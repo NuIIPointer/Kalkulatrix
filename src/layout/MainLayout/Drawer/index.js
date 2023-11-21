@@ -34,8 +34,12 @@ const MainDrawer = () => {
     return (
       <Drawer anchor={'left'} open={navOpen} onClose={() => setNavOpen(false)}>
         <Box
+          component="nav"
           sx={{
-            padding: theme.spacing(2),
+            padding: {
+              xs: theme.spacing(3),
+              sm: theme.spacing(5)
+            },
             backgroundColor: theme.palette.primary.main,
             height: '100%'
           }}
@@ -48,7 +52,10 @@ const MainDrawer = () => {
   }
 
   return (
-    <Box component="nav" sx={{ width: drawerWidth, padding: theme.shape.layoutDesignGutter, position: 'sticky', top: '0' }}>
+    <Box component="nav" sx={{ width: drawerWidth, padding: {
+      xs: theme.spacing(3),
+      sm: theme.spacing(5)
+    }, position: 'sticky', top: '0' }}>
       {drawerHeader}
       {drawerContent}
     </Box>

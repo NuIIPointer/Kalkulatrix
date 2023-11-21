@@ -33,10 +33,14 @@ const MainLayout = () => {
           maxWidth: '1920px',
           minHeight: '100vh',
           margin: '0 auto',
-          gridTemplateColumns: `auto 1fr`,
+          gridTemplateColumns: {
+            xs: `0 auto 0`,
+            md: `1fr minmax(50%, 1000px) 1fr`,
+            lg: `1fr minmax(50%, 1000px) .25fr`,
+            xl: `1fr minmax(50%, 1000px) .5fr`
+          },
           gridTemplateRows: `auto 1fr`,
-          gap: theme.shape.layoutDesignGutter,
-          paddingRight: theme.shape.layoutDesignGutter
+          gap: theme.shape.layoutDesignGutter
         }}
       >
         <Box
@@ -95,6 +99,7 @@ const MainLayout = () => {
             gridRowEnd: '3',
             backgroundColor: theme.palette.primary.main,
             position: 'relative',
+            alignItems: 'flex-end',
             ':after': {
               content: '""',
               position: 'absolute',
@@ -118,7 +123,11 @@ const MainLayout = () => {
             gridRowStart: '2',
             gridRowEnd: '3',
             backgroundColor: 'transparent',
-            paddingBottom: theme.shape.layoutDesignGutter
+            marginTop: {
+              sm: theme.spacing(-4),
+              md: theme.spacing(-6),
+              lg: theme.spacing(-8)
+            }
           }}
         >
           <Outlet />
