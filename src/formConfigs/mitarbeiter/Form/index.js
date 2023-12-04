@@ -6,12 +6,12 @@ import { Formik, Form } from 'formik';
 import CalculationUpdater from '../CalculationUpdater/index';
 import Start from './Start';
 import Stammdaten from './Stammdaten';
+import Zusammenfassung from './Zusammenfassung';
 import { UserContext } from 'context/user';
-import Test from './Test';
 
 const TestForm = () => {
   const { activeFormData } = useContext(UserContext);
-  const onSubmit = useCallback(async (values, _formikBag) => {
+  const onSubmit = useCallback(async (values) => {
     console.log('submit', values);
   }, []);
   const initialValues = {
@@ -26,7 +26,7 @@ const TestForm = () => {
           <CalculationUpdater />
           <Start />
           <Stammdaten />
-          <Test />
+          <Zusammenfassung />
           <ButtonBar />
         </Form>
       )}
