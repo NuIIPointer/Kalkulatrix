@@ -5,11 +5,11 @@ import ButtonBar from 'components/formComponents/ButtonBar/index';
 import { Formik, Form } from 'formik';
 import CalculationUpdater from '../CalculationUpdater/index';
 import Start from './Start';
-import Stammdaten from './Stammdaten';
-import Zusammenfassung from './Zusammenfassung';
+import DGemeinkostenPlangewinn from './DGemeinkostenPlangewinn';
+import AufschlagssaetzePK from './AufschlagssaetzePK';
 import { UserContext } from 'context/user';
 
-const TestForm = () => {
+const GKStundensaetze = () => {
   const { activeFormData } = useContext(UserContext);
   const onSubmit = useCallback(async (values) => {
     console.log('submit', values);
@@ -17,7 +17,7 @@ const TestForm = () => {
   const initialValues = {
     ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
-    letzteAenderung: activeFormData?.values?.lastChanged
+    letzteAenderung: activeFormData?.values?.lastChanged,
   };
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -25,8 +25,8 @@ const TestForm = () => {
         <Form autoComplete="off">
           <CalculationUpdater />
           <Start />
-          <Stammdaten />
-          <Zusammenfassung />
+          <DGemeinkostenPlangewinn />
+          <AufschlagssaetzePK />
           <ButtonBar />
         </Form>
       )}
@@ -34,4 +34,4 @@ const TestForm = () => {
   );
 };
 
-export default TestForm;
+export default GKStundensaetze;

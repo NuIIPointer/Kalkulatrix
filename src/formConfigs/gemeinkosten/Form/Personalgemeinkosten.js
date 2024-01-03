@@ -63,7 +63,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Variable Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -80,7 +80,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Fixe Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -143,7 +143,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Variable Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -160,7 +160,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Fixe Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -223,7 +223,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Variable Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -240,7 +240,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Fixe Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -259,14 +259,14 @@ const Stammdaten = () => {
           &nbsp;
         </Grid>
         <Grid item xs={12}>
-          <ReadOnlyBox alwaysOpen title={'Materialgemeinkosten Gesamt'} headlineVariant="h3">
+          <ReadOnlyBox alwaysOpen title={'Personalgemeinkosten Gesamt'} headlineVariant="h3">
             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 2 }} alignItems="flex-end">
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_F18">
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Gesamt: PLAN-Kosten (berechnet, in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -283,7 +283,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Gesamt: variabele Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
@@ -300,7 +300,7 @@ const Stammdaten = () => {
                   {({ field, meta }) => (
                     <TextField
                       {...field}
-                      value={formFloat(field.value, 1)}
+                      value={formFloat(field.value, 2)}
                       label="Gesamt: fixe Kosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}

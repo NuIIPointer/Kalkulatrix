@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // material-ui
-import { Grid, TextField, Divider, Button, ButtonGroup, Typography, Tab, Stack } from '@mui/material';
+import {
+  Grid,
+  TextField,
+  Divider,
+  Button,
+  ButtonGroup,
+  Typography,
+  Tab,
+  Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
+} from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useTheme } from '@mui/material/styles';
+import { DeleteOutlineOutlined } from '@mui/icons-material';
 
 // formik
 import { FastField, FieldArray, useFormikContext } from 'formik';
@@ -13,10 +28,12 @@ import FormSection from 'components/formComponents/FormSection/index';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import { v4 as uuid } from 'uuid';
 import formFloat from 'utils/formUtils/formFloat';
+import { getInitialGemeinkostenItem } from '../getInitialGemeinkostenData';
 
 const MaterialzuschlagFremdleistungen = () => {
   const { values, errors, isSubmitting } = useFormikContext();
-  const [openedTab, setOpenedTab] = React.useState(0);
+  const [openedTab, setOpenedTab] = useState(0);
+  const [groupToDelete, setGroupToDelete] = useState(undefined);
   const theme = useTheme();
 
   const changeTab = (_event, newValue) => {
@@ -25,21 +42,21 @@ const MaterialzuschlagFremdleistungen = () => {
 
   return (
     <>
-      <ReadOnlyBox title="Angabe Gemeinkosten" headlineVariant="h2" white alwaysOpen>
-        <TabContext value={openedTab}>
+      <FormSection collapsable={false} title="Angabe Gemeinkosten">
+        <TabContext value={openedTab.toString()}>
           <FieldArray name="gk_deckung_zuschlaege">
             {({ push, remove }) => (
               <>
-                <Stack direction="row" flexWrap="wrap">
+                <Stack direction="row" flexWrap="wrap" mt={{ xs: 2, sm: 3, borderBottom: `1px solid ${theme.palette.primary.main}` }}>
                   <TabList onChange={changeTab} aria-label="lab API tabs example">
                     {values.gk_deckung_zuschlaege?.map((category, index) => {
-                      return <Tab key={index} label={category.groupTitle || `Tab ${index + 1}`} value={index} />;
+                      return <Tab key={index} label={category.groupTitle || `Tab ${index + 1}`} value={index.toString()} />;
                     })}
                   </TabList>
                   <Button
                     variant="text"
                     onClick={() => {
-                      push({ categoryId: uuid() });
+                      push({ categoryId: uuid(), fields: [getInitialGemeinkostenItem()] });
                       changeTab(null, values.gk_deckung_zuschlaege.length);
                     }}
                     disabled={isSubmitting}
@@ -49,9 +66,9 @@ const MaterialzuschlagFremdleistungen = () => {
                   </Button>
                 </Stack>
                 {values.gk_deckung_zuschlaege?.map((outerField, outerIndex) => (
-                  <TabPanel key={outerIndex} value={outerIndex} sx={{ padding: 0, marginTop: 3 }}>
-                    <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} alignItems="end">
-                      <Grid item xs={12} sm={6}>
+                  <TabPanel key={outerIndex} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
+                    <Grid container columnSpacing={2} alignItems="end">
+                      <Grid item xs={12} sm={5} md={4}>
                         <FastField name={`gk_deckung_zuschlaege.${openedTab}.groupTitle`}>
                           {({ field, meta }) => (
                             <TextField
@@ -65,11 +82,42 @@ const MaterialzuschlagFremdleistungen = () => {
                         </FastField>
                       </Grid>
                       <Grid item xs={12} sm={6}>
-                        <Button variant="contained" onClick={() => remove(outerIndex)} disabled={isSubmitting} sx={{ mb: 3 }}>
+                        <Button
+                          variant="outlined"
+                          onClick={() => setGroupToDelete(outerIndex)}
+                          disabled={isSubmitting}
+                          sx={{ mb: 3 }}
+                          color="error"
+                          startIcon={<DeleteOutlineOutlined />}
+                        >
                           Gruppe löschen
                         </Button>
                       </Grid>
                     </Grid>
+                    <Dialog
+                      open={groupToDelete === outerIndex}
+                      onClose={() => setGroupToDelete(undefined)}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">{outerField.groupTitle}</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">Wollen Sie diese Gruppe wirklich löschen?</DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={() => setGroupToDelete(undefined)}>Abbrechen</Button>
+                        <Button
+                          onClick={() => {
+                            remove(outerIndex);
+                            changeTab(null, 0);
+                            setGroupToDelete(undefined);
+                          }}
+                          autoFocus
+                        >
+                          Ja, löschen
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                     <FieldArray name={`gk_deckung_zuschlaege.${outerIndex}.fields`}>
                       {({ push: innerPush, remove: innerRemove }) => (
                         <>
@@ -78,9 +126,10 @@ const MaterialzuschlagFremdleistungen = () => {
                               <FormSection
                                 key={innerIndex}
                                 title={innerField?.D8 || 'Neues Element'}
-                                description="Pflegen Sie hier Einträge für Gemeinkosten ein."
+                                description={`Zuschlag: ${formFloat(innerField.H8, 2)} €`}
                                 backgroundColor={theme.palette.primary[50]}
                                 onDelete={() => innerRemove(innerIndex)}
+                                headlineVariant="h3"
                               >
                                 <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 2 }}>
                                   <Grid item xs={12}>
@@ -145,7 +194,7 @@ const MaterialzuschlagFremdleistungen = () => {
                                             {({ field, meta }) => (
                                               <TextField
                                                 {...field}
-                                                value={formFloat(field.value, 1)}
+                                                value={formFloat(field.value, 2)}
                                                 label="Erlös (in EUR)"
                                                 error={meta?.touched && Boolean(meta.error)}
                                                 helperText={meta?.touched && meta.error}
@@ -162,7 +211,7 @@ const MaterialzuschlagFremdleistungen = () => {
                                             {({ field, meta }) => (
                                               <TextField
                                                 {...field}
-                                                value={formFloat(field.value, 1)}
+                                                value={formFloat(field.value, 2)}
                                                 label="Zuschlag (in EUR)"
                                                 error={meta?.touched && Boolean(meta.error)}
                                                 helperText={meta?.touched && meta.error}
@@ -184,10 +233,10 @@ const MaterialzuschlagFremdleistungen = () => {
                                 <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 2 }}>
                                   <>
                                     <Grid item xs={12}>
-                                      <ButtonGroup columnSpacing="2">
+                                      <ButtonGroup>
                                         <Button
-                                          variant="contained"
-                                          color="primary"
+                                          variant="outlined"
+                                          color="error"
                                           disabled={isSubmitting}
                                           onClick={() => innerRemove(innerIndex)}
                                         >
@@ -197,7 +246,7 @@ const MaterialzuschlagFremdleistungen = () => {
                                           variant="outlined"
                                           color="primary"
                                           disabled={isSubmitting}
-                                          onClick={() => innerPush({ ...values.gk_deckung_zuschlaege?.[innerIndex], itemId: uuid() })}
+                                          onClick={() => innerPush({ ...innerField, itemId: uuid() })}
                                         >
                                           Eintrag duplizieren
                                         </Button>
@@ -212,29 +261,38 @@ const MaterialzuschlagFremdleistungen = () => {
                                   </Grid>
                                 </Grid>
                               </FormSection>
-                              {innerIndex === values.gk_deckung_zuschlaege?.length - 1 && (
-                                <Button
-                                  variant="contained"
-                                  onClick={() => innerPush({ itemId: uuid() })}
-                                  disabled={isSubmitting}
-                                  sx={{ mb: 4 }}
-                                >
-                                  Neuer Eintrag
-                                </Button>
-                              )}
                             </React.Fragment>
                           ))}
-                          {(!values.gk_deckung_zuschlaege[outerIndex].fields ||
-                            values.gk_deckung_zuschlaege[outerIndex].fields?.length === 0) && (
-                            <Button
-                              variant="contained"
-                              onClick={() => innerPush({ itemId: uuid() })}
-                              disabled={isSubmitting}
-                              sx={{ mb: 4 }}
-                            >
-                              Neuer Eintrag
-                            </Button>
-                          )}
+                          <Button
+                            variant="contained"
+                            color="success"
+                            onClick={() => innerPush({ itemId: uuid() })}
+                            disabled={isSubmitting}
+                            sx={{ mb: 4 }}
+                          >
+                            Neuer Eintrag
+                          </Button>
+                          <ReadOnlyBox title={' '} alwaysOpen>
+                            <Grid container columnSpacing={{ xs: 2, md: 4 }}>
+                              <Grid item xs={12} sm={6}>
+                                <FastField name={`gk_deckung_zuschlaege.${outerIndex}.H12`}>
+                                  {({ field, meta }) => (
+                                    <TextField
+                                      {...field}
+                                      value={formFloat(field.value, 2)}
+                                      label={`Summe ${outerField.groupTitle || 'Gruppe'} (in EUR)`}
+                                      error={meta?.touched && Boolean(meta.error)}
+                                      helperText={meta?.touched && meta.error}
+                                      InputProps={{
+                                        readOnly: true
+                                      }}
+                                      sx={{ mb: 2 }}
+                                    />
+                                  )}
+                                </FastField>
+                              </Grid>
+                            </Grid>
+                          </ReadOnlyBox>
                         </>
                       )}
                     </FieldArray>
@@ -244,7 +302,7 @@ const MaterialzuschlagFremdleistungen = () => {
             )}
           </FieldArray>
         </TabContext>
-      </ReadOnlyBox>
+      </FormSection>
     </>
   );
 };

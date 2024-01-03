@@ -87,7 +87,7 @@ const SelectFormView = ({ formType, sections }) => {
                       }}
                       component="span"
                     >
-                      {section.label}
+                      {section.title}
                       <Edit
                         sx={{
                           opacity: '0.2',
@@ -105,6 +105,8 @@ const SelectFormView = ({ formType, sections }) => {
               </Grid>
             );
           });
+
+          console.log('formData', formData);
 
           return (
             <Grid key={formId} item xs={12}>

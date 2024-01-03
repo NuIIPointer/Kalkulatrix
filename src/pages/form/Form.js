@@ -8,12 +8,8 @@ import { Box } from '@mui/material';
 // project import
 import { UserContext } from 'context/user';
 import ColoredSection from 'components/pageLayout/header/ColoredSection/index';
-import Annahmen from 'formConfigs/annahmen/Form/index';
-import PersonalkostenProduktiv from 'formConfigs/pk_produktiv/Form/index';
-import PersonalkostenAllgemein from 'formConfigs/pk_allgemein/Form/index';
-import Gemeinkosten from 'formConfigs/gemeinkosten/Form/index';
-import GKDeckung from 'formConfigs/gk_deckung/Form/index';
 import FullPageLoader from 'components/FullPageLoader/index';
+import formLiteral from './formLiteral';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -21,7 +17,6 @@ const FormComponent = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const { activeFormId, activeFormData, setActiveFormId } = useContext(UserContext);
-  const activeFormTitle = useMemo(() => activeFormData?.title, [activeFormData]);
   const { formId, formSection } = useParams();
 
   useEffect(() => {
@@ -34,30 +29,21 @@ const FormComponent = () => {
     }
   }, [activeFormId, formId, setActiveFormId, navigate]);
 
-  const content = useMemo(() => {
+  const activeFormConfig = useMemo(() => {
     if (activeFormData) {
-      const formLiteral = {
-        annahmen: <Annahmen />,
-        pk_produktiv: <PersonalkostenProduktiv />,
-        pk_allgemein: <PersonalkostenAllgemein />,
-        gemeinkosten: <Gemeinkosten />,
-        gk_deckung: <GKDeckung />
-      };
-
+      console.log('formSection', formSection, formLiteral);
       return formLiteral[formSection] || 'Es ist ein Fehler aufgetreten.';
     }
 
     return <FullPageLoader />;
   }, [activeFormData, formSection]);
 
+  console.log('activeFormConfig', activeFormConfig)
+
   return (
     <Box mb={theme.shape.layoutDesignGutterReset}>
-      <ColoredSection
-        backLink="/office/form/overview"
-        bgColor={theme.palette.primary[800]}
-        headline={`Formular${activeFormTitle ? `: ${activeFormTitle}` : ''}`}
-      />
-      {content}
+      <ColoredSection backLink="/office/form/overview" bgColor={theme.palette.primary[800]} headline={activeFormConfig.title} />
+      {activeFormConfig.content}
     </Box>
   );
 };

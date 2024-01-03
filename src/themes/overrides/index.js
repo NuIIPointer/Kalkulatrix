@@ -14,6 +14,7 @@ import InputLabel from './InputLabel';
 import Input from './Input';
 import FormControl from './FormControl';
 import TextField from './TextField';
+import Select from './Select';
 import MuiCard from './MuiCard';
 import LinearProgress from './LinearProgress';
 import Link from './Link';
@@ -25,6 +26,7 @@ import TableCell from './TableCell';
 import Tabs from './Tabs';
 import Typography from './Typography';
 import FormHelperText from './FormHelperText';
+import Stepper from './Stepper';
 
 // ==============================|| OVERRIDES - MAIN ||============================== //
 
@@ -39,6 +41,7 @@ export default function ComponentsOverrides(theme) {
     IconButton(theme),
     FormControl(theme),
     TextField(),
+    Select(),
     FormHelperText(),
     MuiCard(),
     Divider(theme),
@@ -52,6 +55,7 @@ export default function ComponentsOverrides(theme) {
     Tab(theme),
     TableCell(theme),
     Tabs(),
-    Typography()
+    Typography(),
+    Stepper(theme)
   );
 }
