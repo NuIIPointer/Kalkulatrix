@@ -9,6 +9,7 @@ import Stammdaten from './Stammdaten';
 import Angaben from './Angaben';
 import Zusammenfassung from './Zusammenfassung';
 import { UserContext } from 'context/user';
+import validationSchema from '../rules/validation/schema';
 
 const TestForm = () => {
   const { activeFormData } = useContext(UserContext);
@@ -21,7 +22,7 @@ const TestForm = () => {
     letzteAenderung: activeFormData?.values?.lastChanged
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />

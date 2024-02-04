@@ -5,9 +5,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Button, FormControl, FormHelperText, Grid, Link, IconButton, InputAdornment, Typography, TextField } from '@mui/material';
 
 // Form
-import validationRules from '../../../formConfigs/authLogin/rules/validation/index';
-import conditionalRules from '../../../formConfigs/authLogin/rules/conditional/index';
-import validateFields from 'utils/formUtils/validateFields';
 import { Formik, Form, Field } from 'formik';
 
 // project import
@@ -17,6 +14,7 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import validationSchema from 'formConfigs/authRegister/rules/validation/schema';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
 
@@ -45,12 +43,16 @@ const AuthRegister = () => {
   return (
     <>
       <Formik
-        initialValues={{}}
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          company: '',
+          email: '',
+          password: ''
+        }}
+        validationSchema={validationSchema}
         onSubmit={async (values, formikBag) => {
-          const { errors } = validateFields(values, conditionalRules, validationRules);
-          formikBag.setErrors(errors);
-
-          if (Object.keys(errors)?.length === 0) {
+          if (Object.keys(formikBag.errors)?.length === 0) {
             handleRegister({
               email: values.email,
               password: values.password,
@@ -63,7 +65,7 @@ const AuthRegister = () => {
         }}
       >
         {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {} }) => (
-          <Form autoComplete="off">
+          <Form autoComplete="off" noValidate>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <Field
@@ -100,7 +102,6 @@ const AuthRegister = () => {
                   id="company"
                   name="company"
                   label="Unternehmen"
-                  required
                   value={values.company}
                   onChange={handleChange}
                   onBlur={handleBlur}

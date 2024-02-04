@@ -9,6 +9,7 @@ import Zuschlaege from './Zuschlaege';
 import { UserContext } from 'context/user';
 import { getInitialGemeinkostenCategory } from '../getInitialGemeinkostenData';
 import Zusammenfassung from './Zusammenfassung';
+import validationSchema from '../rules/validation/schema';
 
 const GKDeckung = () => {
   const { activeFormData } = useContext(UserContext);
@@ -22,7 +23,7 @@ const GKDeckung = () => {
     gk_deckung_zuschlaege: activeFormData.values.gk_deckung_zuschlaege || [getInitialGemeinkostenCategory()]
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />

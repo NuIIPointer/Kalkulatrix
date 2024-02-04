@@ -45,18 +45,18 @@ const ButtonBar = () => {
     }
   }, [values, activeFormConfig.conditional, activeFormConfig.rules, saveForm, enqueueSnackbar]);
 
-  useEffect(() => {
-    const checkForErrors = () => {
-      const { errors: validatedErrors } = validateFields(values, activeFormConfig.conditional, activeFormConfig.rules);
-      setErrors(validatedErrors);
-    };
+  // useEffect(() => {
+  //   const checkForErrors = () => {
+  //     const { errors: validatedErrors } = validateFields(values, activeFormConfig.conditional, activeFormConfig.rules);
+  //     setErrors(validatedErrors);
+  //   };
 
-    validationTimeout = setTimeout(checkForErrors, 2000);
+  //   validationTimeout = setTimeout(checkForErrors, 2000);
 
-    return () => {
-      clearTimeout(validationTimeout);
-    };
-  }, [activeFormConfig.conditional, activeFormConfig.rules, setErrors, values]);
+  //   return () => {
+  //     clearTimeout(validationTimeout);
+  //   };
+  // }, [activeFormConfig.conditional, activeFormConfig.rules, setErrors, values]);
 
   const handleGoBack = useCallback(() => {
     if (!hasTouchedFields) {
