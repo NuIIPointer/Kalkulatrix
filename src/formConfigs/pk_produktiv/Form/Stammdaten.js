@@ -49,7 +49,17 @@ const Stammdaten = () => {
               <Stack direction="row" flexWrap="wrap" mt={{ xs: 2, sm: 3, borderBottom: `1px solid ${theme.palette.primary.main}` }}>
                 <TabList onChange={changeTab}>
                   {values.pk_produktiv_mitarbeiter?.map((category, index) => {
-                    return <Tab key={index} label={category.groupTitle || `Tab ${index + 1}`} value={index.toString()} />;
+                    return (
+                      <Tab
+                        key={index}
+                        label={
+                          <Stack sx={{ color: errors.pk_produktiv_mitarbeiter?.[index] ? theme.palette.error.main : undefined }}>
+                            {category.groupTitle || `Tab ${index + 1}`}
+                          </Stack>
+                        }
+                        value={index.toString()}
+                      />
+                    );
                   })}
                 </TabList>
                 <Button
@@ -131,18 +141,14 @@ const Stammdaten = () => {
                                 backgroundColor={theme.palette.primary[50]}
                                 onDelete={() => innerRemove(innerIndex)}
                                 headlineVariant="h3"
+                                isError={errors.pk_produktiv_mitarbeiter?.[outerIndex]?.fields[innerIndex]}
                               >
                                 <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                                   <Grid item xs={12}>
                                     <Divider sx={{ mt: 2, mb: 4 }} />
                                   </Grid>
                                 </Grid>
-                                <Grid
-                                  container
-                                  alignItems="flex-end"
-                                  columnSpacing={{ xs: 2, sm: 4, lg: 6 }}
-                                  rowSpacing={{ xs: 1, lg: 1.5 }}
-                                >
+                                <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                                   <>
                                     <Grid item xs={12} sm={6}>
                                       <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.vorname`}>

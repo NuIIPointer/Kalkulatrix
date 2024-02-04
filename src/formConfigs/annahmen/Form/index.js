@@ -17,8 +17,8 @@ const TestForm = () => {
     console.log('submit', values);
   }, []);
   const initialValues = {
-    ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
+    ...(activeFormData.values || {}),
     letzteAenderung: activeFormData?.values?.lastChanged
   };
 

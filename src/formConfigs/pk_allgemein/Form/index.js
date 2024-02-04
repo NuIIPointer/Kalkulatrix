@@ -11,20 +11,33 @@ import Zusammenfassung from './Zusammenfassung';
 import { UserContext } from 'context/user';
 import validationSchema from '../rules/validation/schema';
 
-const TestForm = () => {
+const PKAllgemein = () => {
   const { activeFormData } = useContext(UserContext);
   const onSubmit = useCallback(async (values) => {
     console.log('submit', values);
   }, []);
   const initialValues = {
-    ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
+    pk_allgemein_K6: null,
+    pk_allgemein_K7: null,
+    pk_allgemein_K78: null,
+    pk_allgemein_mitarbeiter: [],
+    ...(activeFormData.values || {}),
     letzteAenderung: activeFormData?.values?.lastChanged
   };
+
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
-      {() => (
+    <Formik
+      key={activeFormData.title}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+      validateOnChange
+      validateOnSubmit
+    >
+      {({ touched, initialValues }) => (
         <Form autoComplete="off">
+          {console.log('touched', touched, initialValues)}
           <CalculationUpdater />
           <Start />
           <Angaben />
@@ -37,4 +50,4 @@ const TestForm = () => {
   );
 };
 
-export default TestForm;
+export default PKAllgemein;

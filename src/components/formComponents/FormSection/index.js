@@ -25,6 +25,7 @@ const FormSection = ({
   defaultOpen,
   collapsable = true,
   backgroundColor,
+  isError,
   headlineVariant = 'h2'
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen || false);
@@ -41,6 +42,7 @@ const FormSection = ({
       <LayoutBox
         sx={{
           backgroundColor: backgroundColor || theme.palette.common.white,
+          border: isError ? `2px solid ${theme.palette.error.main}` : undefined,
           padding: theme.shape.paddingBoxMedium,
           mb: { xs: theme.spacing(1.5), md: theme.spacing(1.75), lg: theme.spacing(2) },
           overflow: 'hidden'
@@ -51,6 +53,11 @@ const FormSection = ({
             <Typography variant={headlineVariant} sx={{ mr: 'auto' }}>
               {title}
             </Typography>
+            {isError && (
+              <Typography variant="text" sx={{ mr: 'auto', mt: 1, color: theme.palette.error.main }}>
+                In dieser Gruppe gibt es Fehlerhafte Angaben.
+              </Typography>
+            )}
             {description && (
               <Typography variant="text" sx={{ mr: 'auto', mt: 1 }}>
                 {description}

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState, useMemo } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useFormikContext } from 'formik';
 import { useSnackbar } from 'notistack';
 import { StatusCodes } from 'http-status-codes';
@@ -7,56 +7,27 @@ import { Save, ChevronLeft } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { UserContext } from 'context/user';
 
-import validateFields from 'utils/formUtils/validateFields';
 import { useNavigate } from 'react-router-dom';
-import useFormLiteral from 'pages/form/useFormLiteral';
-import { useParams } from 'react-router-dom';
-
-let validationTimeout;
 
 const ButtonBar = () => {
   const navigate = useNavigate();
-  const { values = {}, errors, setErrors, touched } = useFormikContext();
-  const { saveForm, requestStatusCodes, activeFormData } = useContext(UserContext);
+  const { values = {}, errors, touched } = useFormikContext();
+  const { saveForm, requestStatusCodes } = useContext(UserContext);
   const isSaving = requestStatusCodes.saveForm === StatusCodes.PROCESSING;
   const { enqueueSnackbar } = useSnackbar();
   const theme = useTheme();
-  const formLiteral = useFormLiteral();
-  const { formSection } = useParams();
-  const activeFormConfig = useMemo(() => {
-    if (activeFormData) {
-      return formLiteral[formSection] || 'Es ist ein Fehler aufgetreten.';
-    }
-
-    return null;
-  }, [activeFormData, formLiteral, formSection]);
 
   const [showTouchedFieldsDialog, setShowTouchedFieldsDialog] = useState(false);
-
   const hasTouchedFields = Object.keys(touched).length > 0;
 
   const saveAction = useCallback(async () => {
-    const { errors: validatedErrors } = validateFields(values, activeFormConfig.conditional, activeFormConfig.rules);
     await saveForm(values);
-    if (validatedErrors && Object.keys(validatedErrors).length === 0) {
+    if (errors && Object.keys(errors).length === 0) {
       enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
     } else {
       enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
     }
-  }, [values, activeFormConfig.conditional, activeFormConfig.rules, saveForm, enqueueSnackbar]);
-
-  // useEffect(() => {
-  //   const checkForErrors = () => {
-  //     const { errors: validatedErrors } = validateFields(values, activeFormConfig.conditional, activeFormConfig.rules);
-  //     setErrors(validatedErrors);
-  //   };
-
-  //   validationTimeout = setTimeout(checkForErrors, 2000);
-
-  //   return () => {
-  //     clearTimeout(validationTimeout);
-  //   };
-  // }, [activeFormConfig.conditional, activeFormConfig.rules, setErrors, values]);
+  }, [saveForm, values, errors, enqueueSnackbar]);
 
   const handleGoBack = useCallback(() => {
     if (!hasTouchedFields) {
@@ -113,7 +84,7 @@ const ButtonBar = () => {
           zurück
         </Button>
         {errors && Object.keys(errors).length > 0 ? (
-          <Alert severity="warning" variant="outlined">
+          <Alert severity="error" variant="outlined">
             Es gibt unvollständige oder falsche Angaben
           </Alert>
         ) : (
@@ -124,6 +95,7 @@ const ButtonBar = () => {
           variant="contained"
           color="primary"
           onClick={saveAction}
+          type="submit"
         >
           {isSaving ? 'lädt' : 'speichern'}
         </Button>
