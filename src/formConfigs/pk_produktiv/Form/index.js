@@ -8,6 +8,7 @@ import Start from './Start';
 import Stammdaten from './Stammdaten';
 import Zusammenfassung from './Zusammenfassung';
 import { UserContext } from 'context/user';
+import validationSchema from '../rules/validation/schema';
 
 const TestForm = () => {
   const { activeFormData } = useContext(UserContext);
@@ -15,12 +16,20 @@ const TestForm = () => {
     console.log('submit', values);
   }, []);
   const initialValues = {
-    ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
+    pk_produktiv_mitarbeiter: [],
+    ...(activeFormData.values || {}),
     letzteAenderung: activeFormData?.values?.lastChanged
   };
+
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      key={activeFormData.title}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+      validateOnChange
+    >
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />

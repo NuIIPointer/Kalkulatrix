@@ -2,37 +2,32 @@ import React, { useCallback, useContext, useState } from 'react';
 import { useFormikContext } from 'formik';
 import { useSnackbar } from 'notistack';
 import { StatusCodes } from 'http-status-codes';
-import { Button, Stack, CircularProgress, Dialog, DialogActions, DialogTitle } from '@mui/material';
+import { Button, Stack, CircularProgress, Dialog, DialogActions, DialogTitle, Alert } from '@mui/material';
 import { Save, ChevronLeft } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { UserContext } from 'context/user';
 
-import validateFields from 'utils/formUtils/validateFields';
-import validationRules from 'formConfigs/annahmen/rules/validation/index';
-import conditionalRules from 'formConfigs/annahmen/rules/conditional/index';
 import { useNavigate } from 'react-router-dom';
 
 const ButtonBar = () => {
   const navigate = useNavigate();
-  const { values = {}, setErrors, touched } = useFormikContext();
+  const { values = {}, errors, touched } = useFormikContext();
   const { saveForm, requestStatusCodes } = useContext(UserContext);
   const isSaving = requestStatusCodes.saveForm === StatusCodes.PROCESSING;
   const { enqueueSnackbar } = useSnackbar();
   const theme = useTheme();
 
   const [showTouchedFieldsDialog, setShowTouchedFieldsDialog] = useState(false);
-
   const hasTouchedFields = Object.keys(touched).length > 0;
 
   const saveAction = useCallback(async () => {
-    const { errors } = validateFields(values, conditionalRules, validationRules);
-    setErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      await saveForm(values);
+    await saveForm(values);
+    if (errors && Object.keys(errors).length === 0) {
       enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
+    } else {
+      enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
     }
-  }, [values, saveForm, setErrors, enqueueSnackbar]);
+  }, [saveForm, values, errors, enqueueSnackbar]);
 
   const handleGoBack = useCallback(() => {
     if (!hasTouchedFields) {
@@ -63,6 +58,7 @@ const ButtonBar = () => {
       <Stack
         direction="row"
         justifyContent="space-between"
+        gap={1}
         sx={{
           position: 'sticky',
           mt: { xs: 4, md: 6, lg: 8 },
@@ -73,7 +69,7 @@ const ButtonBar = () => {
           right: '0',
           paddingX: { xs: theme.spacing(1.5), sm: theme.spacing(3) },
           paddingY: { xs: theme.spacing(1.5), sm: theme.spacing(2) },
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.common.white,
           width: barWidth,
           zIndex: '1000',
           boxShadow: theme.customShadows.z2
@@ -81,13 +77,26 @@ const ButtonBar = () => {
       >
         <Button
           startIcon={isSaving ? <CircularProgress size="1rem" /> : <ChevronLeft />}
-          variant="contained"
-          color="white"
+          variant="outlined"
+          color="primary"
           onClick={handleGoBack}
         >
           zurück
         </Button>
-        <Button startIcon={isSaving ? <CircularProgress size="1rem" /> : <Save />} variant="contained" color="white" onClick={saveAction}>
+        {errors && Object.keys(errors).length > 0 ? (
+          <Alert severity="error" variant="outlined">
+            Es gibt unvollständige oder falsche Angaben
+          </Alert>
+        ) : (
+          ''
+        )}
+        <Button
+          startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
+          variant="contained"
+          color="primary"
+          onClick={saveAction}
+          type="submit"
+        >
           {isSaving ? 'lädt' : 'speichern'}
         </Button>
       </Stack>

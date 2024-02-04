@@ -41,7 +41,7 @@ const Stammdaten = () => {
   };
 
   return (
-    <FormSection collapsable={true} title="Personalkosten: Gehälter allgemeiner Bereich">
+    <FormSection collapsable={true} title="Personalkosten: Gehälter allgemeiner Bereich" isError={!!errors?.pk_allgemein_mitarbeiter}>
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_allgemein_mitarbeiter">
           {({ push, remove }) => (
@@ -49,14 +49,25 @@ const Stammdaten = () => {
               <Stack direction="row" flexWrap="wrap" mt={{ xs: 2, sm: 3, borderBottom: `1px solid ${theme.palette.primary.main}` }}>
                 <TabList onChange={changeTab}>
                   {values.pk_allgemein_mitarbeiter?.map((category, index) => {
-                    return <Tab key={index} label={category.groupTitle || `Tab ${index + 1}`} value={index.toString()} />;
+                    console.log('category', category);
+                    return (
+                      <Tab
+                        key={index}
+                        label={
+                          <Stack sx={{ color: errors.pk_allgemein_mitarbeiter?.[index] ? theme.palette.error.main : undefined }}>
+                            {category.groupTitle || `Tab ${index + 1}`}
+                          </Stack>
+                        }
+                        value={index.toString()}
+                      />
+                    );
                   })}
                 </TabList>
                 <Button
                   variant="text"
                   onClick={() => {
                     push({ categoryId: uuid(), fields: [getInitialMitarbeiterData()] });
-                    changeTab(null, values.pk_allgemein_mitarbeiter.length);
+                    changeTab(null, values.pk_allgemein_mitarbeiter?.length || 0);
                   }}
                   disabled={isSubmitting}
                   sx={{ fontWeight: 500 }}
@@ -129,6 +140,7 @@ const Stammdaten = () => {
                             backgroundColor={theme.palette.primary[50]}
                             onDelete={() => innerRemove(innerIndex)}
                             headlineVariant="h3"
+                            isError={errors.pk_allgemein_mitarbeiter?.[outerIndex]?.fields[innerIndex]}
                           >
                             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                               <Grid item xs={12}>

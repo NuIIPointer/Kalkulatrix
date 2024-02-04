@@ -7,6 +7,7 @@ import CalculationUpdater from '../CalculationUpdater/index';
 import Start from './Start';
 import Stundenverrechnungssatz from './Stundenverrechnungssatz';
 import { UserContext } from 'context/user';
+import validationSchema from '../rules/validation/schema';
 
 const StdVerrechnungssaetze = () => {
   const { activeFormData } = useContext(UserContext);
@@ -19,7 +20,7 @@ const StdVerrechnungssaetze = () => {
     letzteAenderung: activeFormData?.values?.lastChanged
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />

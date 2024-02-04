@@ -1,4 +1,5 @@
 import { Box, Stack, Button, useTheme } from '@mui/material';
+import Logo from 'components/Logo/Logo';
 
 const PublicNav = () => {
   const theme = useTheme();
@@ -9,8 +10,8 @@ const PublicNav = () => {
       }}
     >
       <Stack justifyContent="space-between" direction="row">
-        <div>Logo</div>
-        <Button href="/login" color="primary" variant="filled">
+        <Logo style={{ maxWidth: '200px' }} />
+        <Button href="/login" color="primary" variant="contained">
           Login
         </Button>
       </Stack>

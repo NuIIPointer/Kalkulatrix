@@ -8,11 +8,21 @@
 
 // ==============================|| LOGO SVG ||============================== //
 
-import { Typography, Box } from '@mui/material';
-// import kalkulatrixLogo from '../../assets/images/kalkulatrix_logo.png';
+// import { Typography, Box } from '@mui/material';
+import { ReactComponent as KalkulatrixLogoLight } from '../../assets/images/logo/kalkulatrix_logo_white.svg';
+import { ReactComponent as KalkulatrixLogoDark } from '../../assets/images/logo/kalkulatrix_logo_dark.svg';
+import { ReactComponent as KalkulatrixLogoDarkOutlined } from '../../assets/images/logo/kalkulatrix_logo_dark_outline.svg';
 
 // eslint-disable-next-line react/prop-types
-const Logo = ({ color = 'currentColor', ...otherProps }) => {
+const Logo = ({ variant, ...otherProps }) => {
+  const logoLiteral = {
+    dark: KalkulatrixLogoDark,
+    darkOutlined: KalkulatrixLogoDarkOutlined,
+    light: KalkulatrixLogoLight
+  };
+
+  const LogoComponent = logoLiteral[variant] || logoLiteral.dark;
+
   return (
     /**
      * if you want to use image instead of svg uncomment following, and comment out <svg> element.
@@ -20,35 +30,29 @@ const Logo = ({ color = 'currentColor', ...otherProps }) => {
      * <img src={logo} alt="Mantis" width="100" />
      *
      */
-    // <>
-    //   <img
-    //     src={kalkulatrixLogo}
-    //     alt="Kalkulatrix - Adel Consultant - Logo"
-    //     width="469"
-    //     height="185"
-    //     style={{ width: '100%', height: 'auto' }}
-    //   />
-    // </>
-    <Box
-      component="svg"
-      viewBox="0 0 240 76"
-      xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: '100%', color: color + ' !important', ...(otherProps.sx || {}) }}
-      {...otherProps}
-    >
-      <Typography
-        x="-3"
-        y="44"
-        variant="h1"
-        component="text"
-        sx={{ fontWeight: 300, textAlign: { xs: 'center', sm: 'left' }, fontSize: '58px !important', fill: 'currentColor' }}
-      >
-        Kalkulatrix
-      </Typography>
-      <Typography x="0" y="70" component="text" sx={{ fontWeight: 700, fontSize: '18px !important', fill: 'currentColor' }}>
-        Adel Consultant
-      </Typography>
-    </Box>
+    <>
+      <LogoComponent alt="Kalkulatrix - Adel Consultant - Logo" style={{ width: '100%', height: 'auto' }} {...otherProps} />
+    </>
+    // <Box
+    //   component="svg"
+    //   viewBox="0 0 240 76"
+    //   xmlns="http://www.w3.org/2000/svg"
+    //   sx={{ width: '100%', color: color + ' !important', ...(otherProps.sx || {}) }}
+    //   {...otherProps}
+    // >
+    //   <Typography
+    //     x="-3"
+    //     y="44"
+    //     variant="h1"
+    //     component="text"
+    //     sx={{ fontWeight: 300, textAlign: { xs: 'center', sm: 'left' }, fontSize: '58px !important', fill: 'currentColor' }}
+    //   >
+    //     Kalkulatrix
+    //   </Typography>
+    //   <Typography x="0" y="70" component="text" sx={{ fontWeight: 700, fontSize: '18px !important', fill: 'currentColor' }}>
+    //     Adel Consultant
+    //   </Typography>
+    // </Box>
   );
 };
 

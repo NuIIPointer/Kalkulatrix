@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Divider, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Grid, TextField, Divider, MenuItem, Select, FormControl, InputLabel, FormHelperText } from '@mui/material';
 
 // formik
 import { Field, FastField, useFormikContext } from 'formik';
@@ -35,23 +35,7 @@ const Annahmen = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl sx={{ width: '100%' }}>
-            <InputLabel htmlFor="annahmen_allgemein_waehrung">Währung</InputLabel>
-            <Select
-              id="annahmen_allgemein_waehrung"
-              name="annahmen_allgemein_waehrung"
-              value={values.annahmen_allgemein_waehrung}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.annahmen_allgemein_waehrung && Boolean(errors.annahmen_allgemein_waehrung)}
-              helperText={touched.annahmen_allgemein_waehrung && errors.annahmen_allgemein_waehrung}
-              sx={{ mb: 2 }}
-              defaultValue="euro"
-            >
-              <MenuItem value="euro">€ Euro</MenuItem>
-              <MenuItem value="dollar">$ Dollar</MenuItem>
-            </Select>
-          </FormControl>
+          &nbsp;
         </Grid>
         <Grid item xs={12} sm={6}>
           <Field
@@ -115,10 +99,10 @@ const Annahmen = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="annahmen_allgemein_unternehmensBundesland">
             {({ field, meta }) => (
-              <FormControl fullWidth>
+              <FormControl fullWidth error={!!meta.error}>
                 <InputLabel id="annahmen_allgemein_unternehmensBundesland-label">Bundesland</InputLabel>
-                <Select defaultValue={'NATIONAL'} {...field} {...meta} labelId="annahmen_allgemein_unternehmensBundesland-label">
-                  <MenuItem value={'NATIONAL'}>Bitte wählen</MenuItem>
+                <Select displayEmpty defaultValue="" {...field} {...meta} labelId="annahmen_allgemein_unternehmensBundesland-label">
+                  <MenuItem value="">Bitte wählen</MenuItem>
                   <MenuItem value={'BW'}>Baden-Württemberg</MenuItem>
                   <MenuItem value={'BY'}>Bayern</MenuItem>
                   <MenuItem value={'BE'}>Berlin</MenuItem>
@@ -136,11 +120,12 @@ const Annahmen = () => {
                   <MenuItem value={'SH'}>Schleswig-Holstein</MenuItem>
                   <MenuItem value={'TH'}>Thüringen</MenuItem>
                 </Select>
+                {meta.error ? <FormHelperText>{meta.error}</FormHelperText> : ''}
               </FormControl>
             )}
           </FastField>
         </Grid>
-        </Grid>
+      </Grid>
     </FormSection>
   );
 };

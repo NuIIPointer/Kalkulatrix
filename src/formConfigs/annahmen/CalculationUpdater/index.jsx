@@ -55,7 +55,7 @@ const StundensatzRechnerValueUpdater = () => {
         setFieldValue('annahmen_G22', weekendDays);
       }
     } else if (values.annahmen_G22) {
-      setFieldvalue('annahmen_G22', undefined);
+      setFieldValue('annahmen_G22', undefined);
     }
   }, [setFieldValue, values.annahmen_allgemein_planjahr, values.annahmen_G22, values.annahmen_G17_days]);
   useEffect(() => {

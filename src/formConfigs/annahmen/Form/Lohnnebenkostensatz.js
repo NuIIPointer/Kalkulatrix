@@ -90,26 +90,6 @@ const Lohnnebenkostensatz = () => {
               sx={{ mb: 2 }}
             />
           </Grid>
-          <Grid item xs={12} md={12}>
-            <ReadOnlyBox title={'Lohnnebenkostensatz'} alwaysOpen>
-              <Grid container spacing={{ xs: 2, md: 4 }}>
-                <Grid item xs={12} md={6}>
-                  <Field
-                    component={TextField}
-                    InputProps={{
-                      readOnly: true
-                    }}
-                    type="number"
-                    id="annahmen_I46"
-                    name="annahmen_I46"
-                    label="Lohnnebenkostensatz in %"
-                    value={formFloat(values.annahmen_I46, 2)}
-                    sx={{ mb: 2 }}
-                  />
-                </Grid>
-              </Grid>
-            </ReadOnlyBox>
-          </Grid>
         </Grid>
       </FormSection>
       <ReadOnlyBox white title={'Berechnet: Lohnnebenkostensatz'} alwaysOpen>

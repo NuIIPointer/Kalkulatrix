@@ -9,6 +9,7 @@ import Annahmen from './Annahmen';
 import { UserContext } from 'context/user';
 import Produktivstunden from './Produktivstunden';
 import Lohnnebenkostensatz from './Lohnnebenkostensatz';
+import validationSchema from '../rules/validation/schema';
 
 const TestForm = () => {
   const { activeFormData } = useContext(UserContext);
@@ -16,13 +17,13 @@ const TestForm = () => {
     console.log('submit', values);
   }, []);
   const initialValues = {
-    ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
+    ...(activeFormData.values || {}),
     letzteAenderung: activeFormData?.values?.lastChanged
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />

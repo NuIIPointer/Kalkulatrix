@@ -10,6 +10,7 @@ import Personalgemeinkosten from './Personalgemeinkosten';
 import Sachkosten from './Sachkosten';
 import Zusatzkosten from './Zusatzkosten';
 import Zusammenfassung from './Zusammenfassung';
+import validationSchema from '../rules/validation/schema';
 
 import { UserContext } from 'context/user';
 
@@ -24,7 +25,7 @@ const TestForm = () => {
     letzteAenderung: activeFormData?.values?.lastChanged
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />

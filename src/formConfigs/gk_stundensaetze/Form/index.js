@@ -8,6 +8,7 @@ import Start from './Start';
 import DGemeinkostenPlangewinn from './DGemeinkostenPlangewinn';
 import AufschlagssaetzePK from './AufschlagssaetzePK';
 import { UserContext } from 'context/user';
+import validationSchema from '../rules/validation/schema';
 
 const GKStundensaetze = () => {
   const { activeFormData } = useContext(UserContext);
@@ -20,7 +21,7 @@ const GKStundensaetze = () => {
     letzteAenderung: activeFormData?.values?.lastChanged,
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />

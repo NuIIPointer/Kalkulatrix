@@ -23,14 +23,10 @@ import { Formik, Form, Field } from 'formik';
 // project import
 import AnimateButton from 'components/@extended/AnimateButton';
 
-// Form
-import validationRules from '../../../formConfigs/authLogin/rules/validation/index';
-import conditionalRules from '../../../formConfigs/authLogin/rules/conditional/index';
-import validateFields from 'utils/formUtils/validateFields';
-
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { UserContext } from 'context/user';
+import validationSchema from 'formConfigs/authLogin/rules/validation/schema';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -72,23 +68,25 @@ const AuthLogin = () => {
   return (
     <>
       <Formik
-        initialValues={{}}
-        onSubmit={async (values, formikBag) => {
-          const { errors } = validateFields(values, conditionalRules, validationRules);
-          formikBag.setErrors(errors);
-
-          if (Object.keys(errors)?.length === 0) {
-            await handleLogin({
-              email: values.email,
-              password: values.password,
-              keepSignedIn: values.keepSignedIn
-            });
-          }
-          return;
+        initialValues={{
+          email: '',
+          password: '',
+          keepSignedIn: false,
+        }}
+        validationSchema={validationSchema}
+        validateOnChange
+        validateOnSubmit
+        onSubmit={async (values) => {
+          await handleLogin({
+            email: values.email,
+            password: values.password,
+            keepSignedIn: values.keepSignedIn
+          });
         }}
       >
         {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {}, setFieldValue }) => (
-          <Form autoComplete="off">
+          <Form autoComplete="off" noValidate>
+            {console.log('touched', touched)}
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={3}>

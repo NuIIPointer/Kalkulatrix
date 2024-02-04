@@ -51,7 +51,7 @@ const Start = () => {
           padding: { xs: theme.spacing(4), sm: theme.spacing(10), md: theme.spacing(16), lg: theme.spacing(20) }
         }}
       >
-        <Logo sx={{ maxWidth: '400px', mb: theme.spacing(4) }} />
+        <Logo style={{ maxWidth: '400px', marginBottom: theme.spacing(4), marginLeft: theme.spacing(-3) }} />
         <Grid container>
           <Grid item xs={12} md={8}>
             <Typography sx={{ mb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(18) } }}>
