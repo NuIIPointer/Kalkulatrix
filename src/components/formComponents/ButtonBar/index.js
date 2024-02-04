@@ -38,7 +38,7 @@ const ButtonBar = () => {
   const saveAction = useCallback(async () => {
     const { errors: validatedErrors } = validateFields(values, activeFormConfig.conditional, activeFormConfig.rules);
     await saveForm(values);
-    if (Object.keys(validatedErrors).length === 0) {
+    if (validatedErrors && Object.keys(validatedErrors).length === 0) {
       enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
     } else {
       enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
@@ -48,7 +48,6 @@ const ButtonBar = () => {
   useEffect(() => {
     const checkForErrors = () => {
       const { errors: validatedErrors } = validateFields(values, activeFormConfig.conditional, activeFormConfig.rules);
-      console.log('validatedErrors', validatedErrors);
       setErrors(validatedErrors);
     };
 
@@ -113,7 +112,7 @@ const ButtonBar = () => {
         >
           zurück
         </Button>
-        {Object.keys(errors).length > 0 ? (
+        {errors && Object.keys(errors).length > 0 ? (
           <Alert severity="warning" variant="outlined">
             Es gibt unvollständige oder falsche Angaben
           </Alert>

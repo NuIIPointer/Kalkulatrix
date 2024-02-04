@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Divider, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Grid, TextField, Divider, MenuItem, Select, FormControl, InputLabel, FormHelperText } from '@mui/material';
 
 // formik
 import { Field, FastField, useFormikContext } from 'formik';
@@ -99,10 +99,10 @@ const Annahmen = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="annahmen_allgemein_unternehmensBundesland">
             {({ field, meta }) => (
-              <FormControl fullWidth>
+              <FormControl fullWidth error={!!meta.error}>
                 <InputLabel id="annahmen_allgemein_unternehmensBundesland-label">Bundesland</InputLabel>
-                <Select defaultValue={'NATIONAL'} {...field} {...meta} labelId="annahmen_allgemein_unternehmensBundesland-label">
-                  <MenuItem value={'NATIONAL'}>Bitte wählen</MenuItem>
+                <Select displayEmpty defaultValue="" {...field} {...meta} labelId="annahmen_allgemein_unternehmensBundesland-label">
+                  <MenuItem value="">Bitte wählen</MenuItem>
                   <MenuItem value={'BW'}>Baden-Württemberg</MenuItem>
                   <MenuItem value={'BY'}>Bayern</MenuItem>
                   <MenuItem value={'BE'}>Berlin</MenuItem>
@@ -120,11 +120,12 @@ const Annahmen = () => {
                   <MenuItem value={'SH'}>Schleswig-Holstein</MenuItem>
                   <MenuItem value={'TH'}>Thüringen</MenuItem>
                 </Select>
+                {meta.error ? <FormHelperText>{meta.error}</FormHelperText> : ''}
               </FormControl>
             )}
           </FastField>
         </Grid>
-        </Grid>
+      </Grid>
     </FormSection>
   );
 };
