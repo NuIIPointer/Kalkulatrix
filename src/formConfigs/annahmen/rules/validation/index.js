@@ -1,8 +1,14 @@
 const rules = {
-  email: [
+  annahmen_allgemein_planjahr: [
     {
-      message: 'Geben Sie eine korrekte E-Mail Adresse an.',
-      rule: 'email'
+      message: 'Geben Sie ein Planjahr an.',
+      rule: 'required'
+    }
+  ],
+  annahmen_allgemein_unternehmensBundesland: [
+    {
+      message: 'Geben Sie ein Bundesland an.',
+      rule: 'required'
     }
   ]
 };

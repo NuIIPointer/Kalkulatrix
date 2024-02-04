@@ -35,23 +35,7 @@ const Annahmen = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl sx={{ width: '100%' }}>
-            <InputLabel htmlFor="annahmen_allgemein_waehrung">Währung</InputLabel>
-            <Select
-              id="annahmen_allgemein_waehrung"
-              name="annahmen_allgemein_waehrung"
-              value={values.annahmen_allgemein_waehrung}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.annahmen_allgemein_waehrung && Boolean(errors.annahmen_allgemein_waehrung)}
-              helperText={touched.annahmen_allgemein_waehrung && errors.annahmen_allgemein_waehrung}
-              sx={{ mb: 2 }}
-              defaultValue="euro"
-            >
-              <MenuItem value="euro">€ Euro</MenuItem>
-              <MenuItem value="dollar">$ Dollar</MenuItem>
-            </Select>
-          </FormControl>
+          &nbsp;
         </Grid>
         <Grid item xs={12} sm={6}>
           <Field

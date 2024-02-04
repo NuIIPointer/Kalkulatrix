@@ -5,7 +5,11 @@ export default function Alert(theme) {
     MuiAlert: {
       styleOverrides: {
         root: {
-          borderRadius: theme.spacing(2)
+          // borderRadius: theme.spacing(2)
+        },
+        icon: {
+          paddingTop: theme.spacing(1.5),
+          paddingBottom: 0
         }
       }
     }

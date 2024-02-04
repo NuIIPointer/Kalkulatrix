@@ -12,4 +12,8 @@ jsonLogic.add_operation('email', (value) => {
   return isValidMail?.[0] ? true : 'Bitte geben Sie eine gültige E-Mail an';
 });
 
+jsonLogic.add_operation('required', (value) => {
+  return !!value || value === 0 || value === '0';
+});
+
 export default jsonLogic;

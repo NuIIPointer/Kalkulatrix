@@ -13,8 +13,8 @@ const validateFields = (values, conditionalRules, validationRules) => {
         const ruleParsed = typeof rule === 'string' ? { [rule]: [values[fieldKey]] } : rule;
         const validatedValue = jsonLogic.apply(ruleParsed, values);
 
-        if (validatedValue !== true && validatedValue !== undefined) {
-          errors[fieldKey] = validatedValue;
+        if (validatedValue !== true) {
+          errors[fieldKey] = ruleSetting.message || rule;
         }
       });
     }
