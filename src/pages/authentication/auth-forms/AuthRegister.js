@@ -51,17 +51,14 @@ const AuthRegister = () => {
           password: ''
         }}
         validationSchema={validationSchema}
-        onSubmit={async (values, formikBag) => {
-          if (Object.keys(formikBag.errors)?.length === 0) {
-            handleRegister({
-              email: values.email,
-              password: values.password,
-              firstName: values.firstName,
-              lastName: values.lastName,
-              company: values.company
-            });
-          }
-          return new Promise((res) => setTimeout(res, 2500));
+        onSubmit={async (values) => {
+          handleRegister({
+            email: values.email,
+            password: values.password,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            company: values.company
+          });
         }}
       >
         {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {} }) => (

@@ -76,15 +76,12 @@ const AuthLogin = () => {
         validationSchema={validationSchema}
         validateOnChange
         validateOnSubmit
-        onSubmit={async (values, formikBag) => {
-          if (Object.keys(formikBag.errors)?.length === 0) {
-            await handleLogin({
-              email: values.email,
-              password: values.password,
-              keepSignedIn: values.keepSignedIn
-            });
-          }
-          return;
+        onSubmit={async (values) => {
+          await handleLogin({
+            email: values.email,
+            password: values.password,
+            keepSignedIn: values.keepSignedIn
+          });
         }}
       >
         {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {}, setFieldValue }) => (
