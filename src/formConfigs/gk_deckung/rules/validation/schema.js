@@ -1,10 +1,18 @@
-import { object, number } from 'yup';
+import { object, number, string, array } from 'yup';
 
 const validationSchema = object().shape({
-  // annahmen_allgemein_planjahr: number().required('Geben Sie ein Planjahr an.').min(2000, 'Geben Sie ein gültiges Jahr an.'),
-  // annahmen_E41: number().required('Geben Sie einen Wert an.'),
-  // annahmen_G16: number().required('Geben Sie einen Wert an.'),
-  // annahmen_G17_days: number().required('Geben Sie einen Wert an.').min(1, 'Geben Sie eine gültige Anzahl an Wochenarbeitstagen an.'),
+  gk_deckung_zuschlaege: array().of(
+    object().shape({
+      groupTitle: string(),
+      fields: array().of(
+        object().shape({
+          D8: string().required('Geben Sie Eine Bezeichnung an.'),
+          E8: number().required('Geben Sie einen Wert an.'),
+          F8: number().min(0, 'Geben Sie einen gültigen Wert an.')
+        })
+      )
+    })
+  )
 });
 
 export default validationSchema;

@@ -18,6 +18,10 @@ const TestForm = () => {
   }, []);
   const initialValues = {
     formTitle: activeFormData.title,
+    annahmen_allgemein_planjahr: undefined,
+    annahmen_E41: undefined,
+    annahmen_G16: undefined,
+    annahmen_G17_days: undefined,
     ...(activeFormData.values || {}),
     letzteAenderung: activeFormData?.values?.lastChanged
   };

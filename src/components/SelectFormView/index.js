@@ -89,6 +89,8 @@ const SelectFormView = ({ formType, sections }) => {
                       sx={{
                         display: 'flex',
                         width: '100%',
+                        flexWrap: 'wrap',
+                        hyphens: 'auto',
                         justifyContent: 'space-between',
                         flexDirection: 'row',
                         alignItems: 'center'
