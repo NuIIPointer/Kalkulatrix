@@ -16,6 +16,7 @@ const GKStundensaetze = () => {
     console.log('submit', values);
   }, []);
   const initialValues = {
+    gk_stundensaetze_H14: undefined,
     ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
     letzteAenderung: activeFormData?.values?.lastChanged,

@@ -16,6 +16,7 @@ const StdVerrechnungssaetze = () => {
     console.log('submit', values);
   }, []);
   const initialValues = {
+    deckungsbeitraege_J25: undefined,
     ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
     letzteAenderung: activeFormData?.values?.lastChanged

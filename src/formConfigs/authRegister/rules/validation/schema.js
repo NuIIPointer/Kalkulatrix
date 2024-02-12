@@ -5,7 +5,7 @@ const validationSchema = object().shape({
   password: string().required('Geben Sie ein Passwort an.'),
   firstName: string().required('Geben Sie einen Vornamen an.'),
   lastName: string().required('Geben Sie einen Nachnamen an.'),
-  company: string(),
+  company: string()
 });
 
 export default validationSchema;
