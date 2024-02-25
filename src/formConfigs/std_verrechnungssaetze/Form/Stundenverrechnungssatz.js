@@ -8,19 +8,25 @@ const DGemeinkostenPlangewinn = () => {
   const { values } = useFormikContext();
 
   return (
-      <>
+    <>
       <FormSection
         collapsable={false}
         title="Auswahl Berechnungsmethode"
         description="GK-Satz bzw. Plangewinnsatz für das Produktivpersonal (Bereiche)"
       >
-        <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }} sx={{ mt: { xs: 1 } }} alignItems="flex-end">
-          <Grid item xs={12} sm={6}>
-            <FastField name="aaaaa">
+        <Grid
+          container
+          columnSpacing={{ xs: 2, sm: 4, lg: 6 }}
+          rowSpacing={{ xs: 1, lg: 1.5 }}
+          sx={{ mt: { xs: 1 } }}
+          alignItems="flex-end"
+        >
+          <Grid item xs={12}>
+            <FastField name="auswahl_methode">
               {({ field, meta }) => (
                 <FormControl fullWidth>
-                  <InputLabel id="aaaaa-label">Auswahl der verwendeten Methode</InputLabel>
-                  <Select defaultValue={0} {...field} {...meta} labelId="aaaaa-label">
+                  <InputLabel id="auswahl_methode-label">Auswahl der verwendeten Methode</InputLabel>
+                  <Select defaultValue={0} {...field} {...meta} labelId="auswahl_methode-label">
                     <MenuItem value={0}>Bitte wählen</MenuItem>
                     <MenuItem value={1}>a.) Durchschnittliche Gemeinkosten pro Stunde</MenuItem>
                     <MenuItem value={2}>b.) Aufschlag auf individuelle Personalkosten</MenuItem>

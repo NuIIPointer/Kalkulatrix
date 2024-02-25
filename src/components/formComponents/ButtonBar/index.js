@@ -22,7 +22,7 @@ const ButtonBar = () => {
 
   const saveAction = useCallback(async () => {
     await saveForm(values);
-    if (errors && Object.keys(errors).length === 0) {
+    if (!errors || Object.keys(errors).length === 0) {
       enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
     } else {
       enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
