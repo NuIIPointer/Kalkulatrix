@@ -13,7 +13,8 @@ import {
   ButtonGroup
 } from '@mui/material/index';
 import { DeleteOutlineOutlined, NoteAddOutlined, EditOutlined, ClearOutlined } from '@mui/icons-material';
-import { useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
+import { useFormikContext } from 'formik';
 
 // eslint-disable-next-line react/prop-types
 const FormSection = ({
@@ -31,6 +32,25 @@ const FormSection = ({
   const [isOpen, setIsOpen] = useState(defaultOpen || false);
   const [openPopup, setOpenPopup] = useState(false);
   const theme = useTheme();
+  const { errors } = useFormikContext();
+  const sectionRef = useRef(null);
+
+  const hasErrorField = useMemo(() => {
+    if (sectionRef.current) {
+      const inputFields = sectionRef.current.querySelectorAll('input, textarea, select');
+
+      if (inputFields?.length > 0) {
+        const inputNames = Array.from(inputFields).map((field) => field.getAttribute('name') || field.getAttribute('id'));
+        const hasError = Object.keys(errors).find((key) => errors[key] && inputNames.includes(key));
+
+        return !!hasError;
+      }
+    }
+
+    return false;
+  }, [errors, sectionRef.current]);
+
+  const showErrorStatus = hasErrorField || isError;
 
   const buttonStyles = {
     aspectRatio: '1/1',
@@ -38,11 +58,11 @@ const FormSection = ({
   };
 
   return (
-    <>
+    <div ref={sectionRef}>
       <LayoutBox
         sx={{
           backgroundColor: backgroundColor || theme.palette.common.white,
-          border: isError ? `2px solid ${theme.palette.error.main}` : undefined,
+          border: showErrorStatus ? `2px solid ${theme.palette.error.main}` : undefined,
           padding: theme.shape.paddingBoxMedium,
           mb: { xs: theme.spacing(1.5), md: theme.spacing(1.75), lg: theme.spacing(2) },
           overflow: 'hidden'
@@ -53,7 +73,7 @@ const FormSection = ({
             <Typography variant={headlineVariant} sx={{ mr: 'auto' }}>
               {title}
             </Typography>
-            {isError && (
+            {showErrorStatus && (
               <Typography variant="text" sx={{ mr: 'auto', mt: 1, color: theme.palette.error.main }}>
                 In dieser Gruppe gibt es Fehlerhafte Angaben.
               </Typography>
@@ -107,7 +127,7 @@ const FormSection = ({
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 };
 
