@@ -1,11 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Typography, Box } from '@mui/material';
 import TextTeaserCard from 'components/TextTeaserCard/index';
 import Logo from 'components/Logo/Logo';
+import { Scrollama, Step } from 'react-scrollama';
+import AnimatedSection from 'components/AnimatedSection/index';
+import SectionFirst from './SectionFirst';
+import SectionSecond from './SectionSecond';
 
 const Start = () => {
   const theme = useTheme();
+  const [currentStepIndex, setCurrentStepIndex] = useState(null);
+
+  const onStepEnter = ({ data }) => {
+    setCurrentStepIndex(data);
+    // Hier können Sie Aktionen ausführen, wenn ein Schritt betreten wird, z.B. das Ändern von Texten oder Bildern
+  };
 
   const bottomBoxRendering = useCallback(() => {
     return (
@@ -46,21 +56,41 @@ const Start = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          padding: { xs: theme.spacing(4), sm: theme.spacing(10), md: theme.spacing(16), lg: theme.spacing(20) }
-        }}
-      >
-        <Logo style={{ maxWidth: '400px', marginBottom: theme.spacing(4), marginLeft: theme.spacing(-3) }} />
-        <Grid container>
-          <Grid item xs={12} md={8}>
-            <Typography sx={{ mb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(18) } }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Tempor nec feugiat nisl pretium fusce id velit ut. Fames ac turpis egestas sed tempus urna et. Diam in arcu cursus euismod.
-              Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis.
-            </Typography>
-          </Grid>
-        </Grid>
+      <Box>
+        <SectionSecond isActive={currentStepIndex === 1} />
+        <Scrollama onStepEnter={onStepEnter} offset={0.30}>
+          <Step data={1}>
+            <div>
+              <SectionFirst isActive={currentStepIndex === 1} />
+            </div>
+          </Step>
+          <Step data={2}>
+            <div>
+              <SectionFirst isActive={currentStepIndex === 2} />
+            </div>
+          </Step>
+          <Step data={3}>
+            <div>
+              <SectionFirst isActive={currentStepIndex === 3} />
+            </div>
+          </Step>
+          <Step data={4}>
+            <div>
+              <AnimatedSection
+                reverse
+                isActive={currentStepIndex === 4}
+                firstContent={
+                  <>
+                    <h2>Ermitteln Sie den perfekten Stundensatz für Ihr Unternehmen</h2>
+                    <p>Mit Kalkulatrix beseitigen Sie Unsicherheiten bei der Preisfindung.</p>
+                  </>
+                }
+                imageContent={<img src="https://placehold.co/600x400/EEE/31343C" alt="Platzhalterbild" />}
+              ></AnimatedSection>
+            </div>
+          </Step>
+          {/* Weitere Steps mit Animationen hier */}
+        </Scrollama>
         {bottomBoxRendering()}
       </Box>
     </>
