@@ -5,8 +5,8 @@ import TextTeaserCard from 'components/TextTeaserCard/index';
 import Logo from 'components/Logo/Logo';
 import { Scrollama, Step } from 'react-scrollama';
 import AnimatedSection from 'components/AnimatedSection/index';
-import SectionFirst from './SectionFirst';
 import SectionSecond from './SectionSecond';
+import SectionFirst from './SectionFirst';
 
 const Start = () => {
   const theme = useTheme();
@@ -57,23 +57,23 @@ const Start = () => {
   return (
     <>
       <Box>
-        <SectionSecond isActive={currentStepIndex === 1} />
+        <SectionFirst isActive={currentStepIndex === 1} />
         <Scrollama onStepEnter={onStepEnter} offset={0.30}>
           <Step data={1}>
             <div>
-              <SectionFirst isActive={currentStepIndex === 1} />
+              <SectionSecond isActive={currentStepIndex === 1} />
             </div>
           </Step>
-          <Step data={2}>
+          {/* <Step data={2}>
             <div>
-              <SectionFirst isActive={currentStepIndex === 2} />
+              <SectionSecond isActive={currentStepIndex === 2} />
             </div>
           </Step>
           <Step data={3}>
             <div>
-              <SectionFirst isActive={currentStepIndex === 3} />
+              <SectionSecond isActive={currentStepIndex === 3} />
             </div>
-          </Step>
+          </Step> */}
           <Step data={4}>
             <div>
               <AnimatedSection

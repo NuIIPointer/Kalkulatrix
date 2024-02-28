@@ -1,69 +1,44 @@
 import React, { useRef, useEffect } from 'react';
-import { useSpring, animated, to } from '@react-spring/web';
-import { useGesture } from 'react-use-gesture';
 import { Box, Stack } from '@mui/material';
-
-const calcX = (y, ly) => -(y - ly - window.innerHeight / 2) / 20;
-const calcY = (x, lx) => (x - lx - window.innerWidth / 2) / 20;
+import { useTheme } from '@mui/material/styles';
+import { TypeAnimation } from 'react-type-animation';
+import Logo from 'components/Logo/Logo';
 
 const SectionFirst = ({ isActive }) => {
-  useEffect(() => {
-    const preventDefault = (e) => e.preventDefault();
-    document.addEventListener('gesturestart', preventDefault);
-    document.addEventListener('gesturechange', preventDefault);
+  const theme = useTheme();
 
-    return () => {
-      document.removeEventListener('gesturestart', preventDefault);
-      document.removeEventListener('gesturechange', preventDefault);
-    };
-  }, []);
-
-  const domTarget = useRef(null);
-  const [{ x, y, rotateX, rotateY, rotateZ, zoom, scale }, api] = useSpring(() => ({
-    rotateX: 0,
-    rotateY: 0,
-    rotateZ: 0,
-    scale: 1,
-    zoom: 0,
-    x: 0,
-    y: 0,
-    config: { mass: 5, tension: 350, friction: 40 }
-  }));
-
-  useEffect(() => {
-    api({ scale: isActive ? 1.2 : 1 });
-  }, [api, isActive]);
-
-  useGesture(
-    {
-      // onDrag: ({ active, offset: [x, y] }) => api({ x, y, rotateX: 0, rotateY: 0, scale: active ? 1 : 1.2 }),
-      // onPinch: ({ offset: [d, a] }) => api({ zoom: d / 100, rotateZ: a }),
-      onMove: ({ xy: [px, py] }) =>
-        api({
-          rotateX: calcX(py, y.get()),
-          rotateY: calcY(px, x.get()),
-          scale: isActive ? 1.3 : 1.2
-        }),
-      onHover: ({ hovering }) => !hovering && api({ rotateX: 0, rotateY: 0, scale: isActive ? 1.2 : 1 }),
-    },
-    { domTarget, eventOptions: { passive: false } }
-  );
   return (
-    <Stack sx={{ alignItems: 'center', justifyContent: 'center', mt: 4 }}>
-      <animated.div
-        ref={domTarget}
-        style={{
-          transform: 'perspective(600px)',
-          x,
-          y,
-          scale: to([scale, zoom], (s, z) => s + z),
-          rotateX,
-          rotateY,
-          rotateZ
+    <Stack sx={{ alignItems: 'center', minHeight: '65vh', justifyContent: 'center' }}>
+      <Logo style={{ maxWidth: '600px', marginBottom: theme.spacing(1), marginX: theme.spacing(2) }} />
+      <Box
+        sx={{
+          '& span': {
+            backgroundColor: theme.palette.primary[500],
+            color: theme.palette.common.white,
+            paddingX: 2,
+            paddingY: 1,
+            borderRadius: theme.shape.borderRadius,
+            boxShadow: theme.shadows[5]
+          }
         }}
       >
-        <Box sx={{ height: '25vh', aspectRatio: '1/1', backgroundColor: 'red' }}>Test</Box>
-      </animated.div>
+        <TypeAnimation
+          sequence={[
+            'Optimieren Sie Stundensätze,',
+            1000,
+            'Optimieren Sie Personalkosten,',
+            1000,
+            'Optimieren Sie den Preis für Ihre Kunden,',
+            1000,
+            'Optimieren Sie Ihren Gewinn.',
+            2000
+          ]}
+          wrapper="span"
+          speed={50}
+          style={{ fontSize: '3em', display: 'inline-block' }}
+          repeat={Infinity}
+        />
+      </Box>
     </Stack>
   );
 };
