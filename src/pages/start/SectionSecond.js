@@ -36,13 +36,18 @@ export default function SectionSecond() {
     <Grid container justifyContent="space-between">
       <Grid
         item
+        xs={12}
         md={6}
-        sx={{ pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(40) }, py: theme.spacing(30) }}
+        sx={{
+          pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
+          pr: { xs: theme.spacing(4), md: 0 },
+          py: { xs: theme.spacing(5), md: theme.spacing(20), lg: theme.spacing(25) }
+        }}
       >
         <Typography variant="h1" sx={{ mb: 4 }}>
           Lorem Ipsum sit amet dolor
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: { xs: 16, sm: 20, lg: 24, xl: 28 } }}>
+        <Typography variant="body2" sx={{ fontSize: { xs: 16, sm: 20, lg: 22, xl: 24 }, lineHeight: '1.3em' }}>
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
           erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
           sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
@@ -50,15 +55,17 @@ export default function SectionSecond() {
           clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
         </Typography>
       </Grid>
-      <Grid item md={5}>
+      <Grid item xs={12} md={5}>
         <Box
           sx={{
             width: '100%',
             height: '100%',
+            minHeight: { xs: '66vh', md: 'initial' },
             position: 'relative',
             overflow: 'hidden',
-            borderTopLeftRadius: theme.spacing(theme.shape.borderRadiusBox * 3),
-            borderBottomLeftRadius: theme.spacing(theme.shape.borderRadiusBox * 3),
+            borderTopLeftRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 3) },
+            borderBottomLeftRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 3) },
+            mt: { xs: theme.spacing(8), md: 0 },
             '&:before': {
               content: '""',
               position: 'absolute',

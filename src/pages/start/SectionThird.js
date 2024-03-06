@@ -1,71 +1,98 @@
-import React, { useRef, useEffect } from 'react';
-import { useSpring, animated, to } from '@react-spring/web';
+import React, { useRef } from 'react';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import { useGesture } from 'react-use-gesture';
-import { Box, Stack } from '@mui/material';
+import { useInView, animated, useSpring, to } from '@react-spring/web';
+import { Grid, Box, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import formScreenshot from '../../assets/images/content/stundensatzformular_3.png';
 
-const calcX = (y, ly) => -(y - ly - window.innerHeight / 2) / 20;
-const calcY = (x, lx) => (x - lx - window.innerWidth / 2) / 20;
+// Little helpers ...
+const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`;
 
-const SectionSecond = ({ isActive }) => {
-  useEffect(() => {
-    const preventDefault = (e) => e.preventDefault();
-    document.addEventListener('gesturestart', preventDefault);
-    document.addEventListener('gesturechange', preventDefault);
-
-    return () => {
-      document.removeEventListener('gesturestart', preventDefault);
-      document.removeEventListener('gesturechange', preventDefault);
-    };
-  }, []);
-
-  const domTarget = useRef(null);
-  const [{ x, y, rotateX, rotateY, rotateZ, zoom, scale }, api] = useSpring(() => ({
-    rotateX: 0,
-    rotateY: 0,
-    rotateZ: 0,
-    scale: 1,
-    zoom: 0,
-    x: 0,
-    y: 0,
-    config: { mass: 5, tension: 350, friction: 40 }
-  }));
-
-  useEffect(() => {
-    api({ scale: isActive ? 1.2 : 1 });
-  }, [api, isActive]);
-
-  useGesture(
+export default function SectionSecond() {
+  const theme = useTheme();
+  const [ref, springs] = useInView(
+    () => ({
+      from: {
+        opacity: 0,
+        y: 100
+      },
+      to: {
+        opacity: 1,
+        y: 0
+      },
+      config: {
+        mass: 5,
+        friction: 50,
+        tension: 50
+      }
+    }),
     {
-      // onDrag: ({ active, offset: [x, y] }) => api({ x, y, rotateX: 0, rotateY: 0, scale: active ? 1 : 1.2 }),
-      // onPinch: ({ offset: [d, a] }) => api({ zoom: d / 100, rotateZ: a }),
-      onMove: ({ xy: [px, py] }) =>
-        api({
-          rotateX: calcX(py, y.get()),
-          rotateY: calcY(px, x.get()),
-          scale: isActive ? 1.3 : 1.2
-        }),
-      onHover: ({ hovering }) => !hovering && api({ rotateX: 0, rotateY: 0, scale: isActive ? 1.2 : 1 }),
-    },
-    { domTarget, eventOptions: { passive: false } }
+      rootMargin: '-40% 0%'
+    }
   );
+
   return (
-    <Stack sx={{ alignItems: 'center', justifyContent: 'center', mt: 4 }}>
-      <animated.div
-        ref={domTarget}
-        style={{
-          transform: 'perspective(600px)',
-          x,
-          y,
-          scale: to([scale, zoom], (s, z) => s + z),
-          rotateX,
-          rotateY,
-          rotateZ
+    <Grid container justifyContent="space-between" sx={{ mt: theme.spacing(10) }}>
+      <Grid item xs={12} md={5}>
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+            minHeight: { xs: '66vh', md: 'initial' },
+            position: 'relative',
+            overflow: 'hidden',
+            borderTopRightRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 3) },
+            borderBottomRightRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 3) },
+            mt: { xs: theme.spacing(8), md: 0 },
+            '&:before': {
+              content: '""',
+              position: 'absolute',
+              opacity: '0.5',
+              zIndex: '1',
+              height: '100%',
+              width: '100%',
+              background: `linear-gradient(45deg, ${theme.palette.primary[500]}, ${theme.palette.primary[800]}4a)`,
+              pointerEvents: 'none'
+            }
+          }}
+        >
+          <animated.div ref={ref} style={{ width: '100%', height: '100%', ...springs }}>
+            <img
+              src={formScreenshot}
+              style={{
+                position: 'absolute',
+                height: '120%',
+                width: '100%',
+                bottom: '0',
+                objectFit: 'cover',
+                transform: 'skewY(-10deg)',
+                objectPosition: 'left top'
+              }}
+              alt=""
+            />
+          </animated.div>
+        </Box>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        md={5}
+        sx={{
+          pr: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20) },
+          pl: { xs: theme.spacing(4), md: 0 },
+          py: { xs: theme.spacing(5), md: theme.spacing(20), lg: theme.spacing(20) }
         }}
       >
-        <Box sx={{ height: '25vh', aspectRatio: '1/1', backgroundColor: 'red' }}>Test</Box>
-      </animated.div>
-    </Stack>
+        <Typography variant="h1" sx={{ mb: 4 }}>
+          Lorem Ipsum sit amet dolor
+        </Typography>
+        <Typography variant="body2" sx={{ fontSize: { xs: 16, sm: 20, lg: 22, xl: 24 }, lineHeight: '1.3em' }}>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+          erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+          sanctus est Lorem ipsum dolor sit amet.
+        </Typography>
+      </Grid>
+    </Grid>
   );
-};
-
-export default SectionSecond;
+}

@@ -8,8 +8,8 @@ const SectionFirst = ({ isActive }) => {
   const theme = useTheme();
 
   return (
-    <Stack sx={{ alignItems: 'center', minHeight: '65vh', justifyContent: 'center' }}>
-      <Logo style={{ maxWidth: '600px', marginBottom: theme.spacing(1), marginX: theme.spacing(2) }} />
+    <Stack sx={{ alignItems: 'center', minHeight: { xs: '45vh', md: '55vh' }, justifyContent: 'center' }}>
+      <Logo style={{ maxWidth: '600px', width: '66vw', marginBottom: theme.spacing(1), marginX: theme.spacing(2) }} />
       <Box
         sx={{
           '& span': {
@@ -18,7 +18,8 @@ const SectionFirst = ({ isActive }) => {
             paddingX: 2,
             paddingY: 1,
             borderRadius: theme.shape.borderRadius,
-            boxShadow: theme.shadows[5]
+            boxShadow: theme.shadows[5],
+            fontSize: { xs: 24, sm: 26, lg: 28, xl: 30 }
           }
         }}
       >
@@ -35,7 +36,7 @@ const SectionFirst = ({ isActive }) => {
           ]}
           wrapper="span"
           speed={50}
-          style={{ fontSize: '3em', display: 'inline-block' }}
+          style={{ display: 'inline-block' }}
           repeat={Infinity}
         />
       </Box>
