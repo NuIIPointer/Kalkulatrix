@@ -84,7 +84,10 @@ const DGemeinkostenPlangewinn = () => {
           >
             <Grid item xs={12} sm={4}>
               <Typography variant="h3" sx={{ mb: 1 }}>
-                Deckungsbeitragsziel 1
+                Deckungsbeitragsziel 1{' '}
+                <Typography component="span" sx={{ display: 'block' }}>
+                  ({parseFloat(values.deckungsbeitraege_L17, 10).toFixed(2)}€)
+                </Typography>
               </Typography>
               <Chip
                 color={values.deckungsbeitraege_J29 ? 'success' : 'error'}
@@ -93,7 +96,10 @@ const DGemeinkostenPlangewinn = () => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography variant="h3" sx={{ mb: 1 }}>
-                Deckungsbeitragsziel 2
+                Deckungsbeitragsziel 2{' '}
+                <Typography component="span" sx={{ display: 'block' }}>
+                  ({parseFloat(values.deckungsbeitraege_L19, 10).toFixed(2)}€)
+                </Typography>
               </Typography>
               <Chip
                 color={values.deckungsbeitraege_J31 ? 'success' : 'error'}
@@ -102,7 +108,10 @@ const DGemeinkostenPlangewinn = () => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography variant="h3" sx={{ mb: 1 }}>
-                Deckungsbeitragsziel 3
+                Deckungsbeitragsziel 3{' '}
+                <Typography component="span" sx={{ display: 'block' }}>
+                  ({parseFloat(values.deckungsbeitraege_L21, 10).toFixed(2)}€)
+                </Typography>
               </Typography>
               <Chip
                 color={values.deckungsbeitraege_J33 ? 'success' : 'error'}
