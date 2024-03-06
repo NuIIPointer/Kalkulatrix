@@ -2,11 +2,11 @@ import React, { useCallback, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Typography, Box } from '@mui/material';
 import TextTeaserCard from 'components/TextTeaserCard/index';
-import Logo from 'components/Logo/Logo';
 import { Scrollama, Step } from 'react-scrollama';
-import AnimatedSection from 'components/AnimatedSection/index';
 import SectionSecond from './SectionSecond';
+import SectionThird from './SectionThird';
 import SectionFirst from './SectionFirst';
+import SectionFourth from './SectionFourth';
 
 const Start = () => {
   const theme = useTheme();
@@ -64,34 +64,23 @@ const Start = () => {
               <SectionSecond isActive={currentStepIndex === 1} />
             </div>
           </Step>
-          {/* <Step data={2}>
+          <Step data={2}>
             <div>
-              <SectionSecond isActive={currentStepIndex === 2} />
+              <SectionThird isActive={currentStepIndex === 2} />
             </div>
           </Step>
           <Step data={3}>
             <div>
-              <SectionSecond isActive={currentStepIndex === 3} />
-            </div>
-          </Step> */}
-          <Step data={4}>
-            <div>
-              <AnimatedSection
-                reverse
-                isActive={currentStepIndex === 4}
-                firstContent={
-                  <>
-                    <h2>Ermitteln Sie den perfekten Stundensatz für Ihr Unternehmen</h2>
-                    <p>Mit Kalkulatrix beseitigen Sie Unsicherheiten bei der Preisfindung.</p>
-                  </>
-                }
-                imageContent={<img src="https://placehold.co/600x400/EEE/31343C" alt="Platzhalterbild" />}
-              ></AnimatedSection>
+              <SectionFourth isActive={currentStepIndex === 3} />
             </div>
           </Step>
           {/* Weitere Steps mit Animationen hier */}
         </Scrollama>
-        {bottomBoxRendering()}
+        <Grid container justifyContent="center" sx={{ mt: theme.spacing(10), pb: theme.spacing(20) }}>
+          <Grid item xs={12} md={10}>
+            {bottomBoxRendering()}
+          </Grid>
+        </Grid>
       </Box>
     </>
   );
