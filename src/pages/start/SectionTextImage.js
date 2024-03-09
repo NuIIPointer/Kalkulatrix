@@ -1,15 +1,10 @@
-import React, { useRef } from 'react';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-import { useGesture } from 'react-use-gesture';
-import { useInView, animated, useSpring, to } from '@react-spring/web';
+import React from 'react';
+import { useInView, animated } from '@react-spring/web';
 import { Grid, Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import formScreenshot from '../../assets/images/content/stundensatzformular.jpg';
 
-// Little helpers ...
-const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`;
-
-export default function SectionSecond() {
+export default function SectionTextImage() {
   const theme = useTheme();
   const [ref, springs] = useInView(
     () => ({
@@ -33,7 +28,7 @@ export default function SectionSecond() {
   );
 
   return (
-    <Grid container justifyContent="space-between">
+    <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }}>
       <Grid
         item
         xs={12}
@@ -41,7 +36,7 @@ export default function SectionSecond() {
         sx={{
           pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
           pr: { xs: theme.spacing(4), md: 0 },
-          py: { xs: theme.spacing(5), md: theme.spacing(20), lg: theme.spacing(25) }
+          py: { xs: theme.spacing(2), md: theme.spacing(20), lg: theme.spacing(25) }
         }}
       >
         <Typography variant="h1" sx={{ mb: 4 }}>
@@ -60,11 +55,11 @@ export default function SectionSecond() {
           sx={{
             width: '100%',
             height: '100%',
-            minHeight: { xs: '66vh', md: 'initial' },
+            minHeight: { xs: '500px', sm: '700px', md: 'initial' },
             position: 'relative',
             overflow: 'hidden',
-            borderTopLeftRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 3) },
-            borderBottomLeftRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 3) },
+            borderTopLeftRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 2) },
+            borderBottomLeftRadius: { md: theme.spacing(theme.shape.borderRadiusBox * 2) },
             mt: { xs: theme.spacing(8), md: 0 },
             '&:before': {
               content: '""',
