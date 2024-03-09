@@ -4,22 +4,30 @@ import { useTheme } from '@mui/material/styles';
 import { TypeAnimation } from 'react-type-animation';
 import Logo from 'components/Logo/Logo';
 
-const SectionFirst = ({ isActive }) => {
+const SectionHeadlineText = ({ isActive }) => {
   const theme = useTheme();
 
   return (
-    <Stack sx={{ alignItems: 'center', minHeight: { xs: '45vh', md: '55vh' }, justifyContent: 'center' }}>
-      <Logo style={{ maxWidth: '600px', width: '66vw', marginBottom: theme.spacing(1), marginX: theme.spacing(2) }} />
+    <Stack
+      sx={{
+        alignItems: { md: 'center' },
+        minHeight: { xs: '250px', sm: '45vh', md: '55vh' },
+        justifyContent: 'center',
+        paddingX: { xs: theme.spacing(2) }
+      }}
+    >
+      <Logo style={{ maxWidth: '600px', width: '66vw', marginBottom: theme.spacing(1), marginX: { md: theme.spacing(2) } }} />
       <Box
         sx={{
+          paddingX: 2,
           '& span': {
             backgroundColor: theme.palette.primary[500],
             color: theme.palette.common.white,
-            paddingX: 2,
-            paddingY: 1,
+            paddingX: { xs: 1, sm: 2 },
+            paddingY: { xs: 0.75, sm: 1 },
             borderRadius: theme.shape.borderRadius,
             boxShadow: theme.shadows[5],
-            fontSize: { xs: 24, sm: 26, lg: 28, xl: 30 }
+            fontSize: { xs: 18, sm: 26, lg: 28, xl: 30 }
           }
         }}
       >
@@ -44,4 +52,4 @@ const SectionFirst = ({ isActive }) => {
   );
 };
 
-export default SectionFirst;
+export default SectionHeadlineText;
