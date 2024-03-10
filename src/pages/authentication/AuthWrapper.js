@@ -8,14 +8,10 @@ import AuthCard from './AuthCard';
 import Logo from 'components/Logo';
 import AuthFooter from 'components/cards/AuthFooter';
 
-// assets
-import AuthBackground from 'assets/images/auth/AuthBackground';
-
 // ==============================|| AUTHENTICATION - WRAPPER ||============================== //
 
 const AuthWrapper = ({ children }) => (
   <Box sx={{ minHeight: '100vh' }}>
-    <AuthBackground />
     <Grid
       container
       direction="column"
@@ -25,7 +21,7 @@ const AuthWrapper = ({ children }) => (
       }}
     >
       <Grid item xs={12} sx={{ ml: 3, mt: 3 }}>
-        <Logo variant="light" style={{ maxWidth: '350px' }} />
+        <Logo variant="dark" style={{ maxWidth: '350px' }} />
       </Grid>
       <Grid item xs={12}>
         <Grid

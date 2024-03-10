@@ -34,7 +34,7 @@ const PublicLayout = () => {
           <Box
             component="main"
             sx={{
-              pt: { xs: theme.spacing(14), md: theme.spacing(16) }
+              pt: { xs: theme.spacing(10) }
             }}
           >
             <Outlet />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useInView, animated } from '@react-spring/web';
-import { Grid, Box, Typography } from '@mui/material';
+import { Grid, Box, Typography, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import formScreenshot from '../../assets/images/content/stundensatzformular_3.png';
 
@@ -30,7 +30,7 @@ export default function SectionImageText() {
   return (
     <>
       <Grid container justifyContent="space-between" sx={{ mt: { md: theme.spacing(10) } }}>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6} xl={5}>
           <Box
             sx={{
               width: '100%',
@@ -88,6 +88,9 @@ export default function SectionImageText() {
             aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
             takimata sanctus est Lorem ipsum dolor sit amet.
           </Typography>
+          <Button href="/register" color="primary" variant="contained" sx={{ mt: theme.spacing(4) }}>
+            Jetzt starten
+          </Button>
         </Grid>
       </Grid>
     </>
