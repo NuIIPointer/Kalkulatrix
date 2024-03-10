@@ -57,7 +57,7 @@ const Dashboard = () => {
               Mit einem Abonnement können Sie alle Features des Stundensatzkalkulators unbegrenzt nutzen.
             </Typography>
           </Grid>
-          <Grid item xs={12} md={6} lg={5}>
+          <Grid item xs={12} md={6} xl={5}>
             {!hasActiveSubscription && (
               <TextTeaserCard
                 grow

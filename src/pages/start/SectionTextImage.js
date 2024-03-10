@@ -1,11 +1,15 @@
 import React from 'react';
 import { useInView, animated } from '@react-spring/web';
-import { Grid, Box, Typography, Button } from '@mui/material';
+import { Grid, Box, Typography, Button, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { ChevronRight } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import formScreenshot from '../../assets/images/content/stundensatzformular.jpg';
 
 export default function SectionTextImage() {
   const theme = useTheme();
+
+  const textStyles = { fontSize: { xs: 16, sm: 20, lg: 22, xl: 24 }, lineHeight: '1.3em' };
+
   const [ref, springs] = useInView(
     () => ({
       from: {
@@ -42,13 +46,41 @@ export default function SectionTextImage() {
         <Typography variant="h1" sx={{ mb: 4 }}>
           Lorem Ipsum sit amet dolor
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: { xs: 16, sm: 20, lg: 22, xl: 24 }, lineHeight: '1.3em' }}>
+        <Typography variant="body2" sx={textStyles}>
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
           erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-          sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-          invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          sanctus est Lorem ipsum dolor sit amet.
         </Typography>
+        <List sx={{ mt: 2 }}>
+          <ListItem alignItems="flex-start">
+            <ListItemIcon>
+              <ChevronRight />
+            </ListItemIcon>
+            <ListItemText
+              primaryTypographyProps={textStyles}
+              primary="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut"
+            />
+          </ListItem>
+          <ListItem alignItems="flex-start">
+            <ListItemIcon>
+              <ChevronRight />
+            </ListItemIcon>
+            <ListItemText
+              primaryTypographyProps={textStyles}
+              primary="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+          aliquyam"
+            />
+          </ListItem>
+          <ListItem alignItems="flex-start">
+            <ListItemIcon>
+              <ChevronRight />
+            </ListItemIcon>
+            <ListItemText
+              primaryTypographyProps={textStyles}
+              primary="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy"
+            />
+          </ListItem>
+        </List>
         <Button href="/register" color="primary" variant="contained" sx={{ mt: theme.spacing(4) }}>
           Jetzt starten
         </Button>

@@ -17,6 +17,9 @@ const Dashboard = () => {
         <Grid item xs={12} sm={6} xl={4}>
           <TextTeaserCard primaryText="Profil" prefixText="zum" link="/" color={theme.palette.primary.light} />
         </Grid>
+        <Grid item xs={12} sm={6} xl={4}>
+          <TextTeaserCard primaryText="Kontaktieren" prefixText="jetzt" link="/" color={theme.palette.primary[200]} />
+        </Grid>
       </Grid>
     );
   }, [theme]);
