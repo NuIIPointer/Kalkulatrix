@@ -12,7 +12,7 @@ import { activeItem } from 'store/reducers/menu';
 
 // ==============================|| MAIN LOGO ||============================== //
 
-const LogoSection = ({ sx, to }) => {
+const LogoSection = ({ sx, to, variant = 'light' }) => {
   const { defaultId } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
   return (
@@ -23,7 +23,7 @@ const LogoSection = ({ sx, to }) => {
       to={!to ? config.defaultPath : to}
       sx={sx}
     >
-      <Logo variant="light" />
+      <Logo variant={variant} />
     </ButtonBase>
   );
 };

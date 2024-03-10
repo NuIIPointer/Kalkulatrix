@@ -169,16 +169,16 @@ const AuthRegister = () => {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body2">
-                  Durch die Anmeldung stimmst du unseren &nbsp;
-                  <Link variant="subtitle2" component={RouterLink} to="#">
+                <Typography variant="body1">
+                  Durch die Anmeldung stimmst du unseren{' '}
+                  <Link variant="subtitle2" component={RouterLink} to="#" sx={{ fontSize: 'inherit' }}>
                     Nutzungsbedingungen
-                  </Link>
-                  &nbsp; und unserer &nbsp;
-                  <Link variant="subtitle2" component={RouterLink} to="#">
+                  </Link>{' '}
+                  und unserer{' '}
+                  <Link variant="subtitle2" component={RouterLink} to="#" sx={{ fontSize: 'inherit' }}>
                     Datenschutzrichtlinie
-                  </Link>
-                  &nbsp; zu.
+                  </Link>{' '}
+                  zu.
                 </Typography>
               </Grid>
               {errors.submit && (

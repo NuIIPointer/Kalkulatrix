@@ -7,7 +7,7 @@ const PublicNav = () => {
   return (
     <Box
       sx={{
-        padding: `${theme.spacing(4)} ${theme.spacing(5)}`
+        padding: `${theme.spacing(2)} ${theme.spacing(5)}`
       }}
     >
       <Stack justifyContent="space-between" direction="row">
