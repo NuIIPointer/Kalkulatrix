@@ -84,6 +84,9 @@ export default function SectionTextImage() {
         <Button href="/register" color="primary" variant="contained" sx={{ mt: theme.spacing(4) }}>
           Jetzt starten
         </Button>
+        <Button href="/kontakt" color="primary" variant="contained" sx={{ mt: theme.spacing(4) }}>
+          Beratungstermin vereinbaren
+        </Button>
       </Grid>
       <Grid item xs={12} md={5}>
         <Box
