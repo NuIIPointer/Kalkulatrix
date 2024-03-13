@@ -16,7 +16,7 @@ const iconStyles = {
 const Dashboard = () => {
   const theme = useTheme();
   const [isLoadingSub, setIsLoadingSub] = useState();
-  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.main}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary.dark}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.light}, transparent 100%)`;
+  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.main}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary.light}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.light}, transparent 100%)`;
 
   const { getPortalUrl, createSubscription, loadingCreateSubscription, hasActiveSubscription } = useContext(StripeContext);
 
@@ -97,7 +97,7 @@ const Dashboard = () => {
                     }}
                     component="span"
                   >
-                    Abonement und Zahlungsmethode
+                    Abonnement und Zahlungsmethode
                   </Stack>
                 }
                 // prefixText={`zuletzt bearbeitet: ${dayjs(formData.creationDate).format('DD.MM.YYYY')}`}

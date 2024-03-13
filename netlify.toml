@@ -1,0 +1,5 @@
+[[redirects]]
+  force = true
+  from = "/eventcalendar/calendar.ics"
+  status = 200
+  to = "https://calendar.google.com/calendar/ical/c92ul1oi629qbgc4d3rf8kfvac%40group.calendar.google.com/public/basic.ics"

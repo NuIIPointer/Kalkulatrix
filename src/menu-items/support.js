@@ -14,7 +14,6 @@ const support = {
       title: 'Kontakt',
       type: 'item',
       url: '/',
-      // url: '/sample-page',
       icon: EmailIcon
     },
     {
