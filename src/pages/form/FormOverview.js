@@ -15,10 +15,13 @@ const FormOverview = () => {
     mt: { xs: 5, md: 6, lg: 7 }
   };
 
+  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.dark}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.dark}, transparent 100%)`;
+
   return (
     <Stack mb={6}>
       <ColoredSection
         bgColor={theme.palette.primary.dark}
+        bgGradient={headerBgColor}
         headline="Stundensatzkalkulator"
         description="asdojaosidj98 a9sudj ud 98ausd ujas98d jas9d ijoas9d9ash"
       />

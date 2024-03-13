@@ -11,6 +11,7 @@ const FormOverview = Loadable(lazy(() => import('pages/form/FormOverview')));
 const Form = Loadable(lazy(() => import('pages/form/Form')));
 const Dashboard = Loadable(lazy(() => import('pages/dashboard')));
 const Billing = Loadable(lazy(() => import('pages/billing')));
+const Events = Loadable(lazy(() => import('pages/events')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -31,6 +32,14 @@ const UserRoutes = {
       element: (
         <ProtectedRoute>
           <Billing />
+        </ProtectedRoute>
+      )
+    },
+    {
+      path: 'office/events',
+      element: (
+        <ProtectedRoute>
+          <Events />
         </ProtectedRoute>
       )
     },

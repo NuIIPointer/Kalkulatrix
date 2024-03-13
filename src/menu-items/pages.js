@@ -1,5 +1,5 @@
 // assets
-import { SwitchAccountOutlined, BackupTableOutlined, WalletOutlined } from '@mui/icons-material';
+import { CalendarMonth, BackupTableOutlined, WalletOutlined } from '@mui/icons-material';
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
@@ -20,8 +20,15 @@ const pages = {
       id: 'billing',
       title: 'Abonnement',
       type: 'item',
-      url: 'office/billing',
+      url: '/office/billing',
       icon: WalletOutlined
+    },
+    {
+      id: 'beratungstermin',
+      title: 'Beratungstermine',
+      type: 'item',
+      url: '/office/events',
+      icon: CalendarMonth
     }
   ]
 };
