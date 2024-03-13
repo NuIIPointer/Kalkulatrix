@@ -33,7 +33,7 @@ const Events = () => {
           locales={[deLocale]}
           locale="de"
           events={{
-            url: 'https://calendar.google.com/calendar/ical/c92ul1oi629qbgc4d3rf8kfvac%40group.calendar.google.com/public/basic.ics',
+            url: '/eventcalendar/calendar.ics',
             format: 'ics'
           }}
         />
