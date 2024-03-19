@@ -44,16 +44,16 @@ const Dashboard = () => {
       {bottomBoxRendering()}
       {calendarDataStatus === 'success' && futureCalendarData.length > 0 && (
         <>
-          <Typography variant="h2" sx={{ mb: 1, mt: 8 }}>Anstehende Termine:</Typography>
+          <Typography variant="h2" sx={{ mb: 1, mt: 8 }}>Anstehende Termine</Typography>
           <Typography variant="body2" sx={{ mb: 3 }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Typography>
           <Grid container spacing={3} sx={{ mt: -2 }}>
-            {futureCalendarData.map((event) => {
+            {futureCalendarData.slice(0, 3).map((event) => {
               const startDateObj = dayjs(event.startDate);
 
               return (
                 <Grid item md={6} lg={4} key={event.id}>
                   <Stack>
-                    <Typography flexDirection="row" sx={{ fontSize: 36, display: 'flex', gap: 1 }}>
+                    <Typography flexDirection="row" sx={{ fontSize: 36, display: 'flex', gap: 1.5 }}>
                       <Stack sx={{ fontWeight: 'bold' }}>{startDateObj.format('DD.MM.')}</Stack>
                       <Stack>{startDateObj.format('hh:mm')} Uhr</Stack>
                     </Typography>
