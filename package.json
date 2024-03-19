@@ -22,7 +22,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "apexcharts": "^3.35.5",
-    "dayjs": "^1.11.9",
+    "dayjs": "^1.11.10",
     "firebase": "^10.1.0",
     "formik": "^2.2.9",
     "framer-motion": "^7.3.6",
