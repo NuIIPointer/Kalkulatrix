@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { DialogContent, DialogContentText, Dialog, DialogTitle, DialogActions, Button } from '@mui/material';
 import ColoredSection from 'components/pageLayout/header/ColoredSection';
@@ -8,15 +8,13 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import iCalendarPlugin from '@fullcalendar/icalendar';
 import deLocale from '@fullcalendar/core/locales/de';
-import ical from './calendar.ics';
+import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
 
 const Events = () => {
   const [dialogSettings, setDialogSettings] = useState(null);
   const theme = useTheme();
+  const calendarData = useGetCalendarData();
   const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.dark}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary.main}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.light}, transparent 100%)`;
-
-  const environment = process.env.NODE_ENV || 'development';
-  const calToUse = environment !== 'production' ? ical : '/eventcalendar/calendar.ics';
 
   return (
     <>
@@ -39,7 +37,7 @@ const Events = () => {
           locales={[deLocale]}
           locale="de"
           events={{
-            url: calToUse,
+            url: calendarData.url,
             format: 'ics'
           }}
           eventClick={function (info) {
