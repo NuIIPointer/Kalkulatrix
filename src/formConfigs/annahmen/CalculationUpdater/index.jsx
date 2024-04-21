@@ -105,8 +105,8 @@ const StundensatzRechnerValueUpdater = () => {
 
   // Produktivstunden 3
   useEffect(() => {
-    const anwesenheitszeitInTagen = values.annahmen_G23 - values.annahmen_G29 || 0;
-    const anwesenheitszeitInStunden = values.annahmen_H23 - values.annahmen_H29 || 0;
+    const anwesenheitszeitInTagen = (values.annahmen_G23 || 0) - (values.annahmen_G29 || 0) || 0;
+    const anwesenheitszeitInStunden = (values.annahmen_H23 || 0) - (values.annahmen_H29 || 0) || 0;
 
     anwesenheitszeitInTagen !== values.annahmen_G31 && setFieldValue('annahmen_G31', anwesenheitszeitInTagen);
     anwesenheitszeitInStunden !== values.annahmen_H31 && setFieldValue('annahmen_H31', anwesenheitszeitInStunden);
@@ -122,15 +122,15 @@ const StundensatzRechnerValueUpdater = () => {
 
   // Lohnnebenkostensatz
   useEffect(() => {
-    const jahresArbeitszeitFuerLaufendeBezuege = values.annahmen_G29 + values.annahmen_G31 || 0;
-    const svAbgabenArbeitgeberInTagen = (values.annahmen_E41 / 100) * jahresArbeitszeitFuerLaufendeBezuege || 0;
-    const sonstigeKostenInTagen = (values.annahmen_E42 / 100) * jahresArbeitszeitFuerLaufendeBezuege || 0;
-    const gesamtkostensatzDerProduktivkapazitaet =
-      jahresArbeitszeitFuerLaufendeBezuege + svAbgabenArbeitgeberInTagen + sonstigeKostenInTagen || 0;
-    const gesamtkostensatzDerProduktivkapazitaetInProzent = (gesamtkostensatzDerProduktivkapazitaet / values.annahmen_G31 - 1) * 100 || 0;
+    const G38 = values.annahmen_G29 + values.annahmen_G31 || 0;
+    const G41 = (values.annahmen_E41 / 100) * G38 || 0;
+    const G42 = (values.annahmen_E42 / 100) * G38 || 0;
+    const G44 = G38 + G41 + G42 || 0;
+    const I46 = (G44 / values.annahmen_G31 - 1) * 100 || 0;
 
-    gesamtkostensatzDerProduktivkapazitaetInProzent !== values.annahmen_I46 &&
-      setFieldValue('annahmen_I46', gesamtkostensatzDerProduktivkapazitaetInProzent);
+    if (I46 !== values.annahmen_I46) {
+      setFieldValue('annahmen_I46', I46);
+    }
   }, [
     setFieldValue,
     values.annahmen_I46,

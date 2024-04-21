@@ -26,9 +26,10 @@ const StundensatzRechnerValueUpdater = () => {
           const L14 = (J14 || 0) + (ma.K14 || 0);
           const M14 = (L14 || 0) * ((values.pk_allgemein_K5 || 0) / 100);
           const N14 = (L14 || 0) + (M14 || 0);
+          const anzahl = ma.anzahl || 1;
 
-          N24 += N14;
-          N53 += N14;
+          N24 += N14 * anzahl;
+          N53 += N14 * anzahl;
 
           if (H14 !== ma.H14) {
             setFieldValue(`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.H14`, H14);

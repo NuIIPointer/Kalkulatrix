@@ -21,7 +21,7 @@ const TestForm = () => {
     annahmen_allgemein_planjahr: undefined,
     annahmen_E41: undefined,
     annahmen_G16: undefined,
-    annahmen_G17_days: undefined,
+    annahmen_G17_days: [1, 2, 3, 4, 5],
     ...(activeFormData.values || {}),
     letzteAenderung: activeFormData?.values?.lastChanged
   };

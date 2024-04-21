@@ -55,7 +55,7 @@ const Stammdaten = () => {
                         key={index}
                         label={
                           <Stack sx={{ color: errors.pk_allgemein_mitarbeiter?.[index] ? theme.palette.error.main : undefined }}>
-                            {category.groupTitle || `Tab ${index + 1}`}
+                            {category.groupTitle || `Gruppe ${index + 1}`}
                           </Stack>
                         }
                         value={index.toString()}
@@ -66,7 +66,7 @@ const Stammdaten = () => {
                 <Button
                   variant="text"
                   onClick={() => {
-                    push({ categoryId: uuid(), fields: [getInitialMitarbeiterData()] });
+                    push({ categoryId: uuid(), fields: [getInitialMitarbeiterData(values)] });
                     changeTab(null, values.pk_allgemein_mitarbeiter?.length || 0);
                   }}
                   disabled={isSubmitting}
@@ -134,8 +134,9 @@ const Stammdaten = () => {
                         {values.pk_allgemein_mitarbeiter?.[outerIndex]?.fields?.map((innerField, innerIndex) => (
                           <FormSection
                             key={innerIndex}
-                            title={`${innerField?.vorname || 'Mitarbeiter'} ${innerField?.nachname || ''}`}
-                            description="Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein."
+                            title={`${innerField?.titel || 'Mitarbeiter'} ${innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
+                              }`}
+                            description="Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl)."
                             defaultOpen={outerIndex === 0 && values.pk_allgemein_mitarbeiter?.length === 1}
                             backgroundColor={theme.palette.primary[50]}
                             onDelete={() => innerRemove(innerIndex)}
@@ -149,11 +150,11 @@ const Stammdaten = () => {
                             </Grid>
                             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                               <Grid item xs={12} sm={6}>
-                                <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.vorname`}>
+                                <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.titel`}>
                                   {({ field, meta }) => (
                                     <TextField
                                       {...field}
-                                      label="Vorname"
+                                      label="Name/Titel"
                                       error={meta?.touched && Boolean(meta.error)}
                                       helperText={meta?.touched && meta.error}
                                       sx={{ mb: 2 }}
@@ -162,13 +163,14 @@ const Stammdaten = () => {
                                 </FastField>
                               </Grid>
                               <Grid item xs={12} sm={6}>
-                                <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.nachname`}>
+                                <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.anzahl`}>
                                   {({ field, meta }) => (
                                     <TextField
                                       {...field}
-                                      label="Nachname"
+                                      label="Anzahl"
                                       error={meta?.touched && Boolean(meta.error)}
-                                      helperText={meta?.touched && meta.error}
+                                      helperText={'Möchten Sie diesen Mitarbeiter mehrmals berücksichtigen, geben Sie eine Anzahl an.'}
+                                      type="number"
                                       sx={{ mb: 2 }}
                                     />
                                   )}
@@ -288,9 +290,8 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label={`Lohnnebenkosten ${
-                                              values.pk_allgemein_K5 ? `(${values.pk_allgemein_K5}%) ` : ''
-                                            }(in EUR)`}
+                                            label={`Lohnnebenkosten ${values.pk_allgemein_K5 ? `(${values.pk_allgemein_K5}%) ` : ''
+                                              }(in EUR)`}
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             sx={{ mb: 2 }}

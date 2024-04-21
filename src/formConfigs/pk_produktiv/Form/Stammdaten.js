@@ -54,7 +54,7 @@ const Stammdaten = () => {
                         key={index}
                         label={
                           <Stack sx={{ color: errors.pk_produktiv_mitarbeiter?.[index] ? theme.palette.error.main : undefined }}>
-                            {category.groupTitle || `Tab ${index + 1}`}
+                            {category.groupTitle || `Gruppe ${index + 1}`}
                           </Stack>
                         }
                         value={index.toString()}
@@ -65,7 +65,7 @@ const Stammdaten = () => {
                 <Button
                   variant="text"
                   onClick={() => {
-                    push({ categoryId: uuid(), fields: [getInitialMitarbeiterData()] });
+                    push({ categoryId: uuid(), fields: [getInitialMitarbeiterData(values)] });
                     changeTab(null, values.pk_produktiv_mitarbeiter.length);
                   }}
                   disabled={isSubmitting}
@@ -131,7 +131,8 @@ const Stammdaten = () => {
                     {({ push: innerPush, remove: innerRemove }) => (
                       <>
                         {values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields?.map((innerField, innerIndex) => {
-                          const maTitle = `${innerField?.vorname || 'Mitarbeiter'} ${innerField?.nachname || ''}`;
+                          const maTitle = `${innerField?.titel || 'Mitarbeiter'} ${innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
+                            }`;
                           return (
                             <React.Fragment key={innerField.userId || innerIndex}>
                               <FormSection
@@ -151,11 +152,11 @@ const Stammdaten = () => {
                                 <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                                   <>
                                     <Grid item xs={12} sm={6}>
-                                      <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.vorname`}>
+                                      <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.titel`}>
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label="Vorname"
+                                            label="Name/Titel"
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             sx={{ mb: 2 }}
@@ -164,13 +165,16 @@ const Stammdaten = () => {
                                       </FastField>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
-                                      <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.nachname`}>
+                                      <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.anzahl`}>
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label="Nachname"
+                                            label="Anzahl"
                                             error={meta?.touched && Boolean(meta.error)}
-                                            helperText={meta?.touched && meta.error}
+                                            helperText={
+                                              'Möchten Sie diesen Mitarbeiter mehrmals berücksichtigen, geben Sie eine Anzahl an.'
+                                            }
+                                            type="number"
                                             sx={{ mb: 2 }}
                                           />
                                         )}

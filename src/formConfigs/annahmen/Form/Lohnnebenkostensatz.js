@@ -86,12 +86,13 @@ const Lohnnebenkostensatz = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.annahmen_E42 && Boolean(errors.annahmen_E42)}
-              helperText={touched.annahmen_E42 && errors.annahmen_E42}
+              helperText={(touched.annahmen_E42 && errors.annahmen_E42) || 'Aushilfen, Fahrtkosten, etc.'}
               sx={{ mb: 2 }}
             />
           </Grid>
         </Grid>
       </FormSection>
+      {/*
       <ReadOnlyBox white title={'Berechnet: Lohnnebenkostensatz'} alwaysOpen>
         <Grid container spacing={{ xs: 2, md: 4 }}>
           <Grid item xs={12} md={6}>
@@ -110,6 +111,7 @@ const Lohnnebenkostensatz = () => {
           </Grid>
         </Grid>
       </ReadOnlyBox>
+      */}
     </>
   );
 };

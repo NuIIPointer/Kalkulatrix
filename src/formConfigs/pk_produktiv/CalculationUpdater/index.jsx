@@ -20,6 +20,7 @@ const StundensatzRechnerValueUpdater = () => {
       let pk_produktiv_S36 = 0;
       let pk_produktiv_O36 = 0;
       let pk_produktiv_Q36_tmp = 0;
+      let mitarbeiter_anzahl = 0;
 
       values.pk_produktiv_mitarbeiter?.forEach((category, outerIndex) => {
         category.fields?.forEach((ma, innerIndex) => {
@@ -31,12 +32,14 @@ const StundensatzRechnerValueUpdater = () => {
           const S9 = M9 * ((ma.Q9 || 0) + (ma.R9 || 0));
           const U9 = O9 * ((ma.Q9 || 0) + (ma.R9 || 0));
           const V9 = P9 * ((ma.Q9 || 0) + (ma.R9 || 0));
+          const anzahl = ma.anzahl || 1;
 
-          pk_produktiv_P40 += U9;
-          pk_produktiv_Q40 += V9;
-          pk_produktiv_S36 += S9;
-          pk_produktiv_O36 += O9;
-          pk_produktiv_Q36_tmp += ma.Q9 || 0;
+          pk_produktiv_P40 += U9 * anzahl;
+          pk_produktiv_Q40 += V9 * anzahl;
+          pk_produktiv_S36 += S9 * anzahl;
+          pk_produktiv_O36 += O9 * anzahl;
+          pk_produktiv_Q36_tmp += (ma.Q9 || 0) * anzahl;
+          mitarbeiter_anzahl++;
 
           if (J9 !== ma.J9) {
             setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.J9`, J9);
@@ -62,7 +65,7 @@ const StundensatzRechnerValueUpdater = () => {
         });
       });
 
-      const pk_produktiv_Q36 = pk_produktiv_Q36_tmp / (values.pk_produktiv_mitarbeiter?.length || 0);
+      const pk_produktiv_Q36 = pk_produktiv_Q36_tmp / mitarbeiter_anzahl;
       const pk_produktiv_R40 = pk_produktiv_Q36;
       const pk_produktiv_S40 = pk_produktiv_S36;
 

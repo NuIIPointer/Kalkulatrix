@@ -43,7 +43,7 @@ const Produktivstunden = () => {
             {({ field, meta }) => (
               <FormControl fullWidth>
                 <InputLabel id="annahmen_G17_days-label">Wochenarbeitstage</InputLabel>
-                <Select multiple defaultValue={[1, 2, 3, 4, 5]} {...field} {...meta} labelId="annahmen_G17_days-label">
+                <Select multiple {...field} {...meta} labelId="annahmen_G17_days-label">
                   <MenuItem value={1}>Montag</MenuItem>
                   <MenuItem value={2}>Dienstag</MenuItem>
                   <MenuItem value={3}>Mittwoch</MenuItem>
@@ -196,6 +196,7 @@ const Produktivstunden = () => {
             />
           </EnrichedField>
         </Grid>
+        {/*
         <Grid item xs={12}>
           <ReadOnlyBox title={'Summe Nichtanwesenheit'} alwaysOpen>
             <Grid container spacing={{ xs: 2, md: 4 }}>
@@ -230,40 +231,43 @@ const Produktivstunden = () => {
             </Grid>
           </ReadOnlyBox>
         </Grid>
-        <Grid item xs={12}>
-          <ReadOnlyBox title={'Summe Anwesenheitszeit'} alwaysOpen>
-            <Grid container spacing={{ xs: 2, md: 4 }}>
-              <Grid item xs={12} md={6}>
-                <Field
-                  component={TextField}
-                  InputProps={{
-                    readOnly: true
-                  }}
-                  type="number"
-                  id="annahmen_G31"
-                  name="annahmen_G31"
-                  label="Summe Anwesenheit in Tagen"
-                  value={formFloat(values.annahmen_G31, 2)}
-                  sx={{ mb: 2 }}
-                />
+        */}
+        {/*
+          <Grid item xs={12}>
+            <ReadOnlyBox title={'Summe Anwesenheitszeit'} alwaysOpen>
+              <Grid container spacing={{ xs: 2, md: 4 }}>
+                <Grid item xs={12} md={6}>
+                  <Field
+                    component={TextField}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    type="number"
+                    id="annahmen_G31"
+                    name="annahmen_G31"
+                    label="Summe Anwesenheit in Tagen"
+                    value={formFloat(values.annahmen_G31, 2)}
+                    sx={{ mb: 2 }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Field
+                    component={TextField}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    type="number"
+                    id="annahmen_H31"
+                    name="annahmen_H31"
+                    label="Summe Anwesenheit in Stunden"
+                    value={formFloat(values.annahmen_H31, 2)}
+                    sx={{ mb: 2 }}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <Field
-                  component={TextField}
-                  InputProps={{
-                    readOnly: true
-                  }}
-                  type="number"
-                  id="annahmen_H31"
-                  name="annahmen_H31"
-                  label="Summe Anwesenheit in Stunden"
-                  value={formFloat(values.annahmen_H31, 2)}
-                  sx={{ mb: 2 }}
-                />
-              </Grid>
-            </Grid>
-          </ReadOnlyBox>
-        </Grid>
+            </ReadOnlyBox>
+          </Grid>
+        */}
       </Grid>
     </FormSection>
   );

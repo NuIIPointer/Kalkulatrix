@@ -32,7 +32,7 @@ const FormSection = ({
   const [isOpen, setIsOpen] = useState(defaultOpen || false);
   const [openPopup, setOpenPopup] = useState(false);
   const theme = useTheme();
-  const { errors } = useFormikContext();
+  const { errors, touched } = useFormikContext();
   const sectionRef = useRef(null);
 
   const hasErrorField = useMemo(() => {
@@ -50,7 +50,22 @@ const FormSection = ({
     return false;
   }, [errors, sectionRef.current]);
 
-  const showErrorStatus = hasErrorField || isError;
+  const hasTouchedField = useMemo(() => {
+    if (sectionRef.current) {
+      const inputFields = sectionRef.current.querySelectorAll('input, textarea, select');
+
+      if (inputFields?.length > 0) {
+        const inputNames = Array.from(inputFields).map((field) => field.getAttribute('name') || field.getAttribute('id'));
+        const hasError = Object.keys(touched).find((key) => touched[key] && inputNames.includes(key));
+
+        return !!hasError;
+      }
+    }
+
+    return false;
+  }, [touched, sectionRef.current]);
+
+  const showErrorStatus = hasTouchedField && (hasErrorField || isError);
 
   const buttonStyles = {
     aspectRatio: '1/1',
