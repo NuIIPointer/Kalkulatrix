@@ -55,7 +55,7 @@ const MaterialzuschlagFremdleistungen = () => {
                           key={index}
                           label={
                             <Stack sx={{ color: errors.gk_deckung_zuschlaege?.[index] ? theme.palette.error.main : undefined }}>
-                              {category.groupTitle || `Tab ${index + 1}`}
+                              {category.groupTitle || `Gruppe ${index + 1}`}
                             </Stack>
                           }
                           value={index.toString()}

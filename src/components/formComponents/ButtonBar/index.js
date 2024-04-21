@@ -84,7 +84,7 @@ const ButtonBar = () => {
           zurück
         </Button>
         {errors && Object.keys(errors).length > 0 ? (
-          <Alert severity="error" variant="outlined">
+          <Alert severity={Object.keys(touched).length > 0 ? 'error' : 'info'} variant="outlined">
             Es gibt unvollständige oder falsche Angaben
           </Alert>
         ) : (

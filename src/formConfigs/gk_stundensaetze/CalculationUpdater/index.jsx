@@ -67,9 +67,10 @@ const StundensatzRechnerValueUpdater = () => {
   // AufschlagssaetzePK START
   useEffect(() => {
     const reCalculateDGPSValues = () => {
-      const F23 = values.std_verrechnungssaetze_I10 || 0;
-      const G23 = values.pk_produktiv_O20 || 0;
-      const H23 = F23 ? (F23 / 100) * G23 : 0;
+      const F23 = values.std_verrechnungssaetze_G8 || 0;
+      console.log('std_verrechnungssaetze_G8', values.std_verrechnungssaetze_G8);
+      const G23 = values.pk_produktiv_O36 || 0;
+      const H23 = F23 ? F23 * G23 : 0;
       const H29 = H23 ? ((values.gk_stundensaetze_H10 || 0) / H23) * 100 : 0;
       const H33 = F23 ? (F23 / 100) * values.gk_stundensaetze_H29 : 0;
       const H38 = H23 ? ((values.gk_stundensaetze_H14 || 0) / H23) * 100 : 0;
@@ -120,6 +121,7 @@ const StundensatzRechnerValueUpdater = () => {
     values.gk_stundensaetze_H38,
     values.gk_stundensaetze_H42,
     values.pk_produktiv_O20,
+    values.std_verrechnungssaetze_G8,
     values.std_verrechnungssaetze_I10
   ]);
   // AufschlagssaetzePK ENDE

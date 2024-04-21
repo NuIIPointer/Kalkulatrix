@@ -110,7 +110,7 @@ const Zusatzkosten = () => {
           );
         })}
         <Grid item xs={12}>
-          <ReadOnlyBox alwaysOpen title={'Materialgemeinkosten Gesamt'} headlineVariant="h3">
+          <ReadOnlyBox alwaysOpen title={'Zusatzkosten gesamt'} headlineVariant="h3">
             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }} alignItems="flex-end">
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_F47">

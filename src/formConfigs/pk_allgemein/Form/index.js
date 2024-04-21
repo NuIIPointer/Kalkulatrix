@@ -18,7 +18,7 @@ const PKAllgemein = () => {
   }, []);
   const initialValues = {
     formTitle: activeFormData.title,
-    pk_allgemein_K6: undefined,
+    pk_allgemein_K6: 5175,
     pk_allgemein_K7: undefined,
     pk_allgemein_K78: undefined,
     pk_allgemein_mitarbeiter: [],
