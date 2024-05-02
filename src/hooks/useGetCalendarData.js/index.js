@@ -10,7 +10,6 @@ const useGetCalendarData = () => {
   const futureCalendarData = useMemo(() => {
     return calendarData ? calendarData.filter((event) => new Date(event.endDate) > new Date()) : [];
   }, [calendarData]);
-  console.log('futureCalendarData', futureCalendarData);
   const [calendarDataStatus, setCalendarDataStatus] = useState(null);
 
   useEffect(() => {
@@ -19,9 +18,7 @@ const useGetCalendarData = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(calToUse);
-        console.log('response', response);
         const textData = await response.text();
-        console.log('textData', textData);
         const jcalData = ICAL.parse(textData);
         const comp = new ICAL.Component(jcalData);
         const events = comp.getAllSubcomponents('vevent').map((event) => new ICAL.Event(event));
@@ -48,8 +45,6 @@ const useGetCalendarData = () => {
 
     fetchData();
   }, [calToUse]);
-
-  console.log('calendarData', calendarData);
 
   return {
     url: calToUse,

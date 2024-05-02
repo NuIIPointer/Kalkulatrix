@@ -56,7 +56,7 @@ const Profile = () => {
   const iconColorOpen = theme.palette.common.white;
 
   return (
-    <Box sx={{ flexShrink: 0 }}>
+    <Box sx={{ flexShrink: 0, ml: 'auto' }}>
       <ButtonBase
         sx={{
           p: 0.25,

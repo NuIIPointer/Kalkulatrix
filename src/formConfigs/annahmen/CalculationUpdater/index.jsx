@@ -10,6 +10,16 @@ const StundensatzRechnerValueUpdater = () => {
     values.annahmen_G17_days || undefined
   );
 
+  // Tage pro Jahr
+  useEffect(() => {
+    const year = values.annahmen_allgemein_planjahr;
+    const numberOfDays = (year % 4 === 0 && year % 100 > 0) || year % 400 == 0 ? 366 : 365;
+
+    if (numberOfDays !== values.days_of_year) {
+      setFieldValue('days_of_year', numberOfDays);
+    }
+  }, [values.annahmen_allgemein_planjahr, values.days_of_year, setFieldValue]);
+
   // Wochenarbeitstage
   useEffect(() => {
     const arbeitsTageCount = values.annahmen_G17_days ? values.annahmen_G17_days.length : 5;
@@ -65,9 +75,9 @@ const StundensatzRechnerValueUpdater = () => {
       values.annahmen_G18 !== undefined &&
       values.annahmen_G22 !== undefined
     ) {
-      const arbeitsstundenProJahr = 365 * values.annahmen_G18 || 0;
+      const arbeitsstundenProJahr = values.days_of_year * values.annahmen_G18 || 0;
       const wochenendArbeitsstundenProJahr = values.annahmen_G22 * values.annahmen_G18 || 0;
-      const jahresarbeitszzeitInTagen = 365 - values.annahmen_G22 || 0;
+      const jahresarbeitszzeitInTagen = values.days_of_year - values.annahmen_G22 || 0;
       const jahresArbeitszeitInStunden = arbeitsstundenProJahr - wochenendArbeitsstundenProJahr || 0;
 
       jahresArbeitszeitInStunden !== values.annahmen_H23 && setFieldValue('annahmen_H23', jahresArbeitszeitInStunden);
@@ -80,7 +90,8 @@ const StundensatzRechnerValueUpdater = () => {
     values.annahmen_G22,
     setFieldValue,
     values.annahmen_H23,
-    values.annahmen_G23
+    values.annahmen_G23,
+    values.days_of_year
   ]);
 
   // Produktivstunden 2

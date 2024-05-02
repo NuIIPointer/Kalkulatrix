@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Button} from '@mui/material';
+import { Box, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 // project import
@@ -100,15 +100,21 @@ const MainLayout = () => {
             gridRowEnd: '4',
             backgroundColor: theme.palette.primary.main,
             position: 'relative',
-            alignItems: 'flex-end',
             ':after': {
               content: '""',
               position: 'absolute',
               top: '0',
-              right: '100%',
+              right: 'calc(100% - 1px)',
               backgroundColor: theme.palette.primary.main,
               height: '100%',
               width: '100vw'
+            },
+            alignItems: 'flex-end',
+            '@media(min-width: 1536px)': {
+              alignItems: 'center'
+            },
+            '@media(min-width: 2000px)': {
+              alignItems: 'flex-end'
             }
           }}
         >
