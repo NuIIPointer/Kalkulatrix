@@ -10,12 +10,13 @@ import Redirect from './helper/Redirect';
 const FormOverview = Loadable(lazy(() => import('pages/form/FormOverview')));
 const Form = Loadable(lazy(() => import('pages/form/Form')));
 const Dashboard = Loadable(lazy(() => import('pages/dashboard')));
+const AdminDashboard = Loadable(lazy(() => import('pages/admin/dashboard')));
 const Billing = Loadable(lazy(() => import('pages/billing')));
 const Events = Loadable(lazy(() => import('pages/events')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
-const UserRoutes = {
+const userRoutes = (isAdmin) => ({
   path: '/',
   element: <MainLayout />,
   children: [
@@ -27,6 +28,14 @@ const UserRoutes = {
         </ProtectedRoute>
       )
     },
+    isAdmin && {
+      path: 'office/admin/dashboard',
+      element: (
+        <ProtectedRoute>
+          <AdminDashboard />
+        </ProtectedRoute>
+      )
+    } || {},
     {
       path: 'office/billing',
       element: (
@@ -63,7 +72,7 @@ const UserRoutes = {
                 <ProtectedRoute>
                   <Form />
                 </ProtectedRoute>
-              ),
+              )
             },
             {
               path: '',
@@ -78,6 +87,6 @@ const UserRoutes = {
       ]
     }
   ]
-};
+});
 
-export default UserRoutes;
+export default userRoutes;
