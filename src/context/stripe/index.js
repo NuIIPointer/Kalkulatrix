@@ -12,7 +12,7 @@ export const StripeContext = createContext(null);
 const getSubscriptions = async (userId) => {
   if (userId) {
     const checkoutSessionRef = collection(db, 'users', userId, 'subscriptions');
-    const allDocs = await getDocs(query(checkoutSessionRef));
+    // const allDocs = await getDocs(query(checkoutSessionRef));
     const snap = await getDocs(query(checkoutSessionRef, where('status', 'in', ['trialing', 'active'])));
 
     return snap;

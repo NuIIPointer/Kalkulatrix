@@ -6,28 +6,44 @@ import { Button, Stack, CircularProgress, Dialog, DialogActions, DialogTitle, Al
 import { Save, ChevronLeft } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { UserContext } from 'context/user';
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import useFormLiteral from 'pages/form/useFormLiteral';
 
 const ButtonBar = () => {
   const navigate = useNavigate();
   const { values = {}, errors, touched } = useFormikContext();
-  const { saveForm, requestStatusCodes } = useContext(UserContext);
+  const { saveForm, requestStatusCodes, isForeignForm } = useContext(UserContext);
   const isSaving = requestStatusCodes.saveForm === StatusCodes.PROCESSING;
   const { enqueueSnackbar } = useSnackbar();
   const theme = useTheme();
+  const { formId, formSection } = useParams();
+  const formLiteral = useFormLiteral();
 
   const [showTouchedFieldsDialog, setShowTouchedFieldsDialog] = useState(false);
   const hasTouchedFields = Object.keys(touched).length > 0;
 
-  const saveAction = useCallback(async () => {
-    await saveForm(values);
-    if (!errors || Object.keys(errors).length === 0) {
-      enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
-    } else {
-      enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
-    }
-  }, [saveForm, values, errors, enqueueSnackbar]);
+  const saveAction = useCallback(
+    async (goNext) => {
+      if (!isForeignForm) {
+        await saveForm(values);
+        if (!errors || Object.keys(errors).length === 0) {
+          enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
+          if (goNext) {
+            const nextStepKey = Object.keys(formLiteral).findIndex((key) => key === formSection) + 1;
+
+            if (typeof nextStepKey === 'number' && nextStepKey < Object.keys(formLiteral).length) {
+              const nextStep = Object.keys(formLiteral)[nextStepKey];
+              console.log('nextStep', nextStep);
+              navigate(`/office/form/${formId}/${nextStep}`);
+            }
+          }
+        } else {
+          enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
+        }
+      }
+    },
+    [isForeignForm, saveForm, values, errors, enqueueSnackbar, formLiteral, formSection, navigate, formId]
+  );
 
   const handleGoBack = useCallback(() => {
     if (!hasTouchedFields) {
@@ -72,7 +88,8 @@ const ButtonBar = () => {
           backgroundColor: theme.palette.common.white,
           width: barWidth,
           zIndex: '1000',
-          boxShadow: theme.customShadows.z2
+          boxShadow: theme.customShadows.z2,
+          flexWrap: 'wrap'
         }}
       >
         <Button
@@ -80,8 +97,9 @@ const ButtonBar = () => {
           variant="outlined"
           color="primary"
           onClick={handleGoBack}
+          sx={{ marginRight: 'auto' }}
         >
-          zurück
+          zurück zur Übersicht
         </Button>
         {errors && Object.keys(errors).length > 0 ? (
           <Alert severity={Object.keys(touched).length > 0 ? 'error' : 'info'} variant="outlined">
@@ -90,15 +108,28 @@ const ButtonBar = () => {
         ) : (
           ''
         )}
-        <Button
-          startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
-          variant="contained"
-          color="primary"
-          onClick={saveAction}
-          type="submit"
-        >
-          {isSaving ? 'lädt' : 'speichern'}
-        </Button>
+        <Stack gap={1} direction="row" flexWrap="wrap">
+          <Button
+            startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
+            variant="outlined"
+            color="primary"
+            onClick={saveAction}
+            type="submit"
+            disabled={isSaving || isForeignForm}
+          >
+            speichern
+          </Button>
+          <Button
+            startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
+            variant="contained"
+            color="primary"
+            onClick={() => saveAction(true)}
+            type="button"
+            disabled={isSaving || isForeignForm}
+          >
+            speichern und weiter
+          </Button>
+        </Stack>
       </Stack>
       <Dialog
         open={showTouchedFieldsDialog}

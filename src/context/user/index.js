@@ -68,8 +68,10 @@ export const UserContextProvider = ({ children }) => {
   const mounted = useRef();
   const [user, setUser] = useState(initialUser);
   const [formsData, setFormsData] = useState(initialFormsData);
-  const [activeFormId, setActiveFormId] = useState(initialFormsData);
-  const activeFormData = useMemo(() => formsData[activeFormId], [activeFormId, formsData]);
+  const [clientFormsData, setClientFormsData] = useState(initialFormsData);
+  const [activeFormId, setActiveFormId] = useState(null);
+  const activeFormData = useMemo(() => ({ ...clientFormsData, ...formsData }[activeFormId]), [activeFormId, clientFormsData, formsData]);
+  const isForeignForm = !Object.keys(formsData).includes(activeFormId);
 
   const [drawerStatus, setDrawerStatus] = useState(initialLayout.drawerStatus);
 
@@ -265,7 +267,7 @@ export const UserContextProvider = ({ children }) => {
       setFormsData({});
     }
     setLoadingForm(StatusCodes.OK);
-  }, [user.userFormIds, getForms]);
+  }, [user.userFormIds]);
 
   const saveForm = useCallback(
     async (values) => {
@@ -343,7 +345,9 @@ export const UserContextProvider = ({ children }) => {
         setActiveFormId,
         requestStatusCodes,
         drawerStatus,
-        setDrawerStatus
+        setDrawerStatus,
+        setClientFormsData,
+        isForeignForm
       }}
     >
       {children}
