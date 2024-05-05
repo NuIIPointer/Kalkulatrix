@@ -18,6 +18,8 @@ const ButtonBar = () => {
   const theme = useTheme();
   const { formId, formSection } = useParams();
   const formLiteral = useFormLiteral();
+  const nextStepKey = Object.keys(formLiteral).findIndex((key) => key === formSection) + 1;
+  const isLaststep = nextStepKey === Object.keys(formLiteral).length;
 
   const [showTouchedFieldsDialog, setShowTouchedFieldsDialog] = useState(false);
   const hasTouchedFields = Object.keys(touched).length > 0;
@@ -29,11 +31,8 @@ const ButtonBar = () => {
         if (!errors || Object.keys(errors).length === 0) {
           enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
           if (goNext) {
-            const nextStepKey = Object.keys(formLiteral).findIndex((key) => key === formSection) + 1;
-
-            if (typeof nextStepKey === 'number' && nextStepKey < Object.keys(formLiteral).length) {
+            if (typeof nextStepKey === 'number' && !isLaststep) {
               const nextStep = Object.keys(formLiteral)[nextStepKey];
-              console.log('nextStep', nextStep);
               navigate(`/office/form/${formId}/${nextStep}`);
             }
           }
@@ -42,7 +41,7 @@ const ButtonBar = () => {
         }
       }
     },
-    [isForeignForm, saveForm, values, errors, enqueueSnackbar, formLiteral, formSection, navigate, formId]
+    [isForeignForm, saveForm, values, errors, enqueueSnackbar, nextStepKey, isLaststep, formLiteral, navigate, formId]
   );
 
   const handleGoBack = useCallback(() => {
@@ -119,16 +118,18 @@ const ButtonBar = () => {
           >
             speichern
           </Button>
-          <Button
-            startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
-            variant="contained"
-            color="primary"
-            onClick={() => saveAction(true)}
-            type="button"
-            disabled={isSaving || isForeignForm}
-          >
-            speichern und weiter
-          </Button>
+          {!isLaststep && (
+            <Button
+              startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
+              variant="contained"
+              color="primary"
+              onClick={() => saveAction(true)}
+              type="button"
+              disabled={isSaving || isForeignForm}
+            >
+              speichern und weiter
+            </Button>
+          )}
         </Stack>
       </Stack>
       <Dialog
