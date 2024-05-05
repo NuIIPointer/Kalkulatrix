@@ -68,7 +68,6 @@ const StundensatzRechnerValueUpdater = () => {
   useEffect(() => {
     const reCalculateDGPSValues = () => {
       const F23 = values.std_verrechnungssaetze_G8 || 0;
-      console.log('std_verrechnungssaetze_G8', values.std_verrechnungssaetze_G8);
       const G23 = values.pk_produktiv_O36 || 0;
       const H23 = F23 ? F23 * G23 : 0;
       const H29 = H23 ? ((values.gk_stundensaetze_H10 || 0) / H23) * 100 : 0;

@@ -4,6 +4,7 @@ import React, { useContext, useCallback } from 'react';
 import ButtonBar from 'components/formComponents/ButtonBar/index';
 import { Formik, Form } from 'formik';
 import CalculationUpdater from '../CalculationUpdater/index';
+import CalculationUpdaterVerrechnungssaetze from '../../std_verrechnungssaetze/CalculationUpdater/index';
 import Start from './Start';
 import DGemeinkostenPlangewinn from './DGemeinkostenPlangewinn';
 import AufschlagssaetzePK from './AufschlagssaetzePK';
@@ -26,6 +27,7 @@ const GKStundensaetze = () => {
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />
+          <CalculationUpdaterVerrechnungssaetze /> {/* Eine Berechnung benötigt auf dieser Seite wird im std_verrechnungssatz calculator berechnet */}
           <Start />
           <DGemeinkostenPlangewinn />
           <AufschlagssaetzePK />

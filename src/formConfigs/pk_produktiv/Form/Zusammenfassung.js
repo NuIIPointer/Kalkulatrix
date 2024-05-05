@@ -20,9 +20,9 @@ const Zusammenfassung = () => {
       <Typography variant="h2" sx={{ mb: { sm: 2, md: 3 }, mt: { sm: 4, md: 6, lg: 8 } }}>
         Zusammenfassung
       </Typography>
-      <ReadOnlyBox alwaysOpen white title="Anwesenheitsentgelt">
+      <ReadOnlyBox alwaysOpen white title="Berechnet: Anwesenheitsentgelt inkl. Personalnebenkosten">
         <Grid container spacing={{ xs: 2, md: 4 }} alignItems="flex-end">
-          <Grid item xs={12} sm={4}>
+          {/* <Grid item xs={12} sm={4}>
             <Field
               component={TextField}
               id={`pk_produktiv_P40`}
@@ -138,12 +138,12 @@ const Zusammenfassung = () => {
               type="number"
               sx={{ mb: 2 }}
             />
-          </Grid>
-          <Grid item xs={12}>
+          </Grid> */}
+          {/* <Grid item xs={12}>
             <Typography variant="h4" sx={{ mb: -2, mt: 2 }}>
               Berechnet: Anwesenheitsentgelt inkl. Personalnebenkosten
             </Typography>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} sm={4}>
             <Field
               component={TextField}
