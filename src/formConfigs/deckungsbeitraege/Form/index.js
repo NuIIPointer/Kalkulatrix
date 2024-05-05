@@ -4,6 +4,12 @@ import React, { useContext, useCallback } from 'react';
 import ButtonBar from 'components/formComponents/ButtonBar/index';
 import { Formik, Form } from 'formik';
 import CalculationUpdater from '../CalculationUpdater/index';
+import CalculationUpdaterAnnahmen from '../../annahmen/CalculationUpdater/index';
+import CalculationUpdaterGemeinkosten from '../../gemeinkosten/CalculationUpdater/index';
+import CalculationUpdaterGKDeckung from '../../gk_deckung/CalculationUpdater/index';
+import CalculationUpdaterPKAllgemein from '../../pk_allgemein/CalculationUpdater/index';
+import CalculationUpdaterPKProduktiv from '../../pk_produktiv/CalculationUpdater/index';
+import CalculationUpdaterVerrechnungssaetze from '../../std_verrechnungssaetze/CalculationUpdater/index';
 import Start from './Start';
 import Stundendeckungsbeitragsziele from './Stundendeckungsbeitragsziele';
 import TheoretischerDBS from './TheoretischerDBS';
@@ -26,6 +32,12 @@ const StdVerrechnungssaetze = () => {
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />
+          <CalculationUpdaterAnnahmen />
+          <CalculationUpdaterGemeinkosten />
+          <CalculationUpdaterGKDeckung />
+          <CalculationUpdaterPKAllgemein />
+          <CalculationUpdaterPKProduktiv />
+          <CalculationUpdaterVerrechnungssaetze />
           <Start />
           <Stundendeckungsbeitragsziele />
           <TheoretischerDBS />
