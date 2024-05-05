@@ -4,11 +4,13 @@ import React, { useContext, useCallback } from 'react';
 import ButtonBar from 'components/formComponents/ButtonBar/index';
 import { Formik, Form } from 'formik';
 import CalculationUpdater from '../CalculationUpdater/index';
+import CalculationUpdaterGkStundensaetze from '../CalculationUpdater/gk_stundensaetze';
 import Start from './Start';
 import Annahmen from './Annahmen';
 import { UserContext } from 'context/user';
 import Produktivstunden from './Produktivstunden';
 import Lohnnebenkostensatz from './Lohnnebenkostensatz';
+import Plangewinn from './Plangewinn';
 import validationSchema from '../rules/validation/schema';
 
 const TestForm = () => {
@@ -31,10 +33,12 @@ const TestForm = () => {
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />
+          <CalculationUpdaterGkStundensaetze />
           <Start />
           <Annahmen />
           <Produktivstunden />
           <Lohnnebenkostensatz />
+          <Plangewinn />
           <ButtonBar />
         </Form>
       )}

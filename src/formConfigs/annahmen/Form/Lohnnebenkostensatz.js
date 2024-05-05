@@ -15,7 +15,10 @@ const Lohnnebenkostensatz = () => {
 
   return (
     <>
-      <FormSection title="Angaben Lohnnebenkostensatz" description="In diesem Abschnitt werden Sonderausgaben angegeben.">
+      <FormSection
+        title="Angaben Lohnnebenkostensatz"
+        description="Lohnnebenkosten stellen jene Ausgaben dar, welche in ihrem Unternehmen neben dem Bruttolohn anfallen und somit die Gesamtkosten der Arbeitskraft erhöhen."
+      >
         <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
           <Grid item xs={12}>
             <Divider sx={{ mt: 2, mb: 4 }} />
@@ -73,22 +76,30 @@ const Lohnnebenkostensatz = () => {
             </EnrichedField>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Field
-              component={TextField}
-              id="annahmen_E42"
-              name="annahmen_E42"
-              label="Sonstige Kosten (in %)"
-              type="number"
-              onWheel={(event) => event.target.blur()}
-              min="0"
-              max="100"
-              value={values.annahmen_E42}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.annahmen_E42 && Boolean(errors.annahmen_E42)}
-              helperText={(touched.annahmen_E42 && errors.annahmen_E42) || 'Aushilfen, Fahrtkosten, etc.'}
-              sx={{ mb: 2 }}
-            />
+            <EnrichedField
+              infoText={
+                <>
+                  <p>Sonstige Kosten sind eher: Betriebliche Altersvorsorge, Weiterbildungs- und Schulungskosten, Zusätzlich Versicherungen, Gesundheitsförderung, Freiwillige Sozialleistungen, Prämien und Boni, Vermögenswirksame Leistungen</p>
+                </>
+              }
+            >
+              <Field
+                component={TextField}
+                id="annahmen_E42"
+                name="annahmen_E42"
+                label="Sonstige Kosten (in %)"
+                type="number"
+                onWheel={(event) => event.target.blur()}
+                min="0"
+                max="100"
+                value={values.annahmen_E42}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.annahmen_E42 && Boolean(errors.annahmen_E42)}
+                helperText={touched.annahmen_E42 && errors.annahmen_E42}
+                sx={{ mb: 2 }}
+              />
+            </EnrichedField>
           </Grid>
         </Grid>
       </FormSection>

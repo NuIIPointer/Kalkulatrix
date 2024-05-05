@@ -16,7 +16,23 @@ export const AdminContext = createContext(null);
 export const AdminContextProvider = ({ children }) => {
   const [status_clientsData, setLoadingClientsData] = useState(initialStatusCodes.loadingUsersdata);
   const [clientsData, setClientsData] = useState(initialStatusCodes.loadingUsersdata);
-  const { user } = useContext(UserContext);
+  const clientsFormConfigs = useMemo(() => {
+    const forms = {};
+    clientsData?.forEach((client) => {
+      client.usersFormData.forEach((form) => {
+        forms[form.id] = form;
+      });
+    });
+
+    return forms;
+  }, [clientsData]);
+  const { user, setClientFormsData } = useContext(UserContext);
+
+  useEffect(() => {
+    if (clientsFormConfigs) {
+      setClientFormsData(clientsFormConfigs);
+    }
+  }, [clientsFormConfigs, setClientFormsData]);
 
   const requestStatusCodes = useMemo(() => {
     return {
@@ -76,7 +92,8 @@ export const AdminContextProvider = ({ children }) => {
     <AdminContext.Provider
       value={{
         requestStatusCodes,
-        clientsData
+        clientsData,
+        clientsFormConfigs
       }}
     >
       {children}

@@ -14,7 +14,7 @@ const Produktivstunden = () => {
   const { values, errors, touched, handleChange, handleBlur } = useFormikContext();
 
   return (
-    <FormSection title="Produktivstunden / Anwesenheitszeit" description="Geben Sie hier Angaben zu Ihrem Mitarber an. Diese Angaben dienen als Vorlage beim anlegen neuer Mitarbeiter.">
+    <FormSection title="Anwesenheitszeit" description="Geben Sie hier Angaben zu Ihrem Mitarber an. Diese Angaben dienen als Vorlage beim anlegen neuer Mitarbeiter.">
       <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
         <Grid item xs={12}>
           <Divider sx={{ mt: 2, mb: 4 }} />
@@ -145,7 +145,7 @@ const Produktivstunden = () => {
             component={TextField}
             id="annahmen_G26"
             name="annahmen_G26"
-            label="Urlaubstage pro Mitarbeiter"
+            label="⌀ Urlaubstage pro Mitarbeiter"
             value={values.annahmen_G26}
             type="number"
             onWheel={(event) => event.target.blur()}
@@ -154,7 +154,7 @@ const Produktivstunden = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.annahmen_G26 && Boolean(errors.annahmen_G26)}
-            helperText={touched.annahmen_G26 && errors.annahmen_G26}
+            helperText={touched.annahmen_G26 ? errors.annahmen_G26 : 'Dient zur Vorbelegung beim anlegen neuer Mitarbeiter'}
             sx={{ mb: 2 }}
           />
         </Grid>
@@ -163,7 +163,7 @@ const Produktivstunden = () => {
             component={TextField}
             id="annahmen_G27"
             name="annahmen_G27"
-            label="Krankentage pro Mitarbeiter"
+            label="⌀ Krankentage pro Mitarbeiter"
             value={values.annahmen_G27}
             type="number"
             onWheel={(event) => event.target.blur()}
@@ -172,7 +172,7 @@ const Produktivstunden = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.annahmen_G27 && Boolean(errors.annahmen_G27)}
-            helperText={touched.annahmen_G27 && errors.annahmen_G27}
+            helperText={touched.annahmen_G27 ? errors.annahmen_G27 : 'Dient zur Vorbelegung beim anlegen neuer Mitarbeiter'}
             sx={{ mb: 2 }}
           />
         </Grid>
@@ -182,7 +182,7 @@ const Produktivstunden = () => {
               component={TextField}
               id="annahmen_G28"
               name="annahmen_G28"
-              label="Sonstige Arbeitsverhinderungen"
+              label="⌀ Sonstige Arbeitsverhinderungen"
               value={values.annahmen_G28}
               type="number"
               onWheel={(event) => event.target.blur()}
@@ -191,7 +191,7 @@ const Produktivstunden = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.annahmen_G28 && Boolean(errors.annahmen_G28)}
-              helperText={touched.annahmen_G28 && errors.annahmen_G28}
+              helperText={touched.annahmen_G28 ? errors.annahmen_G28 : 'Dient zur Vorbelegung beim anlegen neuer Mitarbeiter'}
               sx={{ mb: 2 }}
             />
           </EnrichedField>
