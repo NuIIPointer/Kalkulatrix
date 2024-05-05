@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 const useGetFeiertage = (blShort = 'BB', dateOrYear, workingDays = [1, 2, 3, 4, 5]) => {
   const [feiertage, setFeiertage] = useState(0);
   const [feiertageWochentage, setFeiertageWochentage] = useState(0);
-  const yearToUse = dayjs(dateOrYear || undefined).get('year');
+  const yearToUse = dayjs(dateOrYear.length > 4 ? dateOrYear : `01.01.${dateOrYear}` || undefined).get('year');
 
   useEffect(() => {
     const fetchIt = async () => {
@@ -13,11 +13,11 @@ const useGetFeiertage = (blShort = 'BB', dateOrYear, workingDays = [1, 2, 3, 4, 
       const holidays = data ? Object.keys(data)?.length || 0 : 0;
       const workDayHolidays = data
         ? Object.values(data).filter((item) => {
-            const dayKey = dayjs(item.datum).get('day');
-            const isWorkingDay = workingDays.includes(dayKey);
+          const dayKey = dayjs(item.datum).get('day');
+          const isWorkingDay = workingDays.includes(dayKey);
 
-            return isWorkingDay;
-          }).length
+          return isWorkingDay;
+        }).length
         : 0;
 
       setFeiertageWochentage(workDayHolidays);

@@ -37,7 +37,6 @@ const PKAllgemein = () => {
     >
       {({ touched, initialValues }) => (
         <Form autoComplete="off">
-          {console.log('touched', touched, initialValues)}
           <CalculationUpdater />
           <Start />
           <Angaben />

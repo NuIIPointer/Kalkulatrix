@@ -38,8 +38,6 @@ const FormComponent = () => {
     return null;
   }, [activeFormData, formLiteral, formSection]);
 
-  console.log('activeFormConfig', activeFormConfig);
-
   if (!activeFormConfig) {
     return <FullPageLoader />;
   }

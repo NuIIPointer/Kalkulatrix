@@ -42,6 +42,23 @@ const initialLayout = {
   drawerStatus: null
 };
 
+export const getForms = async (formIds) => {
+  const tmpForms = {};
+  const snap = await getDocs(query(collection(db, 'forms'), where(documentId(), 'in', formIds)));
+
+  snap.docs.forEach((doc) => {
+    const docData = doc.data();
+    tmpForms[doc.id] = {
+      id: doc.id,
+      title: docData.title,
+      type: docData.type,
+      values: docData.values ? JSON.parse(docData.values) : {},
+      creationDate: docData.creationDate
+    };
+  });
+  return tmpForms;
+};
+
 export const UserContext = createContext(null);
 // eslint-disable-next-line react/prop-types
 export const UserContextProvider = ({ children }) => {
@@ -221,23 +238,6 @@ export const UserContextProvider = ({ children }) => {
     },
     [removeUserForm]
   );
-
-  const getForms = useCallback(async (formIds) => {
-    const tmpForms = {};
-    const snap = await getDocs(query(collection(db, 'forms'), where(documentId(), 'in', formIds)));
-
-    snap.docs.forEach((doc) => {
-      const docData = doc.data();
-      tmpForms[doc.id] = {
-        id: doc.id,
-        title: docData.title,
-        type: docData.type,
-        values: docData.values ? JSON.parse(docData.values) : {},
-        creationDate: docData.creationDate
-      };
-    });
-    return tmpForms;
-  }, []);
 
   const createForm = useCallback(
     async ({ title, type }) => {

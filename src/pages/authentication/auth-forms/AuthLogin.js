@@ -86,7 +86,6 @@ const AuthLogin = () => {
       >
         {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {}, setFieldValue }) => (
           <Form autoComplete="off" noValidate>
-            {console.log('touched', touched)}
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={3}>

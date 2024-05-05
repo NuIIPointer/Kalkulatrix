@@ -49,7 +49,6 @@ const Stammdaten = () => {
               <Stack direction="row" flexWrap="wrap" mt={{ xs: 2, sm: 3, borderBottom: `1px solid ${theme.palette.primary.main}` }}>
                 <TabList onChange={changeTab}>
                   {values.pk_allgemein_mitarbeiter?.map((category, index) => {
-                    console.log('category', category);
                     return (
                       <Tab
                         key={index}

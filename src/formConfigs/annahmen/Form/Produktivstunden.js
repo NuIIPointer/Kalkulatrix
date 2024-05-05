@@ -150,7 +150,7 @@ const Produktivstunden = () => {
             type="number"
             onWheel={(event) => event.target.blur()}
             min="0"
-            max="365"
+            max="366"
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.annahmen_G26 && Boolean(errors.annahmen_G26)}
@@ -168,7 +168,7 @@ const Produktivstunden = () => {
             type="number"
             onWheel={(event) => event.target.blur()}
             min="0"
-            max="365"
+            max="366"
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.annahmen_G27 && Boolean(errors.annahmen_G27)}
@@ -187,7 +187,7 @@ const Produktivstunden = () => {
               type="number"
               onWheel={(event) => event.target.blur()}
               min="0"
-              max="365"
+              max="366"
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.annahmen_G28 && Boolean(errors.annahmen_G28)}

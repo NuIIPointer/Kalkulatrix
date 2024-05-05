@@ -17,6 +17,14 @@ const pages = {
       icon: BackupTableOutlined
     },
     {
+      id: 'forms',
+      title: 'Admin Dashboard',
+      type: 'item',
+      url: '/office/admin/dashboard',
+      requiresAdmin: true,
+      icon: BackupTableOutlined
+    },
+    {
       id: 'billing',
       title: 'Abonnement',
       type: 'item',
