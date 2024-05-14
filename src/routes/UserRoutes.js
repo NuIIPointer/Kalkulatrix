@@ -13,6 +13,7 @@ const Dashboard = Loadable(lazy(() => import('pages/dashboard')));
 const AdminDashboard = Loadable(lazy(() => import('pages/admin/dashboard')));
 const Billing = Loadable(lazy(() => import('pages/billing')));
 const Events = Loadable(lazy(() => import('pages/events')));
+const Profile = Loadable(lazy(() => import('pages/profile')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -25,6 +26,14 @@ const userRoutes = (isAdmin) => ({
       element: (
         <ProtectedRoute>
           <Dashboard />
+        </ProtectedRoute>
+      )
+    },
+    {
+      path: 'office/profile',
+      element: (
+        <ProtectedRoute>
+          <Profile />
         </ProtectedRoute>
       )
     },

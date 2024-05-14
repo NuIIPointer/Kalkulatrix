@@ -19,16 +19,16 @@ const ButtonBar = () => {
   const { formId, formSection } = useParams();
   const formLiteral = useFormLiteral();
   const nextStepKey = Object.keys(formLiteral).findIndex((key) => key === formSection) + 1;
-  const isLaststep = nextStepKey === Object.keys(formLiteral).length;
+  const isLaststep = formLiteral && nextStepKey === Object.keys(formLiteral)?.length;
 
   const [showTouchedFieldsDialog, setShowTouchedFieldsDialog] = useState(false);
-  const hasTouchedFields = Object.keys(touched).length > 0;
+  const hasTouchedFields = touched && Object.keys(touched)?.length > 0;
 
   const saveAction = useCallback(
     async (goNext) => {
       if (!isForeignForm) {
         await saveForm(values);
-        if (!errors || Object.keys(errors).length === 0) {
+        if (!errors || Object.keys(errors)?.length === 0) {
           enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
           if (goNext) {
             if (typeof nextStepKey === 'number' && !isLaststep) {
@@ -100,8 +100,8 @@ const ButtonBar = () => {
         >
           zurück zur Übersicht
         </Button>
-        {errors && Object.keys(errors).length > 0 ? (
-          <Alert severity={Object.keys(touched).length > 0 ? 'error' : 'info'} variant="outlined">
+        {errors && Object.keys(errors)?.length > 0 ? (
+          <Alert severity={Object.keys(touched)?.length > 0 ? 'error' : 'info'} variant="outlined">
             Es gibt unvollständige oder falsche Angaben
           </Alert>
         ) : (

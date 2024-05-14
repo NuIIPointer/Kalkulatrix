@@ -66,7 +66,7 @@ const Stammdaten = () => {
                   variant="text"
                   onClick={() => {
                     push({ categoryId: uuid(), fields: [getInitialMitarbeiterData(values)] });
-                    changeTab(null, values.pk_produktiv_mitarbeiter.length);
+                    changeTab(null, values.pk_produktiv_mitarbeiter?.length);
                   }}
                   disabled={isSubmitting}
                   sx={{ fontWeight: 500 }}

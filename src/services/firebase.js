@@ -3,6 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  updateEmail,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut
@@ -29,4 +30,16 @@ const db = getFirestore(app);
 //init services
 const auth = getAuth();
 
-export { db, app, functions, httpsCallable, auth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut };
+export {
+  db,
+  app,
+  functions,
+  httpsCallable,
+  auth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  updateEmail,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+};

@@ -1,5 +1,5 @@
 // assets
-import { CalendarMonth, BackupTableOutlined, WalletOutlined } from '@mui/icons-material';
+import { Person, CalendarMonth, BackupTableOutlined, WalletOutlined } from '@mui/icons-material';
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
@@ -37,6 +37,13 @@ const pages = {
       type: 'item',
       url: '/office/events',
       icon: CalendarMonth
+    },
+    {
+      id: 'profil',
+      title: 'Profil',
+      type: 'item',
+      url: '/office/profile',
+      icon: Person
     }
   ]
 };

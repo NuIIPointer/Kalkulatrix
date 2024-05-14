@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import ColoredSection from 'components/pageLayout/header/ColoredSection';
 import { AdminContext } from 'context/admin/index';
-import { Box, Button, Stack, Modal } from '@mui/material';
+import { Box, Button, Stack, Modal, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import useFormLiteral from 'pages/form/useFormLiteral';
 
@@ -36,8 +36,9 @@ const AdminDashboard = () => {
       renderCell: (params) => (
         <Stack gap={2} direction="row" justifyContent="flex-start" alignItems="center" sx={{ height: '100%' }}>
           {params.value?.map((formData, key) => (
-            <Button size="small" color="primary" variant="contained" onClick={() => setModalData(formData)} key={FormData.id}>
+            <Button size="small" color="primary" variant="contained" onClick={() => setModalData({ formData: formData, rowData: params.row })} key={FormData.id}>
               {formData.title}
+              {console.log('params', params)}
             </Button>
           ))}
         </Stack>
@@ -54,10 +55,19 @@ const AdminDashboard = () => {
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor nec feugiat nisl pretium fusce id velit ut. Fames ac turpis egestas sed tempus urna et. Diam in arcu cursus euismod. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis."
       />
       {clientsData && (
-        <Box
-          sx={{ overflow: 'hidden', borderRadius: theme.shape.borderRadiusBox, backgroundColor: theme.palette.common.white, padding: 2 }}
-        >
+        <Box sx={{ overflow: 'hidden', borderRadius: theme.shape.borderRadiusBox, backgroundColor: '#ffffff', padding: 2 }}>
           <DataGrid
+            sx={{
+              '& .MuiDataGrid-row': {
+                borderRadius: theme.shape.borderRadius,
+                '&:nth-child(2n-1)': {
+                  backgroundColor: theme.palette.grey[100],
+                  '&:hover': {
+                    backgroundColor: theme.palette.grey[200]
+                  }
+                }
+              }
+            }}
             rows={clientsData}
             columns={columns}
             initialState={{
@@ -73,7 +83,7 @@ const AdminDashboard = () => {
             disableColumnSelector
           />
           <Modal
-            open={!!modalData}
+            open={!!modalData?.formData}
             onClose={() => setModalData(null)}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -84,13 +94,18 @@ const AdminDashboard = () => {
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                width: '1300px',
+                width: '1000px',
                 maxWidth: '90vw',
                 borderRadius: theme.shape.borderRadiusBox,
                 backgroundColor: theme.palette.common.white,
                 padding: 3
               }}
             >
+              <Typography variant="h2" color="primary" sx={{ mb: 1 }}>
+                Blatt wählen
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 0, lineHeight: 1.2 }}>Formular von: {modalData?.rowData?.firstName} {modalData?.rowData?.lastName}</Typography>
+              <Typography variant="body2" sx={{ mb: 3, lineHeight: 1.2 }}>Formulartitel: {modalData?.formData?.title}</Typography>
               <Stack gap={2} direction="row" flexWrap="wrap">
                 {Object.keys(formLiteral).map((key) => {
                   const stepConfig = formLiteral[key];
@@ -100,7 +115,7 @@ const AdminDashboard = () => {
                       variant="contained"
                       color="primary"
                       key={stepConfig.linkPart}
-                      href={`/office/form/${modalData?.id}/${stepConfig.linkPart}`}
+                      href={`/office/form/${modalData?.formData?.id}/${stepConfig.linkPart}`}
                       sx={{ flexBasis: '23%', flexGrow: 1 }}
                     >
                       {stepConfig.title}

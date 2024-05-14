@@ -22,7 +22,7 @@ const StundensatzRechnerValueUpdater = () => {
 
   // Wochenarbeitstage
   useEffect(() => {
-    const arbeitsTageCount = values.annahmen_G17_days ? values.annahmen_G17_days.length : 5;
+    const arbeitsTageCount = values.annahmen_G17_days ? values.annahmen_G17_days?.length : 5;
     if (arbeitsTageCount !== values.annahmen_G17) {
       setFieldValue('annahmen_G17', arbeitsTageCount);
     }

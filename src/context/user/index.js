@@ -10,13 +10,14 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  updateEmail,
   signOut,
   db,
   onAuthStateChanged
 } from 'services/firebase';
 import { setPersistence, browserLocalPersistence, inMemoryPersistence } from 'firebase/auth';
 
-import { setDoc, doc, getDoc, getDocs, addDoc, collection, query, where, documentId, deleteDoc } from 'firebase/firestore';
+import { setDoc, doc, getDoc, getDocs, updateDoc, addDoc, collection, query, where, documentId, deleteDoc } from 'firebase/firestore';
 
 const initialUser = {
   uid: null,
@@ -46,7 +47,7 @@ export const getForms = async (formIds) => {
   const tmpForms = {};
   const snap = await getDocs(query(collection(db, 'forms'), where(documentId(), 'in', formIds)));
 
-  snap.docs.forEach((doc) => {
+  snap.docs?.forEach((doc) => {
     const docData = doc.data();
     tmpForms[doc.id] = {
       id: doc.id,
@@ -148,18 +149,47 @@ export const UserContextProvider = ({ children }) => {
       setAuthUser(StatusCodes.PROCESSING);
       const persistance = keepSignedIn ? browserLocalPersistence : inMemoryPersistence;
       await setPersistence(auth, persistance);
-      await signInWithEmailAndPassword(auth, email, password)
-        .then(async (userAuth) => {
-          // store the user's information in the redux state
-          await loginUser({ email: userAuth.user.email, uid: userAuth.user.uid, displayName: userAuth.user.displayName });
-        })
-        // display the error if any
-        .catch((err) => {
-          alert(err);
-        });
-      setAuthUser(StatusCodes.PROCESSING);
+      try {
+        const userAuth = await signInWithEmailAndPassword(auth, email, password);
+        await loginUser({ email: userAuth.user.email, uid: userAuth.user.uid, displayName: userAuth.user.displayName });
+        setAuthUser(StatusCodes.OK);
+
+        return true;
+      } catch (err) {
+        console.log(err);
+        alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.');
+        return false;
+      }
     },
     [loginUser]
+  );
+
+  const changeUser = useCallback(
+    async ({ email, firstName, lastName, company }) => {
+      const displayName = `${firstName} ${lastName}`;
+      if (displayName !== user.displayName) {
+        await updateProfile(auth.currentUser, {
+          displayName: displayName
+        });
+      }
+      if (email !== user.email) {
+        await updateEmail(auth.currentUser, email);
+      }
+      await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        company: company || ''
+      });
+      await setUser({
+        ...user,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        company: company
+      });
+    },
+    [user]
   );
 
   const registerUser = useCallback(
@@ -189,12 +219,12 @@ export const UserContextProvider = ({ children }) => {
                   password: password
                 }
               });
+              setCreateUser(StatusCodes.OK);
             });
         })
         .catch((error) => {
           console.error('user not updated', error);
         });
-      setCreateUser(StatusCodes.OK);
     },
     [authUser]
   );
@@ -334,6 +364,7 @@ export const UserContextProvider = ({ children }) => {
         registerUser,
         user,
         setUser,
+        changeUser,
         addUserForm,
         reloadUser,
         formsData,
