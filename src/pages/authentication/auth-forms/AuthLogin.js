@@ -52,7 +52,7 @@ const AuthLogin = () => {
   const handleLogin = useCallback(
     async ({ email, password, keepSignedIn }) => {
       // Sign in an existing user with Firebase
-      await authUser({
+      const successful = await authUser({
         emailCredentials: {
           email: email,
           password: password,
@@ -60,7 +60,7 @@ const AuthLogin = () => {
         }
       });
 
-      navigate('/office/dashboard');
+      successful && navigate('/office/dashboard');
     },
     [navigate, authUser]
   );
@@ -86,9 +86,9 @@ const AuthLogin = () => {
       >
         {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {}, setFieldValue }) => (
           <Form autoComplete="off" noValidate>
-            <Grid container spacing={3}>
+            <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
               <Grid item xs={12}>
-                <Stack spacing={3}>
+                <Stack columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                   <Field
                     component={TextField}
                     id="email"

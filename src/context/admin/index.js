@@ -19,7 +19,7 @@ export const AdminContextProvider = ({ children }) => {
   const clientsFormConfigs = useMemo(() => {
     const forms = {};
     clientsData?.forEach((client) => {
-      client.usersFormData.forEach((form) => {
+      client.usersFormData?.forEach((form) => {
         forms[form.id] = form;
       });
     });

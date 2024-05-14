@@ -44,7 +44,7 @@ const SelectFormView = ({ formType, sections }) => {
   const visibleForms = useMemo(() => {
     const formsToUse = {};
     let shouldSetShowWarning = false;
-    Object.keys(formsData).forEach((formKey) => {
+    formsData && Object.keys(formsData)?.forEach((formKey) => {
       const currentForm = formsData[formKey];
       if (currentForm.type === formType) {
         const shouldAddFormToView = hasActiveSubscription || Object.keys(formsToUse)?.length === 0;

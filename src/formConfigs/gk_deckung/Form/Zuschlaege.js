@@ -67,7 +67,7 @@ const MaterialzuschlagFremdleistungen = () => {
                     variant="text"
                     onClick={() => {
                       push({ categoryId: uuid(), fields: [getInitialGemeinkostenItem()] });
-                      changeTab(null, values.gk_deckung_zuschlaege.length);
+                      changeTab(null, values.gk_deckung_zuschlaege?.length);
                     }}
                     disabled={isSubmitting}
                     sx={{ fontWeight: 500 }}
