@@ -11,6 +11,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   updateEmail,
+  updatePassword,
   signOut,
   db,
   onAuthStateChanged
@@ -165,32 +166,65 @@ export const UserContextProvider = ({ children }) => {
   );
 
   const changeUser = useCallback(
-    async ({ email, firstName, lastName, company }) => {
-      const displayName = `${firstName} ${lastName}`;
-      if (displayName !== user.displayName) {
-        await updateProfile(auth.currentUser, {
-          displayName: displayName
+    async ({ firstName, lastName, company }) => {
+      try {
+        const displayName = `${firstName} ${lastName}`;
+        if (displayName !== user.displayName) {
+          await updateProfile(auth.currentUser, {
+            displayName: displayName
+          });
+        }
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          firstName: firstName,
+          lastName: lastName,
+          company: company || ''
         });
+        await setUser({
+          ...user,
+          firstName: firstName,
+          lastName: lastName,
+          company: company
+        });
+        return true;
+      } catch (error) {
+        console.log('error', error);
+        return false;
       }
-      if (email !== user.email) {
-        await updateEmail(auth.currentUser, email);
-      }
-      await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        company: company || ''
-      });
-      await setUser({
-        ...user,
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        company: company
-      });
     },
     [user]
   );
+
+  const changeEmail = useCallback(
+    async ({ email }) => {
+      try {
+        if (email && email !== user.email) {
+          await updateEmail(auth.currentUser, email);
+        }
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          email: email
+        });
+        await setUser({
+          ...user,
+          email: email
+        });
+
+        return true;
+      } catch (error) {
+        console.log('error', error);
+        return false;
+      }
+    },
+    [user]
+  );
+
+  const changePassword = useCallback(async ({ password }) => {
+    try {
+      await updatePassword(auth.currentUser, password);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }, []);
 
   const registerUser = useCallback(
     async (formData) => {
@@ -365,6 +399,8 @@ export const UserContextProvider = ({ children }) => {
         user,
         setUser,
         changeUser,
+        changeEmail,
+        changePassword,
         addUserForm,
         reloadUser,
         formsData,

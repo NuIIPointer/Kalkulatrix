@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   updateEmail,
+  updatePassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut
@@ -39,6 +40,7 @@ export {
   createUserWithEmailAndPassword,
   updateProfile,
   updateEmail,
+  updatePassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut
