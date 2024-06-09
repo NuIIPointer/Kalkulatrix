@@ -7,6 +7,7 @@ import PublicLayout from 'layout/PublicLayout';
 // pages
 const Start = Loadable(lazy(() => import('pages/start')));
 const Imprint = Loadable(lazy(() => import('pages/imprint')));
+const Contact = Loadable(lazy(() => import('pages/contact')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -17,6 +18,10 @@ const MainRoutes = {
     {
       path: '/',
       element: <Start />
+    },
+    {
+      path: '/contact',
+      element: <Contact />
     },
     {
       path: '/imprint',

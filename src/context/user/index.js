@@ -14,7 +14,8 @@ import {
   updatePassword,
   signOut,
   db,
-  onAuthStateChanged
+  onAuthStateChanged,
+  sendPasswordResetEmail
 } from 'services/firebase';
 import { setPersistence, browserLocalPersistence, inMemoryPersistence } from 'firebase/auth';
 
@@ -158,7 +159,7 @@ export const UserContextProvider = ({ children }) => {
         return true;
       } catch (err) {
         console.log(err);
-        alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.');
+        // alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.');
         return false;
       }
     },
@@ -221,6 +222,15 @@ export const UserContextProvider = ({ children }) => {
     try {
       await updatePassword(auth.currentUser, password);
       return true;
+    } catch (error) {
+      return false;
+    }
+  }, []);
+
+  const resetPasswordMail = useCallback(async (email) => {
+    try {
+      const successful = await sendPasswordResetEmail(auth, email);
+      return successful;
     } catch (error) {
       return false;
     }
@@ -401,6 +411,7 @@ export const UserContextProvider = ({ children }) => {
         changeUser,
         changeEmail,
         changePassword,
+        resetPasswordMail,
         addUserForm,
         reloadUser,
         formsData,

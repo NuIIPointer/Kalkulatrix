@@ -27,6 +27,7 @@ import AnimateButton from 'components/@extended/AnimateButton';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { UserContext } from 'context/user';
 import validationSchema from 'formConfigs/authLogin/rules/validation/schema';
+import { enqueueSnackbar } from 'notistack';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -60,7 +61,13 @@ const AuthLogin = () => {
         }
       });
 
-      successful && navigate('/office/dashboard');
+      if (successful) {
+        navigate('/office/dashboard');
+      } else {
+        enqueueSnackbar('Die Anmeldung ist fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail-Adresse und Ihr Passwort.', {
+          variant: 'error'
+        });
+      }
     },
     [navigate, authUser]
   );
@@ -71,7 +78,7 @@ const AuthLogin = () => {
         initialValues={{
           email: '',
           password: '',
-          keepSignedIn: false,
+          keepSignedIn: false
         }}
         validationSchema={validationSchema}
         validateOnChange
@@ -148,7 +155,7 @@ const AuthLogin = () => {
                     }
                     label={<Typography variant="h6">Angemeldet bleiben</Typography>}
                   />
-                  <Link variant="h6" component={RouterLink} to="" color="text.primary">
+                  <Link variant="h6" component={RouterLink} to="/forgot-password" color="text.primary">
                     Passwort vergessen?
                   </Link>
                 </Stack>
