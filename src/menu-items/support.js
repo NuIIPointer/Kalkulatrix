@@ -1,6 +1,6 @@
 // assets
 import EmailIcon from '@mui/icons-material/Email';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+// import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
 
@@ -13,16 +13,16 @@ const support = {
       id: 'sample-page',
       title: 'Kontakt',
       type: 'item',
-      url: '/',
+      url: '/contact',
       icon: EmailIcon
     },
-    {
-      id: 'documentation',
-      title: 'Dokumentation',
-      type: 'item',
-      url: '/',
-      icon: ManageSearchIcon
-    }
+    // {
+    //   id: 'documentation',
+    //   title: 'Dokumentation',
+    //   type: 'item',
+    //   url: '/',
+    //   icon: ManageSearchIcon
+    // }
   ]
 };
 
