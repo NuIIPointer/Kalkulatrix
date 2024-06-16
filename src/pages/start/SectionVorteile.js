@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import { Grid, Typography, Stack, Button } from '@mui/material';
+import { Grid, Typography, Stack, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
-import IconChip from 'components/IconChip/index';
+import IconChip from 'components/IconChip';
+import SectionChip from 'components/SecitonChip';
 
 const SectionHeadlineText = ({ isActive }) => {
   const theme = useTheme();
@@ -28,18 +29,21 @@ const SectionHeadlineText = ({ isActive }) => {
   const itemsRendered = items.map((item, i) => (
     <Grid
       item
-      xs={12}
-      md={2}
+      xs={10}
+      sm={5}
+      md={3}
+      lg={2}
       key={i}
       sx={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         flexDirection: 'column',
-        textAlign: 'center'
+        textAlign: 'center',
+        mb: { xs: 4, sm: 8, md: 0 }
       }}
     >
-      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="large" shadowPreset="small" cardSx={{ mb: 5 }} />
+      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="large" cardSx={{ mb: 5 }} />
       <Typography variant="h3" sx={{ mb: 2 }}>
         {item.title}
       </Typography>
@@ -55,7 +59,8 @@ const SectionHeadlineText = ({ isActive }) => {
         textAlign: 'center'
       }}
     >
-      <Typography variant="h2" sx={{ mb: 6, fontSize: { xs: 24, md: 32, lg: 36 } }}>
+      <SectionChip colorPreset="primaryLight" sx={{ mx: 'auto', mb: 2 }}>How it works</SectionChip>
+      <Typography variant="h2" sx={{ mb: { xs: 6, sm: 7, md: 8 }, fontSize: { xs: 28, md: 32, lg: 42 } }}>
         Entdecken Sie die Vorteile von Kalkulatrix
       </Typography>
       <Grid container justifyContent="center" columnGap={4} sx={{ overflow: 'hidden' }}>
