@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Box, Stack } from '@mui/material';
+import { Grid, Typography, Stack, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { TypeAnimation } from 'react-type-animation';
 import Logo from 'components/Logo/Logo';
@@ -8,47 +8,51 @@ const SectionHeadlineText = ({ isActive }) => {
   const theme = useTheme();
 
   return (
-    <Stack
-      sx={{
-        alignItems: { md: 'center' },
-        minHeight: { xs: '250px', sm: '45vh', md: '55vh' },
-        justifyContent: 'center',
-        paddingX: { xs: theme.spacing(2) }
-      }}
-    >
-      <Logo style={{ maxWidth: '600px', width: '66vw', marginBottom: theme.spacing(1), marginX: { md: theme.spacing(2) } }} />
-      <Box
+    <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }}>
+      <Grid
+        item
+        xs={12}
+        md={7}
         sx={{
-          paddingX: 2,
-          '& span': {
-            backgroundColor: theme.palette.primary[500],
-            color: theme.palette.common.white,
-            paddingX: { xs: 1, sm: 2 },
-            paddingY: { xs: 0.75, sm: 1 },
-            borderRadius: theme.shape.borderRadius,
-            boxShadow: theme.shadows[5],
-            fontSize: { xs: 18, sm: 26, lg: 28, xl: 30 }
-          }
+          pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
+          pr: { xs: theme.spacing(4), md: 0 },
+          py: { xs: theme.spacing(2), md: theme.spacing(20), lg: theme.spacing(25) }
         }}
       >
-        <TypeAnimation
-          sequence={[
-            'Optimieren Sie Stundensätze,',
-            1000,
-            'Optimieren Sie Personalkosten,',
-            1000,
-            'Optimieren Sie den Preis für Ihre Kunden,',
-            1000,
-            'Optimieren Sie Ihren Gewinn.',
-            2000
-          ]}
-          wrapper="span"
-          speed={50}
-          style={{ display: 'inline-block' }}
-          repeat={Infinity}
-        />
-      </Box>
-    </Stack>
+        <Typography variant="h1" sx={{ mb: 1, fontWeight: 700, fontSize: { xs: 24, sm: 32, md: 48, lg: 64 } }}>
+          Kalkulatrix
+        </Typography>
+        <Typography variant="h2" component="p" sx={{ fontWeight: 500, fontSize: { xs: 18, sm: 24, md: 28, lg: 36 }, minHeight: '3em' }}>
+          <TypeAnimation
+            sequence={[
+              'Optimieren Sie Stundensätze,',
+              1000,
+              'Optimieren Sie Personalkosten,',
+              1000,
+              'Optimieren Sie den Preis für Ihre Kunden,',
+              1000,
+              'Optimieren Sie Ihren Gewinn.',
+              2000
+            ]}
+            wrapper="span"
+            speed={75}
+            style={{ display: 'inline-block' }}
+            repeat={Infinity}
+          />
+        </Typography>
+        <Typography variant="body2" sx={{ mb: { sx: 2, md: 5, lg: 6 }, fontSize: { xs: 16, sm: 18, md: 22 }}}>
+          Der Konkurrenz einen Schritt voraus. Berechnen Sie präzise Stundensätze und senken Sie Mitarbeiterkosten. Steigern Sie Effizienz,
+          maximieren Sie Gewinne. Einfache Anwendung – sofortige Ergebnisse.
+        </Typography>
+        <Stack gap={2} sx={{ flexDirection: "row" }}>
+          <Button variant="outlined" color="primary">Video ansehen</Button>
+          <Button variant="contained" color="primary">Kostenlos testen</Button>
+        </Stack>
+      </Grid>
+      <Grid item xs={12} md={5}>
+        {/* image */}
+      </Grid>
+    </Grid>
   );
 };
 
