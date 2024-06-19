@@ -6,8 +6,6 @@ import IconChip from 'components/IconChip';
 import SectionChip from 'components/SecitonChip';
 
 const SectionHeadlineText = ({ isActive }) => {
-  const theme = useTheme();
-
   const items = [
     {
       title: 'Gewinnsteigerung',

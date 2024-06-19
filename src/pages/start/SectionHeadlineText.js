@@ -12,7 +12,7 @@ const SectionHeadlineText = ({ isActive }) => {
       <Grid
         item
         xs={12}
-        md={7}
+        md={6}
         sx={{
           pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
           pr: { xs: theme.spacing(4), md: 0 },
@@ -50,7 +50,7 @@ const SectionHeadlineText = ({ isActive }) => {
         </Stack>
       </Grid>
       <Grid item xs={12} md={5}>
-        {/* image */}
+          {/* <img src='https://placehold.co/1000x700/EEE/31343C' alt="Kalkulatrix Anwendung" /> */}
       </Grid>
     </Grid>
   );

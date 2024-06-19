@@ -32,9 +32,9 @@ const NavItem = ({ item }) => {
 
   const textColor = isActive ? theme.palette.common.black : theme.palette.common.white;
   const textColorHover = textColor;
-  const iconColor = isActive ? theme.palette.primary.main : theme.palette.secondary.main;
-  const bgColor = isActive ? theme.palette.common.white : theme.palette.primary.main;
-  const bgColorHover = isActive ? theme.palette.primary[100] : theme.palette.primary.dark;
+  const iconColor = theme.palette.secondary.main;
+  const bgColor = isActive ? theme.palette.primary[900] : 'transparent';
+  const bgColorHover = isActive ? theme.palette.common.white : theme.palette.primary[200];
 
   return (
     <ListItem sx={{ padding: 0 }}>
@@ -47,12 +47,12 @@ const NavItem = ({ item }) => {
           color: textColor,
           padding: theme.shape.paddingButton,
           marginBottom: theme.spacing(1),
-          borderRadius: theme.shape.borderRadius / 4,
+          borderRadius: theme.shape.borderRadius / 7,
           transition: '.25s',
           fontSize: '1.2rem',
           '&:after': {
             content: '""',
-            height: '60%',
+            height: '50%',
             width: '0px',
             opacity: '0',
             position: 'absolute',

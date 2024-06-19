@@ -21,7 +21,7 @@ const Footer = () => {
         padding: theme.shape.layoutDesignGutter,
         position: 'relative',
         zIndex: '1',
-        borderTop: `2px solid ${theme.palette.primary.main}`
+        borderTop: `2px solid ${theme.palette.primary[200]}`
       }}
     >
       <Grid container spacing={3}>
