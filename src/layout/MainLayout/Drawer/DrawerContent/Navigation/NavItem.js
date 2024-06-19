@@ -34,7 +34,7 @@ const NavItem = ({ item }) => {
   const textColorHover = textColor;
   const iconColor = theme.palette.secondary.main;
   const bgColor = isActive ? theme.palette.primary[900] : 'transparent';
-  const bgColorHover = isActive ? theme.palette.common.white : theme.palette.primary.dark;
+  const bgColorHover = isActive ? theme.palette.common.white : theme.palette.primary[200];
 
   return (
     <ListItem sx={{ padding: 0 }}>
@@ -47,7 +47,7 @@ const NavItem = ({ item }) => {
           color: textColor,
           padding: theme.shape.paddingButton,
           marginBottom: theme.spacing(1),
-          borderRadius: theme.shape.borderRadius / 4,
+          borderRadius: theme.shape.borderRadius / 7,
           transition: '.25s',
           fontSize: '1.2rem',
           '&:after': {
