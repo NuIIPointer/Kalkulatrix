@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 const styledSizePresets = {
   large: {
     card: {
-      borderRadius: 5,
+      borderRadius: 2,
       width: 120,
       height: 120
     },
@@ -14,7 +14,7 @@ const styledSizePresets = {
   },
   medium: {
     card: {
-      borderRadius: 3,
+      borderRadius: 1.5,
       width: 72,
       height: 72
     },

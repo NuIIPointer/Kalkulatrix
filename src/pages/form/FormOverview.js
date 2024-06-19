@@ -15,7 +15,7 @@ const FormOverview = () => {
     mt: { xs: 5, md: 6, lg: 7 }
   };
 
-  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.dark}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.dark}, transparent 100%)`;
+  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary[400]}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[500]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.dark}, transparent 100%)`;
 
   return (
     <Stack mb={6}>

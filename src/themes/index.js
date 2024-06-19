@@ -59,7 +59,7 @@ export default function ThemeCustomization({ children }) {
           md: `${theme.spacing(6)} ${theme.spacing(7)}`,
           lg: `${theme.spacing(6.5)} ${theme.spacing(8)}`
         },
-        borderRadius: 3,
+        borderRadius: 10,
         borderRadiusBox: 3,
         drawerWidth: {
           xs: '320px',

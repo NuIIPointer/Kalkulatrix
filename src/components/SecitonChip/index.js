@@ -37,19 +37,19 @@ const styledSizePreset = {
     px: 1,
     py: 0.5,
     fontSize: 12,
-    borderRadius: 2
+    borderRadius: 0.5
   },
   medium: {
     px: 2,
     py: 1.25,
     fontSize: 16,
-    borderRadius: 3
+    borderRadius: 1
   },
   large: {
     px: 3,
     py: 2,
     fontSize: 20,
-    borderRadius: 5
+    borderRadius: 1.5
   }
 };
 
