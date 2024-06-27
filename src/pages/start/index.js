@@ -4,6 +4,9 @@ import { Scrollama, Step } from 'react-scrollama';
 import SectionHeadlineText from './SectionHeadlineText';
 import SectionVorteile from './SectionVorteile';
 import SectionPartnerSlider from './SectionPartnerSlider';
+import SectionCalendar from './SectionCalendar';
+import SectionGewinn from './SectionGewinn';
+import SectionKalkulieren from './SectionKalkulieren';
 // import SectionHeadlineCards from './SectionHeadlineCards';
 // import SectionTimeline from './SectionTimeline';
 // import SectionTextImage from './SectionTextImage';
@@ -16,7 +19,7 @@ const Start = () => {
     setCurrentStepIndex(data);
   };
 
-  const sections = [SectionHeadlineText, SectionVorteile, SectionPartnerSlider];
+  const sections = [SectionHeadlineText, SectionVorteile, SectionPartnerSlider, SectionGewinn, SectionKalkulieren, SectionCalendar];
 
   return (
     <>

@@ -14,11 +14,14 @@ import Header from './Header';
 import { NavigationContext } from 'context/navigation/index';
 import Profile from './Header/HeaderContent/Profile/index';
 import Footer from 'layout/Footer/index';
+import { PopupWidget } from 'react-calendly';
+import { UserContext } from 'context/user/index';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = () => {
   const theme = useTheme();
+  const { user } = useContext(UserContext);
   const { setNavOpen, navOpen, useDrawerNav } = useContext(NavigationContext);
 
   return (
@@ -27,6 +30,21 @@ const MainLayout = () => {
         background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[500]}, transparent 100%)`
       }}
     >
+      <PopupWidget
+        url="https://calendly.com/adel-consulting/30min"
+        /*
+         * react-calendly uses React's Portal feature (https://reactjs.org/docs/portals.html) to render the popup modal. As a result, you'll need to
+         * specify the rootElement property to ensure that the modal is inserted into the correct domNode.
+         */
+        rootElement={document.getElementById('root')}
+        text="Beratungstermin"
+        textColor="#ffffff"
+        color="#00a2ff"
+        prefill={{
+          name: user.displayName,
+          email: user.email
+        }}
+      />
       <Box
         sx={{
           display: 'grid',
@@ -98,7 +116,7 @@ const MainLayout = () => {
             gridColumnEnd: '1',
             gridRowStart: '1',
             gridRowEnd: '4',
-            backgroundColor: theme.palette.primary[200],
+            backgroundColor: theme.palette.grey[700],
             position: 'relative',
             ':after': {
               content: '""',

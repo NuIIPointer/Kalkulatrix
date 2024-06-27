@@ -41,7 +41,7 @@ const SectionHeadlineText = ({ isActive }) => {
         mb: { xs: 4, sm: 8, md: 0 }
       }}
     >
-      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="large" cardSx={{ mb: 5 }} />
+      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="large" cardSx={{ mb: 5 }} shadowPreset="small" />
       <Typography variant="h3" sx={{ mb: 2 }}>
         {item.title}
       </Typography>

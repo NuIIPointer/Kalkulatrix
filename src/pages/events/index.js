@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { DialogContent, DialogContentText, Dialog, DialogTitle, DialogActions, Button } from '@mui/material';
 import ColoredSection from 'components/pageLayout/header/ColoredSection';
-import LayoutBox from 'components/LayoutBox/index';
+// import LayoutBox from 'components/LayoutBox/index';
+// import { DialogContent, DialogContentText, Dialog, DialogTitle, DialogActions, Button } from '@mui/material';
 
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import iCalendarPlugin from '@fullcalendar/icalendar';
-import deLocale from '@fullcalendar/core/locales/de';
-import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
+// import FullCalendar from '@fullcalendar/react';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import iCalendarPlugin from '@fullcalendar/icalendar';
+// import deLocale from '@fullcalendar/core/locales/de';
+// import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
+import { InlineWidget, PopupWidget } from 'react-calendly';
+import { UserContext } from 'context/user/index';
 
 const Events = () => {
-  const [dialogSettings, setDialogSettings] = useState(null);
+  const { user } = useContext(UserContext);
+  console.log('user', user);
+  // const [dialogSettings, setDialogSettings] = useState(null);
   const theme = useTheme();
-  const calendarData = useGetCalendarData();
+  // const calendarData = useGetCalendarData();
   const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.dark}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary.main}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.light}, transparent 100%)`;
 
   return (
@@ -21,10 +25,20 @@ const Events = () => {
       <ColoredSection
         bgGradient={headerBgColor}
         bgColor={theme.palette.secondary.dark}
-        headline={`Beratungstermine`}
-        description="Auf dieser Seite können Sie verfügbare Beratungstermine einsehen."
+        headline={`Buchen Sie jetzt Ihren individuellen Beratungstermin.`}
+        description="Unsere Experten stehen bereit, um Ihnen mit maßgeschneiderter Beratung zur Seite zu stehen. Ob Sie tiefer in die Funktionen von Kalkulatrix eintauchen oder spezifische Herausforderungen in Ihrem Unternehmen besprechen möchten, ein persönlicher Beratungstermin bietet Ihnen die Lösungen, welche zu Ihrem Unternehmen passen. Alternativ können Sie auch an unseren interaktiven Webinaren teilnehmen, die praktische Einblicke und nützliche Tipps zur Maximierung Ihrer Unternehmenspotenziale bieten."
       />
-      <LayoutBox
+      <InlineWidget
+        url="https://calendly.com/adel-consulting/30min"
+        styles={{
+          height: '1200px'
+        }}
+        prefill={{
+          email: user.email,
+          name: user.displayName,
+        }}
+      />
+      {/* <LayoutBox
         sx={{
           backgroundColor: theme.palette.common.white,
           padding: theme.shape.paddingBoxMedium
@@ -47,8 +61,8 @@ const Events = () => {
             });
           }}
         />
-      </LayoutBox>
-      <Dialog
+      </LayoutBox> */}
+      {/* <Dialog
         open={!!dialogSettings}
         onClose={() => setDialogSettings(null)}
         aria-labelledby="alert-dialog-title"
@@ -61,7 +75,7 @@ const Events = () => {
         <DialogActions>
           <Button onClick={() => setDialogSettings(null)}>Schließen</Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };

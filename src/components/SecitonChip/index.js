@@ -72,6 +72,7 @@ const SectionChip = ({ colorPreset = 'primary', sizePreset = 'medium', shadowPre
   };
 
   const mergedStyles = {
+    display: 'inline-block',
     ...styledColorPreset[colorPreset],
     ...styledSizePreset[sizePreset],
     ...styledShadowPreset[shadowPreset],

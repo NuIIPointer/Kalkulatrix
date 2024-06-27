@@ -27,10 +27,10 @@ const styledSizePresets = {
 const styledColorPreset = {
   primary: {
     card: {
-      backgroundColor: 'primary.100'
+      backgroundColor: 'primary.900'
     },
     icon: {
-      color: 'primary.700'
+      color: 'primary.500'
     }
   },
   primaryLight: {
@@ -38,7 +38,7 @@ const styledColorPreset = {
       backgroundColor: 'common.white'
     },
     icon: {
-      color: 'primary.300'
+      color: 'primary.600'
     }
   },
   secondary: {
@@ -99,19 +99,19 @@ const defaultIconSx = {
   color: 'primary.700'
 };
 
-const IconChip = ({ icon, cardSx, iconSx, sizePreset = 'medium', colorPreset = 'primary', shadowPreset = 'none' }) => {
+const IconChip = ({ icon, cardSx, iconSx, sizePreset = 'medium', colorPreset = 'primary', shadowPreset = 'none', ...otherProps }) => {
   const theme = useTheme();
   const Icon = icon;
 
   const styledShadowPreset = {
     small: {
-      boxShadow: theme.shadows[3]
+      boxShadow: theme.customShadows.z1
     },
     medium: {
-      boxShadow: theme.shadows[8]
+      boxShadow: theme.customShadows.z2
     },
     large: {
-      boxShadow: theme.shadows[12]
+      boxShadow: theme.customShadows.z3
     },
     none: {
       boxShadow: 'none'
@@ -134,7 +134,7 @@ const IconChip = ({ icon, cardSx, iconSx, sizePreset = 'medium', colorPreset = '
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', ...cardStyles }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', ...cardStyles }} {...otherProps}>
       <Icon sx={{ fontSize: 20, ...iconStyles }} />
     </Box>
   );

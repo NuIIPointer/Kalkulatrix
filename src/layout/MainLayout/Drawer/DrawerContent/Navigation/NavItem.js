@@ -32,9 +32,9 @@ const NavItem = ({ item }) => {
 
   const textColor = isActive ? theme.palette.common.black : theme.palette.common.white;
   const textColorHover = textColor;
-  const iconColor = theme.palette.secondary.main;
+  const iconColor = theme.palette.primary.main;
   const bgColor = isActive ? theme.palette.primary[900] : 'transparent';
-  const bgColorHover = isActive ? theme.palette.common.white : theme.palette.primary[200];
+  const bgColorHover = isActive ? theme.palette.grey[200]: theme.palette.grey[600];
 
   return (
     <ListItem sx={{ padding: 0 }}>

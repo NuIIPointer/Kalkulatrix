@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material/styles';
 import LayoutBox from 'components/LayoutBox/index';
 
 // eslint-disable-next-line react/prop-types
-const ColoredSectionTop = ({ headline, description, headerChildren, bgColor, bgGradient, backLink, noMargin }) => {
+const ColoredSectionTop = ({ headline, description, headerChildren, bgColor, bgGradient, backLink, noMargin, boxShadow }) => {
   const theme = useTheme();
   const fgColor = theme.palette.getContrastText(bgColor);
 
@@ -21,7 +21,8 @@ const ColoredSectionTop = ({ headline, description, headerChildren, bgColor, bgG
           background: bgGradient || bgColor,
           color: fgColor,
           padding: theme.shape.paddingBoxLarge,
-          marginBottom: noMargin ? '0' : { xs: 2, sm: 3, md: 4 }
+          marginBottom: noMargin ? '0' : { xs: 2, sm: 3, md: 4 },
+          boxShadow,
         }}
       >
         <Grid container justifyContent="center">

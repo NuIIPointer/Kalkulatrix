@@ -46,11 +46,7 @@ const SectionPartnerSlider = () => {
     </Box>
   ));
 
-  return (
-    <Stack sx={{ mb: { xs: 8, md: 16, lg: 24 }}}>
-      <Slider {...settings}>{slides}</Slider>
-    </Stack>
-  );
+  return <Slider {...settings}>{slides}</Slider>;
 };
 
 export default SectionPartnerSlider;
