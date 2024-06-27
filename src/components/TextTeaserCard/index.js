@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { darken } from '@mui/material/styles';
 
 // eslint-disable-next-line react/prop-types
-const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light, grow, ratio, textAlign, onClick }) => {
+const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light, grow, ratio, textAlign, onClick, boxShadow }) => {
   const theme = useTheme();
   const textColor = light ? theme.palette.text.primary : theme.palette.common.white;
   const textColorHover = textColor;
@@ -17,6 +17,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
       to={link && link}
       onClick={onClick && onClick}
       sx={{
+        boxShadow,
         aspectRatio: ratio,
         width: '100%',
         height: grow && '100%',
@@ -49,7 +50,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         },
         '&:hover': {
           color: textColorHover,
-          boxShadow: theme.shadows[8],
+          boxShadow: theme.customShadows.z3,
 
           '&:after': link && {
             transform: 'rotate(20deg) translateY(-50%) translateX(-15%)'
