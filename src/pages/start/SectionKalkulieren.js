@@ -23,7 +23,8 @@ const SectionGewinn = ({ isActive }) => {
           sx={{
             pr: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
             pl: { xs: theme.spacing(4), md: 0 },
-            py: { xs: theme.spacing(2), md: theme.spacing(20), lg: theme.spacing(25) }
+            pt: { xs: theme.spacing(2), md: theme.spacing(15), lg: theme.spacing(20) },
+            pb: { xs: theme.spacing(2), md: theme.spacing(12), lg: theme.spacing(15) }
           }}
         >
           <SectionChip colorPreset="primaryLight" sx={{ mx: 'auto', mb: 2, mr: 'auto', width: 'auto' }}>

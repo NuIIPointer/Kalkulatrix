@@ -1,8 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { Grid, Typography, Stack, Button } from '@mui/material';
+import React from 'react';
+import { Grid, Typography, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { TypeAnimation } from 'react-type-animation';
-import Logo from 'components/Logo/Logo';
 import IconChip from 'components/IconChip';
 import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
 import SectionChip from 'components/SecitonChip';
@@ -92,6 +90,7 @@ const SectionGewinn = ({ isActive }) => {
           px: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
           mt: { xs: 8, md: 12, lg: 0 }
         }}
+        columnSpacing={{ xs: 2, sm: 4, md: 6, lg: 8, xl: 10 }}
       >
         {itemsRendered}
       </Grid>
