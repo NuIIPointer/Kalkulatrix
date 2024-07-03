@@ -7,6 +7,8 @@ import SectionPartnerSlider from './SectionPartnerSlider';
 import SectionCalendar from './SectionCalendar';
 import SectionGewinn from './SectionGewinn';
 import SectionKalkulieren from './SectionKalkulieren';
+import SectionCheckline from './SectionCheckline';
+import SectionAdel from './SectionAdel';
 // import SectionHeadlineCards from './SectionHeadlineCards';
 // import SectionTimeline from './SectionTimeline';
 // import SectionTextImage from './SectionTextImage';
@@ -19,7 +21,16 @@ const Start = () => {
     setCurrentStepIndex(data);
   };
 
-  const sections = [SectionHeadlineText, SectionVorteile, SectionPartnerSlider, SectionGewinn, SectionKalkulieren, SectionCalendar];
+  const sections = [
+    SectionHeadlineText,
+    SectionVorteile,
+    SectionPartnerSlider,
+    SectionGewinn,
+    SectionKalkulieren,
+    SectionCheckline,
+    SectionAdel,
+    SectionCalendar
+  ];
 
   return (
     <>

@@ -48,6 +48,18 @@ const Palette = (mode) => {
       // secondary: createColor('#305ab7'),
       error: createColor('#d42a31'),
       warning: createColor('#ffc300'),
+      success: {
+        50: '#f0f9f2',
+        100: '#d4f3dc',
+        200: '#b7edc5',
+        300: '#9be7ae',
+        400: '#7ee197',
+        500: '#0ab13b',
+        600: '#0a9f35',
+        700: '#098c2f',
+        800: '#087928',
+        900: '#06661e'
+      },
       primary: {
         50: '#040a19',
         100: '#091531',
