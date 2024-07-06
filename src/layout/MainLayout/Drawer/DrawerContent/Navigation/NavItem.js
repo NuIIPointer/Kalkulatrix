@@ -30,11 +30,11 @@ const NavItem = ({ item }) => {
   const Icon = item.icon;
   const itemIcon = item.icon ? <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} /> : false;
 
-  const textColor = isActive ? theme.palette.common.black : theme.palette.common.white;
-  const textColorHover = textColor;
+  const textColor = isActive ? theme.palette.common.white : theme.palette.common.black;
+  const textColorHover = isActive ? theme.palette.common.black : theme.palette.common.black;
   const iconColor = theme.palette.primary.main;
-  const bgColor = isActive ? theme.palette.primary[900] : 'transparent';
-  const bgColorHover = isActive ? theme.palette.grey[200]: theme.palette.grey[600];
+  const bgColor = isActive ? theme.palette.primary[500] : 'transparent';
+  const bgColorHover = isActive ? theme.palette.grey[200] : theme.palette.grey[200];
 
   return (
     <ListItem sx={{ padding: 0 }}>

@@ -5,7 +5,7 @@ import IconChip from 'components/IconChip';
 import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
 import SectionChip from 'components/SecitonChip';
 
-const SectionGewinn = ({ isActive }) => {
+const SectionGewinn = () => {
   const theme = useTheme();
   const items = [
     {
@@ -67,11 +67,11 @@ const SectionGewinn = ({ isActive }) => {
           <Typography variant="h2" sx={{ mb: 4, fontWeight: 700, fontSize: { xs: 22, sm: 28, md: 36, lg: 48 } }}>
             Setzen Sie auf Gewinn, nicht auf Spekulation
           </Typography>
-          <Typography variant="body2" sx={{ mb: { sx: 2, lg: 3 }, fontSize: { xs: 16, sm: 18, md: 22 } }}>
+          <Typography variant="body2" sx={{ mb: { xs: 2, lg: 3 }, fontSize: { xs: 16, sm: 18, md: 22 } }}>
             Schluss mit dem Rätselraten bei der Preisgestaltung! Mit Kalkulatrix transformieren Sie Ihre Konstenstruktur in klare,
             gewinnorientierte Stundensätze.
           </Typography>
-          <Typography variant="body2" sx={{ mb: { sx: 2, md: 5, lg: 6 }, fontSize: { xs: 16, sm: 18, md: 22 } }}>
+          <Typography variant="body2" sx={{ mb: { xs: 2, md: 5, lg: 6 }, fontSize: { xs: 16, sm: 18, md: 22 } }}>
             Mit der intuitiven Eingabe Ihrer Ausgaben und Gewinnziele, ermitteln wir den für Sie optimalen Stundensatzverkaufssatz. So
             steigern Sie Ihren Gewinn und Ihre Effizienz.
           </Typography>
@@ -88,7 +88,8 @@ const SectionGewinn = ({ isActive }) => {
         justifyContent="center"
         sx={{
           px: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
-          mt: { xs: 8, md: 12, lg: 0 }
+          mt: { xs: 8, md: 12, lg: 0 },
+          mb: { xs: 0, md: 2, lg: 6 }
         }}
         columnSpacing={{ xs: 2, sm: 4, md: 6, lg: 8, xl: 10 }}
       >

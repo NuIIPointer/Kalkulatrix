@@ -20,14 +20,15 @@ const GKStundensaetze = () => {
     gk_stundensaetze_H14: undefined,
     ...(activeFormData.values || {}),
     formTitle: activeFormData.title,
-    letzteAenderung: activeFormData?.values?.lastChanged,
+    letzteAenderung: activeFormData?.values?.lastChanged
   };
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} validateOnChange>
       {() => (
         <Form autoComplete="off">
           <CalculationUpdater />
-          <CalculationUpdaterVerrechnungssaetze /> {/* Eine Berechnung benötigt auf dieser Seite wird im std_verrechnungssatz calculator berechnet */}
+          <CalculationUpdaterVerrechnungssaetze />{' '}
+          {/* Eine Berechnung benötigt auf dieser Seite wird im std_verrechnungssatz calculator berechnet */}
           <Start />
           <DGemeinkostenPlangewinn />
           <AufschlagssaetzePK />

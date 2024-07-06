@@ -130,12 +130,17 @@ const Stammdaten = () => {
                   <FieldArray name={`pk_allgemein_mitarbeiter.${outerIndex}.fields`}>
                     {({ push: innerPush, remove: innerRemove }) => (
                       <>
-                        <p>Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl).</p>
+                        <p>
+                          Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher
+                          Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter erstellen
+                          und angeben, wie oft dieser berücksichtigt wird (Anzahl).
+                        </p>
                         {values.pk_allgemein_mitarbeiter?.[outerIndex]?.fields?.map((innerField, innerIndex) => (
                           <FormSection
                             key={innerIndex}
-                            title={`${innerField?.titel || 'Mitarbeiter'} ${innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
-                              }`}
+                            title={`${innerField?.titel || 'Mitarbeiter'} ${
+                              innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
+                            }`}
                             defaultOpen={outerIndex === 0 && values.pk_allgemein_mitarbeiter?.length === 1}
                             backgroundColor={theme.palette.primary[50]}
                             onDelete={() => innerRemove(innerIndex)}
@@ -289,8 +294,9 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label={`Lohnnebenkosten ${values.pk_allgemein_K5 ? `(${values.pk_allgemein_K5}%) ` : ''
-                                              }(in EUR)`}
+                                            label={`Lohnnebenkosten ${
+                                              values.pk_allgemein_K5 ? `(${values.pk_allgemein_K5}%) ` : ''
+                                            }(in EUR)`}
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             sx={{ mb: 2 }}

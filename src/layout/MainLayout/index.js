@@ -27,7 +27,7 @@ const MainLayout = () => {
   return (
     <Box
       sx={{
-        background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[500]}, transparent 100%)`
+        background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[300]}, transparent 100%)`
       }}
     >
       <PopupWidget
@@ -116,14 +116,15 @@ const MainLayout = () => {
             gridColumnEnd: '1',
             gridRowStart: '1',
             gridRowEnd: '4',
-            backgroundColor: theme.palette.grey[700],
+            backgroundColor: theme.palette.common.white,
+            borderRight: `1px solid ${theme.palette.grey[300]}`,
             position: 'relative',
             ':after': {
               content: '""',
               position: 'absolute',
               top: '0',
               right: 'calc(100% - 1px)',
-              backgroundColor: theme.palette.primary[200],
+              backgroundColor: theme.palette.common.white,
               height: '100%',
               width: '100vw'
             },

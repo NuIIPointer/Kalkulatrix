@@ -36,7 +36,13 @@ const AdminDashboard = () => {
       renderCell: (params) => (
         <Stack gap={2} direction="row" justifyContent="flex-start" alignItems="center" sx={{ height: '100%' }}>
           {params.value?.map((formData, key) => (
-            <Button size="small" color="primary" variant="contained" onClick={() => setModalData({ formData: formData, rowData: params.row })} key={FormData.id}>
+            <Button
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={() => setModalData({ formData: formData, rowData: params.row })}
+              key={FormData.id}
+            >
               {formData.title}
               {console.log('params', params)}
             </Button>
@@ -59,7 +65,7 @@ const AdminDashboard = () => {
           <DataGrid
             sx={{
               '& .MuiDataGrid-row': {
-                borderRadius: theme.shape.borderRadius,
+                borderRadius: theme.spacing(1.5),
                 '&:nth-child(2n-1)': {
                   backgroundColor: theme.palette.grey[100],
                   '&:hover': {
@@ -104,8 +110,12 @@ const AdminDashboard = () => {
               <Typography variant="h2" color="primary" sx={{ mb: 1 }}>
                 Blatt wählen
               </Typography>
-              <Typography variant="body2" sx={{ mb: 0, lineHeight: 1.2 }}>Formular von: {modalData?.rowData?.firstName} {modalData?.rowData?.lastName}</Typography>
-              <Typography variant="body2" sx={{ mb: 3, lineHeight: 1.2 }}>Formulartitel: {modalData?.formData?.title}</Typography>
+              <Typography variant="body2" sx={{ mb: 0, lineHeight: 1.2 }}>
+                Formular von: {modalData?.rowData?.firstName} {modalData?.rowData?.lastName}
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 3, lineHeight: 1.2 }}>
+                Formulartitel: {modalData?.formData?.title}
+              </Typography>
               <Stack gap={2} direction="row" flexWrap="wrap">
                 {Object.keys(formLiteral).map((key) => {
                   const stepConfig = formLiteral[key];

@@ -1,16 +1,17 @@
 import React from 'react';
-import { Grid, Typography, Button, Stack } from '@mui/material';
+import { Grid, Typography, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import IconChip from 'components/IconChip';
 import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
 import SectionChip from 'components/SecitonChip';
 
-const SectionAdel = ({ isActive }) => {
+const SectionAdel = () => {
   const theme = useTheme();
   const items = [
     {
       title: 'Aufbau Arbeitgebermarke',
-      description: 'Niemand bewirbt sich auf ihre Stellenanzeige? Wir helfen Ihnen sich als bevorzugter Arbeitgeber in der Region zu positionieren und qualifizierte Fachkräfte zu finden.',
+      description:
+        'Niemand bewirbt sich auf ihre Stellenanzeige? Wir helfen Ihnen sich als bevorzugter Arbeitgeber in der Region zu positionieren und qualifizierte Fachkräfte zu finden.',
       icon: AutoGraph
     },
     {
@@ -20,7 +21,8 @@ const SectionAdel = ({ isActive }) => {
     },
     {
       title: 'Prozess & Produktivitätsoptimierung',
-      description: 'Kostensenken,Durchlaufzeitenverkürzen&Produktivität erhöhen.WirdurchleuchtenihreProzesseundunterstützen mit klaren Handlungsempfehlungen.',
+      description:
+        'Kostensenken,Durchlaufzeitenverkürzen&Produktivität erhöhen.WirdurchleuchtenihreProzesseundunterstützen mit klaren Handlungsempfehlungen.',
       icon: CalendarToday
     },
     {
@@ -64,13 +66,13 @@ const SectionAdel = ({ isActive }) => {
           sx={{
             pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
             pr: { xs: theme.spacing(4), md: 0 },
-            py: { xs: theme.spacing(2), md: theme.spacing(12), lg: theme.spacing(15) }
+            py: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
           }}
         >
           <SectionChip colorPreset="primaryLight" sx={{ mx: 'auto', mb: 2, mr: 'auto', width: 'auto' }}>
             Professionelle Beratung
           </SectionChip>
-          <Typography variant="h2" sx={{ mb: { xs: 4, md: 6, lg: 8 }, fontWeight: 700, fontSize: { xs: 22, sm: 28, md: 36, lg: 48 } }}>
+          <Typography variant="h2" sx={{ mb: { xs: 4, md: 7, lg: 10 }, fontWeight: 700, fontSize: { xs: 22, sm: 28, md: 36, lg: 48 } }}>
             <Typography variant="span" display="block">
               KALKULATRIX
             </Typography>

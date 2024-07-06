@@ -1,5 +1,5 @@
 import Slider from 'react-slick';
-import { Stack, Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import React from 'react';
 
 const logoSrcs = [
@@ -15,12 +15,13 @@ const logoSrcs = [
 ];
 
 const SectionPartnerSlider = () => {
+  const isMdUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
   const settings = {
     dots: false,
     infinite: true,
     autoplay: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: isMdUp ? 5 : 2,
     slidesToScroll: 1,
     variableWidth: true,
     arrows: false

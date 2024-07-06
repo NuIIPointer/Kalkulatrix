@@ -12,7 +12,7 @@ export default function MuiSelect() {
           legend: {
             display: 'none'
           },
-          ".MuiOutlinedInput-notchedOutline": {
+          '.MuiOutlinedInput-notchedOutline': {
             top: '0px'
           }
         }

@@ -28,7 +28,6 @@ const Annahmen = () => {
         <Stack justifyContent="space-between" alignItems="center" direction="row" sx={{ width: '100%' }}>
           {/* <DateTimePicker readOnly label="Letzte Änderung" value={dayjs(values.letzteAenderung)} /> */}
           <FormReadonlyValue label="Letzte Änderung" value={dayjs(values.letzteAenderung).format('DD.MM.YYYY')} />
-          
         </Stack>
       </FormSection>
     </>

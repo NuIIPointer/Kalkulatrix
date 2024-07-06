@@ -79,7 +79,10 @@ const Lohnnebenkostensatz = () => {
             <EnrichedField
               infoText={
                 <>
-                  <p>Sonstige Kosten sind eher: Betriebliche Altersvorsorge, Weiterbildungs- und Schulungskosten, Zusätzlich Versicherungen, Gesundheitsförderung, Freiwillige Sozialleistungen, Prämien und Boni, Vermögenswirksame Leistungen</p>
+                  <p>
+                    Sonstige Kosten sind eher: Betriebliche Altersvorsorge, Weiterbildungs- und Schulungskosten, Zusätzlich Versicherungen,
+                    Gesundheitsförderung, Freiwillige Sozialleistungen, Prämien und Boni, Vermögenswirksame Leistungen
+                  </p>
                 </>
               }
             >
