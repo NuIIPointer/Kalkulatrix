@@ -21,41 +21,23 @@ const ProfileTab = ({ handleLogout }) => {
   const textColor = theme.palette.common.black;
   const textColorHover = textColor;
   const bgColor = theme.palette.common.white;
-  const bgColorHover = theme.palette.primary[100];
+  const bgColorHover = theme.palette.primary[900];
 
   const listItemButtonStyle = {
     bgcolor: bgColor,
     color: textColor,
     padding: theme.shape.paddingButton,
     marginBottom: theme.spacing(1),
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: theme.shape.borderRadius * 0.5,
     transition: '.25s',
-    '&:after': {
-      content: '""',
-      height: '60%',
-      width: '0px',
-      opacity: '0',
-      position: 'absolute',
-      top: '50%',
-      right: '0',
-      transform: 'translateY(-50%)',
-      backgroundColor: theme.palette.primary[300],
-      borderTopLeftRadius: '3px',
-      borderBottomLeftRadius: '3px',
-      transition: '.25s'
-    },
     '&.Mui-selected': {
       bgcolor: bgColor,
       color: textColor,
-      '&:after': {
-        width: '4px',
-        opacity: '1'
-      },
       '&:hover': {
         bgcolor: bgColorHover,
         color: textColorHover,
         '&:after': {
-          backgroundColor: theme.palette.primary[400],
+          backgroundColor: theme.palette.primary[800],
           width: '6px',
           opacity: '1'
         }
@@ -63,11 +45,7 @@ const ProfileTab = ({ handleLogout }) => {
     },
     '&:hover': {
       bgcolor: bgColorHover,
-      color: textColorHover,
-      '&:after': {
-        width: '3px',
-        opacity: '0.5'
-      }
+      color: textColorHover
     }
   };
 

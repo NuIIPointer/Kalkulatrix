@@ -131,8 +131,9 @@ const Stammdaten = () => {
                     {({ push: innerPush, remove: innerRemove }) => (
                       <>
                         {values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields?.map((innerField, innerIndex) => {
-                          const maTitle = `${innerField?.titel || 'Mitarbeiter'} ${innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
-                            }`;
+                          const maTitle = `${innerField?.titel || 'Mitarbeiter'} ${
+                            innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
+                          }`;
                           return (
                             <React.Fragment key={innerField.userId || innerIndex}>
                               <FormSection

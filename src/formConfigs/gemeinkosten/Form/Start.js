@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // material-ui
-import {  Button, Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { DeleteOutlineOutlined } from '@mui/icons-material';
 import dayjs from 'dayjs';
 
@@ -28,7 +28,6 @@ const Annahmen = () => {
         <Stack justifyContent="space-between" alignItems="center" direction="row" sx={{ width: '100%' }}>
           {/* <DateTimePicker readOnly label="Letzte Änderung" value={dayjs(values.letzteAenderung)} /> */}
           <FormReadonlyValue label="Letzte Änderung" value={dayjs(values.letzteAenderung).format('DD.MM.YYYY')} />
-          
         </Stack>
       </FormSection>
     </>

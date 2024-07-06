@@ -5,7 +5,7 @@ const Redirect = ({ to }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(to)
+    navigate(to);
   }, [navigate, to]);
 
   return;

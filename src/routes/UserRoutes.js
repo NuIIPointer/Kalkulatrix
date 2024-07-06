@@ -37,14 +37,15 @@ const userRoutes = (isAdmin) => ({
         </ProtectedRoute>
       )
     },
-    isAdmin && {
+    (isAdmin && {
       path: 'office/admin/dashboard',
       element: (
         <ProtectedRoute>
           <AdminDashboard />
         </ProtectedRoute>
       )
-    } || {},
+    }) ||
+      {},
     {
       path: 'office/billing',
       element: (

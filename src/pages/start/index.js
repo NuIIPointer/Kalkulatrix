@@ -9,6 +9,7 @@ import SectionGewinn from './SectionGewinn';
 import SectionKalkulieren from './SectionKalkulieren';
 import SectionCheckline from './SectionCheckline';
 import SectionAdel from './SectionAdel';
+import SectionPreise from './SectionPreise';
 // import SectionHeadlineCards from './SectionHeadlineCards';
 // import SectionTimeline from './SectionTimeline';
 // import SectionTextImage from './SectionTextImage';
@@ -29,6 +30,7 @@ const Start = () => {
     SectionKalkulieren,
     SectionCheckline,
     SectionAdel,
+    SectionPreise,
     SectionCalendar
   ];
 

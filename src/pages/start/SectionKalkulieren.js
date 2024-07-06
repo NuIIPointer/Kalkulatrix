@@ -1,13 +1,9 @@
-import React, { useRef, useEffect } from 'react';
-import { Grid, Typography, Stack, Button } from '@mui/material';
+import React from 'react';
+import { Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { TypeAnimation } from 'react-type-animation';
-import Logo from 'components/Logo/Logo';
-import IconChip from 'components/IconChip';
-import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
 import SectionChip from 'components/SecitonChip';
 
-const SectionGewinn = ({ isActive }) => {
+const SectionGewinn = () => {
   const theme = useTheme();
 
   return (
@@ -23,8 +19,8 @@ const SectionGewinn = ({ isActive }) => {
           sx={{
             pr: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
             pl: { xs: theme.spacing(4), md: 0 },
-            pt: { xs: theme.spacing(2), md: theme.spacing(15), lg: theme.spacing(20) },
-            pb: { xs: theme.spacing(2), md: theme.spacing(12), lg: theme.spacing(15) }
+            pt: { xs: theme.spacing(6), md: theme.spacing(15), lg: theme.spacing(20) },
+            pb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
           }}
         >
           <SectionChip colorPreset="primaryLight" sx={{ mx: 'auto', mb: 2, mr: 'auto', width: 'auto' }}>

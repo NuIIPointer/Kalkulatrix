@@ -44,18 +44,19 @@ const SelectFormView = ({ formType, sections }) => {
   const visibleForms = useMemo(() => {
     const formsToUse = {};
     let shouldSetShowWarning = false;
-    formsData && Object.keys(formsData)?.forEach((formKey) => {
-      const currentForm = formsData[formKey];
-      if (currentForm.type === formType) {
-        const shouldAddFormToView = hasActiveSubscription || Object.keys(formsToUse)?.length === 0;
+    formsData &&
+      Object.keys(formsData)?.forEach((formKey) => {
+        const currentForm = formsData[formKey];
+        if (currentForm.type === formType) {
+          const shouldAddFormToView = hasActiveSubscription || Object.keys(formsToUse)?.length === 0;
 
-        if (shouldAddFormToView) {
-          formsToUse[formKey] = currentForm;
-        } else {
-          shouldSetShowWarning = true;
+          if (shouldAddFormToView) {
+            formsToUse[formKey] = currentForm;
+          } else {
+            shouldSetShowWarning = true;
+          }
         }
-      }
-    });
+      });
 
     setShowMoreFormsWarning(shouldSetShowWarning);
 

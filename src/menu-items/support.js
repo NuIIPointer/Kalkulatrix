@@ -15,7 +15,7 @@ const support = {
       type: 'item',
       url: '/contact',
       icon: EmailIcon
-    },
+    }
     // {
     //   id: 'documentation',
     //   title: 'Dokumentation',

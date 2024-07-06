@@ -8,19 +8,19 @@ export default function Alert(theme) {
           '&.bright': {
             '.MuiStepIcon-root': {
               color: theme.palette.primary[300],
-              "&.Mui-active": {
+              '&.Mui-active': {
                 color: theme.palette.common.white,
-                ".MuiStepIcon-text": {
+                '.MuiStepIcon-text': {
                   fill: theme.palette.common.black
                 }
               },
-              "&.Mui-completed": {
-                color: theme.palette.secondary.main,
+              '&.Mui-completed': {
+                color: theme.palette.secondary.main
               }
             },
             '.MuiStepLabel-label': {
               color: theme.palette.common.white
-            },
+            }
           }
         }
       }

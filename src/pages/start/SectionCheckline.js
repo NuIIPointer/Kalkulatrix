@@ -3,7 +3,7 @@ import { Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Checkline from 'components/Checkline/index';
 
-const SectionCheckline = ({ isActive }) => {
+const SectionCheckline = () => {
   const theme = useTheme();
   const items = [
     { title: 'Daten erfassen', delay: 0 },
@@ -11,8 +11,6 @@ const SectionCheckline = ({ isActive }) => {
     { title: 'Handlungsempfehlungen erhalten', delay: 400 },
     { title: 'Umsetzen im Betrieb', delay: 600 }
   ];
-
-  console.log('isActive', isActive);
 
   return (
     <Stack
@@ -26,7 +24,8 @@ const SectionCheckline = ({ isActive }) => {
         paddingX: {
           xs: theme.spacing(4),
           md: 0
-        }
+        },
+        display: { xs: 'none', md: 'block' }
       }}
     >
       <Checkline items={items} />

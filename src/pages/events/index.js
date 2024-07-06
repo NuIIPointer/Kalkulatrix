@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
 import ColoredSection from 'components/pageLayout/header/ColoredSection';
 // import LayoutBox from 'components/LayoutBox/index';
@@ -9,12 +9,11 @@ import ColoredSection from 'components/pageLayout/header/ColoredSection';
 // import iCalendarPlugin from '@fullcalendar/icalendar';
 // import deLocale from '@fullcalendar/core/locales/de';
 // import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
-import { InlineWidget, PopupWidget } from 'react-calendly';
+import { InlineWidget } from 'react-calendly';
 import { UserContext } from 'context/user/index';
 
 const Events = () => {
   const { user } = useContext(UserContext);
-  console.log('user', user);
   // const [dialogSettings, setDialogSettings] = useState(null);
   const theme = useTheme();
   // const calendarData = useGetCalendarData();
@@ -35,7 +34,7 @@ const Events = () => {
         }}
         prefill={{
           email: user.email,
-          name: user.displayName,
+          name: user.displayName
         }}
       />
       {/* <LayoutBox

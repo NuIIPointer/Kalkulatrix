@@ -58,6 +58,6 @@ export default function ComponentsOverrides(theme) {
     Tabs(),
     Typography(),
     Stepper(theme),
-    Popover(theme),
+    Popover(theme)
   );
 }

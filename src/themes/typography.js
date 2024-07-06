@@ -89,7 +89,7 @@ const Typography = (fontFamily) => ({
   button: {
     fontSize: '1rem',
     textTransform: 'initial',
-    "&:first-letter": {
+    '&:first-letter': {
       textTransform: 'uppercase'
     }
   }

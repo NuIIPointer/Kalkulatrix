@@ -7,11 +7,11 @@ const PublicNav = () => {
   return (
     <Box
       sx={{
-        padding: `${theme.spacing(2)} ${theme.spacing(5)}`
+        padding: { xs: `${theme.spacing(2)} ${theme.spacing(2)}`, md: `${theme.spacing(3)} ${theme.spacing(6)}` }
       }}
     >
       <Stack justifyContent="space-between" direction="row">
-        <Logo style={{ maxWidth: '200px' }} />
+        <Logo style={{ maxWidth: '200px' }} variant="dark" />
         <Button href="/login" color="primary" variant="contained" startIcon={<Login />}>
           Zum Login
         </Button>
