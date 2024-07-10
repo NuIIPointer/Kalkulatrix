@@ -16,6 +16,7 @@ import Profile from './Header/HeaderContent/Profile/index';
 import Footer from 'layout/Footer/index';
 import { PopupWidget } from 'react-calendly';
 import { UserContext } from 'context/user/index';
+import { CalendarMonth } from '@mui/icons-material';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -27,7 +28,11 @@ const MainLayout = () => {
   return (
     <Box
       sx={{
-        background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[300]}, transparent 100%)`
+        background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[300]}, transparent 100%)`,
+        '.calendly-badge-widget .calendly-badge-content': {
+          paddingLeft: theme.spacing(1.5),
+          paddingRight: theme.spacing(1.5)
+        }
       }}
     >
       <PopupWidget
@@ -37,7 +42,7 @@ const MainLayout = () => {
          * specify the rootElement property to ensure that the modal is inserted into the correct domNode.
          */
         rootElement={document.getElementById('root')}
-        text="Beratungstermin"
+        text={<CalendarMonth size={'32px'} sx={{ fontSize: '22px !important' }} />}
         textColor="#ffffff"
         color="#00a2ff"
         prefill={{

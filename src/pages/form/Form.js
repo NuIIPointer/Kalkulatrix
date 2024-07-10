@@ -44,8 +44,8 @@ const FormComponent = () => {
 
   return (
     <Box mb={theme.shape.layoutDesignGutterReset}>
-      <ColoredSection backLink="/office/form/overview" bgColor={theme.palette.primary[800]} headline={activeFormConfig.title} />
-      {activeFormConfig.content}
+      <ColoredSection backLink="/office/form/overview" bgColor={theme.palette.primary[200]} headline={activeFormConfig.title} />
+      <Box sx={{ 'form>div:nth-last-child(2)': { minHeight: '50vh' } }}>{activeFormConfig.content}</Box>
     </Box>
   );
 };

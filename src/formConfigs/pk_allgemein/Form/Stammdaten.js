@@ -142,7 +142,7 @@ const Stammdaten = () => {
                               innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
                             }`}
                             defaultOpen={outerIndex === 0 && values.pk_allgemein_mitarbeiter?.length === 1}
-                            backgroundColor={theme.palette.primary[50]}
+                            border={`1px solid ${theme.palette.grey[300]}`}
                             onDelete={() => innerRemove(innerIndex)}
                             headlineVariant="h3"
                             isError={errors.pk_allgemein_mitarbeiter?.[outerIndex]?.fields[innerIndex]}
@@ -362,7 +362,7 @@ const Stammdaten = () => {
                           color="success"
                           onClick={() => innerPush(getInitialMitarbeiterData(values))}
                           disabled={isSubmitting}
-                          sx={{ mb: 4 }}
+                          sx={{ mb: 4, ml: 'auto', display: 'block' }}
                         >
                           Neuer Mitarbeiter
                         </Button>

@@ -78,12 +78,11 @@ const ButtonBar = () => {
           position: 'sticky',
           mt: { xs: 4, md: 6, lg: 8 },
           ml: barMarginReset,
-          borderTopRightRadius: theme.shape.borderRadius * 4,
-          borderTopLeftRadius: theme.shape.borderRadius * 4,
-          bottom: '0',
+          borderRadius: theme.spacing(2.5),
+          bottom: { xs: theme.spacing(1), md: theme.spacing(2) },
+          marginBottom: { xs: theme.spacing(1), md: theme.spacing(2) },
           right: '0',
-          paddingX: { xs: theme.spacing(1.5), sm: theme.spacing(3) },
-          paddingY: { xs: theme.spacing(1.5), sm: theme.spacing(2) },
+          padding: { xs: theme.spacing(1.5), sm: theme.spacing(2) },
           backgroundColor: theme.palette.common.white,
           width: barWidth,
           zIndex: '1000',
@@ -101,7 +100,11 @@ const ButtonBar = () => {
           zurück zur Übersicht
         </Button>
         {errors && Object.keys(errors)?.length > 0 ? (
-          <Alert severity={Object.keys(touched)?.length > 0 ? 'error' : 'info'} variant="outlined">
+          <Alert
+            severity={Object.keys(touched)?.length > 0 ? 'error' : 'info'}
+            variant="outlined"
+            sx={{ paddingY: 0, whiteSpace: 'break-word' }}
+          >
             Es gibt unvollständige oder falsche Angaben
           </Alert>
         ) : (

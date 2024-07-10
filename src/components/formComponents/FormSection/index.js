@@ -26,6 +26,7 @@ const FormSection = ({
   defaultOpen,
   collapsable = true,
   backgroundColor,
+  border,
   isError,
   headlineVariant = 'h2'
 }) => {
@@ -48,7 +49,7 @@ const FormSection = ({
     }
 
     return false;
-  }, [errors, sectionRef.current]);
+  }, [errors]);
 
   const hasTouchedField = useMemo(() => {
     if (sectionRef.current) {
@@ -63,7 +64,7 @@ const FormSection = ({
     }
 
     return false;
-  }, [touched, sectionRef.current]);
+  }, [touched]);
 
   const showErrorStatus = hasTouchedField && (hasErrorField || isError);
 
@@ -77,7 +78,7 @@ const FormSection = ({
       <LayoutBox
         sx={{
           backgroundColor: backgroundColor || theme.palette.common.white,
-          border: showErrorStatus ? `2px solid ${theme.palette.error.main}` : undefined,
+          border: showErrorStatus ? `2px solid ${theme.palette.error.main}` : border,
           padding: theme.shape.paddingBoxMedium,
           mb: { xs: theme.spacing(1.5), md: theme.spacing(1.75), lg: theme.spacing(2) },
           overflow: 'hidden'

@@ -36,6 +36,7 @@ const ReadOnlyBox = ({ children, title = 'Berechnet:', alwaysOpen, white, headli
             backgroundColor: white && theme.palette.common.white,
             borderRadius: theme.shape.borderRadiusBox,
             height: '100%',
+            boxShadow: theme.customShadows.z0,
             mt: 1
           }}
         >

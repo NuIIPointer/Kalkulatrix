@@ -136,7 +136,7 @@ const MaterialzuschlagFremdleistungen = () => {
                               key={innerIndex}
                               title={innerField?.D8 || 'Neues Element'}
                               description={`Zuschlag: ${formFloat(innerField.H8, 2)} €`}
-                              backgroundColor={theme.palette.primary[50]}
+                              border={`1px solid ${theme.palette.grey[300]}`}
                               onDelete={() => innerRemove(innerIndex)}
                               headlineVariant="h3"
                               isError={errors.gk_deckung_zuschlaege?.[outerIndex]?.fields[innerIndex]}

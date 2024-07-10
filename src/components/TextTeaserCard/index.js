@@ -17,7 +17,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
       to={link && link}
       onClick={onClick && onClick}
       sx={{
-        boxShadow,
+        boxShadow: boxShadow || theme.customShadows.z0,
         aspectRatio: ratio,
         width: '100%',
         height: grow && '100%',
