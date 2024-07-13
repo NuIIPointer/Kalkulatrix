@@ -46,7 +46,18 @@ const Palette = (mode) => {
       ...paletteColor,
       // primary: createColor('#007f53'),
       // secondary: createColor('#305ab7'),
-      error: createColor('#d42a31'),
+      error: {
+        50: '#ffebee',
+        100: '#ffcdd2',
+        200: '#ef9a9a',
+        300: '#e57373',
+        400: '#ef5350',
+        500: '#d42a31',
+        600: '#d32f2f',
+        700: '#c62828',
+        800: '#b71c1c',
+        900: '#a01717'
+      },
       warning: createColor('#ffc300'),
       success: {
         50: '#f0f9f2',
@@ -70,6 +81,7 @@ const Palette = (mode) => {
         600: '#5787f8',
         700: '#81a5fa',
         800: '#abc3fb',
+        850: '#c0d0fc',
         900: '#d5e1fd',
         contrastDefaultColor: 'light',
         ...createColor('#2d69f6')

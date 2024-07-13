@@ -1,10 +1,12 @@
 import React, { useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import ColoredSection from 'components/pageLayout/header/ColoredSection';
-import { Grid, Typography, Stack, Box } from '@mui/material';
+import { Grid, Typography, Stack } from '@mui/material';
 import TextTeaserCard from 'components/TextTeaserCard/index';
 import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
 import dayjs from 'dayjs';
+import DashboardCard from 'components/DashboardCard/index';
+import { PeopleAlt, Receipt, LocalAtm, Inbox } from '@mui/icons-material';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -48,13 +50,39 @@ const Dashboard = () => {
 
   return (
     <>
-      <ColoredSection
-        bgGradient={headerBgColor}
-        bgColor={theme.palette.secondary.light}
-        boxShadow={theme.customShadows.z1}
-        headline={'Dashboard'}
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor nec feugiat nisl pretium fusce id velit ut. Fames ac turpis egestas sed tempus urna et. Diam in arcu cursus euismod. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis."
-      />
+      <Grid container spacing={{ xs: 2, md: 3 }} sx={{ marginBottom: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
+        <Grid item xs={12} sm={6} md={6}>
+          <DashboardCard
+            icon={Receipt}
+            title="Aktueller Stundensatz"
+            subTitle="Seit letzter Kalkulation"
+            value="135,97€"
+            valueChanged="12,25%"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
+          <DashboardCard
+            icon={LocalAtm}
+            title="Aktueller Stundensatz"
+            subTitle="Seit letzter Kalkulation"
+            value="89,00%"
+            valueChanged="10%"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
+          <DashboardCard icon={Inbox} title="Aktueller Stundensatz" subTitle="Seit letzter Kalkulation" value="89,00%" valueChanged="10%" />
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
+          <DashboardCard
+            icon={PeopleAlt}
+            title="Anzahl Mitarbeiter"
+            subTitle="Seit letzter Kalkulation"
+            value="25"
+            valueChanged="3"
+            changedUpDown="down"
+          />
+        </Grid>
+      </Grid>
       {bottomBoxRendering()}
       {calendarDataStatus === 'success' && futureCalendarData?.length > 0 && (
         <>

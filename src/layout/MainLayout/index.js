@@ -121,8 +121,8 @@ const MainLayout = () => {
             gridColumnEnd: '1',
             gridRowStart: '1',
             gridRowEnd: '4',
-            backgroundColor: theme.palette.common.white,
-            borderRight: `1px solid ${theme.palette.grey[300]}`,
+            backgroundColor: { lg: theme.palette.common.white },
+            borderRight: { lg: `1px solid ${theme.palette.grey[300]}` },
             position: 'relative',
             ':after': {
               content: '""',

@@ -22,8 +22,7 @@ const HeaderContent = () => {
         marginTop={1}
         {...(location.pathname !== '/office/dashboard' ? { sx: { opacity: 0 }, 'aria-hidden': true } : {})}
       >
-        <Typography>Willkommen zurück,</Typography>
-        <Typography sx={{ fontSize: 36, fontWeight: theme.typography.fontWeightBold }}>{user?.displayName}</Typography>
+        <Typography sx={{ fontSize: 36, fontWeight: theme.typography.fontWeightBold }}>Kalkulatrix Dashboard</Typography>
       </Stack>
       {!useDrawerNav && <Profile />}
     </>
