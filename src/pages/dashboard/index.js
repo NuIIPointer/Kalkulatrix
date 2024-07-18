@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
 import ColoredSection from 'components/pageLayout/header/ColoredSection';
 import { Grid, Typography, Stack } from '@mui/material';
@@ -7,11 +7,20 @@ import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
 import dayjs from 'dayjs';
 import DashboardCard from 'components/DashboardCard/index';
 import { PeopleAlt, Receipt, LocalAtm, Inbox } from '@mui/icons-material';
+import { UserContext } from 'context/user/index';
 
 const Dashboard = () => {
   const theme = useTheme();
   const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.white.main}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary[900]}, transparent 100%)`;
   const { futureCalendarData, calendarDataStatus } = useGetCalendarData();
+  const { formsData } = useContext(UserContext);
+  const formIdToShow = Object.keys(formsData)[0];
+  const formToShow = formsData[formIdToShow];
+  const formResult = formToShow?.values?.deckungsbeitraege_L17;
+  const produktivitaet = formToShow?.values?.pk_produktiv_Q42
+    ? formToShow.values.pk_produktiv_Q42 / (formToShow?.values?.pk_produktiv_P42 || 0)
+    : 100;
+  const formResultFormatted = formResult ? `${parseFloat(formResult, 10).toFixed(2)}€` : 'Kein Ergebnis';
 
   const bottomBoxRendering = useCallback(() => {
     return (
@@ -56,23 +65,23 @@ const Dashboard = () => {
             icon={Receipt}
             title="Aktueller Stundensatz"
             // subTitle="Seit letzter Kalkulation"
-            value="135,97€"
+            value={formResultFormatted}
             // valueChanged="12,25%"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <DashboardCard
             icon={LocalAtm}
-            title="Aktueller Stundensatz"
+            title="Produktivität"
             // subTitle="Seit letzter Kalkulation"
-            value="89,00%"
+            value={`${produktivitaet}%`}
             // valueChanged="10%"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <DashboardCard
             icon={Inbox}
-            title="Aktueller Stundensatz"
+            title="Marge auf Produkt"
             // subTitle="Seit letzter Kalkulation"
             value="89,00%"
             // valueChanged="10%"

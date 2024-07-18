@@ -223,7 +223,7 @@ const MaterialzuschlagFremdleistungen = () => {
                                             <TextField
                                               {...field}
                                               value={formFloat(field.value, 2)}
-                                              label="Zuschlag (in EUR)"
+                                              label="Davon Zuschlag (in EUR)"
                                               error={meta?.touched && Boolean(meta.error)}
                                               helperText={meta?.touched && meta.error}
                                               sx={{ mb: 2 }}

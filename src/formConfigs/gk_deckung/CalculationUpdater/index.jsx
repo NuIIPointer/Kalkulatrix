@@ -10,6 +10,7 @@ const StundensatzRechnerValueUpdater = () => {
     const reCalculateMzFlValues = () => {
       // Anwesenheitsentgeld (gesamt) START
       let H20 = 0;
+      let F8Summe = 0;
 
       values.gk_deckung_zuschlaege?.forEach((category, outerIndex) => {
         let H12 = 0;
@@ -18,6 +19,7 @@ const StundensatzRechnerValueUpdater = () => {
           const G8 = (item.E8 || 0) + ((item.E8 || 0) * (item.F8 || 0)) / 100;
           const H8 = (G8 || 0) - (item.E8 || 0);
 
+          F8Summe += item.F8 || 0;
           H12 += H8;
 
           if (G8 !== item.G8) {
@@ -34,6 +36,14 @@ const StundensatzRechnerValueUpdater = () => {
 
         H20 += H12;
       });
+
+      console.log('F8Summe', F8Summe);
+      const F8Durchschnitt = F8Summe / values.gk_deckung_zuschlaege.length;
+      console.log('F8Durchschnitt', F8Durchschnitt, values.gk_deckung_zuschlaege.length);
+
+      if (F8Durchschnitt !== values.gk_deckung_F8Durchschnitt) {
+        setFieldValue(`gk_deckung_F8Durchschnitt`, F8Durchschnitt);
+      }
 
       if (H20 !== values.gk_deckung_H20) {
         setFieldValue(`gk_deckung_H20`, H20);
