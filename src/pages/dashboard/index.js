@@ -29,7 +29,7 @@ const Dashboard = () => {
           <TextTeaserCard
             primaryText="Profil"
             prefixText="zum"
-            link="/"
+            link="/office/profile"
             color={theme.palette.primary.light}
             boxShadow={theme.customShadows.z1}
           />
@@ -38,7 +38,7 @@ const Dashboard = () => {
           <TextTeaserCard
             primaryText="Kontaktieren"
             prefixText="jetzt"
-            link="/kontakt"
+            link="/contact"
             target="_blank"
             color={theme.palette.primary[200]}
             boxShadow={theme.customShadows.z1}
@@ -55,30 +55,36 @@ const Dashboard = () => {
           <DashboardCard
             icon={Receipt}
             title="Aktueller Stundensatz"
-            subTitle="Seit letzter Kalkulation"
+            // subTitle="Seit letzter Kalkulation"
             value="135,97€"
-            valueChanged="12,25%"
+            // valueChanged="12,25%"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <DashboardCard
             icon={LocalAtm}
             title="Aktueller Stundensatz"
-            subTitle="Seit letzter Kalkulation"
+            // subTitle="Seit letzter Kalkulation"
             value="89,00%"
-            valueChanged="10%"
+            // valueChanged="10%"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <DashboardCard icon={Inbox} title="Aktueller Stundensatz" subTitle="Seit letzter Kalkulation" value="89,00%" valueChanged="10%" />
+          <DashboardCard
+            icon={Inbox}
+            title="Aktueller Stundensatz"
+            // subTitle="Seit letzter Kalkulation"
+            value="89,00%"
+            // valueChanged="10%"
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <DashboardCard
             icon={PeopleAlt}
             title="Anzahl Mitarbeiter"
-            subTitle="Seit letzter Kalkulation"
+            // subTitle="Seit letzter Kalkulation"
             value="25"
-            valueChanged="3"
+            // valueChanged="3"
             changedUpDown="down"
           />
         </Grid>

@@ -50,12 +50,14 @@ const DashboardCard = ({ icon, title, subTitle, value, valueChanged, changedUpDo
       <Stack sx={{ marginLeft: theme.spacing(1) }}>
         <Stack flexDirection="row" alignItems="center">
           <Typography sx={valueTextSx}>{value}</Typography>
-          <Box sx={changePillSx}>
-            <ArrowIcon sx={{ fontSize: 14, marginLeft: theme.spacing(-0.25) }} />
-            {valueChanged}
-          </Box>
+          {valueChanged && (
+            <Box sx={changePillSx}>
+              <ArrowIcon sx={{ fontSize: 14, marginLeft: theme.spacing(-0.25) }} />
+              {valueChanged}
+            </Box>
+          )}
         </Stack>
-        <Typography sx={{ fontSize: { xs: 14, md: 15 }, opacity: 0.5 }}>{subTitle}</Typography>
+        {subTitle && <Typography sx={{ fontSize: { xs: 14, md: 15 }, opacity: 0.5 }}>{subTitle}</Typography>}
       </Stack>
     </Box>
   );
