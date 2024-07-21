@@ -25,10 +25,14 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         background: bgColor,
         color: textColor,
         padding: {
-          xs: `${theme.spacing(3)} ${theme.spacing(4)}`,
+          xs: `${theme.spacing(1.5)} ${theme.spacing(2)}`,
+          sm: `${theme.spacing(3)} ${theme.spacing(4)}`,
           md: `${theme.spacing(4)} ${theme.spacing(5)}`
         },
-        borderRadius: theme.shape.borderRadiusBox,
+        borderRadius: {
+          xs: theme.shape.borderRadiusBox * 0.5,
+          sm: theme.shape.borderRadiusBox,
+        },
         transition: '.25s',
         justifyContent: 'flex-start',
         position: 'relative',
@@ -64,7 +68,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
           <Typography
             paragraph
             sx={{
-              fontSize: { xs: 18, md: 22, lg: 24 },
+              fontSize: { sx: 14, sm: 18, md: 22, lg: 24 },
               lineHeight: '1em',
               textTransform: 'none',
               fontWeight: theme.typography.fontWeightBolder,
@@ -78,7 +82,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         <Typography
           paragraph
           sx={{
-            fontSize: { xs: 28, md: 34, lg: 38 },
+            fontSize: { xs: 20, sm: 28, md: 34, lg: 38 },
             lineHeight: '1em',
             textTransform: 'none',
             fontWeight: theme.typography.fontWeightLight,

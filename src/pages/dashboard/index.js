@@ -1,31 +1,34 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import ColoredSection from 'components/pageLayout/header/ColoredSection';
-import { Grid, Typography, Stack } from '@mui/material';
-import TextTeaserCard from 'components/TextTeaserCard/index';
-import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
+import { Grid, Typography, Stack, Select, MenuItem } from '@mui/material';
+import TextTeaserCard from 'components/TextTeaserCard';
+import useGetCalendarData from 'hooks/useGetCalendarData.js';
 import dayjs from 'dayjs';
-import DashboardCard from 'components/DashboardCard/index';
+import DashboardCard from 'components/DashboardCard';
 import { PeopleAlt, Receipt, LocalAtm, Inbox } from '@mui/icons-material';
-import { UserContext } from 'context/user/index';
+import { UserContext } from 'context/user';
+import FullCalendarConfigured from 'components/FullCalendarConfigured';
+import TeaserCard from 'components/TeaserCard';
 
 const Dashboard = () => {
   const theme = useTheme();
-  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.white.main}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[900]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary[900]}, transparent 100%)`;
   const { futureCalendarData, calendarDataStatus } = useGetCalendarData();
   const { formsData } = useContext(UserContext);
-  const formIdToShow = Object.keys(formsData)[0];
-  const formToShow = formsData[formIdToShow];
+  const [activeFormKey, setActiveFormKey] = useState(0);
+  const formsKeys = formsData ? Object.keys(formsData) : [];
+  const formIdToShow = formsKeys?.[activeFormKey];
+  const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
   const formResult = formToShow?.values?.deckungsbeitraege_L17;
   const produktivitaet = formToShow?.values?.pk_produktiv_Q42
     ? formToShow.values.pk_produktiv_Q42 / (formToShow?.values?.pk_produktiv_P42 || 0)
     : 100;
   const formResultFormatted = formResult ? `${parseFloat(formResult, 10).toFixed(2)}€` : 'Kein Ergebnis';
+  const formFrom = `Formular vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
 
   const bottomBoxRendering = useCallback(() => {
     return (
       <Grid container spacing={3} mb={6}>
-        <Grid item xs={12} sm={6} xl={4}>
+        <Grid item xs={6} sm={6} xl={4}>
           <TextTeaserCard
             primaryText="Angaben"
             prefixText="zu den"
@@ -34,7 +37,7 @@ const Dashboard = () => {
             boxShadow={theme.customShadows.z1}
           />
         </Grid>
-        <Grid item xs={12} sm={6} xl={4}>
+        <Grid item xs={6} sm={6} xl={4}>
           <TextTeaserCard
             primaryText="Profil"
             prefixText="zum"
@@ -43,7 +46,7 @@ const Dashboard = () => {
             boxShadow={theme.customShadows.z1}
           />
         </Grid>
-        <Grid item xs={12} sm={6} xl={4}>
+        <Grid item xs={6} sm={6} xl={4}>
           <TextTeaserCard
             primaryText="Kontaktieren"
             prefixText="jetzt"
@@ -59,43 +62,82 @@ const Dashboard = () => {
 
   return (
     <>
+      <Stack flexDirection="row" justifyContent="flex-start">
+        <Select
+          sx={{
+            width: 230,
+            backgroundColor: theme.palette.common.white,
+            borderRadius: theme.shape.borderRadius,
+            '.MuiOutlinedInput-notchedOutline': {
+              overlflow: 'hidden',
+              borderColor: theme.palette.common.white
+            },
+            boxShadow: theme.customShadows.z1,
+            mb: 3
+          }}
+          value={activeFormKey}
+          labelId="annahmen_G17_days-label"
+          onChange={(event) => setActiveFormKey(event.target.value || 0)}
+        >
+          {formsKeys.map((formKey, index) => {
+            return (
+              <MenuItem key={formKey} value={index}>
+                {`Formular vom ${dayjs(formsData?.[formKey]?.creationDate).format('DD.MM.YYYY')}`}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </Stack>
       <Grid container spacing={{ xs: 2, md: 3 }} sx={{ marginBottom: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
-        <Grid item xs={12} sm={6} md={6}>
-          <DashboardCard
-            icon={Receipt}
-            title="Aktueller Stundensatz"
-            // subTitle="Seit letzter Kalkulation"
-            value={formResultFormatted}
-            // valueChanged="12,25%"
-          />
+        <Grid item sm={8}>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
+            <Grid item xs={6} sm={6} md={6}>
+              <DashboardCard
+                sx={{ height: '100%' }}
+                icon={Receipt}
+                title="Aktueller Stundensatz"
+                subTitle={formFrom}
+                value={formResultFormatted}
+                // valueChanged="12,25%"
+              />
+            </Grid>
+            <Grid item xs={6} sm={6} md={6}>
+              <DashboardCard
+                sx={{ height: '100%' }}
+                icon={LocalAtm}
+                title="Produktivität"
+                subTitle={formFrom}
+                value={`${produktivitaet}%`}
+                // valueChanged="10%"
+              />
+            </Grid>
+            <Grid item xs={6} sm={6} md={6}>
+              <DashboardCard
+                sx={{ height: '100%' }}
+                icon={Inbox}
+                title="Marge auf Produkt"
+                subTitle={formFrom}
+                value="89,00%"
+                // valueChanged="10%"
+              />
+            </Grid>
+            <Grid item xs={6} sm={6} md={6}>
+              <DashboardCard
+                sx={{ height: '100%' }}
+                icon={PeopleAlt}
+                title="Anzahl Mitarbeiter"
+                subTitle={formFrom}
+                value="25"
+                // valueChanged="3"
+                changedUpDown="down"
+              />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <DashboardCard
-            icon={LocalAtm}
-            title="Produktivität"
-            // subTitle="Seit letzter Kalkulation"
-            value={`${produktivitaet}%`}
-            // valueChanged="10%"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <DashboardCard
-            icon={Inbox}
-            title="Marge auf Produkt"
-            // subTitle="Seit letzter Kalkulation"
-            value="89,00%"
-            // valueChanged="10%"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <DashboardCard
-            icon={PeopleAlt}
-            title="Anzahl Mitarbeiter"
-            // subTitle="Seit letzter Kalkulation"
-            value="25"
-            // valueChanged="3"
-            changedUpDown="down"
-          />
+        <Grid item xs={12} sm={4}>
+          <TeaserCard color={theme.palette.primary.dark} boxShadow={theme.customShadows.z1} sx={{ height: '100%' }}>
+            <FullCalendarConfigured sx={{ height: '100%', width: '100%' }} calendarSx={{ height: '100%', width: '100%' }} />
+          </TeaserCard>
         </Grid>
       </Grid>
       {bottomBoxRendering()}

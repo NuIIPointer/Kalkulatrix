@@ -52,7 +52,7 @@ const MaterialzuschlagFremdleistungen = () => {
                     {values.gk_deckung_zuschlaege?.map((category, index) => {
                       return (
                         <Tab
-                          key={index}
+                          key={`${category.groupTitle}-${index}`}
                           label={
                             <Stack sx={{ color: errors.gk_deckung_zuschlaege?.[index] ? theme.palette.error.main : undefined }}>
                               {category.groupTitle || `Gruppe ${index + 1}`}
@@ -76,7 +76,7 @@ const MaterialzuschlagFremdleistungen = () => {
                   </Button>
                 </Stack>
                 {values.gk_deckung_zuschlaege?.map((outerField, outerIndex) => (
-                  <TabPanel key={outerIndex} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
+                  <TabPanel key={`${outerField.groupTitle}-${outerIndex}`} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
                     <Grid container columnSpacing={2} alignItems="end">
                       <Grid item xs={12} sm={5} md={4}>
                         <FastField name={`gk_deckung_zuschlaege.${openedTab}.groupTitle`}>
@@ -118,9 +118,9 @@ const MaterialzuschlagFremdleistungen = () => {
                         <Button onClick={() => setGroupToDelete(undefined)}>Abbrechen</Button>
                         <Button
                           onClick={() => {
+                            setGroupToDelete(undefined);
                             remove(outerIndex);
                             changeTab(null, 0);
-                            setGroupToDelete(undefined);
                           }}
                           autoFocus
                         >
