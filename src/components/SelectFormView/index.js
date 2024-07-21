@@ -90,7 +90,7 @@ const SelectFormView = ({ formType, sections }) => {
                       sx={{
                         display: 'flex',
                         width: '100%',
-                        flexWrap: 'wrap',
+                        flexWrap: 'no-wrap',
                         hyphens: 'auto',
                         justifyContent: 'space-between',
                         flexDirection: 'row',
@@ -103,7 +103,7 @@ const SelectFormView = ({ formType, sections }) => {
                         sx={{
                           opacity: '0.2',
                           fontSize: { xs: 40, md: 48, lg: 55 },
-                          margin: '0 -0.35em -0.2em'
+                          margin: '0 -0.35em -0.2em 1rem'
                         }}
                       />
                     </Stack>
@@ -128,7 +128,7 @@ const SelectFormView = ({ formType, sections }) => {
                   sx={{ mb: { xs: 2, sm: 3 } }}
                   flexWrap="wrap"
                 >
-                  <Typography variant="h3" sx={{ mb: 1 }}>
+                  <Typography variant="h2" component="h3" sx={{ mb: 1 }}>
                     {formData.title || 'Formular: ' + formData.id}
                   </Typography>
                   <Button startIcon={<DeleteOutlineOutlined />} color="error" variant="contained" onClick={() => removeForm(formId)}>

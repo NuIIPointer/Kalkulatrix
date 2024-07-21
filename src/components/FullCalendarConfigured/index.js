@@ -27,13 +27,14 @@ const FullCalendarConfigured = ({ sx = {}, calendarSx = {} }) => {
       fontSize: '1rem'
     },
     '.fc-button-group': {
-      marginLeft: '0.5rem !important'
+      marginLeft: '0.25rem !important'
     },
     '.fc-button': {
-      padding: '0.15rem 0.4rem'
+      padding: '0.15rem 0.5rem',
+      borderRadius: '1000px'
     },
     '.fc-prev-button, .fc-next-button': {
-      paddingInline: '0.2rem'
+      paddingInline: '0.25rem'
     },
     '.fc .fc-button .fc-icon': {
       fontSize: '1rem'
@@ -53,7 +54,7 @@ const FullCalendarConfigured = ({ sx = {}, calendarSx = {} }) => {
       marginTop: 0
     },
     '.fc-daygrid-event-harness': {
-      backgroundColor: theme.palette.primary[500],
+      backgroundColor: theme.palette.primary[700],
       height: '100%',
       a: {
         opacity: 0,

@@ -30,10 +30,12 @@ const DashboardCard = ({ icon, title, subTitle, value, valueChanged, changedUpDo
   const valueTextSx = {
     fontWeight: 600,
     marginRight: { xs: theme.spacing(1), sm: theme.spacing(3) },
+    lineHeight: '1.1em',
+    my: { xs: 1, lg: 2 },
     fontSize: {
       xs: '1.5rem',
       sm: '2rem',
-      md: '2.5rem'
+      md: '2.3rem'
     }
   };
 
@@ -48,7 +50,7 @@ const DashboardCard = ({ icon, title, subTitle, value, valueChanged, changedUpDo
         <Box sx={iconBoxSx}>
           <Icon sx={{ fontSize: { xs: 16, sm: 18, md: 22, lg: 26 } }} />
         </Box>
-        <Typography sx={{ fontWeight: 'bold', fontSize: { xs: 16, md: 18 }, marginTop: { sm: theme.spacing(0.5) } }}>{title}</Typography>
+        <Typography sx={{ fontWeight: 'bold', fontSize: { xs: 16, md: 18 }, marginTop: { sm: theme.spacing(0.5) }, lineHeight: '1.1em' }}>{title}</Typography>
       </Stack>
       <Stack sx={{ marginLeft: { sm: theme.spacing(1) } }}>
         <Stack flexDirection="row" alignItems="center">

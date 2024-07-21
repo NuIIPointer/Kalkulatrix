@@ -23,7 +23,7 @@ const FormOverview = () => {
         bgColor={theme.palette.primary.dark}
         bgGradient={headerBgColor}
         headline="Stundensatzkalkulator"
-        description="asdojaosidj98 a9sudj ud 98ausd ujas98d jas9d ijoas9d9ash"
+        description="Hier können Sie Ihre Angabensets bearbeiten und speichern."
       />
       <Typography variant="h2" sx={headlineSectionStyle}>
         Angabensets

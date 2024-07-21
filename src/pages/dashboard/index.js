@@ -15,13 +15,13 @@ const Dashboard = () => {
   const { futureCalendarData, calendarDataStatus } = useGetCalendarData();
   const { formsData } = useContext(UserContext);
   const [activeFormKey, setActiveFormKey] = useState(0);
-  const formsKeys = formsData ? Object.keys(formsData) : [];
+  const formsKeys = [];
   const formIdToShow = formsKeys?.[activeFormKey];
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
   const formResult = formToShow?.values?.deckungsbeitraege_L17;
   const produktivitaet = formToShow?.values?.pk_produktiv_Q42
-    ? formToShow.values.pk_produktiv_Q42 / (formToShow?.values?.pk_produktiv_P42 || 0)
-    : 100;
+    ? `${formToShow.values.pk_produktiv_Q42 / (formToShow?.values?.pk_produktiv_P42 || 0)}%`
+    : 'Kein Ergebnis';
   const formResultFormatted = formResult ? `${parseFloat(formResult, 10).toFixed(2)}€` : 'Kein Ergebnis';
   const formFrom = `Formular vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
 
@@ -62,32 +62,34 @@ const Dashboard = () => {
 
   return (
     <>
-      <Stack flexDirection="row" justifyContent="flex-start">
-        <Select
-          sx={{
-            width: 230,
-            backgroundColor: theme.palette.common.white,
-            borderRadius: theme.shape.borderRadius,
-            '.MuiOutlinedInput-notchedOutline': {
-              overlflow: 'hidden',
-              borderColor: theme.palette.common.white
-            },
-            boxShadow: theme.customShadows.z1,
-            mb: 3
-          }}
-          value={activeFormKey}
-          labelId="annahmen_G17_days-label"
-          onChange={(event) => setActiveFormKey(event.target.value || 0)}
-        >
-          {formsKeys.map((formKey, index) => {
-            return (
-              <MenuItem key={formKey} value={index}>
-                {`Formular vom ${dayjs(formsData?.[formKey]?.creationDate).format('DD.MM.YYYY')}`}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </Stack>
+      {formsKeys?.length > 0 && (
+        <Stack flexDirection="row" justifyContent="flex-start">
+          <Select
+            sx={{
+              width: 230,
+              backgroundColor: theme.palette.common.white,
+              borderRadius: theme.shape.borderRadius,
+              '.MuiOutlinedInput-notchedOutline': {
+                overlflow: 'hidden',
+                borderColor: theme.palette.common.white
+              },
+              boxShadow: theme.customShadows.z1,
+              mb: 3
+            }}
+            value={activeFormKey}
+            labelId="annahmen_G17_days-label"
+            onChange={(event) => setActiveFormKey(event.target.value || 0)}
+          >
+            {formsKeys.map((formKey, index) => {
+              return (
+                <MenuItem key={formKey} value={index}>
+                  {`Formular vom ${dayjs(formsData?.[formKey]?.creationDate).format('DD.MM.YYYY')}`}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </Stack>
+      )}
       <Grid container spacing={{ xs: 2, md: 3 }} sx={{ marginBottom: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
         <Grid item sm={8}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -107,7 +109,7 @@ const Dashboard = () => {
                 icon={LocalAtm}
                 title="Produktivität"
                 subTitle={formFrom}
-                value={`${produktivitaet}%`}
+                value={produktivitaet}
                 // valueChanged="10%"
               />
             </Grid>

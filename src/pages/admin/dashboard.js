@@ -57,8 +57,7 @@ const AdminDashboard = () => {
       <ColoredSection
         bgGradient={headerBgColor}
         bgColor={theme.palette.secondary.dark}
-        headline={'AdminDashboard'}
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor nec feugiat nisl pretium fusce id velit ut. Fames ac turpis egestas sed tempus urna et. Diam in arcu cursus euismod. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis."
+        headline={'Admin Dashboard'}
       />
       {clientsData && (
         <Box sx={{ overflow: 'hidden', borderRadius: theme.shape.borderRadiusBox, backgroundColor: '#ffffff', padding: 2 }}>
