@@ -6,8 +6,8 @@ import { darken } from '@mui/material/styles';
 const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light, grow, ratio, textAlign, onClick, boxShadow }) => {
   const theme = useTheme();
   const textColor = light ? theme.palette.text.primary : theme.palette.common.white;
-  const textColorHover = textColor;
-  const bgColor = `linear-gradient(to right, ${color}, ${darken(color, 0.15)})`;
+  const textColorHover = theme.palette.common.dark;
+  const bgColor = color;
 
   const OuterComponent = link || onClick ? Button : Box;
 
@@ -17,7 +17,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
       to={link && link}
       onClick={onClick && onClick}
       sx={{
-        boxShadow: boxShadow || theme.customShadows.z0,
+        boxShadow: boxShadow || theme.customShadows.z1,
         aspectRatio: ratio,
         width: '100%',
         height: grow && '100%',
@@ -31,7 +31,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         },
         borderRadius: {
           xs: theme.shape.borderRadiusBox * 0.5,
-          sm: theme.shape.borderRadiusBox,
+          sm: theme.shape.borderRadiusBox
         },
         transition: '.25s',
         justifyContent: 'flex-start',
@@ -54,7 +54,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         },
         '&:hover': {
           color: textColorHover,
-          boxShadow: theme.customShadows.z3,
+          boxShadow: theme.customShadows.z2,
 
           '&:after': link && {
             transform: 'rotate(20deg) translateY(-50%) translateX(-15%)'
@@ -62,7 +62,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         }
       }}
     >
-      <Stack direction="column" textAlign={textAlign || 'left'} spacing={{ xs: 0, md: 1 }} sx={{ width: '100%' }}>
+      <Stack direction="column" textAlign={textAlign || 'left'} spacing={{ xs: 0, md: 1 }} sx={{ width: '100%', color: 'inherit' }}>
         {/* <Icon sx={{ fontSize: { xs: 32, md: 32, lg: 40 }, color: textColor }} /> */}
         {prefixText && (
           <Typography
@@ -73,7 +73,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
               textTransform: 'none',
               fontWeight: theme.typography.fontWeightBolder,
               margin: '0px',
-              color: textColor
+              color: 'inherit'
             }}
           >
             {prefixText}
@@ -87,7 +87,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
             textTransform: 'none',
             fontWeight: theme.typography.fontWeightLight,
             margin: '0px',
-            color: textColor,
+            color: 'inherit',
             textAlign: textAlign
           }}
         >

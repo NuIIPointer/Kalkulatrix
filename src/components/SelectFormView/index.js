@@ -111,7 +111,8 @@ const SelectFormView = ({ formType, sections }) => {
                   // prefixText={`zuletzt bearbeitet: ${dayjs(formData.creationDate).format('DD.MM.YYYY')}`}
                   prefixText={'Blatt'}
                   link={`/office/form/${formId}/${section.linkPart}`}
-                  color={section.backgroundColor || theme.palette.primary[100]}
+                  light={!section.backgroundColor}
+                  color={section.backgroundColor || theme.palette.common.white}
                 />
               </Grid>
             );
