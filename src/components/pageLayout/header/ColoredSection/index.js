@@ -65,7 +65,7 @@ const ColoredSectionTop = ({ headline, description, headerChildren, bgColor, bgG
                         width: '100%',
                         display: 'block',
                         borderRadius: '1000px',
-                        backgroundColor: theme.palette.secondary.main
+                        backgroundColor: 'currentColor'
                       }}
                     ></Box>
                   </Typography>

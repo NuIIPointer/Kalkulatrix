@@ -12,7 +12,7 @@ const FullCalendarConfigured = ({ sx = {}, calendarSx = {} }) => {
 
   const calendarStyles = {
     '.fc': {
-      ...calendarSx,
+      ...calendarSx
     },
     '.fc-toolbar-chunk': {
       display: 'flex'

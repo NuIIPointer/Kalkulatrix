@@ -45,7 +45,21 @@ const FormComponent = () => {
   return (
     <Box mb={theme.shape.layoutDesignGutterReset}>
       <ColoredSection backLink="/office/form/overview" bgColor={theme.palette.primary[200]} headline={activeFormConfig.title} />
-      <Box sx={{ 'form>div:nth-last-child(2)': { minHeight: '50vh' } }}>{activeFormConfig.content}</Box>
+      {Object.entries(formLiteral).map(([key, value]) => {
+        if (key !== formSection) {
+          return (
+            <Box key={key} display="none">
+              {value.content}
+            </Box>
+          );
+        }
+
+        return (
+          <Box key={key} sx={{ 'form>div:nth-last-child(2)': { minHeight: '50vh' } }}>
+            {value.content}
+          </Box>
+        );
+      })}
     </Box>
   );
 };
