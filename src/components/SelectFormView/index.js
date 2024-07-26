@@ -64,7 +64,7 @@ const SelectFormView = ({ formType, sections }) => {
   }, [formType, formsData, hasActiveSubscription]);
 
   const addForm = () => {
-    createForm({ title: `Formular vom ${dayjs(new Date()).format('DD.MM.YYYY')}`, type: formType });
+    createForm({ title: `Kalkulation vom ${dayjs(new Date()).format('DD.MM.YYYY')}`, type: formType });
   };
 
   const handleOpenSub = () => {
@@ -152,14 +152,14 @@ const SelectFormView = ({ formType, sections }) => {
           <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
             {showMoreFormsWarning && (
               <Alert sx={{ mb: 2 }} severity="warning">
-                Es gibt weitere Angabensets. Setzen Sie das Abonnement fort um alle Angabensets anzuzeigen.
+                Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort um alle Kalkulationen anzuzeigen.
               </Alert>
             )}
             <TextTeaserCard
               onClick={hasActiveSubscription ? addForm : handleOpenSub}
               primaryText={
                 <Stack flexDirection="row" alignItems="center">
-                  Neues Angabenset
+                  Neue Kalkulation
                   <ChevronRight
                     sx={{
                       opacity: '0.2',
@@ -181,7 +181,7 @@ const SelectFormView = ({ formType, sections }) => {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Ein neues Angabenset können Sie nur mit gültigem Abonnement erstellen.</DialogTitle>
+          <DialogTitle id="alert-dialog-title">Ein neue Kalkulation können Sie nur mit gültigem Abonnement erstellen.</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna

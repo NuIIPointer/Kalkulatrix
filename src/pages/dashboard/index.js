@@ -30,7 +30,7 @@ const Dashboard = () => {
   console.log('formValues', formValues);
   const anzMitarbeiter = (formValues.pk_produktiv_anzahl || 0) + (formValues.pk_allgemein_anzahl || 0);
   const formResultFormatted = formResult ? `${parseFloat(formResult, 10).toFixed(2)}€` : 'Kein Ergebnis';
-  const formFrom = `Formular vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
+  const formFrom = `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
 
   const bottomBoxRendering = useCallback(() => {
     return (
@@ -90,7 +90,7 @@ const Dashboard = () => {
             {formsKeys.map((formKey, index) => {
               return (
                 <MenuItem key={formKey} value={index}>
-                  {`Formular vom ${dayjs(formsData?.[formKey]?.creationDate).format('DD.MM.YYYY')}`}
+                  {`Kalkulation vom ${dayjs(formsData?.[formKey]?.creationDate).format('DD.MM.YYYY')}`}
                 </MenuItem>
               );
             })}

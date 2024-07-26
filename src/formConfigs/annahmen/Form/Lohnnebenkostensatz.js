@@ -6,8 +6,6 @@ import { Grid, TextField, Divider, Typography } from '@mui/material';
 // formik
 import { Field, useFormikContext } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
-import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
-import formFloat from 'utils/formUtils/formFloat';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
 
 const Lohnnebenkostensatz = () => {
@@ -27,21 +25,32 @@ const Lohnnebenkostensatz = () => {
             <Typography variant="h3">Produktive Kapazität (pro Jahr)</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Field
-              component={TextField}
-              id="annahmen_E39"
-              name="annahmen_E39"
-              label="Sonderzahlungen (in Monaten)"
-              type="number"
-              onWheel={(event) => event.target.blur()}
-              min="0"
-              max="5"
-              value={values.annahmen_E39}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.annahmen_E39 && Boolean(errors.annahmen_E39)}
-              helperText={touched.annahmen_E39 && errors.annahmen_E39}
-            />
+            <EnrichedField
+              infoText={
+                <>
+                  <p>
+                    Sonderzahlungen können bspw. ein 13. oder 14. Monatsgehalt sein. Auch Weihnachts- und Urlaubsgeld sowie
+                    Gewinnbeteiligungen oder Jahresprämien gehören hierzu.
+                  </p>
+                </>
+              }
+            >
+              <Field
+                component={TextField}
+                id="annahmen_E39"
+                name="annahmen_E39"
+                label="Sonderzahlungen (in Monaten)"
+                type="number"
+                onWheel={(event) => event.target.blur()}
+                min="0"
+                max="5"
+                value={values.annahmen_E39}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.annahmen_E39 && Boolean(errors.annahmen_E39)}
+                helperText={touched.annahmen_E39 && errors.annahmen_E39}
+              />
+            </EnrichedField>
           </Grid>
           <Grid item xs={12} md={6}>
             <EnrichedField

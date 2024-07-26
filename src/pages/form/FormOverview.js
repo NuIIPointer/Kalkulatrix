@@ -23,10 +23,10 @@ const FormOverview = () => {
         bgColor={theme.palette.primary.dark}
         bgGradient={headerBgColor}
         headline="Stundensatzkalkulator"
-        description="Hier können Sie Ihre Angabensets bearbeiten und speichern."
+        description="erzlich Willkommen im Kalkulatrix Stundensatzkalkulator. Bitte tragen Sie in den folgenden Eingabemasken ihre Unternehmensdaten ein. Achten Sie dabei auf Vollständigkeit, damit eine präzise Stundensatzberechnung möglich ist."
       />
       <Typography variant="h2" sx={headlineSectionStyle}>
-        Angabensets
+        Kalkulationen
       </Typography>
       <SelectFormView formType="stundensatz" sections={Object.values(formLiteral)} />
     </Stack>

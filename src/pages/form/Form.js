@@ -30,7 +30,7 @@ const FormComponent = () => {
     pk_allgemein_K7: undefined,
     pk_allgemein_K78: undefined,
     annahmen_allgemein_planjahr: undefined,
-    annahmen_E41: undefined,
+    annahmen_E41: 19.33,
     annahmen_G16: undefined,
     annahmen_G17_days: [1, 2, 3, 4, 5],
     gemeinkosten_material_F9: undefined,
