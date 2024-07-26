@@ -16,6 +16,7 @@ const StundensatzRechnerValueUpdater = () => {
   useEffect(() => {
     const reCalculateMaValues = () => {
       let N53 = 0;
+      let pk_allgemein_anzahl = 0;
 
       values.pk_allgemein_mitarbeiter?.forEach((category, outerIndex) => {
         let N24 = 0;
@@ -28,6 +29,7 @@ const StundensatzRechnerValueUpdater = () => {
           const N14 = (L14 || 0) + (M14 || 0);
           const anzahl = ma.anzahl || 1;
 
+          pk_allgemein_anzahl += anzahl;
           N24 += N14 * anzahl;
           N53 += N14 * anzahl;
 
@@ -53,6 +55,10 @@ const StundensatzRechnerValueUpdater = () => {
         }
       });
 
+      if (pk_allgemein_anzahl !== values.pk_allgemein_anzahl) {
+        setFieldValue('pk_allgemein_anzahl', pk_allgemein_anzahl);
+      }
+
       if (N53 !== values.pk_allgemein_N53) {
         setFieldValue('pk_allgemein_N53', N53);
       }
@@ -65,7 +71,7 @@ const StundensatzRechnerValueUpdater = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [setFieldValue, values.pk_allgemein_K5, values.pk_allgemein_N53, values.pk_allgemein_mitarbeiter]);
+  }, [setFieldValue, values.pk_allgemein_K5, values.pk_allgemein_N53, values.pk_allgemein_anzahl, values.pk_allgemein_mitarbeiter]);
 
   return <React.Fragment />;
 };

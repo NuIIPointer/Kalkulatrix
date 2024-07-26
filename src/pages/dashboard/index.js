@@ -15,13 +15,20 @@ const Dashboard = () => {
   const { futureCalendarData, calendarDataStatus } = useGetCalendarData();
   const { formsData } = useContext(UserContext);
   const [activeFormKey, setActiveFormKey] = useState(0);
-  const formsKeys = [];
+  const formsKeys = Object.keys(formsData);
   const formIdToShow = formsKeys?.[activeFormKey];
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
-  const formResult = formToShow?.values?.deckungsbeitraege_L17;
-  const produktivitaet = formToShow?.values?.pk_produktiv_Q42
-    ? `${formToShow.values.pk_produktiv_Q42 / (formToShow?.values?.pk_produktiv_P42 || 0)}%`
+  const formValues = formToShow?.values || {};
+  const formResult = formValues.deckungsbeitraege_L17;
+  const produktivitaet =
+    formValues.pk_produktiv_Q42 !== undefined && formValues.pk_produktiv_P42
+      ? `${((formValues.pk_produktiv_P42 || 0) / (formToShow.values.pk_produktiv_Q42 || formValues.pk_produktiv_P42)) * 100}%`
+      : 'Kein Ergebnis';
+  const zuschlagProzentDurchschnitt = formValues.zuschlagProzentDurchschnitt
+    ? parseFloat(formValues.zuschlagProzentDurchschnitt, 10).toFixed(2) * 100 + '%'
     : 'Kein Ergebnis';
+  console.log('formValues', formValues);
+  const anzMitarbeiter = (formValues.pk_produktiv_anzahl || 0) + (formValues.pk_allgemein_anzahl || 0);
   const formResultFormatted = formResult ? `${parseFloat(formResult, 10).toFixed(2)}€` : 'Kein Ergebnis';
   const formFrom = `Formular vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
 
@@ -119,7 +126,7 @@ const Dashboard = () => {
                 icon={Inbox}
                 title="Marge auf Produkt"
                 subTitle={formFrom}
-                value="89,00%"
+                value={zuschlagProzentDurchschnitt}
                 // valueChanged="10%"
               />
             </Grid>
@@ -129,7 +136,7 @@ const Dashboard = () => {
                 icon={PeopleAlt}
                 title="Anzahl Mitarbeiter"
                 subTitle={formFrom}
-                value="25"
+                value={anzMitarbeiter}
                 // valueChanged="3"
                 changedUpDown="down"
               />

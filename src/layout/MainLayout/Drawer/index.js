@@ -40,7 +40,7 @@ const MainDrawer = () => {
               xs: theme.spacing(3),
               sm: theme.spacing(5)
             },
-            backgroundColor: theme.palette.primary[900],
+            backgroundColor: theme.palette.common.white,
             height: '100%'
           }}
         >

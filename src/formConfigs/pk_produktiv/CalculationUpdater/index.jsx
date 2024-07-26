@@ -69,6 +69,9 @@ const StundensatzRechnerValueUpdater = () => {
       const pk_produktiv_R40 = pk_produktiv_Q36;
       const pk_produktiv_S40 = pk_produktiv_S36;
 
+      if (mitarbeiter_anzahl !== values.pk_produktiv_anzahl) {
+        setFieldValue('pk_produktiv_anzahl', mitarbeiter_anzahl);
+      }
       if (pk_produktiv_P40 !== values.pk_produktiv_P40) {
         setFieldValue('pk_produktiv_P40', pk_produktiv_P40);
       }

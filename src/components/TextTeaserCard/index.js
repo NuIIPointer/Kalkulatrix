@@ -1,12 +1,14 @@
 import { Button, Stack, Typography, useTheme, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { darken } from '@mui/material/styles';
 
 // eslint-disable-next-line react/prop-types
 const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light, grow, ratio, textAlign, onClick, boxShadow }) => {
   const theme = useTheme();
   const textColor = light ? theme.palette.text.primary : theme.palette.common.white;
-  const textColorHover = theme.palette.getContrastText(color);
   const bgColor = color;
+  const bgHoverColor = darken(color, 0.15);
+  const textColorHover = theme.palette.getContrastText(bgHoverColor);
 
   const OuterComponent = link || onClick ? Button : Box;
 
@@ -53,6 +55,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         },
         '&:hover': {
           color: textColorHover,
+          backgroundColor: bgHoverColor,
           boxShadow: theme.customShadows.z2,
 
           '&:after': link && {

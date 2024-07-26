@@ -54,11 +54,7 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <ColoredSection
-        bgGradient={headerBgColor}
-        bgColor={theme.palette.secondary.dark}
-        headline={'Admin Dashboard'}
-      />
+      <ColoredSection bgGradient={headerBgColor} bgColor={theme.palette.secondary.dark} headline={'Admin Dashboard'} />
       {clientsData && (
         <Box sx={{ overflow: 'hidden', borderRadius: theme.shape.borderRadiusBox, backgroundColor: '#ffffff', padding: 2 }}>
           <DataGrid

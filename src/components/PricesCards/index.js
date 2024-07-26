@@ -8,7 +8,7 @@ const PriceCard = ({ price, bullets, feature, featured }) => {
       {bullet}
     </li>
   ));
-  console.log('theme.palette.warning', theme.palette.warning);
+
   return (
     <Button
       component={Stack}
