@@ -41,7 +41,7 @@ const Stammdaten = () => {
   };
 
   return (
-    <FormSection collapsable={true} title="Personalkosten: Löhne Produktivbereich">
+    <FormSection collapsable={true} title="Personalkosten: Löhne Produktivbereich" defaultOpen>
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_produktiv_mitarbeiter">
           {({ push, remove }) => (
@@ -405,6 +405,7 @@ const Stammdaten = () => {
                                                   InputProps={{
                                                     readOnly: true
                                                   }}
+                                                  value={formFloat(field.value, 2)}
                                                   type="number"
                                                   sx={{ mb: 2 }}
                                                 />

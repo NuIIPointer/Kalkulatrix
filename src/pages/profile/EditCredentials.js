@@ -20,6 +20,7 @@ const EditCredentials = () => {
 
   const saveFormValues = useCallback(
     async (values) => {
+      // alert('values', JSON.stringify(values));
       setLoading(true);
       const isSuccessful = await changeEmail(values);
       setLoading(false);
@@ -84,8 +85,14 @@ const EditCredentials = () => {
           validateOnChange
           validateOnSubmit
         >
-          {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {}, setFieldValue }) => (
-            <Form autoComplete="off" onSubmit={() => saveFormValues(values)}>
+          {({ values = {}, errors = {}, handleChange, handleBlur, touched = {} }) => (
+            <Form
+              autoComplete="off"
+              onSubmit={(event) => {
+                event.preventDefault();
+                saveFormValues(values);
+              }}
+            >
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                 <Grid item xs={12} sm={6} mt={4}>
                   <Field
@@ -128,7 +135,7 @@ const EditCredentials = () => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !values.email || !values.emailConfirm}
                   disableElevation
                   // onClick={() => saveFormValues(values)}
                   endIcon={loading ? <CircularProgress size={20} color="inherit" /> : null}
@@ -142,8 +149,14 @@ const EditCredentials = () => {
       )}
       {editModePassword && (
         <Formik initialValues={{}} validationSchema={validationSchema} validateOnChange validateOnSubmit>
-          {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {}, setFieldValue }) => (
-            <Form autoComplete="off" onSubmit={() => saveFormValuesPassword(values)}>
+          {({ values = {}, errors = {}, handleChange, handleBlur, touched = {} }) => (
+            <Form
+              autoComplete="off"
+              onSubmit={(event) => {
+                event.preventDefault();
+                saveFormValuesPassword(values);
+              }}
+            >
               <Stack mt={4} />
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                 <Grid item xs={12} sm={6}>
@@ -187,7 +200,7 @@ const EditCredentials = () => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  disabled={loadingPassword}
+                  disabled={loadingPassword || !values.password || !values.passwordConfirm}
                   disableElevation
                   endIcon={loadingPassword ? <CircularProgress size={20} color="inherit" /> : null}
                 >

@@ -199,23 +199,26 @@ export const UserContextProvider = ({ children }) => {
     async ({ email }) => {
       try {
         if (email && email !== user.email) {
+          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            email: email
+          });
           await updateEmail(auth.currentUser, email);
-        }
-        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-          email: email
-        });
-        await setUser({
-          ...user,
-          email: email
-        });
+          await setUser({
+            ...user,
+            email: email
+          });
 
-        return true;
+          logoutUser();
+
+          return true;
+        }
+        return false;
       } catch (error) {
         console.log('error', error);
         return false;
       }
     },
-    [user]
+    [logoutUser, user]
   );
 
   const changePassword = useCallback(async ({ password }) => {

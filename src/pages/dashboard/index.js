@@ -9,6 +9,7 @@ import { PeopleAlt, Receipt, LocalAtm, Inbox } from '@mui/icons-material';
 import { UserContext } from 'context/user';
 import FullCalendarConfigured from 'components/FullCalendarConfigured';
 import TeaserCard from 'components/TeaserCard';
+import formFloat from 'utils/formUtils/formFloat';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -20,10 +21,9 @@ const Dashboard = () => {
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
   const formValues = formToShow?.values || {};
   const formResult = formValues.deckungsbeitraege_L17;
-  const produktivitaet =
-    formValues.pk_produktiv_Q42 !== undefined && formValues.pk_produktiv_P42
-      ? `${((formValues.pk_produktiv_P42 || 0) / (formToShow.values.pk_produktiv_Q42 || formValues.pk_produktiv_P42)) * 100}%`
-      : 'Kein Ergebnis';
+  const produktivitaet = formValues.pk_produktiv_produktivitaet
+    ? `${formFloat(formValues.pk_produktiv_produktivitaet, 2)}%`
+    : 'Kein Ergebnis';
   const zuschlagProzentDurchschnitt = formValues.zuschlagProzentDurchschnitt
     ? parseFloat(formValues.zuschlagProzentDurchschnitt, 10).toFixed(2) * 100 + '%'
     : 'Kein Ergebnis';

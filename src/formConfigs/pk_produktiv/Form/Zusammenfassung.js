@@ -200,6 +200,20 @@ const Zusammenfassung = () => {
               sx={{ mb: 2 }}
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              component={TextField}
+              id={`pk_produktiv_produktivitaet`}
+              name={`pk_produktiv_produktivitaet`}
+              label="Ø Produktivität (in %)"
+              value={formFloat(values.pk_produktiv_produktivitaet, 2)}
+              InputProps={{
+                readOnly: true
+              }}
+              type="number"
+              sx={{ mb: 2 }}
+            />
+          </Grid>
         </Grid>
       </ReadOnlyBox>
     </>

@@ -1,5 +1,5 @@
 import { FastField, Field, useFormikContext } from 'formik';
-import { Grid, TextField, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Grid, TextField, Box } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
@@ -9,34 +9,6 @@ const DGemeinkostenPlangewinn = () => {
 
   return (
     <>
-      <FormSection
-        collapsable={false}
-        title="Auswahl Berechnungsmethode"
-        description="GK-Satz bzw. Plangewinnsatz für das Produktivpersonal (Bereiche)"
-      >
-        <Grid
-          container
-          columnSpacing={{ xs: 2, sm: 4, lg: 6 }}
-          rowSpacing={{ xs: 1, lg: 1.5 }}
-          sx={{ mt: { xs: 1 } }}
-          alignItems="flex-end"
-        >
-          <Grid item xs={12}>
-            <FastField name="auswahl_methode">
-              {({ field, meta }) => (
-                <FormControl fullWidth>
-                  <InputLabel id="auswahl_methode-label">Auswahl der verwendeten Methode</InputLabel>
-                  <Select defaultValue={0} {...field} {...meta} labelId="auswahl_methode-label">
-                    <MenuItem value={0}>Bitte wählen</MenuItem>
-                    <MenuItem value={1}>a.) Durchschnittliche Gemeinkosten pro Stunde</MenuItem>
-                    <MenuItem value={2}>b.) Aufschlag auf individuelle Personalkosten</MenuItem>
-                  </Select>
-                </FormControl>
-              )}
-            </FastField>
-          </Grid>
-        </Grid>
-      </FormSection>
       <FormSection defaultOpen title="Kalkulation Stundenverrrechnungssatz">
         <Box sx={{ mt: 1 }} />
         <ReadOnlyBox alwaysOpen title="Alle Angaben im Durchschnitt, in EUR">

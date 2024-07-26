@@ -109,6 +109,7 @@ const StundensatzRechnerValueUpdater = () => {
     values.pk_produktiv_Q40,
     values.pk_produktiv_R40,
     values.pk_produktiv_S40,
+    values.pk_produktiv_anzahl,
     values.pk_produktiv_mitarbeiter
   ]);
 
@@ -151,7 +152,7 @@ const StundensatzRechnerValueUpdater = () => {
 
     timeout = setTimeout(() => {
       reCalculateLohnNKValues();
-    }, 200);
+    }, 300);
 
     return () => {
       clearTimeout(timeout);
@@ -172,6 +173,17 @@ const StundensatzRechnerValueUpdater = () => {
     values.pk_produktiv_S40,
     values.pk_produktiv_S42
   ]);
+
+  useEffect(() => {
+    const pk_produktiv_produktivitaet = values.pk_produktiv_Q42
+      ? 100 - ((values.pk_produktiv_Q42 || 0) / (values.pk_produktiv_S42 || 0)) * 100
+      : 100;
+    console.log('pk_produktiv_produktivitaet', pk_produktiv_produktivitaet);
+    console.log('pk_produktiv_produktivitaet', pk_produktiv_produktivitaet);
+    if (pk_produktiv_produktivitaet !== values.pk_produktiv_produktivitaet) {
+      setFieldValue('pk_produktiv_produktivitaet', pk_produktiv_produktivitaet);
+    }
+  }, [setFieldValue, values.pk_produktiv_S42, values.pk_produktiv_Q42, values.pk_produktiv_produktivitaet]);
 
   return <React.Fragment />;
 };
