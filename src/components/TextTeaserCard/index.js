@@ -84,7 +84,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
         <Typography
           paragraph
           sx={{
-            fontSize: { xs: 20, sm: 28, md: 34, lg: 38 },
+            fontSize: { xs: 20, sm: 28, md: 30, xl: 34 },
             lineHeight: '1em',
             textTransform: 'none',
             fontWeight: theme.typography.fontWeightLight,

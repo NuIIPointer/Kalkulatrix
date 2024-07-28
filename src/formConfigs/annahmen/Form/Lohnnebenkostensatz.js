@@ -14,7 +14,7 @@ const Lohnnebenkostensatz = () => {
   return (
     <>
       <FormSection
-        title="Angaben Lohnnebenkostensatz"
+        title="Lohnnebenkosten"
         description="Lohnnebenkosten stellen jene Ausgaben dar, welche in ihrem Unternehmen neben dem Bruttolohn anfallen und somit die Gesamtkosten der Arbeitskraft erhöhen."
       >
         <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>

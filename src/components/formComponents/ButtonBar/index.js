@@ -115,7 +115,7 @@ const ButtonBar = () => {
             startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
             variant="outlined"
             color="primary"
-            onClick={saveAction}
+            onClick={() => saveAction()}
             type="submit"
             disabled={isSaving || isForeignForm}
           >

@@ -13,6 +13,8 @@ import useFormLiteral from './useFormLiteral';
 import { Formik, Form } from 'formik';
 import { getInitialGemeinkostenCategory } from 'formConfigs/gk_deckung/getInitialGemeinkostenData';
 import ButtonBar from 'components/formComponents/ButtonBar/index';
+import FormSection from 'components/formComponents/FormSection/index';
+import dayjs from 'dayjs';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -76,6 +78,12 @@ const FormComponent = () => {
 
         return (
           <Box key={key} sx={{ 'form>div:nth-last-child(2)': { minHeight: '50vh' } }}>
+            <FormSection
+              title={value.title}
+              description={`Letzte Änderung: ${dayjs(activeFormData?.values?.lastChanged).format('DD.MM.YYYY') }`}
+              collapsable={false}
+              defaultOpen
+            />
             {value.content}
           </Box>
         );

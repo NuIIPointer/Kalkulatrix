@@ -85,7 +85,9 @@ const SelectFormView = ({ formType, sections }) => {
               <Grid key={formId} item xs={12} sm={6}>
                 <TextTeaserCard
                   grow
-                  primaryText={
+                  primaryText={section.title}
+                  // prefixText={`zuletzt bearbeitet: ${dayjs(formData.creationDate).format('DD.MM.YYYY')}`}
+                  prefixText={
                     <Stack
                       sx={{
                         display: 'flex',
@@ -98,7 +100,7 @@ const SelectFormView = ({ formType, sections }) => {
                       }}
                       component="span"
                     >
-                      {section.title}
+                      Blatt
                       <Edit
                         sx={{
                           opacity: '0.2',
@@ -108,8 +110,6 @@ const SelectFormView = ({ formType, sections }) => {
                       />
                     </Stack>
                   }
-                  // prefixText={`zuletzt bearbeitet: ${dayjs(formData.creationDate).format('DD.MM.YYYY')}`}
-                  prefixText={'Blatt'}
                   link={`/office/form/${formId}/${section.linkPart}`}
                   light={!section.backgroundColor}
                   color={section.backgroundColor || theme.palette.common.white}

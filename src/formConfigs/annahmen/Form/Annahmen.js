@@ -11,7 +11,7 @@ const Annahmen = () => {
   const { values, errors, touched, handleChange, handleBlur } = useFormikContext();
 
   return (
-    <FormSection title="Allgemeine Annahmen" defaultOpen={true} description="Pflegen Sie hier allgemeine Angaben zu Ihrem Unternehmen ein.">
+    <FormSection title="Unternehmensdaten" defaultOpen={true} description="Pflegen Sie hier allgemeine Angaben zu Ihrem Unternehmen ein.">
       <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
         <Grid item xs={12}>
           <Divider sx={{ mt: 2, mb: 4 }} />

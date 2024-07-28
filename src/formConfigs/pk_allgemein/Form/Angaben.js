@@ -6,6 +6,7 @@ import { Grid, TextField, Divider } from '@mui/material';
 // formik
 import { FastField } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
+import EnrichedField from 'components/formComponents/EnrichedField/index';
 
 const Stammdaten = () => {
   return (
@@ -43,33 +44,55 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="pk_allgemein_K6">
             {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Beitragsbemessungsgrenze (in EUR, p.m.)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                sx={{ mb: 2 }}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-              />
+              <EnrichedField
+                infoText={
+                  <>
+                    <p>
+                      Die <b>Beitragsbemessungsgrenze</b> ist der maximale Betrag des Einkommens, bis zu dem Beiträge zur Sozialversicherung
+                      berechnet werden. Einkommen oberhalb dieser Grenze werden bei der Berechnung der Beiträge nicht berücksichtigt.
+                    </p>
+                  </>
+                }
+              >
+                <TextField
+                  {...field}
+                  label="Beitragsbemessungsgrenze (in EUR, p.m.)"
+                  error={meta?.touched && Boolean(meta.error)}
+                  helperText={meta?.touched && meta.error}
+                  sx={{ mb: 2 }}
+                  type="number"
+                  onWheel={(event) => event.target.blur()}
+                  min="0"
+                />
+              </EnrichedField>
             )}
           </FastField>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FastField name="pk_allgemein_K7">
             {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Lohnnebenkosten (oberhalb Beitragsbemessungsgrenze, in %)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                sx={{ mb: 2 }}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                max="100"
-              />
+              <EnrichedField
+                infoText={
+                  <p>
+                    <b>Lohnnebenkosten</b> oberhalb der Beitragsbemessungsgrenze sind Kosten, die zusätzlich zum Bruttolohn eines
+                    Arbeitnehmers anfallen und nicht durch die Beitragsbemessungsgrenze der Sozialversicherung gedeckelt sind. Diese können
+                    beinhalten: Arbeitgeberbeiträge zur Unfallversicherung, Beiträge zur Berufsgenossenschaft, Betriebliche Altersvorsorge,
+                    Zusätzliche freiwillige Sozialleistungen, Lohnfortzahlung im Krankheitsfall, etc.
+                  </p>
+                }
+              >
+                <TextField
+                  {...field}
+                  label="Lohnnebenkosten (oberhalb Beitragsbemessungsgrenze, in %)"
+                  error={meta?.touched && Boolean(meta.error)}
+                  helperText={meta?.touched && meta.error}
+                  sx={{ mb: 2 }}
+                  type="number"
+                  onWheel={(event) => event.target.blur()}
+                  min="0"
+                  max="100"
+                />
+              </EnrichedField>
             )}
           </FastField>
         </Grid>

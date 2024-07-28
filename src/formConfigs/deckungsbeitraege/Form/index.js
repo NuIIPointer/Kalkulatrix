@@ -8,7 +8,6 @@ import CalculationUpdaterGKDeckung from '../../gk_deckung/CalculationUpdater/ind
 import CalculationUpdaterPKAllgemein from '../../pk_allgemein/CalculationUpdater/index';
 import CalculationUpdaterPKProduktiv from '../../pk_produktiv/CalculationUpdater/index';
 import CalculationUpdaterVerrechnungssaetze from '../../std_verrechnungssaetze/CalculationUpdater/index';
-import Start from './Start';
 import Stundendeckungsbeitragsziele from './Stundendeckungsbeitragsziele';
 import TheoretischerDBS from './TheoretischerDBS';
 
@@ -22,7 +21,6 @@ const StdVerrechnungssaetze = () => {
       <CalculationUpdaterPKAllgemein />
       <CalculationUpdaterPKProduktiv />
       <CalculationUpdaterVerrechnungssaetze />
-      <Start />
       <Stundendeckungsbeitragsziele />
       <TheoretischerDBS />
     </>

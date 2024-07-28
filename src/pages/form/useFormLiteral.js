@@ -25,31 +25,31 @@ const useFormLiteral = () => {
       linkPart: 'annahmen',
       content: <Annahmen />,
       validationSchema: annahmenValidationSchema,
-      title: 'Annahmen'
+      title: 'Allgemeine Unternehmensangaben'
     },
     pk_produktiv: {
       linkPart: 'pk_produktiv',
       content: <PersonalkostenProduktiv />,
       validationSchema: personalkostenProduktivValidationSchema,
-      title: 'Personalkosten produktiv'
+      title: 'Personalkosten produktive Abteilungen'
     },
     pk_allgemein: {
       linkPart: 'pk_allgemein',
       content: <PersonalkostenAllgemein />,
       validationSchema: personalkostenAllgemeinValidationSchema,
-      title: 'Personalkosten allgemein'
+      title: 'Personalkosten allgemeiner Bereich'
     },
     gemeinkosten: {
       linkPart: 'gemeinkosten',
       content: <Gemeinkosten />,
       validationSchema: gemeinkostenValidationSchema,
-      title: 'Gemeinkosten'
+      title: 'Betriebskosten'
     },
     gk_deckung: {
       linkPart: 'gk_deckung',
       content: <GKDeckung />,
       validationSchema: gKDeckungValidationSchema,
-      title: 'Gemeinkosten-Deckung'
+      title: 'Betriebskosten-Deckung'
     },
     // gk_stundensaetze: {
     //   linkPart: 'gk_stundensaetze',
@@ -61,7 +61,7 @@ const useFormLiteral = () => {
       linkPart: 'std_verrechnungssaetze',
       content: <StdVerrechnungssaetze />,
       validationSchema: stdVerrechnungssaetzeValidationSchema,
-      title: 'Std-Verrechnungssätze'
+      title: 'Stundensatz & Deckungsbeiträge'
     },
     deckungsbeitraege: {
       linkPart: 'deckungsbeitraege',

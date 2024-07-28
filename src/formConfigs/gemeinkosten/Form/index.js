@@ -2,7 +2,6 @@ import React from 'react';
 
 // project import
 import CalculationUpdater from '../CalculationUpdater/index';
-import Start from './Start';
 import Materialgemeinkosten from './Materialgemeinkosten';
 import Personalgemeinkosten from './Personalgemeinkosten';
 import Sachkosten from './Sachkosten';
@@ -13,7 +12,6 @@ const TestForm = () => {
   return (
     <>
       <CalculationUpdater />
-      <Start />
       <Materialgemeinkosten />
       <Personalgemeinkosten />
       <Sachkosten />

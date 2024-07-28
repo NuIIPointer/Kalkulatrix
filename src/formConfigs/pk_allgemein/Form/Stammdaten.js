@@ -41,7 +41,7 @@ const Stammdaten = () => {
   };
 
   return (
-    <FormSection collapsable={true} title="Personalkosten: Gehälter allgemeiner Bereich" isError={!!errors?.pk_allgemein_mitarbeiter}>
+    <FormSection collapsable={true} title="Gehälter allgemeiner Bereich" isError={!!errors?.pk_allgemein_mitarbeiter}>
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_allgemein_mitarbeiter">
           {({ push, remove }) => (
@@ -71,7 +71,7 @@ const Stammdaten = () => {
                   disabled={isSubmitting}
                   sx={{ fontWeight: 500 }}
                 >
-                  Neue Gruppe
+                  Neue Abteilung / Bereich
                 </Button>
               </Stack>
               {values.pk_allgemein_mitarbeiter?.map((outerField, outerIndex) => (

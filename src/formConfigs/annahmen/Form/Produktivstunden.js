@@ -15,7 +15,7 @@ const Produktivstunden = () => {
 
   return (
     <FormSection
-      title="Anwesenheitszeit"
+      title="Arbeitszeiten"
       description="Geben Sie hier Angaben zu Ihrem Mitarber an. Diese Angaben dienen als Vorlage beim anlegen neuer Mitarbeiter."
     >
       <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
@@ -63,7 +63,7 @@ const Produktivstunden = () => {
           &nbsp;
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h3">Ermittlung der Anwesenheitszeit</Typography>
+          <Typography variant="h3">Ermittlung der Arbeitszeiten</Typography>
         </Grid>
         <Grid item xs={12}>
           <ReadOnlyBox title={`Jahresarbeitszeit gesamt (${values.annahmen_G23 || 0} Tage)`}>
@@ -237,7 +237,7 @@ const Produktivstunden = () => {
         */}
         {/*
           <Grid item xs={12}>
-            <ReadOnlyBox title={'Summe Anwesenheitszeit'} alwaysOpen>
+            <ReadOnlyBox title={'Summe Arbeitszeiten'} alwaysOpen>
               <Grid container spacing={{ xs: 2, md: 4 }}>
                 <Grid item xs={12} md={6}>
                   <Field

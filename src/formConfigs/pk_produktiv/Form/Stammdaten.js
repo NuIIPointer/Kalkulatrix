@@ -14,7 +14,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
+  Alert
 } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -41,7 +42,7 @@ const Stammdaten = () => {
   };
 
   return (
-    <FormSection collapsable={true} title="Personalkosten: Löhne Produktivbereich" defaultOpen>
+    <FormSection collapsable={true} title="Eingabe Produktive Lohnkosten" defaultOpen>
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_produktiv_mitarbeiter">
           {({ push, remove }) => (
@@ -82,7 +83,7 @@ const Stammdaten = () => {
                         {({ field, meta }) => (
                           <TextField
                             {...field}
-                            label="Gruppenbezeichnung"
+                            label="Abteilungsname"
                             error={meta?.touched && Boolean(meta.error)}
                             helperText={meta?.touched && meta.error}
                             sx={{ mb: 3 }}
@@ -182,6 +183,11 @@ const Stammdaten = () => {
                                       </FastField>
                                     </Grid>
                                     <Grid item xs={12} sm={12}>
+                                      {innerField.anzahl > 1 && (
+                                        <Alert sx={{ mb: 2 }} severity="info" variant="outlined" color="info">
+                                          Geben Sie bei den folgenden Angaben die Werte für einen einzelnen Mitarbeiter an. Die Anzahl der Mitarbeiter wird in weiteren Berechnungen berücksichtigt.
+                                        </Alert>
+                                      )}
                                       &nbsp;
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -302,7 +308,7 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label="Davon direkt verrechenbar (in Prozent)"
+                                            label="Davon direkt verrechenbare Arbeitszeit"
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             type="number"
@@ -364,7 +370,7 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label="Brutto Stundenentgelt (pro Stunde, in EUR)"
+                                            label="Bruttostundenlohn (in EUR)"
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             type="number"
@@ -380,7 +386,7 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label="Durchschn. Zulagen pro Stdunde (in EUR)"
+                                            label="Zuschläge (in EUR)"
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             type="number"
@@ -392,7 +398,7 @@ const Stammdaten = () => {
                                       </FastField>
                                     </Grid>
                                     <Grid item xs={12}>
-                                      <ReadOnlyBox alwaysOpen>
+                                      <ReadOnlyBox alwaysOpen title={`Berechnet ${innerField.anzahl > 1 ? '(pro Mitarbeiter):' : ''}`}>
                                         <Grid container columnSpacing={{ xs: 2, md: 4 }}>
                                           <Grid item xs={12} sm={6}>
                                             <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.S9`}>

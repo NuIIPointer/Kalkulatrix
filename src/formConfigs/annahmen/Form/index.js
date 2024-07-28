@@ -3,7 +3,6 @@ import React from 'react';
 // project import
 import CalculationUpdater from '../CalculationUpdater/index';
 import CalculationUpdaterGkStundensaetze from '../CalculationUpdater/gk_stundensaetze';
-import Start from './Start';
 import Annahmen from './Annahmen';
 import Produktivstunden from './Produktivstunden';
 import Lohnnebenkostensatz from './Lohnnebenkostensatz';
@@ -14,7 +13,6 @@ const TestForm = () => {
     <>
       <CalculationUpdater />
       <CalculationUpdaterGkStundensaetze />
-      <Start />
       <Annahmen />
       <Produktivstunden />
       <Lohnnebenkostensatz />
