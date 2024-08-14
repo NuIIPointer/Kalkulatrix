@@ -24,13 +24,15 @@ const Dashboard = () => {
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
   const formValues = formToShow?.values || {};
   const formResult = formValues.deckungsbeitraege_L17;
-  const auslastung = formValues.pk_produktiv_auslastung ? `${formFloat(formValues.pk_produktiv_auslastung, 2)}%` : 'Kein Ergebnis';
+  const auslastung = formValues.pk_produktiv_auslastung
+    ? `${formFloat(formValues.pk_produktiv_auslastung, 2).toString().replace('.', ',')}%`
+    : 'Kein Ergebnis';
   const zuschlagProzentDurchschnitt = formValues.zuschlagProzentDurchschnitt
-    ? parseFloat(formValues.zuschlagProzentDurchschnitt, 10).toFixed(2) * 100 + '%'
+    ? formFloat(formValues.zuschlagProzentDurchschnitt, 2) * 100 + '%'
     : 'Kein Ergebnis';
   console.log('formValues', formValues);
   const anzMitarbeiter = (formValues.pk_produktiv_anzahl || 0) + (formValues.pk_allgemein_anzahl || 0);
-  const formResultFormatted = formResult ? `${parseFloat(formResult, 10).toFixed(2)}€` : 'Kein Ergebnis';
+  const formResultFormatted = formResult ? `${formFloat(formResult, 2).toString().replace('.', ',')}€` : 'Kein Ergebnis';
   const formFrom = `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
 
   const lastCreatedForm = Object.values(formsData).reduce((prevForm, currentForm) => {
