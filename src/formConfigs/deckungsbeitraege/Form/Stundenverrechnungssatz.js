@@ -10,7 +10,12 @@ const DGemeinkostenPlangewinn = () => {
   return (
     <>
       <FormSection collapsable={false} title="Stundenverrechnungssatz (ohne USt.):">
-        <Typography variant="h2">{formFloat(values.std_verrechnungssaetze_G14 || 0, 2)}€</Typography>
+        <Typography variant="h2">
+          {formFloat(values.std_verrechnungssaetze_G14 || 0, 2)
+            .toString()
+            .replace('.', ',')}
+          €
+        </Typography>
       </FormSection>
       <FormSection defaultOpen title="Kalkulation Stundenverrrechnungssatz">
         <Box sx={{ mt: 1 }} />
