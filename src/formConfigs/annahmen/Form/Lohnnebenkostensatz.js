@@ -7,6 +7,8 @@ import { Grid, TextField, Divider, Typography } from '@mui/material';
 import { Field, useFormikContext } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
+import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
+import formFloat from 'utils/formUtils/formFloat';
 
 const Lohnnebenkostensatz = () => {
   const { values, errors, touched, handleChange, handleBlur } = useFormikContext();
@@ -113,10 +115,23 @@ const Lohnnebenkostensatz = () => {
               />
             </EnrichedField>
           </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              component={TextField}
+              InputProps={{
+                readOnly: true
+              }}
+              type="number"
+              id="annahmen_I46"
+              name="annahmen_I46"
+              label="Lohnnebenkostensatz in %"
+              value={formFloat(values.annahmen_I46, 2)}
+              sx={{ mb: 2 }}
+            />
+          </Grid>
         </Grid>
       </FormSection>
-      {/*
-      <ReadOnlyBox white title={'Berechnet: Lohnnebenkostensatz'} alwaysOpen>
+      {/* <ReadOnlyBox white title={'Berechnet: Lohnnebenkostensatz'} alwaysOpen>
         <Grid container spacing={{ xs: 2, md: 4 }}>
           <Grid item xs={12} md={6}>
             <Field
@@ -133,8 +148,7 @@ const Lohnnebenkostensatz = () => {
             />
           </Grid>
         </Grid>
-      </ReadOnlyBox>
-      */}
+      </ReadOnlyBox> */}
     </>
   );
 };

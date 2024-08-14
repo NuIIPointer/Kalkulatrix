@@ -37,7 +37,9 @@ const useFormLiteral = () => {
       linkPart: 'pk_allgemein',
       content: <PersonalkostenAllgemein />,
       validationSchema: personalkostenAllgemeinValidationSchema,
-      title: 'Personalkosten allgemeiner Bereich'
+      title: 'Personalkosten allgemeiner Bereich',
+      description:
+        'Bitte erfassen Sie hier alle Kosten, die dem Personal zugerechnet werden, welche in verwaltender oder unterstützender Funktion tätig sind und deren Arbeitsstunden nicht direkt an den Kunden abgerechnet werden können.'
     },
     gemeinkosten: {
       linkPart: 'gemeinkosten',
@@ -57,17 +59,17 @@ const useFormLiteral = () => {
     //   validationSchema: gKStundensaetzeValidationSchema,
     //   title: 'Gemeinkosten-Stundensätze'
     // },
-    std_verrechnungssaetze: {
-      linkPart: 'std_verrechnungssaetze',
-      content: <StdVerrechnungssaetze />,
-      validationSchema: stdVerrechnungssaetzeValidationSchema,
-      title: 'Stundensatz & Deckungsbeiträge'
-    },
+    // std_verrechnungssaetze: {
+    //   linkPart: 'std_verrechnungssaetze',
+    //   content: <StdVerrechnungssaetze />,
+    //   validationSchema: stdVerrechnungssaetzeValidationSchema,
+    //   title: 'Stundensatz & Deckungsbeiträge'
+    // },
     deckungsbeitraege: {
       linkPart: 'deckungsbeitraege',
       content: <Deckungsbeitraege />,
       validationSchema: deckungsbeitraegeValidationSchema,
-      title: 'Deckungsbeiträge',
+      title: 'Stundensatz & Deckungsbeiträge',
       backgroundColor: theme.palette.secondary.main
     }
   };

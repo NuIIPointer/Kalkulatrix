@@ -133,7 +133,10 @@ const StundensatzRechnerValueUpdater = () => {
 
   // Lohnnebenkostensatz
   useEffect(() => {
-    const G38 = values.annahmen_G29 + values.annahmen_G31 || 0;
+    // const G38 = values.annahmen_G29 + values.annahmen_G31 || 0;
+    const sonderzahlungenInTagen = (values.annahmen_H23 / values.annahmen_G18 / 12) * values.annahmen_E39;
+    console.log('sonderzahlungenInTagen', sonderzahlungenInTagen);
+    const G38 = (values.annahmen_G29 || 0) + (values.annahmen_G31 || 0) + (sonderzahlungenInTagen || 0) || 0;
     const G41 = (values.annahmen_E41 / 100) * G38 || 0;
     const G42 = (values.annahmen_E42 / 100) * G38 || 0;
     const G44 = G38 + G41 + G42 || 0;
@@ -149,7 +152,9 @@ const StundensatzRechnerValueUpdater = () => {
     values.annahmen_E42,
     values.annahmen_E41,
     values.annahmen_G31,
-    values.annahmen_G29
+    values.annahmen_G29,
+    values.annahmen_H23,
+    values.annahmen_G18
   ]);
 
   return <React.Fragment />;

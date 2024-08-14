@@ -1,15 +1,18 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Grid, Typography, Stack, Select, MenuItem } from '@mui/material';
+import { Grid, Typography, Stack, Select, MenuItem, Button, Box } from '@mui/material';
 import TextTeaserCard from 'components/TextTeaserCard';
 import useGetCalendarData from 'hooks/useGetCalendarData.js';
 import dayjs from 'dayjs';
 import DashboardCard from 'components/DashboardCard';
-import { PeopleAlt, Receipt, LocalAtm, Inbox } from '@mui/icons-material';
+import { PeopleAlt, Receipt, LocalAtm, Inbox, MoreHoriz } from '@mui/icons-material';
 import { UserContext } from 'context/user';
 import FullCalendarConfigured from 'components/FullCalendarConfigured';
 import TeaserCard from 'components/TeaserCard';
 import formFloat from 'utils/formUtils/formFloat';
+import { InlineWidget } from 'react-calendly';
+import { PieChart } from '@mui/x-charts/PieChart';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -21,9 +24,7 @@ const Dashboard = () => {
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
   const formValues = formToShow?.values || {};
   const formResult = formValues.deckungsbeitraege_L17;
-  const produktivitaet = formValues.pk_produktiv_produktivitaet
-    ? `${formFloat(formValues.pk_produktiv_produktivitaet, 2)}%`
-    : 'Kein Ergebnis';
+  const auslastung = formValues.pk_produktiv_auslastung ? `${formFloat(formValues.pk_produktiv_auslastung, 2)}%` : 'Kein Ergebnis';
   const zuschlagProzentDurchschnitt = formValues.zuschlagProzentDurchschnitt
     ? parseFloat(formValues.zuschlagProzentDurchschnitt, 10).toFixed(2) * 100 + '%'
     : 'Kein Ergebnis';
@@ -31,6 +32,52 @@ const Dashboard = () => {
   const anzMitarbeiter = (formValues.pk_produktiv_anzahl || 0) + (formValues.pk_allgemein_anzahl || 0);
   const formResultFormatted = formResult ? `${parseFloat(formResult, 10).toFixed(2)}€` : 'Kein Ergebnis';
   const formFrom = `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
+
+  const lastCreatedForm = Object.values(formsData).reduce((prevForm, currentForm) => {
+    if (!prevForm || currentForm.creationDate > prevForm.creationDate) {
+      return currentForm;
+    }
+    return prevForm;
+  }, null);
+  const lastCreatedFormTimestamp = lastCreatedForm?.creationDate;
+  const daysSinceLastCreated = lastCreatedFormTimestamp ? dayjs().diff(dayjs(lastCreatedFormTimestamp), 'days') : null;
+  const lastCreatedPlusOffset = lastCreatedFormTimestamp ? dayjs(lastCreatedFormTimestamp).add(3, 'months') : null;
+  const lastCreatedPlusOffsetInDays = lastCreatedPlusOffset
+    ? dayjs(lastCreatedPlusOffset).diff(dayjs(lastCreatedFormTimestamp), 'days')
+    : null;
+  const nextCalculationInDays = lastCreatedPlusOffsetInDays - daysSinceLastCreated;
+
+  const chartDummyData = [{ value: 100, color: theme.palette.primary[500] }];
+
+  const chartData = [
+    {
+      value: daysSinceLastCreated,
+      label: `Tage seit der letzten Kalkulation:`,
+      color: lastCreatedFormTimestamp ? theme.palette.primary[500] : theme.palette.grey[500]
+    },
+    ...(nextCalculationInDays >= 1
+      ? [
+          {
+            value: nextCalculationInDays,
+            label: `Tage bis zur nächsten Kalkulation:`,
+            color: theme.palette.grey[300]
+          }
+        ]
+      : [])
+  ];
+
+  const series = [
+    {
+      cornerRadius: 32,
+      paddingAngle: 2,
+      innerRadius: 100,
+      outerRadius: 120,
+      cy: 120,
+      cx: 120,
+      hideTooltip: true,
+      data: lastCreatedFormTimestamp ? chartData : chartDummyData
+    }
+  ];
 
   const bottomBoxRendering = useCallback(() => {
     return (
@@ -73,7 +120,7 @@ const Dashboard = () => {
         <Stack flexDirection="row" justifyContent="flex-start">
           <Select
             sx={{
-              width: 230,
+              width: 250,
               backgroundColor: theme.palette.common.white,
               borderRadius: theme.shape.borderRadius,
               '.MuiOutlinedInput-notchedOutline': {
@@ -114,9 +161,9 @@ const Dashboard = () => {
               <DashboardCard
                 sx={{ height: '100%' }}
                 icon={LocalAtm}
-                title="Produktivität"
+                title="Auslastung"
                 subTitle={formFrom}
-                value={produktivitaet}
+                value={auslastung}
                 // valueChanged="10%"
               />
             </Grid>
@@ -124,7 +171,7 @@ const Dashboard = () => {
               <DashboardCard
                 sx={{ height: '100%' }}
                 icon={Inbox}
-                title="Marge auf Produkt"
+                title="Ø-Marge auf Produkte"
                 subTitle={formFrom}
                 value={zuschlagProzentDurchschnitt}
                 // valueChanged="10%"
@@ -145,12 +192,74 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TeaserCard color={theme.palette.primary.dark} boxShadow={theme.customShadows.z1} sx={{ height: '100%' }}>
-            <FullCalendarConfigured sx={{ height: '100%', width: '100%' }} calendarSx={{ height: '100%', width: '100%' }} />
+            {/* <FullCalendarConfigured sx={{ height: '100%', width: '100%' }} calendarSx={{ height: '100%', width: '100%' }} /> */}
+            <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
+              <Typography variant="h3">Nächste Kalkulation</Typography>
+              <Button sx={{ p: 1, borderRadius: 1000, minWidth: 0, minHeight: 0, aspectRatio: '1/1', d: 'flex', alignItems: 'center' }}>
+                <MoreHoriz />
+              </Button>
+            </Stack>
+            <Stack sx={{ alignItems: 'center' }}>
+              <Box
+                sx={{
+                  mt: 1,
+                  position: 'relative',
+                  height: 250,
+                  aspectRatio: '1/1',
+                  transform: { xs: 'scale(0.8)', xl: 'scale(1)' }
+                }}
+              >
+                <Stack
+                  sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 1000,
+                    textAlign: 'center'
+                  }}
+                >
+                  {lastCreatedFormTimestamp ? (
+                    <>
+                      <Typography variant="h3" component="p">
+                        {dayjs(lastCreatedPlusOffset).format('DD.MM.YYYY')}
+                      </Typography>
+                      <Typography variant="body">oder in {nextCalculationInDays} Tagen</Typography>
+                    </>
+                  ) : (
+                    <Typography
+                      variant="h4"
+                      component={Link}
+                      to="/office/form/overview"
+                      sx={{ color: 'initial', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}
+                    >
+                      Beginnen Sie jetzt ihre erste Kalkulation!
+                    </Typography>
+                  )}
+                </Stack>
+                <PieChart
+                  series={series}
+                  slotProps={{
+                    legend: { hidden: true }
+                  }}
+                  sx={{ '.MuiPieArc-root': { stroke: 'transparent', strokeWidth: 0 } }}
+                />
+              </Box>
+            </Stack>
+            <Typography variant="body1" sx={{ mt: 1, textAlign: 'center', opacity: 0.6, fontSize: 14, lineHeight: 1.3 }}>
+              Wir empfehlen alle 3 Monate eine neue Kalkulation durchzuführen.
+            </Typography>
           </TeaserCard>
         </Grid>
       </Grid>
       {bottomBoxRendering()}
-      {calendarDataStatus === 'success' && futureCalendarData?.length > 0 && (
+      <InlineWidget
+        url="https://calendly.com/adel-consulting/30min"
+        styles={{
+          height: '700px'
+        }}
+      />
+      {/* {calendarDataStatus === 'success' && futureCalendarData?.length > 0 && (
         <>
           <Typography variant="h2" sx={{ mb: 1, mt: 8 }}>
             Anstehende Termine
@@ -180,7 +289,7 @@ const Dashboard = () => {
             })}
           </Grid>
         </>
-      )}
+      )} */}
     </>
   );
 };

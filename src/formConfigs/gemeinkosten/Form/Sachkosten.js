@@ -10,24 +10,35 @@ import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 
 export const sachkosten_fieldTitles = [
-  'Reisekosten',
-  'Werbe- und Präsentationskosten',
-  'Kosten Betriebs- und Geschäftsfahrzeuge',
-  'Materialien',
-  'Miete/ Grundstückskosten',
-  'Energie- und Wasserkosten',
+  'Personalkosten',
   'Raumkosten',
-  'Transport und Verpackung',
-  'Telefon/Fax',
-  'Bürobedarf',
-  'Kosten EDV',
-  'Rechts- und Beratungskosten',
-  'Kosten Betiebs- und Geschäftsausstattung',
-  'Versicherungen, Beiträge, Gebühren',
-  'Sonstige Sachkosten',
-  'Sonstige Aufwendungen',
-  'Forderungsverluste',
-  'Sonstiges'
+  'Miete / Grundstückskosten',
+  'Betriebl.Steuern',
+  'Versich./ Beiträge',
+  'Kfz - Kosten(o.St.)',
+  'Werbe -/Reisekosten',
+  'Kosten Warenabgabe',
+  'Abschreibungen',
+  'Reparatur / Instandh.',
+  'Sonstige Kosten'
+  // 'Reisekosten',
+  // 'Werbe- und Präsentationskosten',
+  // 'Kosten Betriebs- und Geschäftsfahrzeuge',
+  // 'Materialien',
+  // 'Miete/ Grundstückskosten',
+  // 'Energie- und Wasserkosten',
+  // 'Raumkosten',
+  // 'Transport und Verpackung',
+  // 'Telefon/Fax',
+  // 'Bürobedarf',
+  // 'Kosten EDV',
+  // 'Rechts- und Beratungskosten',
+  // 'Kosten Betiebs- und Geschäftsausstattung',
+  // 'Versicherungen, Beiträge, Gebühren',
+  // 'Sonstige Sachkosten',
+  // 'Sonstige Aufwendungen',
+  // 'Forderungsverluste',
+  // 'Sonstiges'
 ];
 export const sachkosten_startingRow = 21;
 

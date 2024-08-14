@@ -6,7 +6,6 @@ import CalculationUpdaterGkStundensaetze from '../CalculationUpdater/gk_stundens
 import Annahmen from './Annahmen';
 import Produktivstunden from './Produktivstunden';
 import Lohnnebenkostensatz from './Lohnnebenkostensatz';
-import Plangewinn from './Plangewinn';
 
 const TestForm = () => {
   return (
@@ -16,7 +15,6 @@ const TestForm = () => {
       <Annahmen />
       <Produktivstunden />
       <Lohnnebenkostensatz />
-      <Plangewinn />
     </>
   );
 };

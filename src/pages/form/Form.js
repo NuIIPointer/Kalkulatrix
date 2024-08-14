@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 
 // project import
 import { UserContext } from 'context/user';
@@ -80,7 +80,14 @@ const FormComponent = () => {
           <Box key={key} sx={{ 'form>div:nth-last-child(2)': { minHeight: '50vh' } }}>
             <FormSection
               title={value.title}
-              description={`Letzte Änderung: ${dayjs(activeFormData?.values?.lastChanged).format('DD.MM.YYYY') }`}
+              description={
+                <Stack>
+                  <Typography variant="body" sx={{ mb: 1 }}>{`Letzte Änderung: ${dayjs(activeFormData?.values?.lastChanged).format(
+                    'DD.MM.YYYY'
+                  )}`}</Typography>
+                  {value.description && <Typography variant="body">{value.description}</Typography>}
+                </Stack>
+              }
               collapsable={false}
               defaultOpen
             />
@@ -88,7 +95,7 @@ const FormComponent = () => {
           </Box>
         );
       }),
-    [formLiteral, formSection]
+    [activeFormData?.values?.lastChanged, formLiteral, formSection]
   );
 
   const activeFormConfig = useMemo(() => {

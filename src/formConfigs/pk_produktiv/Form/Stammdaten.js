@@ -185,7 +185,8 @@ const Stammdaten = () => {
                                     <Grid item xs={12} sm={12}>
                                       {innerField.anzahl > 1 && (
                                         <Alert sx={{ mb: 2 }} severity="info" variant="outlined" color="info">
-                                          Geben Sie bei den folgenden Angaben die Werte für einen einzelnen Mitarbeiter an. Die Anzahl der Mitarbeiter wird in weiteren Berechnungen berücksichtigt.
+                                          Geben Sie bei den folgenden Angaben die Werte für einen einzelnen Mitarbeiter an. Die Anzahl der
+                                          Mitarbeiter wird in weiteren Berechnungen berücksichtigt.
                                         </Alert>
                                       )}
                                       &nbsp;
@@ -444,7 +445,7 @@ const Stammdaten = () => {
                                               {({ field, meta }) => (
                                                 <TextField
                                                   {...field}
-                                                  label="Verrechenbarkeit (direkt verrechnet, in EUR)"
+                                                  label="Verrechenbarkeit (nicht direkt verrechnet, in EUR)"
                                                   value={formFloat(field.value, 2)}
                                                   error={meta?.touched && Boolean(meta.error)}
                                                   helperText={meta?.touched && meta.error}

@@ -5,7 +5,7 @@ export default function MuiSelect() {
     MuiSelect: {
       defaultProps: {
         fullWidth: true,
-        InputLabelProps: { shrink: false }
+        // InputLabelProps: { shrink: false }
       },
       styleOverrides: {
         root: {

@@ -203,10 +203,10 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={6}>
             <Field
               component={TextField}
-              id={`pk_produktiv_produktivitaet`}
-              name={`pk_produktiv_produktivitaet`}
-              label="Ø Produktivität (in %)"
-              value={formFloat(values.pk_produktiv_produktivitaet, 2)}
+              id={`pk_produktiv_auslastung`}
+              name={`pk_produktiv_auslastung`}
+              label="Ø Auslastung (in %)"
+              value={formFloat(values.pk_produktiv_auslastung, 2)}
               InputProps={{
                 readOnly: true
               }}
