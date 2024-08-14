@@ -1,22 +1,30 @@
 import { FastField, Field, useFormikContext } from 'formik';
-import { Grid, TextField, Box, Typography } from '@mui/material';
+import { Grid, TextField, Box, Typography, Stack, useTheme } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 
 const DGemeinkostenPlangewinn = () => {
   const { values } = useFormikContext();
+  const theme = useTheme();
 
   return (
     <>
-      <FormSection collapsable={false} title="Stundenverrechnungssatz (ohne USt.):">
-        <Typography variant="h2">
-          {formFloat(values.std_verrechnungssaetze_G14 || 0, 2)
-            .toString()
-            .replace('.', ',')}
-          €
-        </Typography>
-      </FormSection>
+      <FormSection
+        collapsable={false}
+        backgroundColor={theme.palette.primary[800]}
+        title={
+          <Stack flexDirection="row" justifyContent="space-between" width="100%" sx={{ color: 'white'}}>
+            <Typography variant="h2" component="span">Stundenverrechnungssatz (ohne USt.):</Typography>
+            <Typography variant="h2" component="span">
+              {formFloat(values.std_verrechnungssaetze_G14 || 0, 2)
+                .toString()
+                .replace('.', ',')}
+              €
+            </Typography>
+          </Stack>
+        }
+      />
       <FormSection defaultOpen title="Kalkulation Stundenverrrechnungssatz">
         <Box sx={{ mt: 1 }} />
         <ReadOnlyBox title="Alle Angaben im Durchschnitt, in EUR">

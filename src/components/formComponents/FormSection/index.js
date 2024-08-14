@@ -85,8 +85,8 @@ const FormSection = ({
         }}
       >
         <Stack gap={2} direction="row" justifyContent="space-between" flexWrap={{ xs: 'wrap', sm: 'nowrap' }} alignItems="flex-start">
-          <Stack>
-            <Typography variant={headlineVariant} sx={{ mr: 'auto' }}>
+          <Stack flexGrow="1">
+            <Typography variant={headlineVariant} sx={{ flexGrow: 1 }}>
               {title}
             </Typography>
             {showErrorStatus && (
