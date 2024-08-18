@@ -319,20 +319,33 @@ export const UserContextProvider = ({ children }) => {
   );
 
   const createForm = useCallback(
-    async ({ title, type }) => {
+    async ({ title, type, initialData }) => {
       setCreateForm(StatusCodes.PROCESSING);
       const docRef = await addDoc(collection(db, 'forms'), {
         title: title,
         type: type,
         creationDate: dayjs().valueOf(),
-        values: JSON.stringify({})
+        values: JSON.stringify(initialData || {})
       });
 
       await addUserForm(docRef.id);
       await reloadUser();
       setCreateForm(StatusCodes.OK);
+      return docRef.id;
     },
     [addUserForm, reloadUser]
+  );
+
+  const copyForm = useCallback(
+    async ({ formId, title }) => {
+      const formToCopy = formsData[formId];
+      if (formToCopy) {
+        return createForm({ title, initialData: formToCopy.values, type: formToCopy.type });
+      }
+
+      return false;
+    },
+    [createForm, formsData]
   );
 
   const updateForms = useCallback(async () => {
@@ -419,6 +432,7 @@ export const UserContextProvider = ({ children }) => {
         reloadUser,
         formsData,
         createForm,
+        copyForm,
         deleteForm,
         saveForm,
         activeFormId,

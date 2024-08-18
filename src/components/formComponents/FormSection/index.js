@@ -28,7 +28,8 @@ const FormSection = ({
   backgroundColor,
   border,
   isError,
-  headlineVariant = 'h2'
+  headlineVariant = 'h2',
+  small
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen || false);
   const [openPopup, setOpenPopup] = useState(false);
@@ -79,7 +80,7 @@ const FormSection = ({
         sx={{
           backgroundColor: backgroundColor || theme.palette.common.white,
           border: showErrorStatus ? `2px solid ${theme.palette.error.main}` : border,
-          padding: theme.shape.paddingBoxMedium,
+          padding: small ? theme.shape.paddingBoxSmall : theme.shape.paddingBoxMedium,
           mb: { xs: theme.spacing(1.5), md: theme.spacing(1.75), lg: theme.spacing(2) },
           overflow: 'hidden'
         }}
@@ -95,7 +96,7 @@ const FormSection = ({
               </Typography>
             )}
             {description && (
-              <Typography variant="text" sx={{ mr: 'auto', mt: 1 }}>
+              <Typography variant="text" component="div" sx={{ mr: 'auto', mt: 1 }}>
                 {description}
               </Typography>
             )}

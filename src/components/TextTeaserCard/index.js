@@ -3,7 +3,20 @@ import { Link } from 'react-router-dom';
 import { darken } from '@mui/material/styles';
 
 // eslint-disable-next-line react/prop-types
-const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light, grow, ratio, textAlign, onClick, boxShadow }) => {
+const TextTeaserCard = ({
+  primaryText,
+  prefixText,
+  link,
+  color,
+  children,
+  light,
+  grow,
+  ratio,
+  textAlign,
+  onClick,
+  boxShadow,
+  outerSx = {}
+}) => {
   const theme = useTheme();
   const textColor = light ? theme.palette.text.primary : theme.palette.common.white;
   const bgColor = color;
@@ -61,7 +74,8 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
           '&:after': link && {
             transform: 'rotate(20deg) translateY(-50%) translateX(-15%)'
           }
-        }
+        },
+        ...outerSx
       }}
     >
       <Stack direction="column" textAlign={textAlign || 'left'} spacing={{ xs: 0, md: 1 }} sx={{ width: '100%', color: 'inherit' }}>
@@ -71,7 +85,7 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
             paragraph
             sx={{
               fontSize: { sx: 14, sm: 18, md: 22, lg: 24 },
-              lineHeight: '1em',
+              lineHeight: '1.25em',
               textTransform: 'none',
               fontWeight: theme.typography.fontWeightBolder,
               margin: '0px',
@@ -85,12 +99,15 @@ const TextTeaserCard = ({ primaryText, prefixText, link, color, children, light,
           paragraph
           sx={{
             fontSize: { xs: 20, sm: 28, md: 30, xl: 34 },
-            lineHeight: '1em',
+            lineHeight: '1.15em',
             textTransform: 'none',
             fontWeight: theme.typography.fontWeightLight,
             margin: '0px',
             color: 'inherit',
-            textAlign: textAlign
+            textAlign: textAlign,
+            wordBreak: 'break-word',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden'
           }}
         >
           {primaryText}

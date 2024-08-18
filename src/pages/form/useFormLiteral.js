@@ -25,13 +25,17 @@ const useFormLiteral = () => {
       linkPart: 'annahmen',
       content: <Annahmen />,
       validationSchema: annahmenValidationSchema,
-      title: 'Allgemeine Unternehmensangaben'
+      title: 'Allgemeine Unternehmensangaben',
+      description:
+        'Bitte tragen Sie hier Ihre Unternehmensdaten, Arbeitszeiten sowie Lohnnebenkosten ein. Diese Angaben dienen zum einen zur Ermittlung der jährlichen Arbeitszeit und zur Vorbelegung von bspw. Urlaubstagen für die Anlagen ihrer Mitarbeiter.'
     },
     pk_produktiv: {
       linkPart: 'pk_produktiv',
       content: <PersonalkostenProduktiv />,
       validationSchema: personalkostenProduktivValidationSchema,
-      title: 'Personalkosten produktive Abteilungen'
+      title: 'Personalkosten produktive Abteilungen',
+      description:
+        'Bitte erfassen Sie hier die verschiedenen Abteilungen und Mitarbeiter Ihres Betriebs, welche produktive Arbeit verrichten. Über den Reiter „Neue Gruppe“ können sie beliebig viele Abteilungen hinzufügen. Beachten Sie, dass hier lediglich die Mitarbeiter erfasst werden sollten, deren Arbeitsleistung direkt an den Kunden verrechenbar ist z.B. Mitarbeiter einer Werkstatt. Mitarbeiter aus verwaltenden Bereichen werden hier NICHT erfasst.'
     },
     pk_allgemein: {
       linkPart: 'pk_allgemein',
@@ -39,19 +43,32 @@ const useFormLiteral = () => {
       validationSchema: personalkostenAllgemeinValidationSchema,
       title: 'Personalkosten allgemeiner Bereich',
       description:
-        'Bitte erfassen Sie hier alle Kosten, die dem Personal zugerechnet werden, welche in verwaltender oder unterstützender Funktion tätig sind und deren Arbeitsstunden nicht direkt an den Kunden abgerechnet werden können.'
+        'Bitte erfassen Sie nun die verwaltenden Abteilungen ihres Unternehmens (nicht produktiv). Dies können bspw. Buchhaltung, Geschäftsführung, IT, etc. sein. Die Erfassung dieser Mitarbeiter ist für die Kalkulation des Stundensatzes essentiell, da die Löhne dieser Mitarbeiter ebenfalls durch den Verkauf der Serviceleistung erwirtschaftet werden müssen.'
     },
     gemeinkosten: {
       linkPart: 'gemeinkosten',
       content: <Gemeinkosten />,
       validationSchema: gemeinkostenValidationSchema,
-      title: 'Betriebskosten'
+      title: 'Betriebskosten',
+      description:
+        'Nachdem ihre Personalkosten vollständig erfasst wurden, werden in diesem Abschnitt sämtliche Kosten erfasst, die in Ihrem Betrieb anfallen. Dies umfasst den Materialaufwand, welchen sie zur Durchführung ihrer Serviceleistung benötigen, Personalgemeinkosten, wo sie ggf. zusätzliche Kosten angegeben und die Variabilität der Löhne festlegen können, Betriebskosten wie z.B. Miete, Ausstattung, Versicherungen, etc. und kalkulatorische Kosten für Kredite oder sonstiges.'
     },
     gk_deckung: {
       linkPart: 'gk_deckung',
       content: <GKDeckung />,
       validationSchema: gKDeckungValidationSchema,
-      title: 'Betriebskosten-Deckung'
+      title: 'Betriebskosten-Deckung',
+      description: (
+        <>
+          Bitte tragen Sie hier ihre Erlöse ein, welche dazu beitragen, dass die Betriebskosten gedeckt werden. Sie können auch hier
+          verschiedene Gruppen anlegen und dementsprechend ihre verkauften Produkte erfassen. Neben des Einkaufspreise geben sie bitte
+          zusätzlich ihren Zuschlagssatz für das jeweilige Produkt ein.
+          <br />
+          <br />
+          Beispiel für die Erfassung in einer Werkstatt: Gruppe: Ersatzteile Produkte: Bremsscheiben, Bremssattel, Glühlampe, etc. Gruppe:
+          Öl- und Schmierstoffe Produkte: Motoröl, Getriebeöl, Achsöl, etc.
+        </>
+      )
     },
     // gk_stundensaetze: {
     //   linkPart: 'gk_stundensaetze',
@@ -70,6 +87,8 @@ const useFormLiteral = () => {
       content: <Deckungsbeitraege />,
       validationSchema: deckungsbeitraegeValidationSchema,
       title: 'Stundensatz & Deckungsbeiträge',
+      description:
+        'Sie haben die Kalkulation nun abgeschlossen. Mit Eingabe des Plangewinns für ihr Unternehmen können sie direkt sehen, welche Auswirkungen dieser auf den Stundensatz hat. Weiterhin finden sie hier die verschiedenen Kostensätze sowie ihre Deckungsbeiträge.',
       backgroundColor: theme.palette.secondary.main
     }
   };

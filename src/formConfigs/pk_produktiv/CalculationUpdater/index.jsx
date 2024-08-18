@@ -178,8 +178,6 @@ const StundensatzRechnerValueUpdater = () => {
     const pk_produktiv_auslastung = values.pk_produktiv_Q42
       ? 100 - ((values.pk_produktiv_Q42 || 0) / (values.pk_produktiv_S42 || 0)) * 100
       : 100;
-    console.log('pk_produktiv_auslastung', pk_produktiv_auslastung);
-    console.log('pk_produktiv_auslastung', pk_produktiv_auslastung);
     if (pk_produktiv_auslastung !== values.pk_produktiv_auslastung) {
       setFieldValue('pk_produktiv_auslastung', pk_produktiv_auslastung);
     }

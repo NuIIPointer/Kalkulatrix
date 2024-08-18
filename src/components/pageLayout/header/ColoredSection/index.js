@@ -71,7 +71,7 @@ const ColoredSectionTop = ({ headline, description, headerChildren, bgColor, bgG
                   </Typography>
                 </Stack>
                 {description && (
-                  <Typography sx={{ mb: 0 }} paragraph>
+                  <Typography variant="body2" sx={{ mb: 0 }} paragraph>
                     {description}
                   </Typography>
                 )}

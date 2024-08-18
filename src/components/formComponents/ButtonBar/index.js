@@ -11,7 +11,7 @@ import useFormLiteral from 'pages/form/useFormLiteral';
 
 const ButtonBar = () => {
   const navigate = useNavigate();
-  const { values = {}, errors, touched } = useFormikContext();
+  const { values = {}, errors, touched, setTouched } = useFormikContext();
   const { saveForm, requestStatusCodes, isForeignForm } = useContext(UserContext);
   const isSaving = requestStatusCodes.saveForm === StatusCodes.PROCESSING;
   const { enqueueSnackbar } = useSnackbar();
@@ -37,11 +37,16 @@ const ButtonBar = () => {
             }
           }
         } else {
+          const mappedTOTouched = {};
+          Object.keys(errors).forEach((key) => {
+            mappedTOTouched[key] = true;
+          });
+          setTouched(mappedTOTouched, true);
           enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
         }
       }
     },
-    [isForeignForm, saveForm, values, errors, enqueueSnackbar, nextStepKey, isLaststep, formLiteral, navigate, formId]
+    [isForeignForm, saveForm, values, errors, enqueueSnackbar, nextStepKey, isLaststep, formLiteral, navigate, formId, setTouched]
   );
 
   const handleGoBack = useCallback(() => {

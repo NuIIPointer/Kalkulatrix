@@ -12,11 +12,11 @@ const DGemeinkostenPlangewinn = () => {
     <>
       <FormSection
         collapsable={false}
-        backgroundColor={theme.palette.primary[800]}
+        backgroundColor={theme.palette.primary.main}
         title={
-          <Stack flexDirection="row" justifyContent="space-between" width="100%" sx={{ color: 'white'}}>
-            <Typography variant="h2" component="span">Stundenverrechnungssatz (ohne USt.):</Typography>
-            <Typography variant="h2" component="span">
+          <Stack flexDirection="row" justifyContent="space-between" width="100%">
+            <Typography variant="h2" component="span" style={{ color: "white" }}>Stundenverrechnungssatz (ohne USt.):</Typography>
+            <Typography variant="h2" component="span" style={{ color: "white" }}>
               {formFloat(values.std_verrechnungssaetze_G14 || 0, 2)
                 .toString()
                 .replace('.', ',')}

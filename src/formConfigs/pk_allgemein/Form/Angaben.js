@@ -60,7 +60,9 @@ const Stammdaten = () => {
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
-                  type="number"
+                  InputProps={{
+                    readOnly: true
+                  }}
                   onWheel={(event) => event.target.blur()}
                   min="0"
                 />
@@ -74,10 +76,11 @@ const Stammdaten = () => {
               <EnrichedField
                 infoText={
                   <p>
-                    <b>Lohnnebenkosten</b> oberhalb der Beitragsbemessungsgrenze sind Kosten, die zusätzlich zum Bruttolohn eines
-                    Arbeitnehmers anfallen und nicht durch die Beitragsbemessungsgrenze der Sozialversicherung gedeckelt sind. Diese können
-                    beinhalten: Arbeitgeberbeiträge zur Unfallversicherung, Beiträge zur Berufsgenossenschaft, Betriebliche Altersvorsorge,
-                    Zusätzliche freiwillige Sozialleistungen, Lohnfortzahlung im Krankheitsfall, etc.
+                    Die Höhe des Bruttoeinkommens, für das Sie als Arbeitgeber Lohnnebenkosten zahlen müssen, ist begrenzt. Überschreitet
+                    das Bruttogehalt diese sogenannte Beitragsbemessungsgrenze, fallen für den Bruttolohn, der die Grenze übersteigt, keine
+                    weiteren Sozialversicherungsbeiträge an.Kosten Oberhalb der BBG: Arbeitgeberbeiträge zur Unfallversicherung, Beiträge
+                    zur Berufsgenossenschaft, Betriebliche Altersvorsorge, Zusätzliche freiwillige Sozialleistungen, Lohnfortzahlung im
+                    Krankheitsfall, etc.
                   </p>
                 }
               >
@@ -108,6 +111,7 @@ const Stammdaten = () => {
                 type="number"
                 onWheel={(event) => event.target.blur()}
                 min="0"
+                max="12"
               />
             )}
           </FastField>

@@ -77,17 +77,9 @@ const FormComponent = () => {
         }
 
         return (
-          <Box key={key} sx={{ 'form>div:nth-last-child(2)': { minHeight: '50vh' } }}>
+          <Box key={key} sx={{ minHeight: 'calc(100vh - 550px)' }}>
             <FormSection
-              title={value.title}
-              description={
-                <Stack>
-                  <Typography variant="body" sx={{ mb: 1 }}>{`Letzte Änderung: ${dayjs(activeFormData?.values?.lastChanged).format(
-                    'DD.MM.YYYY'
-                  )}`}</Typography>
-                  {value.description && <Typography variant="body">{value.description}</Typography>}
-                </Stack>
-              }
+              title={`Letzte Änderung: ${dayjs(activeFormData?.values?.lastChanged).format('DD.MM.YYYY')}`}
               collapsable={false}
               defaultOpen
             />
@@ -110,26 +102,20 @@ const FormComponent = () => {
     return <FullPageLoader />;
   }
 
-  let validators;
-  if (formLiteral) {
-    Object.entries(formLiteral).forEach((_key, value) => {
-      if (!validators) {
-        validators = value.validationSchema;
-      } else {
-        validators = validators.concat(value.validationSchema);
-      }
-    });
-  }
-
   return (
     <Box mb={theme.shape.layoutDesignGutterReset}>
-      <ColoredSection backLink="/office/form/overview" bgColor={theme.palette.primary[200]} headline={activeFormData?.title} />
+      <ColoredSection
+        backLink="/office/form/overview"
+        bgColor={theme.palette.primary[200]}
+        headline={activeFormConfig.title}
+        description={activeFormConfig.description}
+      />
       {formContents ? (
         <Formik
           key={activeFormData?.title}
           initialValues={initialValues}
           onSubmit={() => {}}
-          validationSchema={validators}
+          validationSchema={activeFormConfig.validationSchema}
           validateOnChange
           validateOnSubmit
         >

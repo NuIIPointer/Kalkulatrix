@@ -3,8 +3,8 @@ import { useTheme } from '@mui/material/styles';
 import ColoredSection from 'components/pageLayout/header/ColoredSection';
 import { AdminContext } from 'context/admin/index';
 import { Box, Button, Stack, Modal, Typography } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
 import useFormLiteral from 'pages/form/useFormLiteral';
+import DataTable from 'components/DataTable/index';
 
 const AdminDashboard = () => {
   const theme = useTheme();
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     {
       field: 'usersFormData',
       headerName: 'Formulare',
-      width: 400,
+      width: 'auto',
       renderCell: (params) => (
         <Stack gap={2} direction="row" justifyContent="flex-start" alignItems="center" sx={{ height: '100%' }}>
           {params.value?.map((formData, key) => (
@@ -57,32 +57,7 @@ const AdminDashboard = () => {
       <ColoredSection bgGradient={headerBgColor} bgColor={theme.palette.secondary.dark} headline={'Admin Dashboard'} />
       {clientsData && (
         <Box sx={{ overflow: 'hidden', borderRadius: theme.shape.borderRadiusBox, backgroundColor: '#ffffff', padding: 2 }}>
-          <DataGrid
-            sx={{
-              '& .MuiDataGrid-row': {
-                borderRadius: theme.spacing(1.5),
-                '&:nth-child(2n-1)': {
-                  backgroundColor: theme.palette.grey[100],
-                  '&:hover': {
-                    backgroundColor: theme.palette.grey[200]
-                  }
-                }
-              }
-            }}
-            rows={clientsData}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 20
-                }
-              }
-            }}
-            getRowId={(row) => row.uid}
-            rowSelection={false}
-            columnSelection={false}
-            disableColumnSelector
-          />
+          <DataTable data={clientsData} columns={columns} />
           <Modal
             open={!!modalData?.formData}
             onClose={() => setModalData(null)}

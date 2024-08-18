@@ -17,28 +17,45 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 import TextTeaserCard from 'components/TextTeaserCard/index';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // icons
-import { Edit, ChevronRight, DeleteOutlineOutlined } from '@mui/icons-material';
+import { ChevronRight, DeleteOutlineOutlined, CopyAllOutlined } from '@mui/icons-material';
 
 // redux
 import { UserContext } from 'context/user';
 import { StripeContext } from 'context/stripe/index';
+import LayoutBox from 'components/LayoutBox/index';
+import { enqueueSnackbar } from 'notistack';
+
+const newFormName = `Kalkulation vom ${dayjs(new Date()).format('DD.MM.YYYY')}`;
 
 // eslint-disable-next-line react/prop-types
 const SelectFormView = ({ formType, sections }) => {
   const theme = useTheme();
-  const { createForm, formsData = {}, deleteForm } = useContext(UserContext);
+  const { createForm, copyForm: copyFormContext, formsData = {}, deleteForm } = useContext(UserContext);
   const { hasActiveSubscription } = useContext(StripeContext);
   const [openSubBanner, setOpenSubBanner] = useState(false);
   const [showMoreFormsWarning, setShowMoreFormsWarning] = useState(false);
-
-  const navigate = useNavigate();
+  const [showDeleteFormDialog, setShowDeleteFormDialog] = useState(false);
 
   const removeForm = async (formId) => {
     await deleteForm(formId);
-    navigate('/office/dashboard');
+    setShowDeleteFormDialog(false);
+  };
+
+  const copyForm = async (formId) => {
+    if (hasActiveSubscription) {
+      const newFormId = await copyFormContext({ formId, title: newFormName });
+      if (newFormId) {
+        enqueueSnackbar('Das Formular wurde erfolgreich kopiert.', { variant: 'success' });
+        await setTimeout(() => document.getElementById(`formCard-${newFormId}`).scrollIntoView({ behavior: 'smooth' }), 250);
+      } else {
+        enqueueSnackbar('Es ist ein Fehler aufgetreten. Versuchen Sie es später erneut.', { variant: 'error' });
+      }
+    } else {
+      enqueueSnackbar('Sie benötigen ein aktives Abonnement um Formulare kopieren zu können.', { variant: 'warning' });
+    }
   };
 
   const visibleForms = useMemo(() => {
@@ -64,7 +81,7 @@ const SelectFormView = ({ formType, sections }) => {
   }, [formType, formsData, hasActiveSubscription]);
 
   const addForm = () => {
-    createForm({ title: `Kalkulation vom ${dayjs(new Date()).format('DD.MM.YYYY')}`, type: formType });
+    createForm({ title: newFormName, type: formType });
   };
 
   const handleOpenSub = () => {
@@ -86,6 +103,10 @@ const SelectFormView = ({ formType, sections }) => {
                 <TextTeaserCard
                   grow
                   primaryText={section.title}
+                  outerSx={{
+                    boxShadow: 'none',
+                    border: `1px solid ${theme.palette.grey[400]}`
+                  }}
                   // prefixText={`zuletzt bearbeitet: ${dayjs(formData.creationDate).format('DD.MM.YYYY')}`}
                   prefixText={
                     <Stack
@@ -101,13 +122,6 @@ const SelectFormView = ({ formType, sections }) => {
                       component="span"
                     >
                       Blatt
-                      <Edit
-                        sx={{
-                          opacity: '0.2',
-                          fontSize: { xs: 40, md: 48, lg: 55 },
-                          margin: '0 -0.35em -0.2em 1rem'
-                        }}
-                      />
                     </Stack>
                   }
                   link={`/office/form/${formId}/${section.linkPart}`}
@@ -120,7 +134,13 @@ const SelectFormView = ({ formType, sections }) => {
 
           return (
             <Grid key={formId} item xs={12}>
-              <Stack flexDirection="column" sx={{ mb: { xs: theme.spacing(4), md: theme.spacing(5), lg: theme.spacing(6) } }}>
+              <LayoutBox
+                id={`formCard-${formId}`}
+                sx={{
+                  backgroundColor: theme.palette.common.white,
+                  padding: theme.shape.paddingBoxMedium
+                }}
+              >
                 <Stack
                   flexDirection="row"
                   alignItems="flex-end"
@@ -131,14 +151,29 @@ const SelectFormView = ({ formType, sections }) => {
                   <Typography variant="h2" component="h3" sx={{ mb: 1 }}>
                     {formData.title || 'Formular: ' + formData.id}
                   </Typography>
-                  <Button startIcon={<DeleteOutlineOutlined />} color="error" variant="contained" onClick={() => removeForm(formId)}>
-                    Formular Löschen
-                  </Button>
+                  <Stack flexDirection={{ xs: 'column', sm: 'row' }} gap={1}>
+                    <Button
+                      startIcon={<CopyAllOutlined />}
+                      color={hasActiveSubscription ? 'primary' : 'secondary'}
+                      variant="outlined"
+                      onClick={() => copyForm(formId)}
+                    >
+                      Formular kopieren
+                    </Button>
+                    <Button
+                      startIcon={<DeleteOutlineOutlined />}
+                      color="error"
+                      variant="outlined"
+                      onClick={() => setShowDeleteFormDialog(formId)}
+                    >
+                      Formular löschen
+                    </Button>
+                  </Stack>
                 </Stack>
                 <Grid spacing={{ xs: 2, lg: 3 }} container>
                   {sectionsDom}
                 </Grid>
-              </Stack>
+              </LayoutBox>
             </Grid>
           );
         })
@@ -163,13 +198,13 @@ const SelectFormView = ({ formType, sections }) => {
                   <ChevronRight
                     sx={{
                       opacity: '0.2',
-                      fontSize: 65,
-                      margin: '0 -0.35em -0.35em 1rem'
+                      fontSize: '1em',
+                      margin: '0 0 -0.2em 0.25rem'
                     }}
                   />
                 </Stack>
               }
-              prefixText="Erstellen Sie ein"
+              prefixText="Erstellen Sie eine"
               color={theme.palette.common.white}
               light
             ></TextTeaserCard>
@@ -192,6 +227,25 @@ const SelectFormView = ({ formType, sections }) => {
             <Button onClick={handleCloseSub}>schließen</Button>
             <Button component={Link} to="/office/billing" autoFocus>
               Abonnement verwalten
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={showDeleteFormDialog}
+          onClose={() => setShowDeleteFormDialog(false)}
+          aria-labelledby="alert-dialog-title-2"
+          aria-describedby="alert-dialog-description-2"
+        >
+          <DialogTitle id="alert-dialog-title-2">Formular wirklisch löschen?</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description-2">
+              Wollen Sie das Formular entgültig löschen? Der Vorgang kann nicht rückgängig gemacht werden.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setShowDeleteFormDialog(false)}>schließen</Button>
+            <Button onClick={() => removeForm(showDeleteFormDialog)} autoFocus>
+              Formular löschen
             </Button>
           </DialogActions>
         </Dialog>

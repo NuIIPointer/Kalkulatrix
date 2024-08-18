@@ -24,7 +24,7 @@ const FormOverview = () => {
         bgColor={theme.palette.primary.dark}
         bgGradient={headerBgColor}
         headline="Stundensatzkalkulator"
-        description="Herzlich Willkommen im Kalkulatrix Stundensatzkalkulator. Bitte tragen Sie in den folgenden Eingabemasken ihre Unternehmensdaten ein. Achten Sie dabei auf Vollständigkeit, damit eine präzise Stundensatzberechnung möglich ist."
+        // description="Herzlich Willkommen im Kalkulatrix Stundensatzkalkulator. Bitte tragen Sie in den folgenden Eingabemasken ihre Unternehmensdaten ein. Achten Sie dabei auf Vollständigkeit, damit eine präzise Stundensatzberechnung möglich ist."
       />
       <Typography variant="h2" sx={headlineSectionStyle}>
         Kalkulationen

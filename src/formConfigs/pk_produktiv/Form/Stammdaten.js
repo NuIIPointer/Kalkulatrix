@@ -55,7 +55,7 @@ const Stammdaten = () => {
                         key={index}
                         label={
                           <Stack sx={{ color: errors.pk_produktiv_mitarbeiter?.[index] ? theme.palette.error.main : undefined }}>
-                            {category.groupTitle || `Gruppe ${index + 1}`}
+                            {category.groupTitle || `Abteilung ${index + 1}`}
                           </Stack>
                         }
                         value={index.toString()}
@@ -72,7 +72,7 @@ const Stammdaten = () => {
                   disabled={isSubmitting}
                   sx={{ fontWeight: 500 }}
                 >
-                  Neue Gruppe
+                  Neue Abteilung
                 </Button>
               </Stack>
               {values.pk_produktiv_mitarbeiter?.map((outerField, outerIndex) => (
@@ -100,7 +100,7 @@ const Stammdaten = () => {
                         color="error"
                         startIcon={<DeleteOutlineOutlined />}
                       >
-                        Gruppe löschen
+                        Abteilung löschen
                       </Button>
                     </Grid>
                   </Grid>
@@ -112,7 +112,7 @@ const Stammdaten = () => {
                   >
                     <DialogTitle id="alert-dialog-title">{outerField.groupTitle}</DialogTitle>
                     <DialogContent>
-                      <DialogContentText id="alert-dialog-description">Wollen Sie diese Gruppe wirklich löschen?</DialogContentText>
+                      <DialogContentText id="alert-dialog-description">Wollen Sie diese Abteilung wirklich löschen?</DialogContentText>
                     </DialogContent>
                     <DialogActions>
                       <Button onClick={() => setGroupToDelete(undefined)}>Abbrechen</Button>
@@ -135,11 +135,26 @@ const Stammdaten = () => {
                           const maTitle = `${innerField?.titel || 'Mitarbeiter'} ${
                             innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
                           }`;
+                          const maShortData = [
+                            { title: 'Bruttostundenlohn', value: `${innerField.Q9 || 0}€` },
+                            { title: 'Auslastung', value: `${innerField.N9 || 0}%` },
+                            { title: 'Anwesenheitsentgelt', value: `${innerField.S9 || 0}€` }
+                          ];
+
                           return (
                             <React.Fragment key={innerField.userId || innerIndex}>
                               <FormSection
+                                small
                                 title={maTitle}
-                                description="Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein."
+                                description={
+                                  <Stack flexDirection="row" gap={2}>
+                                    {maShortData.map((data, index) => (
+                                      <Typography key={index} variant="text" component="div" sx={{ minWidth: 200 }}>
+                                        <strong>{data.title}:</strong> {data.value}
+                                      </Typography>
+                                    ))}
+                                  </Stack>
+                                }
                                 defaultOpen={innerIndex === 0 && values.pk_produktiv_mitarbeiter?.length === 1}
                                 border={`1px solid ${theme.palette.grey[300]}`}
                                 onDelete={() => innerRemove(innerIndex)}

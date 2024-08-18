@@ -294,9 +294,9 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label={`Lohnnebenkosten ${
-                                              values.pk_allgemein_K5 ? `(${values.pk_allgemein_K5}%) ` : ''
-                                            }(in EUR)`}
+                                            label={`Lohnnebenkosten (${
+                                              values.pk_allgemein_K5 ? `${values.pk_allgemein_K5}%, ` : ''
+                                            }in EUR)`}
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             sx={{ mb: 2 }}

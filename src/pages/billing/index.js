@@ -86,6 +86,10 @@ const Dashboard = () => {
               <TextTeaserCard
                 grow
                 textAlign="right"
+                outerSx={{
+                  boxShadow: 'none',
+                  border: `1px solid ${theme.palette.grey[400]}`
+                }}
                 primaryText={
                   <Stack
                     sx={{

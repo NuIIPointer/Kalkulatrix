@@ -1,13 +1,13 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Grid, Typography, Stack, Select, MenuItem, Button, Box } from '@mui/material';
+import { Grid, Typography, Stack, Select, MenuItem, Box } from '@mui/material';
 import TextTeaserCard from 'components/TextTeaserCard';
-import useGetCalendarData from 'hooks/useGetCalendarData.js';
+// import useGetCalendarData from 'hooks/useGetCalendarData.js';
 import dayjs from 'dayjs';
 import DashboardCard from 'components/DashboardCard';
-import { PeopleAlt, Receipt, LocalAtm, Inbox, MoreHoriz } from '@mui/icons-material';
+import { PeopleAlt, Receipt, LocalAtm, Inbox } from '@mui/icons-material';
 import { UserContext } from 'context/user';
-import FullCalendarConfigured from 'components/FullCalendarConfigured';
+// import FullCalendarConfigured from 'components/FullCalendarConfigured';
 import TeaserCard from 'components/TeaserCard';
 import formFloat from 'utils/formUtils/formFloat';
 import { InlineWidget } from 'react-calendly';
@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const theme = useTheme();
-  const { futureCalendarData, calendarDataStatus } = useGetCalendarData();
+  // const { futureCalendarData, calendarDataStatus } = useGetCalendarData();
   const { formsData } = useContext(UserContext);
   const [activeFormKey, setActiveFormKey] = useState(0);
   const formsKeys = Object.keys(formsData);
@@ -85,22 +85,10 @@ const Dashboard = () => {
     return (
       <Grid container spacing={3} mb={6}>
         <Grid item xs={6} sm={6} xl={4}>
-          <TextTeaserCard
-            primaryText="Angaben"
-            prefixText="zu den"
-            link="/office/form/overview"
-            color={theme.palette.primary.dark}
-            boxShadow={theme.customShadows.z1}
-          />
+          <TextTeaserCard primaryText="Angaben" prefixText="zu den" link="/office/form/overview" color={theme.palette.primary.dark} />
         </Grid>
         <Grid item xs={6} sm={6} xl={4}>
-          <TextTeaserCard
-            primaryText="Profil"
-            prefixText="zum"
-            link="/office/profile"
-            color={theme.palette.primary.light}
-            boxShadow={theme.customShadows.z1}
-          />
+          <TextTeaserCard primaryText="Profil" prefixText="zum" link="/office/profile" color={theme.palette.primary.light} />
         </Grid>
         <Grid item xs={6} sm={6} xl={4}>
           <TextTeaserCard
@@ -109,7 +97,6 @@ const Dashboard = () => {
             link="/contact"
             target="_blank"
             color={theme.palette.primary[200]}
-            boxShadow={theme.customShadows.z1}
           />
         </Grid>
       </Grid>
@@ -196,15 +183,15 @@ const Dashboard = () => {
           <TeaserCard color={theme.palette.primary.dark} boxShadow={theme.customShadows.z1} sx={{ height: '100%' }}>
             {/* <FullCalendarConfigured sx={{ height: '100%', width: '100%' }} calendarSx={{ height: '100%', width: '100%' }} /> */}
             <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
-              <Typography variant="h3">Nächste Kalkulation</Typography>
-              <Button sx={{ p: 1, borderRadius: 1000, minWidth: 0, minHeight: 0, aspectRatio: '1/1', d: 'flex', alignItems: 'center' }}>
+              <Typography variant="h3" sx={{ mt: 1, mx: 'auto', textAlign: 'center', display: 'block' }}>Nächste Kalkulation</Typography>
+              {/* <Button sx={{ p: 1, borderRadius: 1000, minWidth: 0, minHeight: 0, aspectRatio: '1/1', d: 'flex', alignItems: 'center' }}>
                 <MoreHoriz />
-              </Button>
+              </Button> */}
             </Stack>
             <Stack sx={{ alignItems: 'center' }}>
               <Box
                 sx={{
-                  mt: 1,
+                  my: { xs: -1, md: 0, lg: 1 },
                   position: 'relative',
                   height: 250,
                   aspectRatio: '1/1',

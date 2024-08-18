@@ -51,7 +51,7 @@ export const StripeContextProvider = ({ children }) => {
 
         return new Promise((resolve, reject) => {
           const unsubscribe = onSnapshot(docRef, (snap) => {
-            const { error, url } = snap.data();
+            const { error, url } = snap.data() || {};
             if (error) {
               unsubscribe();
               reject(new Error(`An error occurred: ${error.message}`));
@@ -88,7 +88,7 @@ export const StripeContextProvider = ({ children }) => {
     }
 
     return new Promise((resolve, reject) => {
-      if (dataWithUrl.url) {
+      if (dataWithUrl?.url) {
         resolve(dataWithUrl.url);
       } else {
         reject(new Error('No url returned'));
