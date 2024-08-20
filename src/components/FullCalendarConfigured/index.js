@@ -67,6 +67,10 @@ const FullCalendarConfigured = ({ sx = {}, calendarSx = {} }) => {
     ...sx
   };
 
+  if (!hasConsent) {
+    return 'Die Kalenderansicht ist deaktiviert. Bitte akzeptieren Sie die notwendigen Cookies, um die Kalenderansicht zu aktivieren.';
+  }
+
   return (
     <Box sx={calendarStyles}>
       <FullCalendar

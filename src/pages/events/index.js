@@ -11,6 +11,7 @@ import ColoredSection from 'components/pageLayout/header/ColoredSection';
 // import useGetCalendarData from 'hooks/useGetCalendarData.js/index';
 import { InlineWidget } from 'react-calendly';
 import { UserContext } from 'context/user/index';
+import ConsentWrapper from 'components/ConsentWrapper/index';
 
 const Events = () => {
   const { user } = useContext(UserContext);
@@ -27,16 +28,19 @@ const Events = () => {
         headline={`Buchen Sie jetzt Ihren individuellen Beratungstermin.`}
         description="Unsere Experten stehen bereit, um Ihnen mit maßgeschneiderter Beratung zur Seite zu stehen. Ob Sie tiefer in die Funktionen von Kalkulatrix eintauchen oder spezifische Herausforderungen in Ihrem Unternehmen besprechen möchten, ein persönlicher Beratungstermin bietet Ihnen die Lösungen, welche zu Ihrem Unternehmen passen. Alternativ können Sie auch an unseren interaktiven Webinaren teilnehmen, die praktische Einblicke und nützliche Tipps zur Maximierung Ihrer Unternehmenspotenziale bieten."
       />
-      <InlineWidget
-        url="https://calendly.com/adel-consulting/30min"
-        styles={{
-          height: '1200px'
-        }}
-        prefill={{
-          email: user.email,
-          name: user.displayName
-        }}
-      />
+
+      <ConsentWrapper consentKeys={['analytics']}>
+        <InlineWidget
+          url="https://calendly.com/adel-consulting/30min"
+          styles={{
+            height: '1200px'
+          }}
+          prefill={{
+            email: user.email,
+            name: user.displayName
+          }}
+        />
+      </ConsentWrapper>
       {/* <LayoutBox
         sx={{
           backgroundColor: theme.palette.common.white,

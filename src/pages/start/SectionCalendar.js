@@ -1,5 +1,6 @@
 import { InlineWidget } from 'react-calendly';
 import { Stack, Typography } from '@mui/material';
+import ConsentWrapper from 'components/ConsentWrapper/index';
 
 const SectionCalendar = () => {
   return (
@@ -10,12 +11,15 @@ const SectionCalendar = () => {
           Jetzt einen Beratungstermin vereinbaren
         </Typography>
       </Typography>
-      <InlineWidget
-        url="https://calendly.com/adel-consulting/30min"
-        styles={{
-          height: '700px'
-        }}
-      />
+
+      <ConsentWrapper consentKeys={['analytics']}>
+        <InlineWidget
+          url="https://calendly.com/adel-consulting/30min"
+          styles={{
+            height: '700px'
+          }}
+        />
+      </ConsentWrapper>
     </Stack>
   );
 };

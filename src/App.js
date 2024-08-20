@@ -1,5 +1,5 @@
 // project import
-import React from 'react';
+import React, { useEffect } from 'react';
 import Routes from 'routes';
 import ThemeCustomization from 'themes';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -10,6 +10,7 @@ import { SnackbarProvider } from 'notistack';
 import 'dayjs/locale/de';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
+import runConsent from 'services/cookieconsent';
 
 import './styles/index.css';
 import 'slick-carousel/slick/slick.css';
@@ -20,6 +21,10 @@ dayjs.extend(dayOfYear);
 // ==============================|| APP - THEME, ROUTER, LOCAL  ||============================== //
 
 const App = () => {
+  useEffect(() => {
+    runConsent();
+  }, []);
+
   return (
     <ThemeCustomization>
       <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>

@@ -13,6 +13,7 @@ import formFloat from 'utils/formUtils/formFloat';
 import { InlineWidget } from 'react-calendly';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { Link } from 'react-router-dom';
+import ConsentWrapper from 'components/ConsentWrapper/index';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -183,7 +184,9 @@ const Dashboard = () => {
           <TeaserCard color={theme.palette.primary.dark} boxShadow={theme.customShadows.z1} sx={{ height: '100%' }}>
             {/* <FullCalendarConfigured sx={{ height: '100%', width: '100%' }} calendarSx={{ height: '100%', width: '100%' }} /> */}
             <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
-              <Typography variant="h3" sx={{ mt: 1, mx: 'auto', textAlign: 'center', display: 'block' }}>Nächste Kalkulation</Typography>
+              <Typography variant="h3" sx={{ mt: 1, mx: 'auto', textAlign: 'center', display: 'block' }}>
+                Nächste Kalkulation
+              </Typography>
               {/* <Button sx={{ p: 1, borderRadius: 1000, minWidth: 0, minHeight: 0, aspectRatio: '1/1', d: 'flex', alignItems: 'center' }}>
                 <MoreHoriz />
               </Button> */}
@@ -242,12 +245,14 @@ const Dashboard = () => {
         </Grid>
       </Grid>
       {bottomBoxRendering()}
-      <InlineWidget
-        url="https://calendly.com/adel-consulting/30min"
-        styles={{
-          height: '700px'
-        }}
-      />
+      <ConsentWrapper consentKeys={['analytics']}>
+        <InlineWidget
+          url="https://calendly.com/adel-consulting/30min"
+          styles={{
+            height: '700px'
+          }}
+        />
+      </ConsentWrapper>
       {/* {calendarDataStatus === 'success' && futureCalendarData?.length > 0 && (
         <>
           <Typography variant="h2" sx={{ mb: 1, mt: 8 }}>

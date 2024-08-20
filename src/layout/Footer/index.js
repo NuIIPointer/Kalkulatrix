@@ -2,6 +2,7 @@ import { Box, Grid, List, ListItemButton, ListItem } from '@mui/material';
 import Logo from 'components/Logo/Logo';
 import { useTheme } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
+import * as CookieConsent from 'vanilla-cookieconsent';
 
 const Footer = () => {
   const theme = useTheme();
@@ -14,6 +15,8 @@ const Footer = () => {
     whiteSpace: 'nowrap',
     '&:hover': { backgroundColor: 'transparent', textDecoration: 'underline' }
   };
+
+  const showConsent = () => CookieConsent.showPreferences();
 
   return (
     <Box
@@ -39,6 +42,11 @@ const Footer = () => {
               gap: `${theme.spacing(1)} ${theme.spacing(3)}`
             }}
           >
+            <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
+              <ListItemButton variant="subtitle2" onClick={showConsent} sx={footerLinkStyles}>
+                Cookie-Einstellungen
+              </ListItemButton>
+            </ListItem>
             <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
               <ListItemButton variant="subtitle2" component={RouterLink} to="#" sx={footerLinkStyles}>
                 Impressum
