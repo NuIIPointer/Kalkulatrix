@@ -12,6 +12,11 @@ import {
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
+import { setConsent } from 'firebase/analytics';
+setConsent({
+  analytics_storage: 'denied',
+  ad_storage: 'denied'
+});
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
