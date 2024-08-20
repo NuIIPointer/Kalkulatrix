@@ -10,6 +10,8 @@ const Footer = () => {
     fontWeight: 300,
     fontSize: '1rem',
     padding: 0,
+    boxShadow: 'none',
+    whiteSpace: 'nowrap',
     '&:hover': { backgroundColor: 'transparent', textDecoration: 'underline' }
   };
 
@@ -37,6 +39,11 @@ const Footer = () => {
               gap: `${theme.spacing(1)} ${theme.spacing(3)}`
             }}
           >
+            <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
+              <ListItemButton variant="subtitle2" component={RouterLink} to="?cmpscreen" sx={footerLinkStyles} className="cmpfooterlinkcmp">
+                Cookie-Einstellungen
+              </ListItemButton>
+            </ListItem>
             <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
               <ListItemButton variant="subtitle2" component={RouterLink} to="#" sx={footerLinkStyles}>
                 Impressum
