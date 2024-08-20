@@ -40,11 +40,6 @@ const Footer = () => {
             }}
           >
             <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
-              <ListItemButton variant="subtitle2" component={RouterLink} to="?cmpscreen" sx={footerLinkStyles} className="cmpfooterlinkcmp">
-                Cookie-Einstellungen
-              </ListItemButton>
-            </ListItem>
-            <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
               <ListItemButton variant="subtitle2" component={RouterLink} to="#" sx={footerLinkStyles}>
                 Impressum
               </ListItemButton>
