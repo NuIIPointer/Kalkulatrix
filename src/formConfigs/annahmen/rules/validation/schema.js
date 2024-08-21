@@ -5,7 +5,6 @@ const validationSchema = object().shape({
   annahmen_E41: number().required('Geben Sie einen Wert an.'),
   annahmen_G16: number().required('Geben Sie einen Wert an.'),
   annahmen_G17_days: number().required('Geben Sie einen Wert an.').min(1, 'Geben Sie eine gültige Anzahl an Wochenarbeitstagen an.'),
-  gk_stundensaetze_H14: number().required('Geben Sie einen Plangewinn an.').min(0, 'Geben Sie einen gültigen Wert an.')
 });
 
 export default validationSchema;

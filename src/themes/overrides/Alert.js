@@ -12,6 +12,14 @@ export default function Alert(theme) {
           paddingBottom: 0
         }
       }
+    },
+    MuiAlertTitle: {
+      styleOverrides: {
+        root: {
+          marginBottom: 2,
+          marginTop: 3
+        }
+      }
     }
   };
 }

@@ -32,6 +32,9 @@ const MainLayout = () => {
         '.calendly-badge-widget .calendly-badge-content': {
           paddingLeft: theme.spacing(1.5),
           paddingRight: theme.spacing(1.5)
+        },
+        '& .calendly-badge-content': {
+          backgroundColor: `${theme.palette.primary.main} !important`
         }
       }}
     >

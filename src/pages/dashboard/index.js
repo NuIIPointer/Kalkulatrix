@@ -245,7 +245,7 @@ const Dashboard = () => {
         </Grid>
       </Grid>
       {bottomBoxRendering()}
-      <ConsentWrapper consentKeys={['analytics']}>
+      <ConsentWrapper title="Kalender - Termin vereinbaren" consentKeys={['necessary']}>
         <InlineWidget
           url="https://calendly.com/adel-consulting/30min"
           styles={{

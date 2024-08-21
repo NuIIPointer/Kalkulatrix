@@ -14,15 +14,26 @@ const DGemeinkostenPlangewinn = () => {
         collapsable={false}
         backgroundColor={theme.palette.primary.main}
         title={
-          <Stack flexDirection="row" justifyContent="space-between" width="100%">
-            <Typography variant="h2" component="span" style={{ color: "white" }}>Stundenverrechnungssatz (ohne USt.):</Typography>
-            <Typography variant="h2" component="span" style={{ color: "white" }}>
-              {formFloat(values.std_verrechnungssaetze_G14 || 0, 2)
+          <>
+            <Stack flexDirection="row" justifyContent="space-between" width="100%">
+              <Typography variant="h2" component="span" style={{ color: 'white' }}>
+                Stundenverrechnungssatz (ohne USt.):
+              </Typography>
+              <Typography variant="h2" component="span" style={{ color: 'white' }}>
+                {formFloat(values.std_verrechnungssaetze_G14 || 0, 2)
+                  .toString()
+                  .replace('.', ',')}
+                €
+              </Typography>
+            </Stack>
+            <Typography variant="body1" component="span" style={{ color: 'white' }}>
+              Stundenverrechnungssatz (mit USt.):{' '}
+              {formFloat((values.std_verrechnungssaetze_G14 || 0) * 1.19, 2)
                 .toString()
                 .replace('.', ',')}
               €
             </Typography>
-          </Stack>
+          </>
         }
       />
       <FormSection defaultOpen title="Kalkulation Stundenverrrechnungssatz">

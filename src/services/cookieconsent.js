@@ -23,7 +23,7 @@ const runConsent = () => {
           consentModal: {
             title: 'Wir verwenden Cookies',
             description:
-              'Um unsere Website zu betreiben, verwenden wir Cookies. Einige von ihnen sind erforderlich, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.',
+              'Um unsere Webseite zu betreiben, verwenden wir Cookies. Einige von ihnen sind erforderlich, während andere uns helfen, diese Webseite und Ihre Erfahrung zu verbessern.',
             acceptAllBtn: 'Alle akzeptieren',
             acceptNecessaryBtn: 'Alle ablehnen',
             showPreferencesBtn: 'Individuelle Einstellungen verwalten'
@@ -38,17 +38,17 @@ const runConsent = () => {
               {
                 title: 'Wir verwenden Cookies',
                 description:
-                  'Um unsere Website zu betreiben, verwenden wir Cookies. Einige von ihnen sind erforderlich, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.'
+                  'Um unsere Webseite zu betreiben, verwenden wir Cookies. Einige von ihnen sind erforderlich, während andere uns helfen, diese Webseite und Ihre Erfahrung zu verbessern.'
               },
               {
                 title: 'Unbedingt erforderliche Cookies',
-                description: 'Diese Cookies sind für die ordnungsgemäße Funktion der Website unerlässlich.',
+                description: 'Diese Cookies sind für die ordnungsgemäße Funktion der Webseite unerlässlich.',
                 linkedCategory: 'necessary'
               },
               {
                 title: 'Leistung und Analyse',
                 description:
-                  'Diese Cookies sammeln Informationen darüber, wie Sie unsere Website nutzen um unsere Dienste für Sie verbessern zu können.',
+                  'Diese Cookies sammeln Informationen darüber, wie Sie unsere Webseite nutzen um unsere Dienste für Sie verbessern zu können.',
                 linkedCategory: 'analytics'
               },
               {

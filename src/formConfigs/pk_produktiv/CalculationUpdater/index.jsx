@@ -34,10 +34,10 @@ const StundensatzRechnerValueUpdater = () => {
           const V9 = P9 * ((ma.Q9 || 0) + (ma.R9 || 0));
           const anzahl = ma.anzahl || 1;
 
-          pk_produktiv_P40 += U9 * anzahl;
+          pk_produktiv_P40 += U9 * anzahl; // this
           pk_produktiv_Q40 += V9 * anzahl;
           pk_produktiv_S36 += S9 * anzahl;
-          pk_produktiv_O36 += O9 * anzahl;
+          pk_produktiv_O36 += O9 * anzahl; // this
           pk_produktiv_Q36_tmp += (ma.Q9 || 0) * anzahl;
           mitarbeiter_anzahl++;
 
@@ -121,7 +121,11 @@ const StundensatzRechnerValueUpdater = () => {
       const S41 = (P41 || 0) + (Q41 || 0);
       const P42 = (P41 || 0) + (values.pk_produktiv_P40 || 0);
       const Q42 = (Q41 || 0) + (values.pk_produktiv_Q40 || 0);
-      const R42 = (R41 || 0) + (values.pk_produktiv_R40 || 0);
+      const R42 =
+        (typeof values.pk_produktiv_O36 === 'number' && values.annahmen_I46
+          ? (values.pk_produktiv_P40 || 0) / values.pk_produktiv_O36
+          : 0) *
+        ((values.annahmen_I46 || 0) / 100 + 1);
       const S42 = (S41 || 0) + (values.pk_produktiv_S40 || 0);
 
       if (!values.pk_produktiv_P41 !== P41) {
@@ -171,7 +175,8 @@ const StundensatzRechnerValueUpdater = () => {
     values.pk_produktiv_Q42,
     values.pk_produktiv_R42,
     values.pk_produktiv_S40,
-    values.pk_produktiv_S42
+    values.pk_produktiv_S42,
+    values.pk_produktiv_O36
   ]);
 
   useEffect(() => {

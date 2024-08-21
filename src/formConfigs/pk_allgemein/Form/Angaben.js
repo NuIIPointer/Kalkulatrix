@@ -104,7 +104,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <TextField
                 {...field}
-                label="Anzahl der Gehälter p.a."
+                label="Anzahl der Gehälter (p.a., max. 12)"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}

@@ -16,7 +16,10 @@ const PublicLayout = () => {
     <>
       <Box
         sx={{
-          background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[800]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[200]}, transparent 100%)`
+          background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[800]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[200]}, transparent 100%)`,
+          '& .calendly-badge-content': {
+            backgroundColor: `${theme.palette.primary.main} !important`
+          }
         }}
       >
         <PopupWidget

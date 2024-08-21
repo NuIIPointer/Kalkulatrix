@@ -12,8 +12,8 @@ import GKDeckung from 'formConfigs/gk_deckung/Form/index';
 import gKDeckungValidationSchema from 'formConfigs/gk_deckung/rules/validation/schema';
 // import GKStundensaetze from 'formConfigs/gk_stundensaetze/Form/index';
 // import gKStundensaetzeValidationSchema from 'formConfigs/gk_stundensaetze/rules/validation/schema';
-import StdVerrechnungssaetze from 'formConfigs/std_verrechnungssaetze/Form/index';
-import stdVerrechnungssaetzeValidationSchema from 'formConfigs/std_verrechnungssaetze/rules/validation/schema';
+// import StdVerrechnungssaetze from 'formConfigs/std_verrechnungssaetze/Form/index';
+// import stdVerrechnungssaetzeValidationSchema from 'formConfigs/std_verrechnungssaetze/rules/validation/schema';
 import Deckungsbeitraege from 'formConfigs/deckungsbeitraege/Form/index';
 import deckungsbeitraegeValidationSchema from 'formConfigs/deckungsbeitraege/rules/validation/schema';
 

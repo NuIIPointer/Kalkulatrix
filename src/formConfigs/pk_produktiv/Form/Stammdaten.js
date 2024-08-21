@@ -324,7 +324,7 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label="Davon direkt verrechenbare Arbeitszeit"
+                                            label="Davon direkt verrechenbare Arbeitszeit (in %)"
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             type="number"
@@ -414,7 +414,10 @@ const Stammdaten = () => {
                                       </FastField>
                                     </Grid>
                                     <Grid item xs={12}>
-                                      <ReadOnlyBox alwaysOpen title={`Berechnet ${innerField.anzahl > 1 ? '(pro Mitarbeiter):' : ''}`}>
+                                      <ReadOnlyBox
+                                        alwaysOpen
+                                        title={`Berechnet ${innerField.anzahl > 1 ? '(pro einzelner Mitarbeiter):' : ''}`}
+                                      >
                                         <Grid container columnSpacing={{ xs: 2, md: 4 }}>
                                           <Grid item xs={12} sm={6}>
                                             <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.S9`}>

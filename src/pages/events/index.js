@@ -29,7 +29,7 @@ const Events = () => {
         description="Unsere Experten stehen bereit, um Ihnen mit maßgeschneiderter Beratung zur Seite zu stehen. Ob Sie tiefer in die Funktionen von Kalkulatrix eintauchen oder spezifische Herausforderungen in Ihrem Unternehmen besprechen möchten, ein persönlicher Beratungstermin bietet Ihnen die Lösungen, welche zu Ihrem Unternehmen passen. Alternativ können Sie auch an unseren interaktiven Webinaren teilnehmen, die praktische Einblicke und nützliche Tipps zur Maximierung Ihrer Unternehmenspotenziale bieten."
       />
 
-      <ConsentWrapper consentKeys={['analytics']}>
+      <ConsentWrapper title="Kalender - Termin vereinbaren" consentKeys={['necessary']}>
         <InlineWidget
           url="https://calendly.com/adel-consulting/30min"
           styles={{

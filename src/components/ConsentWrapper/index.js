@@ -1,11 +1,21 @@
 import { useHasConsent } from 'services/cookieconsent';
+import { Alert, AlertTitle } from '@mui/material/index';
 
-const ConsentWrapper = ({ children, consentKeys }) => {
+const ConsentWrapper = ({
+  title,
+  children,
+  consentKeys,
+  errorDescription = 'Sie müssen den Diensten zustimmen um dieses Element sehen zu können.'
+}) => {
   const hasConsent = useHasConsent(consentKeys || []);
-    console.log('consentwrapper', consentKeys, hasConsent);
+  console.log('consentwrapper', consentKeys, hasConsent);
 
   if (!hasConsent) {
-    return 'Stimmen Sie dem Consent zu, um die Inhalte zu sehen';
+    return (
+      <Alert severity="warning">
+        {title ? <AlertTitle>{title}</AlertTitle> : ''} {errorDescription}
+      </Alert>
+    );
   }
 
   return children;
