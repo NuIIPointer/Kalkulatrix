@@ -294,9 +294,8 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
-                                            label={`Lohnnebenkosten (${
-                                              values.pk_allgemein_K5 ? `${values.pk_allgemein_K5}%, ` : ''
-                                            }in EUR)`}
+                                            value={formFloat(field.value, 2)}
+                                            label={`Lohnnebenkosten (in EUR)`}
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}
                                             sx={{ mb: 2 }}
@@ -313,6 +312,7 @@ const Stammdaten = () => {
                                         {({ field, meta }) => (
                                           <TextField
                                             {...field}
+                                            value={formFloat(field.value, 2)}
                                             label="Gesamtkosten (p.a., in EUR)"
                                             error={meta?.touched && Boolean(meta.error)}
                                             helperText={meta?.touched && meta.error}

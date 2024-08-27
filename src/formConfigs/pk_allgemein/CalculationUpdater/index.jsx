@@ -25,9 +25,21 @@ const StundensatzRechnerValueUpdater = () => {
           const H14 = (ma.G14 || 0) - (ma.F14 || 0) + 1;
           const J14 = (H14 || 0) * (ma.I14 || 0);
           const L14 = (J14 || 0) + (ma.K14 || 0);
-          const M14 = (L14 || 0) * ((values.pk_allgemein_K5 || 0) / 100);
+
+          // pk_allgemein_K6 => Beitragsbemessungsgrenze in EURO
+          // pk_allgemein_K5 => Lohnnebenkosten (bis Beitragsbemessungsgrenze, in %)
+          // pk_allgemein_K7 => Lohnnebenkosten (oberhalb Beitragsbemessungsgrenze, in %)
+          // J14 => Bruttoeinkommen gesamt in EURO (Jahr)
+          // L14 => Personalkosten gesamt in EURO (inkl. Sonderzahlungen Jahr)
+          const isLohnAboveBemessungsgrenze = L14 > (values.pk_allgemein_K6 || 0);
+          const lohnNKVorBemessungsgrenze = Math.min(L14, values.pk_allgemein_K6 || 0) * ((values.pk_allgemein_K5 || 0) / 100);
+          const lohnNKNachBemessungsgrenze = isLohnAboveBemessungsgrenze
+            ? (L14 - (values.pk_allgemein_K6 || 0)) * ((values.pk_allgemein_K7 || 0) / 100)
+            : 0;
+
+          const M14 = lohnNKVorBemessungsgrenze + lohnNKNachBemessungsgrenze;
           const N14 = (L14 || 0) + (M14 || 0);
-          const anzahl = ma.anzahl || 1;
+          const anzahl = ma.anzahl ?? 1;
 
           pk_allgemein_anzahl += anzahl;
           N24 += N14 * anzahl;
@@ -71,7 +83,15 @@ const StundensatzRechnerValueUpdater = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [setFieldValue, values.pk_allgemein_K5, values.pk_allgemein_N53, values.pk_allgemein_anzahl, values.pk_allgemein_mitarbeiter]);
+  }, [
+    setFieldValue,
+    values.pk_allgemein_K5,
+    values.pk_allgemein_K6,
+    values.pk_allgemein_K7,
+    values.pk_allgemein_N53,
+    values.pk_allgemein_anzahl,
+    values.pk_allgemein_mitarbeiter
+  ]);
 
   return <React.Fragment />;
 };
