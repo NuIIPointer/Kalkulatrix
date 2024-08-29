@@ -41,7 +41,13 @@ const Stammdaten = () => {
   };
 
   return (
-    <FormSection collapsable={true} title="Gehälter allgemeiner Bereich" isError={!!errors?.pk_allgemein_mitarbeiter}>
+    <FormSection
+      collapsable={true}
+      title="Gehälter allgemeiner Bereich"
+      description="Bitte legen Sie ihre Abteilungen bzw. Unternehmensbereiche an. Folgend können sie die Mitarbeiter für die einzelnen Abteilungen erfassen.
+"
+      isError={!!errors?.pk_allgemein_mitarbeiter}
+    >
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_allgemein_mitarbeiter">
           {({ push, remove }) => (
@@ -255,7 +261,7 @@ const Stammdaten = () => {
                                   {({ field, meta }) => (
                                     <TextField
                                       {...field}
-                                      label="Sonderzahlungen (SZ)"
+                                      label="Sonderzahlungen (p.A., in EUR)"
                                       error={meta?.touched && Boolean(meta.error)}
                                       helperText={meta?.touched && meta.error}
                                       sx={{ mb: 2 }}
@@ -368,13 +374,13 @@ const Stammdaten = () => {
                         </Button>
                         <ReadOnlyBox title={' '} alwaysOpen>
                           <Grid container columnSpacing={{ xs: 2, md: 4 }}>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6} key={`${outerField.groupTitle || outerIndex}`}>
                               <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.N24`}>
                                 {({ field, meta }) => (
                                   <TextField
                                     {...field}
                                     value={formFloat(field.value, 2)}
-                                    label={`Summe ${outerField.groupTitle || 'Gruppe'} (in EUR)`}
+                                    label={`Gesamtkosten Abteilung "${outerField.groupTitle || outerIndex + 1}" (in EUR)`}
                                     error={meta?.touched && Boolean(meta.error)}
                                     helperText={meta?.touched && meta.error}
                                     InputProps={{

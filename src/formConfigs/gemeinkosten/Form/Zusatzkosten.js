@@ -9,7 +9,13 @@ import FormSection from 'components/formComponents/FormSection/index';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 
-export const zusatzkosten_fieldTitles = ['Unternehmerlohn', 'Abschreibung', 'EK-Zinsen', 'FK-Zinsen', 'Kalkulatorische Wagnisse'];
+export const zusatzkosten_fieldTitles = [
+  'Unternehmerlohn',
+  'Abschreibung',
+  'Eigenkapital-Zinsen',
+  'Fremdkapital-Zinsen',
+  'Kalkulatorische Wagnisse'
+];
 export const zusatzkosten_startingRow = 42;
 
 const Zusatzkosten = () => {

@@ -10,11 +10,10 @@ import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 
 export const sachkosten_fieldTitles = [
-  'Personalkosten',
   'Raumkosten',
   'Miete / Grundstückskosten',
-  'Betriebl.Steuern',
-  'Versich./ Beiträge',
+  'Betriebliche Steuern',
+  'Versicherungen/ Beiträge',
   'Kfz - Kosten(o.St.)',
   'Werbe -/Reisekosten',
   'Kosten Warenabgabe',

@@ -42,7 +42,12 @@ const Stammdaten = () => {
   };
 
   return (
-    <FormSection collapsable={true} title="Eingabe Produktive Lohnkosten" defaultOpen>
+    <FormSection
+      collapsable={true}
+      title="Eingabe Produktive Lohnkosten"
+      description="Bitte legen Sie ihre Abteilungen bzw. Unternehmensbereiche an. Folgend können sie die Mitarbeiter für die einzelnen Abteilungen erfassen."
+      defaultOpen
+    >
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_produktiv_mitarbeiter">
           {({ push, remove }) => (
@@ -131,14 +136,19 @@ const Stammdaten = () => {
                   <FieldArray name={`pk_produktiv_mitarbeiter.${outerIndex}.fields`}>
                     {({ push: innerPush, remove: innerRemove }) => (
                       <>
+                        <p>
+                          Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher
+                          Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter erstellen
+                          und angeben, wie oft dieser berücksichtigt wird (Anzahl).
+                        </p>
                         {values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields?.map((innerField, innerIndex) => {
                           const maTitle = `${innerField?.titel || 'Mitarbeiter'} ${
                             innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
                           }`;
                           const maShortData = [
-                            { title: 'Bruttostundenlohn', value: `${innerField.Q9 || 0}€` },
-                            { title: 'Auslastung', value: `${innerField.N9 || 0}%` },
-                            { title: 'Anwesenheitsentgelt', value: `${innerField.S9 || 0}€` }
+                            { title: 'Bruttostundenlohn', value: `${formFloat(innerField.Q9 || 0, 2).replace('.', ',')}€` },
+                            { title: 'Auslastung', value: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%` },
+                            { title: 'Anwesenheitsentgelt', value: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€` }
                           ];
 
                           return (
@@ -527,6 +537,28 @@ const Stammdaten = () => {
                         >
                           Neuer Mitarbeiter
                         </Button>
+                        <ReadOnlyBox title={' '} alwaysOpen>
+                          <Grid container columnSpacing={{ xs: 2, md: 4 }}>
+                            <Grid item xs={12} sm={6}>
+                              <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.S9_gesamt`}>
+                                {({ field, meta }) => (
+                                  <TextField
+                                    {...field}
+                                    value={formFloat(field.value, 2)}
+                                    label={`Gesamtkosten Abteilung "${outerField.groupTitle || outerIndex + 1}" (in EUR)`}
+                                    error={meta?.touched && Boolean(meta.error)}
+                                    helperText={meta?.touched && meta.error}
+                                    InputProps={{
+                                      readOnly: true
+                                    }}
+                                    type="number"
+                                    sx={{ mb: 2 }}
+                                  />
+                                )}
+                              </FastField>
+                            </Grid>
+                          </Grid>
+                        </ReadOnlyBox>
                       </>
                     )}
                   </FieldArray>

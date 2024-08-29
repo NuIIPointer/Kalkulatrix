@@ -185,7 +185,7 @@ const Produktivstunden = () => {
               component={TextField}
               id="annahmen_G28"
               name="annahmen_G28"
-              label="⌀ Sonstige Arbeitsverhinderungen"
+              label="⌀ Sonstige Arbeitsverhinderungen (in Tagen)"
               value={values.annahmen_G28}
               type="number"
               onWheel={(event) => event.target.blur()}
