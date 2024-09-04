@@ -29,7 +29,7 @@ const Zusammenfassung = () => {
                 <TextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme aller PLAN-Gemeinkosten (in EUR)"
+                  label="Gesamtsumme aller Plan-Gemeinkosten (in EUR)"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}

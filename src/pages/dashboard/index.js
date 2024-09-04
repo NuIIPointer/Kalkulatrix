@@ -24,7 +24,7 @@ const Dashboard = () => {
   const formIdToShow = formsKeys?.[activeFormKey];
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
   const formValues = formToShow?.values || {};
-  const formResult = formValues.deckungsbeitraege_L17;
+  const formResult = formValues.std_verrechnungssaetze_G14;
   const auslastung = formValues.pk_produktiv_auslastung
     ? `${formFloat(formValues.pk_produktiv_auslastung, 2).toString().replace('.', ',')}%`
     : 'Kein Ergebnis';

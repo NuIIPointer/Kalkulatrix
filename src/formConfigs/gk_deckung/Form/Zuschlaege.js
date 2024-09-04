@@ -42,7 +42,7 @@ const MaterialzuschlagFremdleistungen = () => {
 
   return (
     <>
-      <FormSection collapsable={false} title="Angabe Gemeinkosten">
+      <FormSection collapsable={false} title="Angabe Betriebskosten-Deckung">
         <TabContext value={openedTab.toString()}>
           <FieldArray name="gk_deckung_zuschlaege">
             {({ push, remove }) => (
@@ -76,7 +76,7 @@ const MaterialzuschlagFremdleistungen = () => {
                   </Button>
                 </Stack>
                 {values.gk_deckung_zuschlaege?.map((outerField, outerIndex) => (
-                  <TabPanel key={`${outerField.groupTitle}-${outerIndex}`} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
+                  <TabPanel key={outerIndex} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
                     <Grid container columnSpacing={2} alignItems="end">
                       <Grid item xs={12} sm={5} md={4}>
                         <FastField name={`gk_deckung_zuschlaege.${openedTab}.groupTitle`}>
@@ -288,7 +288,7 @@ const MaterialzuschlagFremdleistungen = () => {
                                     <TextField
                                       {...field}
                                       value={formFloat(field.value, 2)}
-                                      label={`Summe ${outerField.groupTitle || 'Gruppe'} (in EUR)`}
+                                      label={`Erlöse der Gruppe "${outerField.groupTitle || 'Gruppe'}" (in EUR)`}
                                       error={meta?.touched && Boolean(meta.error)}
                                       helperText={meta?.touched && meta.error}
                                       InputProps={{

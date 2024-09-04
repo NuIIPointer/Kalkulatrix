@@ -19,10 +19,6 @@ const StundensatzRechnerValueUpdater = () => {
       const G14 = G12 + G13 || 0;
       const G15 = G14 && G10 ? (G14 / G10) * 100 : 0;
 
-      console.log('G12', G12);
-      console.log('G13', G13);
-      console.log('G14', G14);
-
       if (G8 !== values.std_verrechnungssaetze_G8) {
         setFieldValue('std_verrechnungssaetze_G8', G8);
       }

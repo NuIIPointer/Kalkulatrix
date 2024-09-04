@@ -31,7 +31,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <TextField
                 {...field}
-                label="PLAN (in EUR)"
+                label="Plankosten (in EUR)"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}
@@ -47,7 +47,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <TextField
                 {...field}
-                label="Davon variabel (in %)"
+                label="Variable Kosten (in %)"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}
@@ -113,7 +113,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <TextField
                 {...field}
-                label="PLAN (in EUR)"
+                label="Plankosten (in EUR)"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}
@@ -129,7 +129,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <TextField
                 {...field}
-                label="Davon variabel (in %)"
+                label="Variable Kosten (in %)"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}
@@ -195,7 +195,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <TextField
                 {...field}
-                label="PLAN (in EUR)"
+                label="Plankosten (in EUR)"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}
@@ -211,7 +211,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <TextField
                 {...field}
-                label="Davon variabel (in %)"
+                label="Variable Kosten (in %)"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}
@@ -276,7 +276,7 @@ const Stammdaten = () => {
                     <TextField
                       {...field}
                       value={formFloat(field.value, 2)}
-                      label="Gesamt: PLAN-Kosten (berechnet, in EUR)"
+                      label="Gesamt: Plankosten (berechnet, in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
                       sx={{ mb: 2 }}
