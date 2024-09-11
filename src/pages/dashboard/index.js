@@ -31,7 +31,6 @@ const Dashboard = () => {
   const zuschlagProzentDurchschnitt = formValues.zuschlagProzentDurchschnitt
     ? formFloat(formValues.zuschlagProzentDurchschnitt, 2) * 100 + '%'
     : 'Kein Ergebnis';
-  console.log('formValues', formValues);
   const anzMitarbeiter = (formValues.pk_produktiv_anzahl || 0) + (formValues.pk_allgemein_anzahl || 0);
   const formResultFormatted = formResult ? `${formFloat(formResult, 2).toString().replace('.', ',')}€` : 'Kein Ergebnis';
   const formFrom = `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;

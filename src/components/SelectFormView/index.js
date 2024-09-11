@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 // material-ui
 import {
   Alert,
+  AlertTitle,
   Grid,
   Stack,
   Typography,
@@ -170,6 +171,12 @@ const SelectFormView = ({ formType, sections }) => {
                     </Button>
                   </Stack>
                 </Stack>
+                <Alert severity="info" sx={{ mb: 3 }}>
+                  <AlertTitle>
+                    Für eine effiziente und korrekte Kalkulation benötigen Sie einen aktuellen Jahresabschluss oder betriebswirtschaftliche
+                    Auswertung sowie eine Übersicht der Daten Ihrer Angestellten.
+                  </AlertTitle>
+                </Alert>
                 <Grid spacing={{ xs: 2, lg: 3 }} container>
                   {sectionsDom}
                 </Grid>

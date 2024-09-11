@@ -46,7 +46,7 @@ const DGemeinkostenPlangewinn = () => {
             sx={{ mt: { xs: 1 } }}
             alignItems="flex-end"
           >
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G8">
                 {({ field, meta }) => (
                   <TextField
@@ -81,7 +81,7 @@ const DGemeinkostenPlangewinn = () => {
                   />
                 )}
               </Field>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G10">
                 {({ field, meta }) => (
@@ -109,7 +109,7 @@ const DGemeinkostenPlangewinn = () => {
                   <TextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="GK-Satz pro Stunde"
+                    label="Betriebskostensatz pro Stunde"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -120,9 +120,6 @@ const DGemeinkostenPlangewinn = () => {
                   />
                 )}
               </FastField>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              &nbsp;
             </Grid>
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G12">
@@ -162,9 +159,6 @@ const DGemeinkostenPlangewinn = () => {
                   />
                 )}
               </FastField>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              &nbsp;
             </Grid>
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G15">

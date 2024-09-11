@@ -74,11 +74,6 @@ const StundensatzRechnerValueUpdater = () => {
       const H33 = F23 ? (F23 / 100) * values.gk_stundensaetze_H29 : 0;
       const H38 = H23 ? ((values.gk_stundensaetze_H14 || 0) / H23) * 100 : 0;
       const H42 = F23 ? (F23 / 100) * H38 : 0;
-
-      if (F23 !== values.gk_stundensaetze_F23) {
-        setFieldValue('gk_stundensaetze_F23', F23);
-        setFieldValue('gk_stundensaetze_F33', F23);
-      }
       if (G23 !== values.gk_stundensaetze_G23) {
         setFieldValue('gk_stundensaetze_G23', G23);
       }
@@ -109,7 +104,6 @@ const StundensatzRechnerValueUpdater = () => {
     };
   }, [
     setFieldValue,
-    values.gk_stundensaetze_F23,
     values.gk_stundensaetze_F33,
     values.gk_stundensaetze_G23,
     values.gk_stundensaetze_H10,

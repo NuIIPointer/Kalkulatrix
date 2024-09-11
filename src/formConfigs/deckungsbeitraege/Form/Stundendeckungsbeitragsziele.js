@@ -24,7 +24,7 @@ const DGemeinkostenPlangewinn = () => {
                 <TextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Berechnungsbasis (Summe direkt verrechenb. Std., in EUR)"
+                  label="Berechnungsbasis (Summe direkt verrechenbarer Std., in EUR)"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}

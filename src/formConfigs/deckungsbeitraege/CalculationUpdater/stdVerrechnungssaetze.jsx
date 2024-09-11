@@ -11,7 +11,7 @@ const StundensatzRechnerValueUpdater = () => {
     const reCalculateSVSValues = () => {
       const G8 = values.pk_produktiv_Q36 || 0;
       const G9 = (G8 * (values.annahmen_I46 || 0)) / 100 - G8;
-      const G10 = G8 + G9 || 0;
+      const G10 = values.pk_produktiv_R42 || 0;
 
       const G11 = values.gk_stundensaetze_H12 || 0;
       const G12 = G10 + G11 || 0;
@@ -58,6 +58,7 @@ const StundensatzRechnerValueUpdater = () => {
     values.gk_stundensaetze_H12,
     values.gk_stundensaetze_H16,
     values.pk_produktiv_Q36,
+    values.pk_produktiv_R42,
     values.std_verrechnungssaetze_G10,
     values.std_verrechnungssaetze_G11,
     values.std_verrechnungssaetze_G12,
