@@ -15,13 +15,19 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import validationSchema from 'formConfigs/authRegister/rules/validation/schema';
+import { Alert, CircularProgress } from '@mui/material';
+import Loader from 'components/Loader';
+import { StatusCodes } from 'http-status-codes';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
 
 const AuthRegister = () => {
-  const { registerUser } = useContext(UserContext);
+  const { registerUser, requestStatusCodes } = useContext(UserContext);
   const [level, setLevel] = useState();
   const [showPassword, setShowPassword] = useState(false);
+  const showSuccess = requestStatusCodes.createUser === StatusCodes.OK;
+  const showError = requestStatusCodes.createUser >= 400;
+  const registerLoading = requestStatusCodes.createUser === StatusCodes.PROCESSING;
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -35,10 +41,21 @@ const AuthRegister = () => {
     setLevel(strengthColor(temp));
   };
 
-  const handleRegister = ({ email, password, firstName, lastName, company }) => {
+  const handleRegister = async ({ email, password, firstName, lastName, company }) => {
     // Sign in an existing user with Firebase
-    registerUser({ email, password, firstName, lastName, company });
+    await registerUser({ email, password, firstName, lastName, company });
   };
+
+  if (showSuccess) {
+    return (
+      <>
+        <Alert severity="success">Sie haben sich erfolgreich registriert!</Alert>
+        <Button href="/login" size="large" variant="contained" color="primary" sx={{ mt: 2, ml: 'auto' }}>
+          Jetzt anmelden
+        </Button>
+      </>
+    );
+  }
 
   return (
     <>
@@ -186,10 +203,25 @@ const AuthRegister = () => {
                   <FormHelperText error>{errors.submit}</FormHelperText>
                 </Grid>
               )}
+              {showError && (
+                <Grid item xs={12}>
+                  <Alert severity="error">
+                    Es ist etwas schief gelaufen. Stelle sicher, dass es noch keinen Account mit dieser E-Mail-Adresse gibt.
+                  </Alert>
+                </Grid>
+              )}
               <Grid item xs={12}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                    Profil erstellen
+                  <Button
+                    disableElevation
+                    disabled={isSubmitting || registerLoading}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Profil erstellen {registerLoading && <CircularProgress size="1rem" sx={{ ml: 1 }} />}
                   </Button>
                 </AnimateButton>
               </Grid>
@@ -207,6 +239,7 @@ const AuthRegister = () => {
           </Form>
         )}
       </Formik>
+      {registerLoading && <Loader />}
     </>
   );
 };

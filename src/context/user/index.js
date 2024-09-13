@@ -243,6 +243,7 @@ export const UserContextProvider = ({ children }) => {
     async (formData) => {
       const { email, password, firstName, lastName, company } = formData;
       setCreateUser(StatusCodes.PROCESSING);
+
       await createUserWithEmailAndPassword(auth, email, password)
         // returns  an auth object after a successful authentication
         // userAuth.user contains all our user details
@@ -270,8 +271,11 @@ export const UserContextProvider = ({ children }) => {
             });
         })
         .catch((error) => {
+          setCreateUser(StatusCodes.BAD_REQUEST);
           console.error('user not updated', error);
         });
+
+      return status;
     },
     [authUser]
   );
