@@ -16,7 +16,6 @@ const iconStyles = {
 const Dashboard = () => {
   const theme = useTheme();
   const [isLoadingSub, setIsLoadingSub] = useState();
-  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.main}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary.light}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.light}, transparent 100%)`;
 
   const { getPortalUrl, createSubscription, loadingCreateSubscription, hasActiveSubscription } = useContext(StripeContext);
 
@@ -35,12 +34,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <ColoredSection
-        bgGradient={headerBgColor}
-        bgColor={theme.palette.secondary.dark}
-        headline={`Abonnement ${hasActiveSubscription ? '(aktiv)' : ''}`}
-        description="Auf dieser Seite können Sie Ihr Abonnement verwalten."
-      />
       <LayoutBox
         sx={{
           backgroundColor: theme.palette.common.white,

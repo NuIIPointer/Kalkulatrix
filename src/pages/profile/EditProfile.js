@@ -68,7 +68,7 @@ const EditProfile = () => {
           validateOnChange
           validateOnSubmit
         >
-          {({ values = {}, errors = {}, isSubmitting, handleChange, handleBlur, touched = {}, setFieldValue }) => (
+          {({ values = {}, errors = {}, handleChange, handleBlur, touched = {} }) => (
             <Form autoComplete="off" onSubmit={() => saveFormValues(values)}>
               <Stack mt={4} />
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>

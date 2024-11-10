@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Stack, Typography } from '@mui/material/index';
 import { NavigationContext } from 'context/navigation/index';
 import { useLocation } from 'react-router-dom/dist/index';
+import pages from '../../../../menu-items/index'; // Import pages data
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
@@ -15,14 +16,27 @@ const HeaderContent = () => {
   const theme = useTheme();
   const location = useLocation();
 
+  const getTitle = (pathname) => {
+    const pagesFlattened = [];
+
+    pages.items?.forEach((page) => {
+      if (page.children) {
+        page.children.forEach((child) => {
+          pagesFlattened.push(child);
+        });
+      } else {
+        pagesFlattened.push(page);
+      }
+    });
+
+    const currentPage = pagesFlattened.find((page) => page.url === pathname);
+    return currentPage ? currentPage.title : '';
+  };
+
   return (
     <>
-      <Stack
-        flexDirection="column"
-        marginTop={1}
-        {...(location.pathname !== '/office/dashboard' ? { sx: { opacity: 0 }, 'aria-hidden': true } : {})}
-      >
-        <Typography sx={{ fontSize: 36, fontWeight: theme.typography.fontWeightBold }}>Kalkulatrix Dashboard</Typography>
+      <Stack flexDirection="column" marginTop={1}>
+        <Typography sx={{ fontSize: 36, fontWeight: theme.typography.fontWeightBold }}>{getTitle(location.pathname)}</Typography>
       </Stack>
       {!useDrawerNav && <Profile />}
     </>

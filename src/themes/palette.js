@@ -87,18 +87,18 @@ const Palette = (mode) => {
         ...createColor('#2d69f6')
       },
       secondary: {
-        50: '#13110c',
-        100: '#262217',
-        200: '#4d442f',
-        300: '#736546',
-        400: '#9a875e',
-        500: '#c0a975',
-        600: '#cdba91',
-        700: '#d9cbac',
-        800: '#e6ddc8',
-        900: '#f2eee3',
+        50: '#fafafa',
+        100: '#f5f5f5',
+        200: '#eeeeee',
+        300: '#e0e0e0',
+        400: '#bdbdbd',
+        500: '#9e9e9e',
+        600: '#757575',
+        700: '#616161',
+        800: '#424242',
+        900: '#212121',
         contrastDefaultColor: 'dark',
-        ...createColor('#c0a975')
+        ...createColor('#9e9e9e')
       },
       tertiary: {
         50: '#eaebf2',

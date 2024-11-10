@@ -1,11 +1,9 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Typography, Box } from '@mui/material';
-// import ColoredSection from 'components/pageLayout/header/ColoredSection';
 
 const Imprint = () => {
   const theme = useTheme();
-  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.main}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary.dark}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.light}, transparent 100%)`;
 
   return (
     <Box

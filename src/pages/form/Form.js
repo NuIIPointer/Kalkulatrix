@@ -3,11 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Typography, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 
 // project import
 import { UserContext } from 'context/user';
-import ColoredSection from 'components/pageLayout/header/ColoredSection/index';
 import FullPageLoader from 'components/FullPageLoader/index';
 import useFormLiteral from './useFormLiteral';
 import { Formik, Form } from 'formik';
@@ -104,12 +103,6 @@ const FormComponent = () => {
 
   return (
     <Box mb={theme.shape.layoutDesignGutterReset}>
-      <ColoredSection
-        backLink="/office/form/overview"
-        bgColor={theme.palette.primary[200]}
-        headline={activeFormConfig.title}
-        description={activeFormConfig.description}
-      />
       {formContents ? (
         <Formik
           key={activeFormData?.title}

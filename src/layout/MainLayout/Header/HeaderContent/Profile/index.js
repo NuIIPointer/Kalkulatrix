@@ -127,15 +127,17 @@ const Profile = () => {
                             {user?.initials}
                           </Avatar>
                           <Stack>
-                            <Typography variant="h6">{user?.displayName}</Typography>
-                            <Typography variant="body2" color="textSecondary">
+                            <Typography variant="body1" sx={{ fontWeight: 'bold', lineHeight: '1.2em' }}>
+                              {user?.displayName}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" sx={{ fontSize: '0.75rem', lineHeight: '1.1em' }}>
                               {user?.company}
                             </Typography>
                           </Stack>
                         </Stack>
                       </Grid>
                       <Grid item>
-                        <IconButton size="large" color="primary" onClick={handleLogout}>
+                        <IconButton size="large" color="dark" onClick={handleLogout}>
                           <Logout />
                         </IconButton>
                       </Grid>

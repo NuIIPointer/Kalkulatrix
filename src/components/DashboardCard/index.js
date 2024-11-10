@@ -50,7 +50,10 @@ const DashboardCard = ({ icon, title, subTitle, value, valueChanged, changedUpDo
         <Box sx={iconBoxSx}>
           <Icon sx={{ fontSize: { xs: 16, sm: 18, md: 22, lg: 26 } }} />
         </Box>
-        <Typography component="h3" sx={{ fontWeight: 'bold', fontSize: { xs: 16, md: 18 }, marginTop: { sm: theme.spacing(0.5) }, lineHeight: '1.1em' }}>
+        <Typography
+          component="h3"
+          sx={{ fontWeight: 'bold', fontSize: { xs: 16, md: 18 }, marginTop: { sm: theme.spacing(0.5) }, lineHeight: '1.1em' }}
+        >
           {title}
         </Typography>
       </Stack>

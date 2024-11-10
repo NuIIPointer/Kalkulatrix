@@ -1,28 +1,27 @@
 import React, { useContext, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import ColoredSection from 'components/pageLayout/header/ColoredSection';
 import { AdminContext } from 'context/admin/index';
 import { Box, Button, Stack, Modal, Typography } from '@mui/material';
 import useFormLiteral from 'pages/form/useFormLiteral';
 import DataTable from 'components/DataTable/index';
+import LayoutBox from 'components/LayoutBox/index';
 
 const AdminDashboard = () => {
   const theme = useTheme();
   const { clientsData } = useContext(AdminContext);
   const [modalData, setModalData] = useState(null);
-  const headerBgColor = `radial-gradient(circle at 2% 10%, ${theme.palette.primary.main}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary.dark}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.primary.light}, transparent 100%)`;
   const formLiteral = useFormLiteral();
 
   const columns = [
     {
       field: 'firstName',
       headerName: 'Vorname',
-      width: 150
+      width: 200
     },
     {
       field: 'lastName',
       headerName: 'Nachname',
-      width: 150
+      width: 200
     },
     {
       field: 'company',
@@ -32,9 +31,9 @@ const AdminDashboard = () => {
     {
       field: 'usersFormData',
       headerName: 'Formulare',
-      width: 'auto',
+      width: 450,
       renderCell: (params) => (
-        <Stack gap={2} direction="row" justifyContent="flex-start" alignItems="center" sx={{ height: '100%' }}>
+        <Stack gap={2} direction="row" justifyContent="flex-start" alignItems="center" flexWrap="wrap" sx={{ height: '100%' }}>
           {params.value?.map((formData, key) => (
             <Button
               size="small"
@@ -44,7 +43,6 @@ const AdminDashboard = () => {
               key={FormData.id}
             >
               {formData.title}
-              {console.log('params', params)}
             </Button>
           ))}
         </Stack>
@@ -54,9 +52,9 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <ColoredSection bgGradient={headerBgColor} bgColor={theme.palette.secondary.dark} headline={'Admin Dashboard'} />
+      {/* <ColoredSection bgGradient={headerBgColor} bgColor={theme.palette.secondary.dark} headline={'Admin Dashboard'} /> */}
       {clientsData && (
-        <Box sx={{ overflow: 'hidden', borderRadius: theme.shape.borderRadiusBox, backgroundColor: '#ffffff', padding: 2 }}>
+        <LayoutBox sx={{ padding: { xs: 2, sm: 3, md: 4 }, backgroundColor: '#fff' }}>
           <DataTable data={clientsData} columns={columns} />
           <Modal
             open={!!modalData?.formData}
@@ -105,7 +103,7 @@ const AdminDashboard = () => {
               </Stack>
             </Box>
           </Modal>
-        </Box>
+        </LayoutBox>
       )}
     </>
   );
