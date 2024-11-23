@@ -19,7 +19,6 @@ const getSubscriptions = async (userId) => {
   }
 };
 
-// eslint-disable-next-line react/prop-types
 export const StripeContextProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [loadingCreateSubscription, setLoadingCreateSubscription] = useState(false);

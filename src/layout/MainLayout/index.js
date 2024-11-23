@@ -55,7 +55,8 @@ const MainLayout = () => {
       />
       <Box
         sx={{
-          display: 'grid',
+          display: { xs: 'block', md: 'grid' },
+          padding: { xs: theme.spacing(2), sm: theme.spacing(4), md: 0 },
           width: '100%',
           maxWidth: '1920px',
           minHeight: '100vh',

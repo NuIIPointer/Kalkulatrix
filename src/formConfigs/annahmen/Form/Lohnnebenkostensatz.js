@@ -7,7 +7,6 @@ import { Grid, TextField, Divider, Typography } from '@mui/material';
 import { Field, useFormikContext } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
-import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 
 const Lohnnebenkostensatz = () => {

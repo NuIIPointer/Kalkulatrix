@@ -1,4 +1,4 @@
-import { Typography, Stack, Grid, Button, Chip } from '@mui/material';
+import { Typography, Stack, Grid, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 const PriceCard = ({ price, bullets, feature, featured }) => {

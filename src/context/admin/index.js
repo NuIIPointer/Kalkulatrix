@@ -12,7 +12,7 @@ const initialStatusCodes = {
 };
 
 export const AdminContext = createContext(null);
-// eslint-disable-next-line react/prop-types
+
 export const AdminContextProvider = ({ children }) => {
   const [status_clientsData, setLoadingClientsData] = useState(initialStatusCodes.loadingUsersdata);
   const [clientsData, setClientsData] = useState(initialStatusCodes.loadingUsersdata);

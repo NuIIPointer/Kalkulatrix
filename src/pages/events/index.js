@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useTheme } from '@mui/material/styles';
 // import LayoutBox from 'components/LayoutBox/index';
 // import { DialogContent, DialogContentText, Dialog, DialogTitle, DialogActions, Button } from '@mui/material';
 
@@ -14,7 +13,6 @@ import ConsentWrapper from 'components/ConsentWrapper/index';
 
 const Events = () => {
   const { user } = useContext(UserContext);
-  const theme = useTheme();
 
   return (
     <>

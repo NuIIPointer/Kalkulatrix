@@ -1,6 +1,5 @@
 import React from 'react';
 import SelectFormView from 'components/SelectFormView/index';
-import { useTheme } from '@mui/material/styles';
 import { Typography, Stack } from '@mui/material';
 import useFormLiteral from './useFormLiteral';
 

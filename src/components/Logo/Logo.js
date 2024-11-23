@@ -13,7 +13,6 @@ import { ReactComponent as KalkulatrixLogoLight } from '../../assets/images/logo
 import { ReactComponent as KalkulatrixLogoDark } from '../../assets/images/logo/kalkulatrix_logo_dark.svg';
 import { ReactComponent as KalkulatrixLogoDarkOutlined } from '../../assets/images/logo/kalkulatrix_logo_dark_outline.svg';
 
-// eslint-disable-next-line react/prop-types
 const Logo = ({ variant, ...otherProps }) => {
   const logoLiteral = {
     dark: KalkulatrixLogoDark,

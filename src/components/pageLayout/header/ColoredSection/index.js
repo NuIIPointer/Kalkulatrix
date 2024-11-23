@@ -9,7 +9,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTheme } from '@mui/material/styles';
 import LayoutBox from 'components/LayoutBox/index';
 
-// eslint-disable-next-line react/prop-types
 const ColoredSectionTop = ({ headline, description, headerChildren, bgColor, bgGradient, backLink, noMargin, boxShadow }) => {
   const theme = useTheme();
   const fgColor = theme.palette.getContrastText(bgColor);

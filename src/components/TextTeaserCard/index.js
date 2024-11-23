@@ -2,7 +2,6 @@ import { Button, Stack, Typography, useTheme, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { darken } from '@mui/material/styles';
 
-// eslint-disable-next-line react/prop-types
 const TextTeaserCard = ({
   primaryText,
   prefixText,

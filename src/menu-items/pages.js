@@ -13,7 +13,7 @@ const pages = {
       title: 'Stundensatzkalkulator',
       type: 'item',
       url: '/office/form/overview',
-      matchingUrlRegexp: /\/form\/[^/]{8,}$/,
+      matchingUrlRegexp: /\/form\/[^/]{20,}\/[^/]*$/,
       icon: BackupTableOutlined
     },
     {

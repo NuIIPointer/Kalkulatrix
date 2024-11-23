@@ -5,7 +5,6 @@ import { useTheme } from '@mui/material/styles';
 import { UserContext } from 'context/user/index';
 import { useContext, useEffect, useState } from 'react';
 
-// eslint-disable-next-line react/prop-types
 const ReadOnlyBox = ({ children, title = 'Berechnet:', alwaysOpen, white, headlineVariant = 'h4', sx }) => {
   const theme = useTheme();
   const { advancedMode } = useContext(UserContext);

@@ -1,15 +1,13 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material/styles';
 
-const DataTable = ({ data, columns, ...otherProps }) => {
+const DataTable = ({ data, columns, sx = {}, ...otherProps }) => {
   const theme = useTheme();
 
   return (
     <DataGrid
       sx={{
-        // '& .MuiDataGrid-virtualScrollerRenderZone': {
-        //   minWidth: '100%'
-        // },
+        ...sx,
         '&.MuiDataGrid-root': {
           border: 'none'
         },

@@ -34,7 +34,7 @@ const AdminDashboard = () => {
       width: 450,
       renderCell: (params) => (
         <Stack gap={2} direction="row" justifyContent="flex-start" alignItems="center" flexWrap="wrap" sx={{ height: '100%' }}>
-          {params.value?.map((formData, key) => (
+          {params.value?.map((formData) => (
             <Button
               size="small"
               color="primary"

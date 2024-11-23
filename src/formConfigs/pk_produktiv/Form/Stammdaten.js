@@ -6,7 +6,6 @@ import {
   TextField,
   Divider,
   Button,
-  ButtonGroup,
   Typography,
   Stack,
   Tab,
@@ -65,7 +64,7 @@ const columns = [
   }
 ];
 
-const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, innerField, errors }) => (
+const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, errors }) => (
   <React.Fragment>
     <Stack justifyContent="space-between" alignItems="center" flexDirection="row">
       <Typography variant="h3">{maTitle} bearbeiten</Typography>
@@ -370,6 +369,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
         </Button>
       </Grid>
       <Grid item>
+        {/* eslint-disable-next-line   */}
         {typeof errors.pk_produktiv_mitarbeiter?.[outerIndex]?.fields === 'string' ? (
           <Typography color="error">{errors.pk_produktiv_mitarbeiter[outerIndex].fields}</Typography>
         ) : null}
@@ -574,7 +574,7 @@ const Stammdaten = () => {
                             Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter
                             erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl).
                           </p>
-                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2) }}>
+                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
                             {maFields.length > 0 ? (
                               <DataTable data={tableData} columns={columns} />
                             ) : (

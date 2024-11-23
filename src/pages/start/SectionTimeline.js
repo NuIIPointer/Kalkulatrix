@@ -3,7 +3,7 @@ import { animated, useInView } from '@react-spring/web';
 import { Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-const SectionTimeline = ({ isActive }) => {
+const SectionTimeline = () => {
   const theme = useTheme();
   const [ref, springs] = useInView(
     () => ({

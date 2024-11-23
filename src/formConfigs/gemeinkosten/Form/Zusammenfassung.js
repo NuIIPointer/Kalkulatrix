@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Typography, Stack } from '@mui/material';
+import { Grid, TextField, Typography } from '@mui/material';
 
 // formik
 import { FastField, useFormikContext } from 'formik';

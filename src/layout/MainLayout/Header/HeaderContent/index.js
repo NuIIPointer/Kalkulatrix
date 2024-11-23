@@ -1,18 +1,18 @@
 // project import
 import Profile from './Profile';
 import { useContext } from 'react';
-import { UserContext } from 'context/user';
 import { useTheme } from '@mui/material/styles';
 import { Stack, Typography } from '@mui/material/index';
 import { NavigationContext } from 'context/navigation/index';
 import { useLocation } from 'react-router-dom/dist/index';
 import pages from '../../../../menu-items/index'; // Import pages data
+import useFormLiteral from 'pages/form/useFormLiteral';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
 const HeaderContent = () => {
-  const { user } = useContext(UserContext);
   const { useDrawerNav } = useContext(NavigationContext);
+  const formLiteral = useFormLiteral();
   const theme = useTheme();
   const location = useLocation();
 
@@ -29,14 +29,36 @@ const HeaderContent = () => {
       }
     });
 
-    const currentPage = pagesFlattened.find((page) => page.url === pathname);
+    const currentPage = pagesFlattened.find(
+      (page) => page.url === pathname || (page.matchingUrlRegexp && pathname.match(page.matchingUrlRegexp))
+    );
+    const isFormSubPage = currentPage.id === 'forms' && pathname.match(currentPage.matchingUrlRegexp);
+    if (isFormSubPage) {
+      const linkPart = pathname.split('/')[4];
+      const theTitle = formLiteral[linkPart]?.title;
+
+      if (theTitle) {
+        return theTitle;
+      }
+    }
     return currentPage ? currentPage.title : '';
   };
 
   return (
     <>
       <Stack flexDirection="column" marginTop={1}>
-        <Typography sx={{ fontSize: 36, fontWeight: theme.typography.fontWeightBold }}>{getTitle(location.pathname)}</Typography>
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: 36,
+            fontWeight: theme.typography.fontWeightBold,
+            mb: { xs: theme.spacing(2), sm: theme.spacing(4), md: 0 },
+            mt: { xs: theme.spacing(6), sm: 0 },
+            paddingRight: { sm: theme.spacing(15), md: 0 }
+          }}
+        >
+          {getTitle(location.pathname)}
+        </Typography>
       </Stack>
       {!useDrawerNav && <Profile />}
     </>

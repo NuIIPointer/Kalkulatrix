@@ -1,7 +1,6 @@
 import { Stack, Typography, useTheme } from '@mui/material';
 import TeaserCard from 'components/TeaserCard/index';
 
-// eslint-disable-next-line react/prop-types
 const TextTeaserCard = ({ primaryText, prefixText, children, light, textAlign }) => {
   const theme = useTheme();
   const textColor = light ? theme.palette.text.primary : theme.palette.common.white;

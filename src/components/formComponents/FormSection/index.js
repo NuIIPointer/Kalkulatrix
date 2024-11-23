@@ -16,7 +16,6 @@ import { DeleteOutlineOutlined, NoteAddOutlined, EditOutlined, ClearOutlined } f
 import { useMemo, useRef, useState } from 'react';
 import { useFormikContext } from 'formik';
 
-// eslint-disable-next-line react/prop-types
 const FormSection = ({
   children,
   title,

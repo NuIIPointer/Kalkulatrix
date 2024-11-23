@@ -1,6 +1,5 @@
 import { InputLabel, Typography, Stack } from '@mui/material';
 
-// eslint-disable-next-line react/prop-types
 const FormReadonlyValue = ({ label, value, outerProps, labelProps, valueProps }) => {
   return (
     <Stack {...outerProps}>

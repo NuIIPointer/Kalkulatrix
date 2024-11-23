@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-const getInitialMitarbeiterData = (_values) => {
+const getInitialMitarbeiterData = () => {
   return {
     userId: uuid(),
     F14: 1,

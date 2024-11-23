@@ -63,7 +63,7 @@ export const getForms = async (formIds) => {
 };
 
 export const UserContext = createContext(null);
-// eslint-disable-next-line react/prop-types
+
 export const UserContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const theme = useTheme();

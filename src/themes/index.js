@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 import { useMemo } from 'react';
 
 // material-ui
@@ -19,7 +19,6 @@ import componentsOverride from './overrides';
 export default function ThemeCustomization({ children }) {
   const theme = Palette('light', 'default');
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const themeTypography = Typography(`'Red Hat Display', sans-serif`);
   const themeCustomShadows = useMemo(() => CustomShadows(theme), [theme]);
 
@@ -93,7 +92,3 @@ export default function ThemeCustomization({ children }) {
     </StyledEngineProvider>
   );
 }
-
-ThemeCustomization.propTypes = {
-  children: PropTypes.node
-};

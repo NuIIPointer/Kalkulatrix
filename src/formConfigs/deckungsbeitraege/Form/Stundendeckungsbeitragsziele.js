@@ -1,12 +1,10 @@
-import { FastField, useFormikContext } from 'formik';
+import { FastField } from 'formik';
 import { Grid, TextField, Box, Typography } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 
 const DGemeinkostenPlangewinn = () => {
-  const { values } = useFormikContext();
-
   return (
     <>
       <FormSection title="Stundendeckungsbeitragsziele">

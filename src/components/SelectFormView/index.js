@@ -31,7 +31,6 @@ import { enqueueSnackbar } from 'notistack';
 
 const newFormName = `Kalkulation vom ${dayjs(new Date()).format('DD.MM.YYYY')}`;
 
-// eslint-disable-next-line react/prop-types
 const SelectFormView = ({ formType, sections }) => {
   const theme = useTheme();
   const { createForm, copyForm: copyFormContext, formsData = {}, deleteForm } = useContext(UserContext);

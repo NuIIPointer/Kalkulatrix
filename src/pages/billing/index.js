@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Typography, CircularProgress, Stack, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
-import ColoredSection from 'components/pageLayout/header/ColoredSection';
 import { StripeContext } from 'context/stripe/index';
 import TextTeaserCard from 'components/TextTeaserCard/index';
 import LayoutBox from 'components/LayoutBox/index';
