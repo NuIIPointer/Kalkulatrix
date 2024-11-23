@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // project import
-import CalculationUpdater from '../CalculationUpdater/index';
 import Stammdaten from './Stammdaten';
 import Angaben from './Angaben';
 import Zusammenfassung from './Zusammenfassung';
 
-const PKAllgemein = () => {
+const PKAllgemein = memo(() => {
   return (
     <>
-      <CalculationUpdater />
       <Angaben />
       <Stammdaten />
       <Zusammenfassung />
     </>
   );
-};
+});
 
 export default PKAllgemein;

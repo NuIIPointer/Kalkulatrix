@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { useFormikContext } from 'formik';
+// import { useFormikContext } from 'formik';
 
-let timeout = null;
+// let timeout = null;
 
 const StundensatzRechnerValueUpdater = () => {
-  const { values = {}, setFieldValue } = useFormikContext();
+  // const { values = {}, setFieldValue } = useFormikContext();
 
   // Stundenverrechnungssatz START
   // useEffect(() => {

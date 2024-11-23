@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // project import
-import CalculationUpdater from '../CalculationUpdater/index';
 import Stammdaten from './Stammdaten';
 import Zusammenfassung from './Zusammenfassung';
 
-const TestForm = () => {
+const TestForm = memo(() => {
   return (
     <>
-      <CalculationUpdater />
       <Stammdaten />
       <Zusammenfassung />
     </>
   );
-};
+});
 
 export default TestForm;

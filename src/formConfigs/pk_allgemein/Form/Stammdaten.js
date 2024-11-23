@@ -144,9 +144,7 @@ const Stammdaten = () => {
                         {values.pk_allgemein_mitarbeiter?.[outerIndex]?.fields?.map((innerField, innerIndex) => (
                           <FormSection
                             key={innerIndex}
-                            title={`${innerField?.titel || 'Mitarbeiter'} ${
-                              innerField.anzahl > 1 ? `(${innerField.anzahl.toString().replace('.', ',')}x)` : ''
-                            }`}
+                            title={innerField?.titel || 'Mitarbeiter'}
                             defaultOpen={outerIndex === 0 && values.pk_allgemein_mitarbeiter?.length === 1}
                             border={`1px solid ${theme.palette.grey[300]}`}
                             onDelete={() => innerRemove(innerIndex)}
@@ -167,20 +165,6 @@ const Stammdaten = () => {
                                       label="Name/Titel"
                                       error={meta?.touched && Boolean(meta.error)}
                                       helperText={meta?.touched && meta.error}
-                                      sx={{ mb: 2 }}
-                                    />
-                                  )}
-                                </FastField>
-                              </Grid>
-                              <Grid item xs={12} sm={6}>
-                                <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.anzahl`}>
-                                  {({ field, meta }) => (
-                                    <TextField
-                                      {...field}
-                                      label="Anzahl"
-                                      error={meta?.touched && Boolean(meta.error)}
-                                      helperText={'Möchten Sie diesen Mitarbeiter mehrmals berücksichtigen, geben Sie eine Anzahl an.'}
-                                      type="number"
                                       sx={{ mb: 2 }}
                                     />
                                   )}

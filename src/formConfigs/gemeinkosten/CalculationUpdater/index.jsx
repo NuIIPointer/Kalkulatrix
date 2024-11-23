@@ -4,13 +4,14 @@ import { sachkosten_fieldTitles, sachkosten_startingRow } from '../Form/Sachkost
 import { zusatzkosten_fieldTitles, zusatzkosten_startingRow } from '../Form/Zusatzkosten';
 
 let timeout = null;
+let timeout2 = null;
 let timeoutSachkosten = null;
+let timeoutSachkosten2 = null;
 
 const StundensatzRechnerValueUpdater = () => {
   const { values = {}, setFieldValue } = useFormikContext();
 
   // MATERIALGEMEINKOSTEN START
-
   useEffect(() => {
     const gemeinkosten_material_H9 = ((values.gemeinkosten_material_F9 || 0) * (values.gemeinkosten_material_G9 || 0)) / 100;
     const gemeinkosten_material_I9 = (values.gemeinkosten_material_F9 || 0) - (gemeinkosten_material_H9 || 0);
@@ -183,6 +184,7 @@ const StundensatzRechnerValueUpdater = () => {
   ]);
 
   useEffect(() => {
+    clearTimeout(timeout2);
     const reCalculateGesamtValues = () => {
       const gemeinkosten_F18 =
         (values.gemeinkosten_personal_F15 || 0) + (values.gemeinkosten_personal_F16 || 0) + (values.gemeinkosten_personal_F17 || 0);
@@ -202,12 +204,12 @@ const StundensatzRechnerValueUpdater = () => {
       }
     };
 
-    timeout = setTimeout(() => {
+    timeout2 = setTimeout(() => {
       reCalculateGesamtValues();
     }, 600);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeout2);
     };
   }, [
     setFieldValue,
@@ -230,6 +232,7 @@ const StundensatzRechnerValueUpdater = () => {
   // SACHKOSTENKOSTEN START
 
   useEffect(() => {
+    clearTimeout(timeoutSachkosten);
     const reCalculateSachkostenValues = () => {
       let gemeinkosten_F39 = 0;
       let gemeinkosten_H39 = 0;
@@ -282,6 +285,7 @@ const StundensatzRechnerValueUpdater = () => {
   // ZUSATZKOSTEN START
 
   useEffect(() => {
+    clearTimeout(timeoutSachkosten2);
     const reCalculateZusatzkostenValues = () => {
       let gemeinkosten_F47 = 0;
       let gemeinkosten_H47 = 0;
@@ -320,12 +324,12 @@ const StundensatzRechnerValueUpdater = () => {
       }
     };
 
-    timeoutSachkosten = setTimeout(() => {
+    timeoutSachkosten2 = setTimeout(() => {
       reCalculateZusatzkostenValues();
     }, 600);
 
     return () => {
-      clearTimeout(timeoutSachkosten);
+      clearTimeout(timeoutSachkosten2);
     };
   }, [setFieldValue, values]);
 

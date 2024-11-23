@@ -8,6 +8,7 @@ const StundensatzRechnerValueUpdater = () => {
 
   // Stundenverrechnungssatz START
   useEffect(() => {
+    clearTimeout(timeout);
     const reCalculateSVSValues = () => {
       const G8 = values.pk_produktiv_Q36 || 0;
       const G9 = (G8 * (values.annahmen_I46 || 0)) / 100 - G8;

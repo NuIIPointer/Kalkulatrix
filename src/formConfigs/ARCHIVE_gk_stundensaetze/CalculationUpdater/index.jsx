@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { useFormikContext } from 'formik';
 
 let timeout = null;
+let timeout2 = null;
 
 const StundensatzRechnerValueUpdater = () => {
   const { values = {}, setFieldValue } = useFormikContext();
 
   // DGemeinkostenPlangewinn START
   useEffect(() => {
+    clearTimeout(timeout);
     const reCalculateDGPSValues = () => {
       const H8 = values.gemeinkosten_H49 + values.gemeinkosten_I49 || 0;
       const H9 = values.gk_deckung_H43 || 0;
@@ -66,6 +68,7 @@ const StundensatzRechnerValueUpdater = () => {
 
   // AufschlagssaetzePK START
   useEffect(() => {
+    clearTimeout(timeout2);
     const reCalculateDGPSValues = () => {
       const F23 = values.std_verrechnungssaetze_G8 || 0;
       const G23 = values.pk_produktiv_O36 || 0;
@@ -100,17 +103,16 @@ const StundensatzRechnerValueUpdater = () => {
       }
     };
 
-    timeout = setTimeout(() => {
+    timeout2 = setTimeout(() => {
       reCalculateDGPSValues();
     }, 600);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeout2);
     };
   }, [
     setFieldValue,
     values.gk_stundensaetze_F23,
-    values.gk_stundensaetze_F33,
     values.gk_stundensaetze_G23,
     values.gk_stundensaetze_H10,
     values.gk_stundensaetze_H14,
@@ -119,9 +121,8 @@ const StundensatzRechnerValueUpdater = () => {
     values.gk_stundensaetze_H33,
     values.gk_stundensaetze_H38,
     values.gk_stundensaetze_H42,
-    values.pk_produktiv_O20,
-    values.std_verrechnungssaetze_G8,
-    values.std_verrechnungssaetze_I10
+    values.pk_produktiv_O36,
+    values.std_verrechnungssaetze_G8
   ]);
   // AufschlagssaetzePK ENDE
 

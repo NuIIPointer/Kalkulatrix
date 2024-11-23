@@ -14,6 +14,7 @@ const StundensatzRechnerValueUpdater = () => {
   }, [values.pk_allgemein_K5, values.annahmen_E41, values.annahmen_E42, setFieldValue]);
 
   useEffect(() => {
+    clearTimeout(timeout);
     const reCalculateMaValues = () => {
       let N53 = 0;
       let pk_allgemein_anzahl = 0;
@@ -44,7 +45,7 @@ const StundensatzRechnerValueUpdater = () => {
 
           const M14 = result;
           const N14 = (L14 || 0) + (M14 || 0);
-          const anzahl = ma.anzahl || 1;
+          const anzahl = 1;
 
           pk_allgemein_anzahl += anzahl;
           N24 += N14 * anzahl;
@@ -93,6 +94,7 @@ const StundensatzRechnerValueUpdater = () => {
     values.pk_allgemein_K5,
     values.pk_allgemein_K6,
     values.pk_allgemein_K7,
+    values.pk_allgemein_K78,
     values.pk_allgemein_N53,
     values.pk_allgemein_anzahl,
     values.pk_allgemein_mitarbeiter

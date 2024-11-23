@@ -62,17 +62,11 @@ const FormComponent = () => {
     }
   }, [activeFormId, formId, setActiveFormId, navigate]);
 
-  console.log('formSection', formSection);
-
   const formContents = useMemo(
     () =>
       Object.entries(formLiteral).map(([key, value]) => {
         if (key !== formSection) {
-          return (
-            <Box key={key} display="none">
-              {value.content}
-            </Box>
-          );
+          return value.calucationUpdater;
         }
 
         return (
@@ -83,6 +77,7 @@ const FormComponent = () => {
               defaultOpen
             />
             {value.content}
+            {value.calucationUpdater}
           </Box>
         );
       }),

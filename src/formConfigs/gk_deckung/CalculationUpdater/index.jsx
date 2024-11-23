@@ -7,6 +7,7 @@ const StundensatzRechnerValueUpdater = () => {
   const { values = {}, setFieldValue } = useFormikContext();
 
   useEffect(() => {
+    clearTimeout(timeout);
     const reCalculateMzFlValues = () => {
       // Anwesenheitsentgeld (gesamt) START
       let H20 = 0;

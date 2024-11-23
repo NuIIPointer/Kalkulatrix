@@ -8,6 +8,7 @@ const StundensatzRechnerValueUpdater = () => {
 
   // Stundenverrechnungssatz START
   useEffect(() => {
+    clearTimeout(timeout);
     const reCalculateDBZValues = () => {
       const J10 = values.pk_produktiv_O36 || 0;
       const I12 = values.pk_produktiv_P42 || 0;
@@ -136,8 +137,46 @@ const StundensatzRechnerValueUpdater = () => {
     return () => {
       clearTimeout(timeout);
     };
-    // eslint-disable-next-line prettier/prettier
-  }, [setFieldValue, values.deckungsbeitraege_I12, values.deckungsbeitraege_I13, values.deckungsbeitraege_I14, values.deckungsbeitraege_I15, values.deckungsbeitraege_I16, values.deckungsbeitraege_I17, values.deckungsbeitraege_I18, values.deckungsbeitraege_I19, values.deckungsbeitraege_I20, values.deckungsbeitraege_I21, values.deckungsbeitraege_J10, values.deckungsbeitraege_J12, values.deckungsbeitraege_J13, values.deckungsbeitraege_J14, values.deckungsbeitraege_J15, values.deckungsbeitraege_J16, values.deckungsbeitraege_J17, values.deckungsbeitraege_J18, values.deckungsbeitraege_J19, values.deckungsbeitraege_J20, values.deckungsbeitraege_J21, values.deckungsbeitraege_J25, values.deckungsbeitraege_J26, values.deckungsbeitraege_J27, values.deckungsbeitraege_J29, values.deckungsbeitraege_J31, values.deckungsbeitraege_J33, values.deckungsbeitraege_L17, values.deckungsbeitraege_L19, values.deckungsbeitraege_L21, values.gemeinkosten_H49, values.gemeinkosten_I51, values.gemeinkosten_I53, values.gk_stundensaetze_H14, values.gk_stundensaetze_H9, values.pk_produktiv_O36, values.pk_produktiv_P42]);
+  }, [
+    setFieldValue,
+    values.deckungsbeitraege_I12,
+    values.deckungsbeitraege_I13,
+    values.deckungsbeitraege_I14,
+    values.deckungsbeitraege_I15,
+    values.deckungsbeitraege_I16,
+    values.deckungsbeitraege_I17,
+    values.deckungsbeitraege_I18,
+    values.deckungsbeitraege_I19,
+    values.deckungsbeitraege_I20,
+    values.deckungsbeitraege_I21,
+    values.deckungsbeitraege_J10,
+    values.deckungsbeitraege_J12,
+    values.deckungsbeitraege_J13,
+    values.deckungsbeitraege_J14,
+    values.deckungsbeitraege_J15,
+    values.deckungsbeitraege_J16,
+    values.deckungsbeitraege_J17,
+    values.deckungsbeitraege_J18,
+    values.deckungsbeitraege_J19,
+    values.deckungsbeitraege_J20,
+    values.deckungsbeitraege_J21,
+    values.deckungsbeitraege_J25,
+    values.deckungsbeitraege_J26,
+    values.deckungsbeitraege_J27,
+    values.deckungsbeitraege_J29,
+    values.deckungsbeitraege_J31,
+    values.deckungsbeitraege_J33,
+    values.deckungsbeitraege_L17,
+    values.deckungsbeitraege_L19,
+    values.deckungsbeitraege_L21,
+    values.gemeinkosten_H49,
+    values.gemeinkosten_I51,
+    values.gemeinkosten_I53,
+    values.gk_stundensaetze_H14,
+    values.gk_stundensaetze_H9,
+    values.pk_produktiv_O36,
+    values.pk_produktiv_P42
+  ]);
   // Stundenverrechnungssatz ENDE
 
   return <React.Fragment />;

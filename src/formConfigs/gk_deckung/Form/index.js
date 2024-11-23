@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // project import
-import CalculationUpdater from '../CalculationUpdater/index';
 import Zuschlaege from './Zuschlaege';
 import Zusammenfassung from './Zusammenfassung';
 
-const GKDeckung = () => {
+const GKDeckung = memo(() => {
   return (
     <>
-      <CalculationUpdater />
       <Zuschlaege />
       <Zusammenfassung />
     </>
   );
-};
+});
 
 export default GKDeckung;

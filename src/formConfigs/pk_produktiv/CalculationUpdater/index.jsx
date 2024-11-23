@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useFormikContext } from 'formik';
 import getInitialMitarbeiterData from '../getInitialMitarbeiterData';
 
-let timeout = null;
+let timeout1 = null;
+let timeout2 = null;
 
 const StundensatzRechnerValueUpdater = () => {
   const { values = {}, setFieldValue } = useFormikContext();
@@ -14,6 +15,8 @@ const StundensatzRechnerValueUpdater = () => {
   }, [setFieldValue, values]);
 
   useEffect(() => {
+    clearTimeout(timeout1);
+
     const reCalculateMaValues = () => {
       let pk_produktiv_P40 = 0;
       let pk_produktiv_Q40 = 0;
@@ -35,7 +38,7 @@ const StundensatzRechnerValueUpdater = () => {
           S9_gesamt += S9;
           const U9 = O9 * ((ma.Q9 || 0) + (ma.R9 || 0));
           const V9 = P9 * ((ma.Q9 || 0) + (ma.R9 || 0));
-          const anzahl = ma.anzahl || 1;
+          const anzahl = 1;
 
           pk_produktiv_P40 += U9 * anzahl; // this
           pk_produktiv_Q40 += V9 * anzahl;
@@ -100,12 +103,12 @@ const StundensatzRechnerValueUpdater = () => {
       // Anwesenheitsentgeld (gesamt) ENDE
     };
 
-    timeout = setTimeout(() => {
+    timeout1 = setTimeout(() => {
       reCalculateMaValues();
-    }, 600);
+    }, 500);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeout1);
     };
   }, [
     setFieldValue,
@@ -120,6 +123,8 @@ const StundensatzRechnerValueUpdater = () => {
   ]);
 
   useEffect(() => {
+    clearTimeout(timeout2);
+
     const reCalculateLohnNKValues = () => {
       const P41 = ((values.annahmen_I46 || 0) / 100) * (values.pk_produktiv_P40 || 0);
       const Q41 = ((values.annahmen_I46 || 0) / 100) * (values.pk_produktiv_Q40 || 0);
@@ -160,12 +165,12 @@ const StundensatzRechnerValueUpdater = () => {
       }
     };
 
-    timeout = setTimeout(() => {
+    timeout2 = setTimeout(() => {
       reCalculateLohnNKValues();
-    }, 300);
+    }, 500);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeout2);
     };
   }, [
     setFieldValue,

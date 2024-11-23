@@ -1,21 +1,35 @@
 import { useTheme } from '@mui/material/styles';
 
 import Annahmen from 'formConfigs/annahmen/Form/index';
+import AnnahmenUpdater from 'formConfigs/annahmen/CalculationUpdater/index';
+import CalculationUpdaterGkStundensaetze from 'formConfigs/annahmen/CalculationUpdater/gk_stundensaetze';
 import annahmenValidationSchema from 'formConfigs/annahmen/rules/validation/schema';
+
 import PersonalkostenProduktiv from 'formConfigs/pk_produktiv/Form/index';
 import personalkostenProduktivValidationSchema from 'formConfigs/pk_produktiv/rules/validation/schema';
+import PersonalkostenProduktivUpdater from 'formConfigs/pk_produktiv/CalculationUpdater/index';
+
 import PersonalkostenAllgemein from 'formConfigs/pk_allgemein/Form/index';
 import personalkostenAllgemeinValidationSchema from 'formConfigs/pk_allgemein/rules/validation/schema';
+import PersonalkostenAllgemeinUpdater from 'formConfigs/pk_allgemein/CalculationUpdater/index';
+
 import Gemeinkosten from 'formConfigs/gemeinkosten/Form/index';
 import gemeinkostenValidationSchema from 'formConfigs/gemeinkosten/rules/validation/schema';
+import GemeinkostenUpdater from 'formConfigs/gemeinkosten/CalculationUpdater/index';
+
 import GKDeckung from 'formConfigs/gk_deckung/Form/index';
 import gKDeckungValidationSchema from 'formConfigs/gk_deckung/rules/validation/schema';
+import GKDeckungUpdater from 'formConfigs/gk_deckung/CalculationUpdater/index';
+
 // import GKStundensaetze from 'formConfigs/gk_stundensaetze/Form/index';
 // import gKStundensaetzeValidationSchema from 'formConfigs/gk_stundensaetze/rules/validation/schema';
 // import StdVerrechnungssaetze from 'formConfigs/std_verrechnungssaetze/Form/index';
 // import stdVerrechnungssaetzeValidationSchema from 'formConfigs/std_verrechnungssaetze/rules/validation/schema';
+
 import Deckungsbeitraege from 'formConfigs/deckungsbeitraege/Form/index';
 import deckungsbeitraegeValidationSchema from 'formConfigs/deckungsbeitraege/rules/validation/schema';
+import DeckungsbeitraegeUpdater from 'formConfigs/deckungsbeitraege/CalculationUpdater/index';
+import DeckungsbeitraegeUpdaterStdVerrechnungssaetze from 'formConfigs/deckungsbeitraege/CalculationUpdater/stdVerrechnungssaetze';
 
 const useFormLiteral = () => {
   const theme = useTheme();
@@ -24,6 +38,12 @@ const useFormLiteral = () => {
     annahmen: {
       linkPart: 'annahmen',
       content: <Annahmen />,
+      calucationUpdater: (
+        <>
+          <AnnahmenUpdater />
+          <CalculationUpdaterGkStundensaetze />
+        </>
+      ),
       validationSchema: annahmenValidationSchema,
       title: 'Allgemeine Unternehmensangaben',
       description:
@@ -32,6 +52,7 @@ const useFormLiteral = () => {
     pk_produktiv: {
       linkPart: 'pk_produktiv',
       content: <PersonalkostenProduktiv />,
+      calucationUpdater: <PersonalkostenProduktivUpdater />,
       validationSchema: personalkostenProduktivValidationSchema,
       title: 'Personalkosten produktive Abteilungen',
       description:
@@ -40,6 +61,7 @@ const useFormLiteral = () => {
     pk_allgemein: {
       linkPart: 'pk_allgemein',
       content: <PersonalkostenAllgemein />,
+      calucationUpdater: <PersonalkostenAllgemeinUpdater />,
       validationSchema: personalkostenAllgemeinValidationSchema,
       title: 'Personalkosten allgemeiner Bereich',
       description:
@@ -48,6 +70,7 @@ const useFormLiteral = () => {
     gemeinkosten: {
       linkPart: 'gemeinkosten',
       content: <Gemeinkosten />,
+      calucationUpdater: <GemeinkostenUpdater />,
       validationSchema: gemeinkostenValidationSchema,
       title: 'Betriebskosten',
       description:
@@ -56,6 +79,7 @@ const useFormLiteral = () => {
     gk_deckung: {
       linkPart: 'gk_deckung',
       content: <GKDeckung />,
+      calucationUpdater: <GKDeckungUpdater />,
       validationSchema: gKDeckungValidationSchema,
       title: 'Betriebskosten-Deckung',
       description: (
@@ -85,6 +109,12 @@ const useFormLiteral = () => {
     deckungsbeitraege: {
       linkPart: 'deckungsbeitraege',
       content: <Deckungsbeitraege />,
+      calucationUpdater: (
+        <>
+          <DeckungsbeitraegeUpdaterStdVerrechnungssaetze />
+          <DeckungsbeitraegeUpdater />
+        </>
+      ),
       validationSchema: deckungsbeitraegeValidationSchema,
       title: 'Stundensatz & Deckungsbeiträge',
       description:

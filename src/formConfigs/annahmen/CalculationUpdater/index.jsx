@@ -42,6 +42,7 @@ const StundensatzRechnerValueUpdater = () => {
       setFieldValue('annahmen_G18', durchschnittArbeitsstundenProTag);
     }
   }, [values.annahmen_G16, values.annahmen_G17, setFieldValue]);
+
   useEffect(() => {
     const countWeekends = (year) => {
       let count = 0;
@@ -68,6 +69,7 @@ const StundensatzRechnerValueUpdater = () => {
       setFieldValue('annahmen_G22', undefined);
     }
   }, [setFieldValue, values.annahmen_allgemein_planjahr, values.annahmen_G22, values.annahmen_G17_days]);
+
   useEffect(() => {
     if (
       values.annahmen_G16 !== undefined &&
