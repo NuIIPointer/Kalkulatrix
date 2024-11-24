@@ -59,7 +59,7 @@ const columns = [
   {
     field: 'actionsDom',
     headerName: 'Formulare',
-    width: 450,
+    width: 200,
     renderCell: (params) => params.value
   }
 ];
@@ -575,7 +575,7 @@ const Stammdaten = () => {
                             erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl).
                           </p>
                           <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
-                            {maFields.length > 0 ? (
+                            {maFields?.length > 0 ? (
                               <DataTable data={tableData} columns={columns} />
                             ) : (
                               <Alert severity="info">Noch keine Mitarbeiter vorhanden</Alert>

@@ -46,6 +46,7 @@ const NavItem = ({ item }) => {
           bgcolor: bgColor,
           color: textColor,
           padding: theme.shape.paddingButton,
+          marginTop: item.isSubItem ? 0 : theme.spacing(-1),
           marginBottom: theme.spacing(1),
           borderRadius: theme.shape.borderRadius / 7,
           transition: '.25s',

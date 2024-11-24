@@ -23,7 +23,7 @@ const DataTable = ({ data, columns, sx = {}, ...otherProps }) => {
             display: 'none'
           },
 
-          '& .MuiDataGrid-columnHeader': {
+          '.MuiDataGrid-columnHeader, .MuiDataGrid-columnHeaderRow': {
             backgroundColor: `${theme.palette.grey[300]} !important`
           }
         },

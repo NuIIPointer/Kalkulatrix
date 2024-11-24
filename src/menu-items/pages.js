@@ -1,5 +1,5 @@
 // assets
-import { Person, CalendarMonth, BackupTableOutlined, WalletOutlined } from '@mui/icons-material';
+import { BackupTableOutlined } from '@mui/icons-material';
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
@@ -16,6 +16,15 @@ const pages = {
       matchingUrlRegexp: /\/form\/[^/]{20,}\/[^/]*$/,
       icon: BackupTableOutlined
     },
+    // {
+    //   id: 'forms',
+    //   title: 'PK-Produktiv',
+    //   type: 'item',
+    //   url: '/office/form/*/pk_produktiv',
+    //   matchingUrlRegexp: /\/form\/[^/]{20,}\/[^/]*$/,
+    //   isSubItem: true,
+    //   icon: () => <></>
+    // },
     {
       id: 'formsAdmin',
       title: 'Admin Dashboard',
@@ -23,27 +32,6 @@ const pages = {
       url: '/office/admin/dashboard',
       requiresAdmin: true,
       icon: BackupTableOutlined
-    },
-    {
-      id: 'billing',
-      title: 'Abonnement',
-      type: 'item',
-      url: '/office/billing',
-      icon: WalletOutlined
-    },
-    {
-      id: 'beratungstermin',
-      title: 'Beratungstermine',
-      type: 'item',
-      url: '/office/events',
-      icon: CalendarMonth
-    },
-    {
-      id: 'profil',
-      title: 'Profil',
-      type: 'item',
-      url: '/office/profile',
-      icon: Person
     }
   ]
 };
