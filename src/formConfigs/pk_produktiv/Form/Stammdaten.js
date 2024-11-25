@@ -584,11 +584,11 @@ const Stammdaten = () => {
                       const maFields = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
                       const tableData = maFields?.map((innerField, innerIndex) => {
                         const maTitle = innerField?.titel || 'Mitarbeiter';
-                        const uuid = innerField.userId;
+                        const userId = innerField.userId;
 
                         return {
-                          uid: uuid,
-                          userId: uuid,
+                          uid: userId,
+                          userId: userId,
                           onRowCheck,
                           checked: checkedRows.includes(innerField.userId),
                           name: maTitle,
