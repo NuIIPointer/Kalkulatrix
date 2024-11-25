@@ -16,13 +16,15 @@ import {
   DialogActions,
   Modal,
   Alert,
-  IconButton
+  IconButton,
+  Checkbox
 } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { DeleteOutlineOutlined, EditOutlined, ContentCopy, DeleteOutlined, Close } from '@mui/icons-material';
+import { DeleteOutlineOutlined, EditOutlined, ContentCopy, DeleteOutlined, Close, Save } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
+import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 
 // formik
 import { FastField, FieldArray, useFormikContext } from 'formik';
@@ -33,33 +35,61 @@ import getInitialMitarbeiterData from '../getInitialMitarbeiterData';
 import formFloat from 'utils/formUtils/formFloat';
 import DataTable from 'components/DataTable/index';
 import LayoutBox from 'components/LayoutBox/index';
-import { Save } from '../../../../node_modules/@mui/icons-material/index';
+import InitialsCircle from 'components/InitialsCircle/index';
 
 const columns = [
   {
+    field: 'checked',
+    headerName: '',
+    width: 50,
+    renderCell: (params) => (
+      <Checkbox
+        sx={{ padding: 0 }}
+        type="checkbox"
+        checked={params.row.checked}
+        onChange={() => {
+          params.row.onRowCheck?.(params.row.userId);
+        }}
+      />
+    )
+  },
+  {
     field: 'name',
-    headerName: 'Name',
-    width: 200
+    headerName: 'Mitarbeiter',
+    width: 240,
+    renderCell: (params) => (
+      <Stack flexDirection="row" gap={1.5}>
+        <InitialsCircle name={params.value} sx={{ flexShrink: 0 }} />
+        <Stack>
+          <Typography variant="body1" fontWeight="bold" marginBottom={-0.5}>
+            {params.value}
+          </Typography>
+          <Typography variant="body2" fontSize="0.8rem" color="textSecondary">
+            {params.row.groupName}
+          </Typography>
+        </Stack>
+      </Stack>
+    )
   },
   {
     field: 'stundenlohn',
     headerName: 'Stundenlohn',
-    width: 150
+    width: 135
   },
   {
     field: 'auslastung',
     headerName: 'Auslastung',
-    width: 150
+    width: 120
   },
   {
     field: 'anwesenheitsentgelt',
     headerName: 'Anwesenheitsentgeld',
-    width: 225
+    width: 200
   },
   {
     field: 'actionsDom',
-    headerName: 'Formulare',
-    width: 200,
+    headerName: '',
+    width: 160,
     renderCell: (params) => params.value
   }
 ];
@@ -364,8 +394,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
         </Grid>
       </>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-        <Button variant="contained" color="primary" onClick={() => setModalData(null)}>
-          <Save /> schließen
+        <Button variant="contained" color="primary" onClick={() => setModalData(null)} startIcon={<Save />}>
+          schließen
         </Button>
       </Grid>
       <Grid item>
@@ -379,11 +409,20 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
 ));
 
 const Stammdaten = () => {
-  const { values, errors, isSubmitting } = useFormikContext();
+  const theme = useTheme();
+  const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
   const [groupToDelete, setGroupToDelete] = useState(undefined);
-  const theme = useTheme();
+  const [checkedRows, setCheckedRows] = useState([]);
+  const onRowCheck = (userId) => {
+    setCheckedRows((prev) => {
+      if (prev.includes(userId)) {
+        return prev.filter((row) => row !== userId);
+      }
+      return [...prev, userId];
+    });
+  };
 
   const changeTab = (_event, newValue) => {
     setOpenedTab(newValue);
@@ -393,6 +432,38 @@ const Stammdaten = () => {
     width: '28px',
     height: '28px',
     minWidth: '28px'
+  };
+
+  const CustomFooter = ({ onCopy, onDelete }) => {
+    return (
+      <GridFooterContainer>
+        {checkedRows?.length > 0 ? (
+          <Stack flexDirection="row" gap={1} marginLeft={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onDelete}
+              startIcon={<DeleteOutlined />}
+              sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
+            >
+              <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Löschen</Stack>
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onCopy}
+              startIcon={<Save />}
+              sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
+            >
+              <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Kopieren</Stack>
+            </Button>
+          </Stack>
+        ) : (
+          <span />
+        )}
+        <GridFooter />
+      </GridFooterContainer>
+    );
   };
 
   return (
@@ -513,18 +584,24 @@ const Stammdaten = () => {
                       const maFields = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
                       const tableData = maFields?.map((innerField, innerIndex) => {
                         const maTitle = innerField?.titel || 'Mitarbeiter';
+                        const uuid = innerField.userId;
 
                         return {
-                          uid: `${outerIndex}-${innerIndex}-${maTitle}`,
+                          uid: uuid,
+                          userId: uuid,
+                          onRowCheck,
+                          checked: checkedRows.includes(innerField.userId),
                           name: maTitle,
+                          groupName: outerField.groupTitle || outerIndex + 1,
                           stundenlohn: `${formFloat(innerField.Q9 || 0, 2).replace('.', ',')}€`,
                           auslastung: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%`,
                           anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
+                          newField: innerField.newField, // Add the new field here
                           actionsDom: (
                             <Stack flexDirection="row" gap={{ xs: 1, md: 1.5, lg: 2 }}>
                               <IconButton
                                 variant="outlined"
-                                color="primary"
+                                color="secondary"
                                 onClick={() =>
                                   setModalData(
                                     <MemorizedTabData
@@ -567,6 +644,30 @@ const Stammdaten = () => {
                         };
                       });
 
+                      const onCopy = () => {
+                        checkedRows.forEach((row) => {
+                          const rows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
+                          const rowToCopy = rows?.findIndex((r) => row === r.userId);
+                          innerPush({
+                            ...rows[rowToCopy],
+                            userId: uuid()
+                          });
+                          setCheckedRows([]);
+                        });
+                      };
+                      const onDelete = () => {
+                        const rowIndexesToDelete = checkedRows.map((row) => {
+                          const rows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
+                          const rowToDelete = rows?.findIndex((r) => row === r.userId);
+                          return rowToDelete;
+                        });
+                        const newRows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields.filter(
+                          (row, index) => !rowIndexesToDelete.includes(index)
+                        );
+                        setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.fields`, newRows);
+                        setCheckedRows([]);
+                      };
+
                       return (
                         <>
                           <p>
@@ -576,7 +677,16 @@ const Stammdaten = () => {
                           </p>
                           <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
                             {maFields?.length > 0 ? (
-                              <DataTable data={tableData} columns={columns} />
+                              <DataTable
+                                data={tableData}
+                                columns={columns}
+                                slots={{
+                                  footer: CustomFooter
+                                }}
+                                slotProps={{
+                                  footer: { onCopy, onDelete }
+                                }}
+                              />
                             ) : (
                               <Alert severity="info">Noch keine Mitarbeiter vorhanden</Alert>
                             )}
