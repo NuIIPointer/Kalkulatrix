@@ -27,15 +27,19 @@ const StundensatzRechnerValueUpdater = () => {
 
       values.pk_produktiv_mitarbeiter?.forEach((category, outerIndex) => {
         let S9_gesamt = 0;
+        let N9_gesamt = 0;
+        let Q9_gesamt = 0;
 
         category.fields?.forEach((ma, innerIndex) => {
           // Anwesenheitsentgeld (gesamt) START
           const J9 = 0 + (ma.F9 || 0) + (ma.G9 || 0) + (ma.H9 || 0) + (ma.I9 || 0);
           const M9 = (ma.E9 || 0) - J9;
           const O9 = (M9 * (ma.N9 || 100)) / 100;
+          N9_gesamt += ma.N9;
           const P9 = M9 - O9;
           const S9 = M9 * ((ma.Q9 || 0) + (ma.R9 || 0));
-          S9_gesamt += S9;
+          S9_gesamt += S9 || 0;
+          Q9_gesamt += ma.Q9 || 0;
           const U9 = O9 * ((ma.Q9 || 0) + (ma.R9 || 0));
           const V9 = P9 * ((ma.Q9 || 0) + (ma.R9 || 0));
           const anzahl = 1;
@@ -69,6 +73,18 @@ const StundensatzRechnerValueUpdater = () => {
             setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.V9`, V9);
           }
         });
+
+        const N9_durchschnitt = N9_gesamt / category.fields.length;
+        const Q9_durchschnitt = Q9_gesamt / category.fields.length;
+
+        if (N9_durchschnitt !== category.N9_durchschnitt) {
+          setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.N9_durchschnitt`, N9_durchschnitt);
+        }
+
+        if (Q9_durchschnitt !== category.Q9_durchschnitt) {
+          setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.Q9_durchschnitt`, Q9_durchschnitt);
+        }
+
         if (S9_gesamt !== category.S9_gesamt) {
           setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.S9_gesamt`, S9_gesamt);
         }

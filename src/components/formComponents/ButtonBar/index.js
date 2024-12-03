@@ -104,17 +104,6 @@ const ButtonBar = () => {
         >
           zurück zur Übersicht
         </Button>
-        {errors && Object.keys(errors)?.length > 0 ? (
-          <Alert
-            severity={Object.keys(touched)?.length > 0 ? 'error' : 'info'}
-            variant="outlined"
-            sx={{ paddingY: 0, whiteSpace: 'break-word' }}
-          >
-            Es gibt unvollständige oder falsche Angaben
-          </Alert>
-        ) : (
-          ''
-        )}
         <Stack gap={1} direction="row" flexWrap="wrap">
           <Button
             startIcon={isSaving ? <CircularProgress size="1rem" color="white" /> : <Save />}
@@ -139,6 +128,17 @@ const ButtonBar = () => {
             </Button>
           )}
         </Stack>
+        {/* {errors && Object.keys(errors)?.length > 0 ? (
+          <Alert
+            severity={Object.keys(touched)?.length > 0 ? 'error' : 'info'}
+            variant="outlined"
+            sx={{ paddingY: 0, whiteSpace: 'break-word' }}
+          >
+            Es gibt unvollständige oder falsche Angaben
+          </Alert>
+        ) : (
+          ''
+        )} */}
       </Stack>
       <Dialog
         open={showTouchedFieldsDialog}

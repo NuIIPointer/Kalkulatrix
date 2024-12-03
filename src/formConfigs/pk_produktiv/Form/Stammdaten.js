@@ -37,6 +37,19 @@ import DataTable from 'components/DataTable/index';
 import LayoutBox from 'components/LayoutBox/index';
 import InitialsCircle from 'components/InitialsCircle/index';
 
+const statCardStyles = (theme) => ({
+  number: {
+    color: theme.palette.primary[500],
+    fontWeight: '700',
+    fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2rem' },
+    textAlign: 'center'
+  },
+  description: {
+    textAlign: 'center',
+    fontSize: { xs: '0.75rem', sm: '0.875rem', md: '1rem' }
+  }
+});
+
 const columns = [
   {
     field: 'checked',
@@ -60,7 +73,7 @@ const columns = [
     renderCell: (params) => (
       <Stack flexDirection="row" gap={1.5}>
         <InitialsCircle name={params.value} sx={{ flexShrink: 0 }} />
-        <Stack>
+        <Stack sx={{ color: params.row.hasError ? 'red' : undefined }}>
           <Typography variant="body1" fontWeight="bold" marginBottom={-0.5}>
             {params.value}
           </Typography>
@@ -410,11 +423,12 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
 
 const Stammdaten = () => {
   const theme = useTheme();
-  const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
+  const { values, errors, touched, isSubmitting, setFieldValue } = useFormikContext();
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
   const [groupToDelete, setGroupToDelete] = useState(undefined);
   const [checkedRows, setCheckedRows] = useState([]);
+  console.log('errors', errors);
   const onRowCheck = (userId) => {
     setCheckedRows((prev) => {
       if (prev.includes(userId)) {
@@ -472,6 +486,8 @@ const Stammdaten = () => {
       title="Eingabe Produktive Lohnkosten"
       description="Bitte legen Sie ihre Abteilungen bzw. Unternehmensbereiche an. Folgend können sie die Mitarbeiter für die einzelnen Abteilungen erfassen."
       defaultOpen
+      forceShowError={Object.keys(touched).length > 0}
+      isError={!!errors.pk_produktiv_mitarbeiter}
     >
       {modalData && (
         <Modal open={!!modalData} onClose={() => setModalData(null)}>
@@ -529,7 +545,7 @@ const Stammdaten = () => {
               {values.pk_produktiv_mitarbeiter?.map((outerField, outerIndex) => (
                 <TabPanel key={outerIndex} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
                   <Grid container columnSpacing={2} alignItems="end">
-                    <Grid item xs={12} sm={5} md={4}>
+                    <Grid item xs={12} sm={5} md={3}>
                       <FastField name={`pk_produktiv_mitarbeiter.${openedTab}.groupTitle`}>
                         {({ field, meta }) => (
                           <TextField
@@ -537,7 +553,7 @@ const Stammdaten = () => {
                             label="Abteilungsname"
                             error={meta?.touched && Boolean(meta.error)}
                             helperText={meta?.touched && meta.error}
-                            sx={{ mb: 3 }}
+                            sx={{ mb: 2 }}
                           />
                         )}
                       </FastField>
@@ -547,12 +563,76 @@ const Stammdaten = () => {
                         variant="outlined"
                         onClick={() => setGroupToDelete(outerIndex)}
                         disabled={isSubmitting}
-                        sx={{ mb: 3 }}
+                        sx={{ mb: 2 }}
                         color="error"
                         startIcon={<DeleteOutlineOutlined />}
                       >
                         Abteilung löschen
                       </Button>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    columnSpacing={{ xs: 1, sm: 2 }}
+                    rowSpacing={{ xs: 1, sm: 2 }}
+                    alignItems="end"
+                    sx={{ mb: 3, alignItems: 'stretch' }}
+                  >
+                    <Grid item xs={6} sm={6} md={3}>
+                      <LayoutBox
+                        sx={{
+                          padding: theme.shape.paddingBoxSmall,
+                          boxShadow: '0',
+                          height: '100%'
+                        }}
+                      >
+                        <Typography variant="body2" sx={statCardStyles(theme).number}>
+                          {formFloat(outerField.S9_gesamt, 0) || 0}€
+                        </Typography>
+                        <Typography sx={statCardStyles(theme).description}>Personalkosten</Typography>
+                      </LayoutBox>
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={3}>
+                      <LayoutBox
+                        sx={{
+                          padding: theme.shape.paddingBoxSmall,
+                          boxShadow: '0',
+                          height: '100%'
+                        }}
+                      >
+                        <Typography variant="body2" sx={statCardStyles(theme).number}>
+                          {formFloat(outerField.N9_durchschnitt, 0) || '0'}%
+                        </Typography>
+                        <Typography sx={statCardStyles(theme).description}>Auslastung</Typography>
+                      </LayoutBox>
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={3}>
+                      <LayoutBox
+                        sx={{
+                          padding: theme.shape.paddingBoxSmall,
+                          boxShadow: '0',
+                          height: '100%'
+                        }}
+                      >
+                        <Typography variant="body2" sx={statCardStyles(theme).number}>
+                          {formFloat(outerField.Q9_durchschnitt, 0) || '0'}€
+                        </Typography>
+                        <Typography sx={statCardStyles(theme).description}>Kosten je Stunde</Typography>
+                      </LayoutBox>
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={3}>
+                      <LayoutBox
+                        sx={{
+                          padding: theme.shape.paddingBoxSmall,
+                          boxShadow: '0',
+                          height: '100%'
+                        }}
+                      >
+                        <Typography variant="body2" sx={statCardStyles(theme).number}>
+                          {formFloat(outerField.fields?.length, 0) || 0}
+                        </Typography>
+                        <Typography sx={statCardStyles(theme).description}>Mitarbeiter</Typography>
+                      </LayoutBox>
                     </Grid>
                   </Grid>
                   <Dialog
@@ -592,11 +672,12 @@ const Stammdaten = () => {
                           onRowCheck,
                           checked: checkedRows.includes(innerField.userId),
                           name: maTitle,
-                          groupName: outerField.groupTitle || outerIndex + 1,
+                          groupName: outerField.groupTitle || `Abteilung ${outerIndex + 1}`,
                           stundenlohn: `${formFloat(innerField.Q9 || 0, 2).replace('.', ',')}€`,
                           auslastung: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%`,
                           anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
-                          newField: innerField.newField, // Add the new field here
+                          newField: innerField.newField,
+                          hasError: errors.pk_produktiv_mitarbeiter?.[outerIndex],
                           actionsDom: (
                             <Stack flexDirection="row" gap={{ xs: 1, md: 1.5, lg: 2 }}>
                               <IconButton

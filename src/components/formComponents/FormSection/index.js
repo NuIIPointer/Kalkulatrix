@@ -27,6 +27,7 @@ const FormSection = ({
   backgroundColor,
   border,
   isError,
+  forceShowError,
   headlineVariant = 'h2',
   small
 }) => {
@@ -38,7 +39,7 @@ const FormSection = ({
 
   const hasErrorField = useMemo(() => {
     if (sectionRef.current) {
-      const inputFields = sectionRef.current.querySelectorAll('input, textarea, select');
+      const inputFields = sectionRef.current.querySelectorAll('input, textarea, select, .isInvalidCustom');
 
       if (inputFields?.length > 0) {
         const inputNames = Array.from(inputFields).map((field) => field.getAttribute('name') || field.getAttribute('id'));
@@ -53,7 +54,7 @@ const FormSection = ({
 
   const hasTouchedField = useMemo(() => {
     if (sectionRef.current) {
-      const inputFields = sectionRef.current.querySelectorAll('input, textarea, select');
+      const inputFields = sectionRef.current.querySelectorAll('input, textarea, select, .isInvalidCustom');
 
       if (inputFields?.length > 0) {
         const inputNames = Array.from(inputFields).map((field) => field.getAttribute('name') || field.getAttribute('id'));
@@ -66,7 +67,7 @@ const FormSection = ({
     return false;
   }, [touched]);
 
-  const showErrorStatus = hasTouchedField && (hasErrorField || isError);
+  const showErrorStatus = (hasTouchedField || forceShowError) && (hasErrorField || isError);
 
   const buttonStyles = {
     aspectRatio: '1/1',
@@ -86,7 +87,7 @@ const FormSection = ({
       >
         <Stack gap={2} direction="row" justifyContent="space-between" flexWrap={{ xs: 'wrap', sm: 'nowrap' }} alignItems="flex-start">
           <Stack flexGrow="1">
-            <Typography variant={headlineVariant} sx={{ flexGrow: 1 }}>
+            <Typography variant={headlineVariant} sx={{ flexGrow: 1, color: showErrorStatus ? theme.palette.error.main : undefined }}>
               {title}
             </Typography>
             {showErrorStatus && (

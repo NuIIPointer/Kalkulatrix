@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 // project import
 import { UserContext } from 'context/user';
@@ -12,7 +12,6 @@ import useFormLiteral from './useFormLiteral';
 import { Formik, Form } from 'formik';
 import { getInitialGemeinkostenCategory } from 'formConfigs/gk_deckung/getInitialGemeinkostenData';
 import ButtonBar from 'components/formComponents/ButtonBar/index';
-import FormSection from 'components/formComponents/FormSection/index';
 import dayjs from 'dayjs';
 
 // ==============================|| SAMPLE PAGE ||============================== //
@@ -71,11 +70,9 @@ const FormComponent = () => {
 
         return (
           <Box key={key} sx={{ minHeight: 'calc(100vh - 550px)' }}>
-            <FormSection
-              title={`Letzte Änderung: ${dayjs(activeFormData?.values?.lastChanged).format('DD.MM.YYYY')}`}
-              collapsable={false}
-              defaultOpen
-            />
+            <Typography variant="h5" sx={{ mb: 5, mt: -3 }}>
+              Letzte Änderung: {dayjs(activeFormData?.values?.lastChanged).format('DD.MM.YYYY')}
+            </Typography>
             {value.content}
             {value.calucationUpdater}
           </Box>
