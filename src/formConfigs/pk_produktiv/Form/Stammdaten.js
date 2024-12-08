@@ -99,9 +99,14 @@ const columns = [
     width: 120
   },
   {
+    field: 'krankenzeit',
+    headerName: 'Krankenzeit',
+    width: 150
+  },
+  {
     field: 'anwesenheitsentgelt',
-    headerName: 'Anwesenheitsentgeld',
-    width: 200
+    headerName: 'Lohn p.a.',
+    width: 140
   },
   {
     field: 'actionsDom',
@@ -689,6 +694,7 @@ const Stammdaten = () => {
                           stundenlohn: `${formFloat(innerField.Q9 || 0, 2).replace('.', ',')}€`,
                           auslastung: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%`,
                           anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
+                          krankenzeit: `${innerField.G9 || 0} Stunden`,
                           newField: innerField.newField,
                           hasError: maHasError,
                           theme,

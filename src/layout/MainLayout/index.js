@@ -63,9 +63,9 @@ const MainLayout = () => {
           margin: '0 auto',
           gridTemplateColumns: {
             xs: `0 auto 0`,
-            md: `1fr minmax(50%, 1000px) 1fr`,
-            lg: `1fr minmax(50%, 1000px) .25fr`,
-            xl: `1fr minmax(50%, 1000px) .5fr`
+            md: `1fr minmax(50%, 1100px) 1fr`,
+            lg: `1fr minmax(50%, 1100px) .25fr`,
+            xl: `1fr minmax(50%, 1100px) .5fr`
           },
           gridTemplateRows: `auto 1fr`,
           gap: theme.shape.layoutDesignGutter
