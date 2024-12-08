@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 // project import
 import NavGroup from './NavGroup';
-import menuItem from 'menu-items';
+import menuItems from 'menu-items';
 import { useContext } from 'react';
 import { UserContext } from 'context/user/index';
 
@@ -11,7 +11,7 @@ import { UserContext } from 'context/user/index';
 
 const Navigation = () => {
   const { user } = useContext(UserContext);
-  const navGroups = menuItem.items.map((item) => {
+  const navGroups = menuItems.items.map((item) => {
     return (!item.requiresAdmin || user?.isAdmin) && <NavGroup key={item.id} item={item} />;
   });
 

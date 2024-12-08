@@ -14,7 +14,23 @@ const pages = {
       type: 'item',
       url: '/office/form/overview',
       matchingUrlRegexp: /\/form\/[^/]{20,}\/[^/]*$/,
-      icon: BackupTableOutlined
+      icon: BackupTableOutlined,
+      // children: [
+      //   {
+      //     id: 'annahmen',
+      //     title: 'Allgemeine Unternehmensangaben',
+      //     type: 'subitem',
+      //     url: '/office/form/{form}/annahmen',
+      //     matchingUrlRegexp: /\/form\/[^/]{20,}\/pk_produktiv$/
+      //   },
+      //   {
+      //     id: 'pk_produktiv',
+      //     title: 'Personalkosten produktive Abteilungen',
+      //     type: 'subitem',
+      //     url: '/office/form/{form}/pk_produktiv',
+      //     matchingUrlRegexp: /\/form\/[^/]{20,}\/pk_produktiv$/
+      //   }
+      // ]
     },
     // {
     //   id: 'forms',

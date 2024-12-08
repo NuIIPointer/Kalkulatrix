@@ -11,6 +11,11 @@ const DataTable = ({ data, columns, sx = {}, ...otherProps }) => {
         '&.MuiDataGrid-root': {
           border: 'none'
         },
+        '.MuiDataGrid-overlayWrapper': {
+          // display: 'none'
+          minHeight: '75px',
+          backgroundColor: `${theme.palette.secondary[300]} !important`
+        },
         '.MuiDataGrid-columnSeparator': {
           display: 'none'
         },

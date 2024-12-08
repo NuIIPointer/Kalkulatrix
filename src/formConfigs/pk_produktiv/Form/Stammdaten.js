@@ -72,12 +72,16 @@ const columns = [
     width: 240,
     renderCell: (params) => (
       <Stack flexDirection="row" gap={1.5}>
-        <InitialsCircle name={params.value} sx={{ flexShrink: 0 }} />
-        <Stack sx={{ color: params.row.hasError ? 'red' : undefined }}>
+        <InitialsCircle
+          name={params.value}
+          sx={{ flexShrink: 0, border: params.row.hasError ? `1px solid ${params.row.theme?.palette?.error?.[500]}` : undefined }}
+          fontSx={{ color: params.row.hasError ? params.row.theme?.palette?.error?.[500] : undefined }}
+        />
+        <Stack sx={{ color: params.row.hasError ? params.row.theme?.palette?.error?.[500] : undefined }}>
           <Typography variant="body1" fontWeight="bold" marginBottom={-0.5}>
             {params.value}
           </Typography>
-          <Typography variant="body2" fontSize="0.8rem" color="textSecondary">
+          <Typography variant="body2" fontSize="0.8rem" color="currentColor" sx={{ opacity: 0.65 }}>
             {params.row.groupName}
           </Typography>
         </Stack>
@@ -448,33 +452,37 @@ const Stammdaten = () => {
     minWidth: '28px'
   };
 
-  const CustomFooter = ({ onCopy, onDelete }) => {
+  const CustomFooter = ({ onCopy, onDelete, onCreate }) => {
     return (
       <GridFooterContainer>
-        {checkedRows?.length > 0 ? (
-          <Stack flexDirection="row" gap={1} marginLeft={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={onDelete}
-              startIcon={<DeleteOutlined />}
-              sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
-            >
-              <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Löschen</Stack>
+        <Stack flexDirection="row" gap={1} marginLeft={2}>
+          {checkedRows?.length > 0 ? (
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={onDelete}
+                startIcon={<DeleteOutlined />}
+                sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
+              >
+                <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Löschen</Stack>
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={onCopy}
+                startIcon={<Save />}
+                sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
+              >
+                <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Kopieren</Stack>
+              </Button>
+            </>
+          ) : (
+            <Button variant="outlined" color="primary" onClick={onCreate} disabled={isSubmitting}>
+              Neuen Mitarbeiter anlegen
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={onCopy}
-              startIcon={<Save />}
-              sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
-            >
-              <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Kopieren</Stack>
-            </Button>
-          </Stack>
-        ) : (
-          <span />
-        )}
+          )}
+        </Stack>
         <GridFooter />
       </GridFooterContainer>
     );
@@ -665,6 +673,11 @@ const Stammdaten = () => {
                       const tableData = maFields?.map((innerField, innerIndex) => {
                         const maTitle = innerField?.titel || 'Mitarbeiter';
                         const userId = innerField.userId;
+                        const maGroupsWithErrors = errors.pk_produktiv_mitarbeiter?.[outerIndex];
+                        const groupErrors =
+                          maGroupsWithErrors?.fields &&
+                          Object.keys(maGroupsWithErrors.fields).filter((fieldKey) => !!maGroupsWithErrors.fields[fieldKey]);
+                        const maHasError = maGroupsWithErrors ? groupErrors?.includes(innerIndex.toString()) : false;
 
                         return {
                           uid: userId,
@@ -677,7 +690,8 @@ const Stammdaten = () => {
                           auslastung: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%`,
                           anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
                           newField: innerField.newField,
-                          hasError: errors.pk_produktiv_mitarbeiter?.[outerIndex],
+                          hasError: maHasError,
+                          theme,
                           actionsDom: (
                             <Stack flexDirection="row" gap={{ xs: 1, md: 1.5, lg: 2 }}>
                               <IconButton
@@ -748,61 +762,33 @@ const Stammdaten = () => {
                         setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.fields`, newRows);
                         setCheckedRows([]);
                       };
+                      const onCreate = () => {
+                        innerPush(getInitialMitarbeiterData(values));
+                      };
 
                       return (
                         <>
-                          <p>
+                          <Typography
+                            variant="body2"
+                            sx={{ pt: { xs: 0, md: 1, lg: 2 }, pb: { xs: 3, sm: 4, md: 4, lg: 6 }, px: { xs: 2, sm: 4, md: 6, lg: 9 } }}
+                            textAlign="center"
+                          >
                             Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher
                             Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter
                             erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl).
-                          </p>
+                          </Typography>
                           <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
-                            {maFields?.length > 0 ? (
-                              <DataTable
-                                data={tableData}
-                                columns={columns}
-                                slots={{
-                                  footer: CustomFooter
-                                }}
-                                slotProps={{
-                                  footer: { onCopy, onDelete }
-                                }}
-                              />
-                            ) : (
-                              <Alert severity="info">Noch keine Mitarbeiter vorhanden</Alert>
-                            )}
+                            <DataTable
+                              data={tableData}
+                              columns={columns}
+                              slots={{
+                                footer: CustomFooter
+                              }}
+                              slotProps={{
+                                footer: { onCopy, onDelete, onCreate }
+                              }}
+                            />
                           </LayoutBox>
-                          <Button
-                            variant="outlined"
-                            color="primary"
-                            onClick={() => innerPush(getInitialMitarbeiterData(values))}
-                            disabled={isSubmitting}
-                            sx={{ mt: 2, mb: 4, ml: 'auto', display: 'block' }}
-                          >
-                            Neuen Mitarbeiter anlegen
-                          </Button>
-                          <ReadOnlyBox title={' '} alwaysOpen>
-                            <Grid container columnSpacing={{ xs: 2, md: 4 }}>
-                              <Grid item xs={12} sm={6}>
-                                <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.S9_gesamt`}>
-                                  {({ field, meta }) => (
-                                    <TextField
-                                      {...field}
-                                      value={formFloat(field.value, 2)}
-                                      label={`Gesamtkosten Abteilung "${outerField.groupTitle || outerIndex + 1}" (in EUR)`}
-                                      error={meta?.touched && Boolean(meta.error)}
-                                      helperText={meta?.touched && meta.error}
-                                      InputProps={{
-                                        readOnly: true
-                                      }}
-                                      type="number"
-                                      sx={{ mb: 2 }}
-                                    />
-                                  )}
-                                </FastField>
-                              </Grid>
-                            </Grid>
-                          </ReadOnlyBox>
                         </>
                       );
                     }}

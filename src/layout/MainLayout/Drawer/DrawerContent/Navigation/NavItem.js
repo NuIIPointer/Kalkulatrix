@@ -8,7 +8,7 @@ import { ListItemButton, ListItemIcon, ListItem } from '@mui/material';
 
 // ==============================|| NAVIGATION - LIST ITEM ||============================== //
 
-const NavItem = ({ item }) => {
+const NavItem = ({ item, level }) => {
   const theme = useTheme();
   const { pathname } = useLocation();
   // const { drawerOpen } = useSelector((state) => state.menu);
@@ -35,9 +35,10 @@ const NavItem = ({ item }) => {
   const iconColor = isActive ? theme.palette.common.white : theme.palette.primary.main;
   const bgColor = isActive ? theme.palette.primary[500] : 'transparent';
   const bgColorHover = isActive ? theme.palette.primary[400] : theme.palette.grey[300];
+  const isSubItem = level === 2;
 
   return (
-    <ListItem sx={{ padding: 0 }}>
+    <ListItem sx={{ padding: 0 }} className={isActive ? 'isActive' : undefined}>
       <ListItemButton
         {...listItemProps}
         disabled={item.disabled}
@@ -45,12 +46,13 @@ const NavItem = ({ item }) => {
         sx={{
           bgcolor: bgColor,
           color: textColor,
-          padding: theme.shape.paddingButton,
+          padding: isSubItem ? 1 : theme.shape.paddingButton,
           marginTop: item.isSubItem ? 0 : theme.spacing(-1),
           marginBottom: theme.spacing(1),
           borderRadius: theme.shape.borderRadius / 7,
           transition: '.25s',
-          fontSize: '1.2rem',
+          fontSize: isSubItem ? '1rem' : '1.2rem',
+          lineHeight: '1.3',
           '&:after': {
             content: '""',
             height: '50%',
@@ -89,7 +91,8 @@ const NavItem = ({ item }) => {
               width: '3px',
               opacity: '0.5'
             }
-          }
+          },
+          ...(isSubItem ? { color: 'red' } : {})
         }}
       >
         {itemIcon && (
