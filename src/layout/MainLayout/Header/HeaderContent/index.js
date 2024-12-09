@@ -46,14 +46,14 @@ const HeaderContent = () => {
 
   return (
     <>
-      <Stack flexDirection="column" marginTop={1}>
+      <Stack flexDirection="column">
         <Typography
           variant="h1"
           sx={{
             fontSize: 36,
             fontWeight: theme.typography.fontWeightBold,
             mb: { xs: theme.spacing(2), sm: theme.spacing(4), md: 0 },
-            mt: { xs: theme.spacing(6), sm: 0 },
+            mt: { xs: theme.spacing(9), sm: 0 },
             paddingRight: { sm: theme.spacing(15), md: 0 }
           }}
         >

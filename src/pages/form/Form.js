@@ -70,15 +70,15 @@ const FormComponent = () => {
 
         return (
           <Box key={key} sx={{ minHeight: 'calc(100vh - 550px)' }}>
-            <Typography variant="h5" sx={{ mb: 5, mt: -3 }}>
+            {/* <Typography variant="h5" sx={{ mb: 5, mt: -3 }}>
               Letzte Änderung: {dayjs(activeFormData?.values?.lastChanged).format('DD.MM.YYYY')}
-            </Typography>
+            </Typography> */}
             {value.content}
             {value.calucationUpdater}
           </Box>
         );
       }),
-    [activeFormData?.values?.lastChanged, formLiteral, formSection]
+    [formLiteral, formSection]
   );
 
   const activeFormConfig = useMemo(() => {

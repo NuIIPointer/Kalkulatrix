@@ -13,6 +13,7 @@ import ProfileTab from './ProfileTab';
 import { SettingsOutlined, Logout } from '@mui/icons-material';
 import { UserContext } from 'context/user';
 import LayoutBox from 'components/LayoutBox/index';
+import InitialsCircle from 'components/InitialsCircle/index';
 
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
@@ -52,20 +53,20 @@ const Profile = () => {
 
   const iconBackColorClosed = theme.palette.primary.main;
   const iconBackColorOpen = theme.palette.primary.light;
-  const iconColorClosed = theme.palette.common.white;
-  const iconColorOpen = theme.palette.common.white;
+  // const iconColorClosed = theme.palette.common.white;
+  // const iconColorOpen = theme.palette.common.white;
+
+  console.log('user', user);
 
   return (
     <Box sx={{ flexShrink: 0, ml: 'auto' }}>
       <ButtonBase
         sx={{
-          p: 0.25,
-          bgcolor: open ? iconBackColorOpen : iconBackColorClosed,
-          padding: 1.5,
+          padding: 0,
           borderRadius: '50%',
           boxShadow: theme.customShadows.z3,
           transition: '.25s',
-          '&:hover': { bgcolor: 'secondary.lighter', transform: 'rotate(25deg)' }
+          '&:hover': { bgcolor: 'secondary.lighter', transform: 'scale(1.1)' }
         }}
         aria-label="open profile"
         ref={anchorRef}
@@ -74,7 +75,16 @@ const Profile = () => {
         onClick={user.uid && handleToggle}
         href={!user.uid ? '/login' : undefined}
       >
-        <SettingsOutlined sx={{ color: open ? iconColorOpen : iconColorClosed }} />
+        {/* <SettingsOutlined sx={{ color: open ? iconColorOpen : iconColorClosed }} /> */}
+        <InitialsCircle
+          name={user?.displayName || ''}
+          sx={{
+            backgroundColor: theme.palette.primary[500],
+            height: theme.spacing(6),
+            width: theme.spacing(6)
+          }}
+          fontSx={{ color: theme.palette.common.white }}
+        />
       </ButtonBase>
       <Popper
         placement="bottom-end"

@@ -23,10 +23,10 @@ const Footer = () => {
       component="footer"
       sx={{
         backgroundColor: 'transparent',
-        padding: theme.shape.layoutDesignGutter,
+        padding: theme.shape.paddingBoxLarge,
         position: 'relative',
         zIndex: '1',
-        borderTop: `2px solid ${theme.palette.primary[200]}`
+        borderTop: `1px solid ${theme.palette.grey[400]}`
       }}
     >
       <Grid container spacing={3}>
@@ -39,7 +39,9 @@ const Footer = () => {
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: { xs: 'center', sm: 'flex-end' },
-              gap: `${theme.spacing(1)} ${theme.spacing(3)}`
+              gap: `${theme.spacing(1)} ${theme.spacing(3)}`,
+              height: '100%',
+              alignItems: 'center'
             }}
           >
             <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>

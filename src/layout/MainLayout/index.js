@@ -62,59 +62,83 @@ const MainLayout = () => {
           minHeight: '100vh',
           margin: '0 auto',
           gridTemplateColumns: {
-            xs: `0 auto 0`,
-            md: `1fr minmax(50%, 1100px) 1fr`,
-            lg: `1fr minmax(50%, 1100px) .25fr`,
-            xl: `1fr minmax(50%, 1100px) .5fr`
+            xs: `0 auto 0 0`,
+            md: `1fr ${theme.shape.layoutDesignGutter.md} minmax(50%, 1100px) ${theme.shape.layoutDesignGutter.md}`,
+            lg: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) ${theme.shape.layoutDesignGutter.lg}`,
+            xl: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) ${theme.shape.layoutDesignGutter.lg}`
           },
-          gridTemplateRows: `auto 1fr`,
-          gap: theme.shape.layoutDesignGutter
+          gridTemplateRows: {
+            xs: `auto ${theme.shape.layoutDesignGutter.xs} 1fr`,
+            md: `auto ${theme.shape.layoutDesignGutter.md} 1fr`
+          }
+          // gap: theme.shape.layoutDesignGutter
         }}
       >
         <Box
           sx={{
             gridColumnStart: '2',
-            gridColumnEnd: '3',
+            gridColumnEnd: '5',
             gridRowStart: '1',
-            gridRowEnd: '1',
-            paddingTop: theme.shape.layoutDesignGutter
+            gridRowEnd: '1'
           }}
         >
-          <Box sx={{ positon: 'sticky' }}>
-            {useDrawerNav && (
+          <Box
+            sx={{
+              backgroundColor: { md: theme.palette.common.white },
+              minHeight: '100px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-betweend',
+              paddingLeft: { md: theme.shape.layoutDesignGutter.md, lg: 0 },
+              borderBottom: { md: `1px solid ${theme.palette.grey[300]}` }
+            }}
+          >
+            {useDrawerNav ? (
+              <>
+                <Box
+                  sx={{
+                    position: 'fixed',
+                    top: '16px',
+                    right: '16px',
+                    backgroundColor: theme.palette.common.white,
+                    boxShadow: theme.shadows[8],
+                    padding: 1,
+                    zIndex: '1000',
+                    borderRadius: '500px',
+                    display: 'flex',
+                    gap: theme.spacing(1)
+                  }}
+                >
+                  <Profile />
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    sx={{
+                      height: '50px',
+                      width: '50px',
+                      minWidth: 'auto',
+                      borderRadius: '500px',
+                      border: `1px solid ${theme.palette.common.white}`,
+                      padding: 1
+                    }}
+                    onClick={() => setNavOpen(!navOpen)}
+                  >
+                    <MenuIcon />
+                  </Button>
+                </Box>
+                <Header />
+              </>
+            ) : (
               <Box
                 sx={{
-                  position: 'fixed',
-                  top: '16px',
-                  right: '16px',
-                  backgroundColor: theme.palette.common.white,
-                  boxShadow: theme.shadows[8],
-                  padding: 1,
-                  zIndex: '1000',
-                  borderRadius: '500px',
-                  display: 'flex',
-                  gap: theme.spacing(1)
+                  paddingLeft: theme.shape.layoutDesignGutter,
+                  paddingRight: theme.shape.layoutDesignGutter,
+                  width: '100%'
                 }}
               >
-                <Profile />
-                <Button
-                  color="primary"
-                  variant="contained"
-                  sx={{
-                    height: '50px',
-                    width: '50px',
-                    minWidth: 'auto',
-                    borderRadius: '500px',
-                    border: `1px solid ${theme.palette.common.white}`,
-                    padding: 1
-                  }}
-                  onClick={() => setNavOpen(!navOpen)}
-                >
-                  <MenuIcon />
-                </Button>
+                <Header />
               </Box>
             )}
-            <Header />
           </Box>
         </Box>
         <Box
@@ -124,7 +148,7 @@ const MainLayout = () => {
             gridColumnStart: '1',
             gridColumnEnd: '1',
             gridRowStart: '1',
-            gridRowEnd: '4',
+            gridRowEnd: '5',
             backgroundColor: { lg: theme.palette.common.white },
             borderRight: { lg: `1px solid ${theme.palette.grey[300]}` },
             position: 'relative',
@@ -153,16 +177,11 @@ const MainLayout = () => {
           sx={{
             width: '100%',
             flexGrow: 1,
-            gridColumnStart: '2',
-            gridColumnEnd: '2',
-            gridRowStart: '2',
-            gridRowEnd: '3',
-            backgroundColor: 'transparent',
-            marginTop: {
-              sm: theme.spacing(-2),
-              md: theme.spacing(-2),
-              lg: theme.spacing(-8)
-            }
+            gridColumnStart: '3',
+            gridColumnEnd: '4',
+            gridRowStart: '3',
+            gridRowEnd: '5',
+            backgroundColor: 'transparent'
           }}
         >
           <Outlet />

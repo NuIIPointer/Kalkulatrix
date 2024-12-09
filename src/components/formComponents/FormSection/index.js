@@ -85,8 +85,8 @@ const FormSection = ({
           overflow: 'hidden'
         }}
       >
-        <Stack gap={2} direction="row" justifyContent="space-between" flexWrap={{ xs: 'wrap', sm: 'nowrap' }} alignItems="flex-start">
-          <Stack flexGrow="1">
+        <Stack gap={{ xs: 1, sm: 2 }} direction="row" justifyContent="space-between" flexWrap="nowrap" alignItems="flex-start">
+          <Stack flexGrow="1" sx={{ maxWidth: '700px' }}>
             <Typography variant={headlineVariant} sx={{ flexGrow: 1, color: showErrorStatus ? theme.palette.error.main : undefined }}>
               {title}
             </Typography>

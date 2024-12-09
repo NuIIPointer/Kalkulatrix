@@ -466,6 +466,7 @@ const Stammdaten = () => {
               <Button
                 variant="contained"
                 color="primary"
+                size="small"
                 onClick={onDelete}
                 startIcon={<DeleteOutlined />}
                 sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
@@ -475,6 +476,7 @@ const Stammdaten = () => {
               <Button
                 variant="contained"
                 color="primary"
+                size="small"
                 onClick={onCopy}
                 startIcon={<Save />}
                 sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
@@ -483,7 +485,7 @@ const Stammdaten = () => {
               </Button>
             </>
           ) : (
-            <Button variant="outlined" color="primary" onClick={onCreate} disabled={isSubmitting}>
+            <Button variant="contained" color="primary" size="small" onClick={onCreate} disabled={isSubmitting}>
               Neuen Mitarbeiter anlegen
             </Button>
           )}
@@ -494,14 +496,7 @@ const Stammdaten = () => {
   };
 
   return (
-    <FormSection
-      collapsable={true}
-      title="Eingabe Produktive Lohnkosten"
-      description="Bitte legen Sie ihre Abteilungen bzw. Unternehmensbereiche an. Folgend können sie die Mitarbeiter für die einzelnen Abteilungen erfassen."
-      defaultOpen
-      forceShowError={Object.keys(touched).length > 0}
-      isError={!!errors.pk_produktiv_mitarbeiter}
-    >
+    <>
       {modalData && (
         <Modal open={!!modalData} onClose={() => setModalData(null)}>
           <LayoutBox
@@ -527,7 +522,7 @@ const Stammdaten = () => {
         <FieldArray name="pk_produktiv_mitarbeiter">
           {({ push, remove }) => (
             <>
-              <Stack direction="row" flexWrap="wrap" mt={{ xs: 2, sm: 3, borderBottom: `1px solid ${theme.palette.primary.main}` }}>
+              <Stack direction="row" flexWrap="wrap" alignItems="center" sx={{ mb: 2 }}>
                 <TabList onChange={changeTab}>
                   {values.pk_produktiv_mitarbeiter?.map((category, index) => {
                     return (
@@ -544,268 +539,270 @@ const Stammdaten = () => {
                   })}
                 </TabList>
                 <Button
-                  variant="text"
+                  variant="contained"
                   onClick={() => {
                     push({ categoryId: uuid(), fields: [getInitialMitarbeiterData(values)] });
                     changeTab(null, values.pk_produktiv_mitarbeiter?.length);
                   }}
                   disabled={isSubmitting}
-                  sx={{ fontWeight: 500 }}
+                  sx={{ fontWeight: 500, margin: 1, marginLeft: 'auto', mt: 0, mb: 0, height: 'auto' }}
                 >
                   Neue Abteilung
                 </Button>
               </Stack>
               {values.pk_produktiv_mitarbeiter?.map((outerField, outerIndex) => (
-                <TabPanel key={outerIndex} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
-                  <Grid container columnSpacing={2} alignItems="end">
-                    <Grid item xs={12} sm={5} md={3}>
-                      <FastField name={`pk_produktiv_mitarbeiter.${openedTab}.groupTitle`}>
-                        {({ field, meta }) => (
-                          <TextField
-                            {...field}
-                            label="Abteilungsname"
-                            error={meta?.touched && Boolean(meta.error)}
-                            helperText={meta?.touched && meta.error}
-                            sx={{ mb: 2 }}
-                          />
-                        )}
-                      </FastField>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <Button
-                        variant="outlined"
-                        onClick={() => setGroupToDelete(outerIndex)}
-                        disabled={isSubmitting}
-                        sx={{ mb: 2 }}
-                        color="error"
-                        startIcon={<DeleteOutlineOutlined />}
-                      >
-                        Abteilung löschen
-                      </Button>
-                    </Grid>
-                  </Grid>
-                  <Grid
-                    container
-                    columnSpacing={{ xs: 1, sm: 2 }}
-                    rowSpacing={{ xs: 1, sm: 2 }}
-                    alignItems="end"
-                    sx={{ mb: 3, alignItems: 'stretch' }}
-                  >
-                    <Grid item xs={6} sm={6} md={3}>
-                      <LayoutBox
-                        sx={{
-                          padding: theme.shape.paddingBoxSmall,
-                          boxShadow: '0',
-                          height: '100%'
-                        }}
-                      >
-                        <Typography variant="body2" sx={statCardStyles(theme).number}>
-                          {formFloat(outerField.S9_gesamt, 0) || 0}€
-                        </Typography>
-                        <Typography sx={statCardStyles(theme).description}>Personalkosten</Typography>
-                      </LayoutBox>
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={3}>
-                      <LayoutBox
-                        sx={{
-                          padding: theme.shape.paddingBoxSmall,
-                          boxShadow: '0',
-                          height: '100%'
-                        }}
-                      >
-                        <Typography variant="body2" sx={statCardStyles(theme).number}>
-                          {formFloat(outerField.N9_durchschnitt, 0) || '0'}%
-                        </Typography>
-                        <Typography sx={statCardStyles(theme).description}>Auslastung</Typography>
-                      </LayoutBox>
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={3}>
-                      <LayoutBox
-                        sx={{
-                          padding: theme.shape.paddingBoxSmall,
-                          boxShadow: '0',
-                          height: '100%'
-                        }}
-                      >
-                        <Typography variant="body2" sx={statCardStyles(theme).number}>
-                          {formFloat(outerField.Q9_durchschnitt, 0) || '0'}€
-                        </Typography>
-                        <Typography sx={statCardStyles(theme).description}>Kosten je Stunde</Typography>
-                      </LayoutBox>
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={3}>
-                      <LayoutBox
-                        sx={{
-                          padding: theme.shape.paddingBoxSmall,
-                          boxShadow: '0',
-                          height: '100%'
-                        }}
-                      >
-                        <Typography variant="body2" sx={statCardStyles(theme).number}>
-                          {formFloat(outerField.fields?.length, 0) || 0}
-                        </Typography>
-                        <Typography sx={statCardStyles(theme).description}>Mitarbeiter</Typography>
-                      </LayoutBox>
-                    </Grid>
-                  </Grid>
-                  <Dialog
-                    open={groupToDelete === outerIndex}
-                    onClose={() => setGroupToDelete(undefined)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                    <DialogTitle id="alert-dialog-title">{outerField.groupTitle}</DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-description">Wollen Sie diese Abteilung wirklich löschen?</DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={() => setGroupToDelete(undefined)}>Abbrechen</Button>
-                      <Button
-                        onClick={() => {
-                          remove(outerIndex);
-                          changeTab(null, 0);
-                          setGroupToDelete(undefined);
-                        }}
-                        autoFocus
-                      >
-                        Ja, löschen
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                  <FieldArray name={`pk_produktiv_mitarbeiter.${outerIndex}.fields`}>
-                    {({ push: innerPush, remove: innerRemove }) => {
-                      const maFields = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
-                      const tableData = maFields?.map((innerField, innerIndex) => {
-                        const maTitle = innerField?.titel || 'Mitarbeiter';
-                        const userId = innerField.userId;
-                        const maGroupsWithErrors = errors.pk_produktiv_mitarbeiter?.[outerIndex];
-                        const groupErrors =
-                          maGroupsWithErrors?.fields &&
-                          Object.keys(maGroupsWithErrors.fields).filter((fieldKey) => !!maGroupsWithErrors.fields[fieldKey]);
-                        const maHasError = maGroupsWithErrors ? groupErrors?.includes(innerIndex.toString()) : false;
-
-                        return {
-                          uid: userId,
-                          userId: userId,
-                          onRowCheck,
-                          checked: checkedRows.includes(innerField.userId),
-                          name: maTitle,
-                          groupName: outerField.groupTitle || `Abteilung ${outerIndex + 1}`,
-                          stundenlohn: `${formFloat(innerField.Q9 || 0, 2).replace('.', ',')}€`,
-                          auslastung: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%`,
-                          anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
-                          krankenzeit: `${innerField.G9 || 0} Stunden`,
-                          newField: innerField.newField,
-                          hasError: maHasError,
-                          theme,
-                          actionsDom: (
-                            <Stack flexDirection="row" gap={{ xs: 1, md: 1.5, lg: 2 }}>
-                              <IconButton
-                                variant="outlined"
-                                color="secondary"
-                                onClick={() =>
-                                  setModalData(
-                                    <MemorizedTabData
-                                      maTitle={maTitle}
-                                      setModalData={setModalData}
-                                      outerIndex={outerIndex}
-                                      innerIndex={innerIndex}
-                                      innerField={innerField}
-                                      errors={errors}
-                                    />
-                                  )
-                                }
-                                sx={tableButtonStyles}
-                              >
-                                <EditOutlined />
-                              </IconButton>
-                              <IconButton
-                                variant="outlined"
-                                color="secondary"
-                                onClick={() =>
-                                  innerPush({
-                                    ...values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields?.[innerIndex],
-                                    userId: uuid()
-                                  })
-                                }
-                                sx={tableButtonStyles}
-                              >
-                                <ContentCopy />
-                              </IconButton>
-                              <IconButton
-                                variant="outlined"
-                                color="secondary"
-                                onClick={() => innerRemove(innerIndex)}
-                                sx={tableButtonStyles}
-                              >
-                                <DeleteOutlined />
-                              </IconButton>
-                            </Stack>
-                          )
-                        };
-                      });
-
-                      const onCopy = () => {
-                        checkedRows.forEach((row) => {
-                          const rows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
-                          const rowToCopy = rows?.findIndex((r) => row === r.userId);
-                          innerPush({
-                            ...rows[rowToCopy],
-                            userId: uuid()
-                          });
-                          setCheckedRows([]);
-                        });
-                      };
-                      const onDelete = () => {
-                        const rowIndexesToDelete = checkedRows.map((row) => {
-                          const rows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
-                          const rowToDelete = rows?.findIndex((r) => row === r.userId);
-                          return rowToDelete;
-                        });
-                        const newRows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields.filter(
-                          (row, index) => !rowIndexesToDelete.includes(index)
-                        );
-                        setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.fields`, newRows);
-                        setCheckedRows([]);
-                      };
-                      const onCreate = () => {
-                        innerPush(getInitialMitarbeiterData(values));
-                      };
-
-                      return (
-                        <>
-                          <Typography
-                            variant="body2"
-                            sx={{ pt: { xs: 0, md: 1, lg: 2 }, pb: { xs: 3, sm: 4, md: 4, lg: 6 }, px: { xs: 2, sm: 4, md: 6, lg: 9 } }}
-                            textAlign="center"
-                          >
-                            Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher
-                            Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter
-                            erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl).
-                          </Typography>
-                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
-                            <DataTable
-                              data={tableData}
-                              columns={columns}
-                              slots={{
-                                footer: CustomFooter
-                              }}
-                              slotProps={{
-                                footer: { onCopy, onDelete, onCreate }
-                              }}
+                <TabPanel value={outerIndex.toString()} key={outerIndex} sx={{ padding: 0 }}>
+                  <LayoutBox sx={{ backgroundColor: theme.palette.common.white, padding: theme.shape.paddingBoxMedium }}>
+                    <Grid container columnSpacing={2} alignItems="end">
+                      <Grid item xs={12} sm={5} md={3}>
+                        <FastField name={`pk_produktiv_mitarbeiter.${openedTab}.groupTitle`}>
+                          {({ field, meta }) => (
+                            <TextField
+                              {...field}
+                              label="Abteilungsname"
+                              error={meta?.touched && Boolean(meta.error)}
+                              helperText={meta?.touched && meta.error}
+                              sx={{ mb: 2 }}
                             />
-                          </LayoutBox>
-                        </>
-                      );
-                    }}
-                  </FieldArray>
+                          )}
+                        </FastField>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <Button
+                          variant="outlined"
+                          onClick={() => setGroupToDelete(outerIndex)}
+                          disabled={isSubmitting}
+                          sx={{ mb: 2 }}
+                          color="error"
+                          startIcon={<DeleteOutlineOutlined />}
+                        >
+                          Abteilung löschen
+                        </Button>
+                      </Grid>
+                    </Grid>
+                    <Dialog
+                      open={groupToDelete === outerIndex}
+                      onClose={() => setGroupToDelete(undefined)}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">{outerField.groupTitle}</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">Wollen Sie diese Abteilung wirklich löschen?</DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={() => setGroupToDelete(undefined)}>Abbrechen</Button>
+                        <Button
+                          onClick={() => {
+                            remove(outerIndex);
+                            changeTab(null, 0);
+                            setGroupToDelete(undefined);
+                          }}
+                          autoFocus
+                        >
+                          Ja, löschen
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                    <Grid
+                      container
+                      columnSpacing={{ xs: 1, sm: 2 }}
+                      rowSpacing={{ xs: 1, sm: 2 }}
+                      alignItems="end"
+                      sx={{ mb: 3, alignItems: 'stretch' }}
+                    >
+                      <Grid item xs={6} sm={6} md={3}>
+                        <LayoutBox
+                          sx={{
+                            padding: theme.shape.paddingBoxSmall,
+                            boxShadow: '0',
+                            height: '100%'
+                          }}
+                        >
+                          <Typography variant="body2" sx={statCardStyles(theme).number}>
+                            {formFloat(outerField.S9_gesamt, 0) || 0}€
+                          </Typography>
+                          <Typography sx={statCardStyles(theme).description}>Personalkosten</Typography>
+                        </LayoutBox>
+                      </Grid>
+                      <Grid item xs={6} sm={6} md={3}>
+                        <LayoutBox
+                          sx={{
+                            padding: theme.shape.paddingBoxSmall,
+                            boxShadow: '0',
+                            height: '100%'
+                          }}
+                        >
+                          <Typography variant="body2" sx={statCardStyles(theme).number}>
+                            {formFloat(outerField.N9_durchschnitt, 0) || '0'}%
+                          </Typography>
+                          <Typography sx={statCardStyles(theme).description}>Auslastung</Typography>
+                        </LayoutBox>
+                      </Grid>
+                      <Grid item xs={6} sm={6} md={3}>
+                        <LayoutBox
+                          sx={{
+                            padding: theme.shape.paddingBoxSmall,
+                            boxShadow: '0',
+                            height: '100%'
+                          }}
+                        >
+                          <Typography variant="body2" sx={statCardStyles(theme).number}>
+                            {formFloat(outerField.Q9_durchschnitt, 0) || '0'}€
+                          </Typography>
+                          <Typography sx={statCardStyles(theme).description}>Kosten je Stunde</Typography>
+                        </LayoutBox>
+                      </Grid>
+                      <Grid item xs={6} sm={6} md={3}>
+                        <LayoutBox
+                          sx={{
+                            padding: theme.shape.paddingBoxSmall,
+                            boxShadow: '0',
+                            height: '100%'
+                          }}
+                        >
+                          <Typography variant="body2" sx={statCardStyles(theme).number}>
+                            {formFloat(outerField.fields?.length, 0) || 0}
+                          </Typography>
+                          <Typography sx={statCardStyles(theme).description}>Mitarbeiter</Typography>
+                        </LayoutBox>
+                      </Grid>
+                    </Grid>
+                    <FieldArray name={`pk_produktiv_mitarbeiter.${outerIndex}.fields`}>
+                      {({ push: innerPush, remove: innerRemove }) => {
+                        const maFields = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
+                        const tableData = maFields?.map((innerField, innerIndex) => {
+                          const maTitle = innerField?.titel || 'Mitarbeiter';
+                          const userId = innerField.userId;
+                          const maGroupsWithErrors = errors.pk_produktiv_mitarbeiter?.[outerIndex];
+                          const groupErrors =
+                            maGroupsWithErrors?.fields &&
+                            Object.keys(maGroupsWithErrors.fields).filter((fieldKey) => !!maGroupsWithErrors.fields[fieldKey]);
+                          const maHasError = maGroupsWithErrors ? groupErrors?.includes(innerIndex.toString()) : false;
+
+                          return {
+                            uid: userId,
+                            userId: userId,
+                            onRowCheck,
+                            checked: checkedRows.includes(innerField.userId),
+                            name: maTitle,
+                            groupName: outerField.groupTitle || `Abteilung ${outerIndex + 1}`,
+                            stundenlohn: `${formFloat(innerField.Q9 || 0, 2).replace('.', ',')}€`,
+                            auslastung: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%`,
+                            anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
+                            krankenzeit: `${innerField.G9 || 0} Stunden`,
+                            newField: innerField.newField,
+                            hasError: maHasError,
+                            theme,
+                            actionsDom: (
+                              <Stack flexDirection="row" gap={{ xs: 1, md: 1.5, lg: 2 }}>
+                                <IconButton
+                                  variant="outlined"
+                                  color="secondary"
+                                  onClick={() =>
+                                    setModalData(
+                                      <MemorizedTabData
+                                        maTitle={maTitle}
+                                        setModalData={setModalData}
+                                        outerIndex={outerIndex}
+                                        innerIndex={innerIndex}
+                                        innerField={innerField}
+                                        errors={errors}
+                                      />
+                                    )
+                                  }
+                                  sx={tableButtonStyles}
+                                >
+                                  <EditOutlined />
+                                </IconButton>
+                                <IconButton
+                                  variant="outlined"
+                                  color="secondary"
+                                  onClick={() =>
+                                    innerPush({
+                                      ...values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields?.[innerIndex],
+                                      userId: uuid()
+                                    })
+                                  }
+                                  sx={tableButtonStyles}
+                                >
+                                  <ContentCopy />
+                                </IconButton>
+                                <IconButton
+                                  variant="outlined"
+                                  color="secondary"
+                                  onClick={() => innerRemove(innerIndex)}
+                                  sx={tableButtonStyles}
+                                >
+                                  <DeleteOutlined />
+                                </IconButton>
+                              </Stack>
+                            )
+                          };
+                        });
+
+                        const onCopy = () => {
+                          checkedRows.forEach((row) => {
+                            const rows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
+                            const rowToCopy = rows?.findIndex((r) => row === r.userId);
+                            innerPush({
+                              ...rows[rowToCopy],
+                              userId: uuid()
+                            });
+                            setCheckedRows([]);
+                          });
+                        };
+                        const onDelete = () => {
+                          const rowIndexesToDelete = checkedRows.map((row) => {
+                            const rows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields;
+                            const rowToDelete = rows?.findIndex((r) => row === r.userId);
+                            return rowToDelete;
+                          });
+                          const newRows = values.pk_produktiv_mitarbeiter?.[outerIndex]?.fields.filter(
+                            (row, index) => !rowIndexesToDelete.includes(index)
+                          );
+                          setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.fields`, newRows);
+                          setCheckedRows([]);
+                        };
+                        const onCreate = () => {
+                          innerPush(getInitialMitarbeiterData(values));
+                        };
+
+                        return (
+                          <>
+                            <Typography
+                              variant="body2"
+                              sx={{ pt: { xs: 0, md: 1, lg: 2 }, pb: { xs: 3, sm: 4, md: 4, lg: 6 }, px: { xs: 2, sm: 4, md: 8, lg: 14 } }}
+                              textAlign="center"
+                            >
+                              Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher
+                              Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter
+                              erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl).
+                            </Typography>
+                            <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
+                              <DataTable
+                                data={tableData}
+                                columns={columns}
+                                slots={{
+                                  footer: CustomFooter
+                                }}
+                                slotProps={{
+                                  footer: { onCopy, onDelete, onCreate }
+                                }}
+                              />
+                            </LayoutBox>
+                          </>
+                        );
+                      }}
+                    </FieldArray>
+                  </LayoutBox>
                 </TabPanel>
               ))}
             </>
           )}
         </FieldArray>
       </TabContext>
-    </FormSection>
+    </>
   );
 };
 
