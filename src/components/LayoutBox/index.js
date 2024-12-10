@@ -7,10 +7,10 @@ const LayoutBox = ({ children, sx, ...otherProps }) => {
   return (
     <Box
       sx={{
-        ...sx,
-        borderRadius: sx?.borderRadius || theme.shape.borderRadiusBox,
-        boxShadow: sx?.boxShadow || theme.customShadows.z0,
-        border: '1px solid #00000012'
+        borderRadius: theme.shape.borderRadiusBox,
+        boxShadow: theme.customShadows.z0,
+        border: '1px solid #00000012',
+        ...sx
       }}
       {...otherProps}
     >

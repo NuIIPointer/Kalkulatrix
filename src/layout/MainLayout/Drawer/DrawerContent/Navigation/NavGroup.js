@@ -1,17 +1,16 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { List, ListItem } from '@mui/material';
-// import { useTheme } from '@mui/material/styles';
+import { List, ListItem, Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // project import
 import NavItem from './NavItem';
-import LayoutBox from 'components/LayoutBox/index';
 
 // ==============================|| NAVIGATION - LIST GROUP ||============================== //
 
 const NavGroup = ({ item }) => {
-  // const theme = useTheme();
+  const theme = useTheme();
   const navItems = item.children?.map((menuItem) => {
     const subItems = menuItem.children?.map((subItem) => {
       return <NavItem key={subItem.id} item={subItem} level={2} />;
@@ -23,12 +22,30 @@ const NavGroup = ({ item }) => {
         {subItems && (
           <ListItem
             sx={{
-              padding: 0
+              padding: 0,
+              display: 'none',
+              '&:has(.isActive)': {
+                display: 'block'
+              }
             }}
           >
-            <LayoutBox sx={{ padding: 2, pb: 0, mb: 2 }} as="ul">
+            <Box
+              sx={{
+                pl: 4.5,
+                pt: 3,
+                mb: 2,
+                mt: -2,
+                boxShadow: 'none',
+                borderTop: 'none',
+                borderTopRightRadius: '0',
+                borderTopLeftRadius: '0',
+                borderBottomRightRadius: theme.shape.borderRadius,
+                borderBottomLeftRadius: theme.shape.borderRadius
+              }}
+              as="ul"
+            >
               {subItems}
-            </LayoutBox>
+            </Box>
           </ListItem>
         )}
       </>
