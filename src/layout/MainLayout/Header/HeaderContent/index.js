@@ -50,7 +50,7 @@ const HeaderContent = () => {
         <Typography
           variant="h1"
           sx={{
-            fontSize: 36,
+            fontSize: { xs: 26, sm: 30, md: 32 },
             fontWeight: theme.typography.fontWeightBold,
             mb: { xs: theme.spacing(2), sm: theme.spacing(4), md: 0 },
             mt: { xs: theme.spacing(9), sm: 0 },

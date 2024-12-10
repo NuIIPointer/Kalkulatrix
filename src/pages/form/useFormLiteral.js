@@ -119,7 +119,7 @@ const useFormLiteral = () => {
       title: 'Stundensatz & Deckungsbeiträge',
       description:
         'Sie haben die Kalkulation nun abgeschlossen. Mit Eingabe des Plangewinns für ihr Unternehmen können sie direkt sehen, welche Auswirkungen dieser auf den Stundensatz hat. Weiterhin finden sie hier die verschiedenen Kostensätze sowie ihre Deckungsbeiträge.',
-      backgroundColor: theme.palette.secondary.main
+      backgroundColor: theme.palette.primary.main
     }
   };
 };
