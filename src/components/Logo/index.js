@@ -16,13 +16,7 @@ const LogoSection = ({ sx, to, variant = 'light' }) => {
   const { defaultId } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
   return (
-    <ButtonBase
-      disableRipple
-      component={Link}
-      onClick={() => dispatch(activeItem({ openItem: [defaultId] }))}
-      to={!to ? config.defaultPath : to}
-      sx={sx}
-    >
+    <ButtonBase disableRipple component={Link} onClick={() => dispatch(activeItem({ openItem: [defaultId] }))} to={!to ? '/' : to} sx={sx}>
       <Logo variant={variant} />
     </ButtonBase>
   );

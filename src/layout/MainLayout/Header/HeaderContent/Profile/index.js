@@ -3,14 +3,13 @@ import { useRef, useState, useContext } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase, ClickAwayListener, Grid, IconButton, Popper, Stack, Typography } from '@mui/material';
+import { Box, ButtonBase, ClickAwayListener, Popper, Stack, Typography } from '@mui/material';
 
 // project import
 import Transitions from 'components/@extended/Transitions';
 import ProfileTab from './ProfileTab';
 
 // assets
-import { SettingsOutlined, Logout } from '@mui/icons-material';
 import { UserContext } from 'context/user';
 import LayoutBox from 'components/LayoutBox/index';
 import InitialsCircle from 'components/InitialsCircle/index';

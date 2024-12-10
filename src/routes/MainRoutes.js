@@ -6,7 +6,8 @@ import PublicLayout from 'layout/PublicLayout';
 
 // pages
 const Start = Loadable(lazy(() => import('pages/start')));
-const Imprint = Loadable(lazy(() => import('pages/imprint')));
+const Impressum = Loadable(lazy(() => import('pages/impressum')));
+const Datenschutz = Loadable(lazy(() => import('pages/datenschutz')));
 const Contact = Loadable(lazy(() => import('pages/contact')));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -24,8 +25,12 @@ const MainRoutes = {
       element: <Contact />
     },
     {
-      path: '/imprint',
-      element: <Imprint />
+      path: '/impressum',
+      element: <Impressum />
+    },
+    {
+      path: '/datenschutz',
+      element: <Datenschutz />
     }
   ]
 };

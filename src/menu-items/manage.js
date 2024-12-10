@@ -30,8 +30,9 @@ const pages = {
       icon: Person
     },
     {
-      id: 'sample-page',
+      id: 'contact',
       title: 'Kontakt',
+      target: '_blank',
       type: 'item',
       url: '/contact',
       icon: Email

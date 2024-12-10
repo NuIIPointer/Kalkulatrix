@@ -13,14 +13,14 @@ const legal = {
       id: 'imprint',
       title: 'Impressum',
       type: 'item',
-      url: '/',
+      url: '/impressum',
       icon: NotesIcon
     },
     {
       id: 'data-privacy',
       title: 'Datenschutzerklärung',
       type: 'item',
-      url: '/',
+      url: '/datenschutz',
       icon: LockIcon
     }
   ]

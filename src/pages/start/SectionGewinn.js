@@ -38,7 +38,7 @@ const SectionGewinn = () => {
         justifyContent: 'flex-start',
         textAlign: 'left',
         gap: 2,
-        mb: { xs: 2, sm: 4, md: 0 }
+        mb: { xs: 2, sm: 4, lg: 0 }
       }}
     >
       <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="medium" cardSx={{ flexShrink: 0 }} shadowPreset="small" />

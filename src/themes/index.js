@@ -73,7 +73,6 @@ export default function ThemeCustomization({ children }) {
         },
         drawerWidthCondensed: '80px',
         layoutDesignGutter: { xs: theme.spacing(3), sm: theme.spacing(4), md: theme.spacing(5), lg: theme.spacing(12) },
-        layoutDesignGutterReset: { xs: theme.spacing(-3), sm: theme.spacing(-4), md: theme.spacing(-5), lg: theme.spacing(-12) },
         layoutDesignGutterOuter: { xs: theme.spacing(3), sm: theme.spacing(4), md: theme.spacing(4), lg: theme.spacing(5) }
       }
     }),

@@ -93,28 +93,24 @@ const FormComponent = () => {
     return <FullPageLoader />;
   }
 
-  return (
-    <Box mb={theme.shape.layoutDesignGutterReset}>
-      {formContents ? (
-        <Formik
-          key={activeFormData?.title}
-          initialValues={initialValues}
-          onSubmit={() => {}}
-          validationSchema={activeFormConfig.validationSchema}
-          validateOnChange
-          validateOnSubmit
-        >
-          {() => (
-            <Form autoComplete="off">
-              {formContents}
-              <ButtonBar />
-            </Form>
-          )}
-        </Formik>
-      ) : (
-        <FullPageLoader />
+  return formContents ? (
+    <Formik
+      key={activeFormData?.title}
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      validationSchema={activeFormConfig.validationSchema}
+      validateOnChange
+      validateOnSubmit
+    >
+      {() => (
+        <Form autoComplete="off">
+          {formContents}
+          <ButtonBar />
+        </Form>
       )}
-    </Box>
+    </Formik>
+  ) : (
+    <FullPageLoader />
   );
 };
 
