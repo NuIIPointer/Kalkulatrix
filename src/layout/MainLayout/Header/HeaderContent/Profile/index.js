@@ -51,13 +51,6 @@ const Profile = () => {
     setOpen(false);
   };
 
-  const iconBackColorClosed = theme.palette.primary.main;
-  const iconBackColorOpen = theme.palette.primary.light;
-  // const iconColorClosed = theme.palette.common.white;
-  // const iconColorOpen = theme.palette.common.white;
-
-  console.log('user', user);
-
   return (
     <Box sx={{ flexShrink: 0, ml: 'auto' }}>
       <ButtonBase
@@ -122,36 +115,14 @@ const Profile = () => {
                     border={false}
                     content={false}
                   >
-                    <Grid
-                      container
-                      justifyContent="space-between"
-                      alignItems="center"
-                      sx={{ mb: 2, backgroundColor: theme.palette.grey[300], borderRadius: '10000px', padding: 0.5 }}
-                    >
-                      <Grid item>
-                        <Stack direction="row" spacing={2} alignItems="center" marginLeft={0.8}>
-                          <Avatar
-                            alt="profile user"
-                            sx={{ width: 32, height: 32, bgColor: theme.palette.primary.main, color: theme.palette.common.white }}
-                          >
-                            {user?.initials}
-                          </Avatar>
-                          <Stack>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold', lineHeight: '1.2em' }}>
-                              {user?.displayName}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" sx={{ fontSize: '0.75rem', lineHeight: '1.1em' }}>
-                              {user?.company}
-                            </Typography>
-                          </Stack>
-                        </Stack>
-                      </Grid>
-                      <Grid item>
-                        <IconButton size="large" color="dark" onClick={handleLogout}>
-                          <Logout />
-                        </IconButton>
-                      </Grid>
-                    </Grid>
+                    <Stack sx={{ pl: 2, pt: 2, pb: 3, mb: 2, borderBottom: `1px solid ${theme.palette.grey[500]}` }}>
+                      <Typography variant="body2" sx={{ fontSize: '1.2rem' }}>
+                        {user?.displayName}
+                      </Typography>
+                      <Typography variant="body1" color="textSecondary" sx={{ fontSize: '0.9rem', mt: -0.5 }}>
+                        {user?.company}
+                      </Typography>
+                    </Stack>
                     {open && <ProfileTab handleLogout={handleLogout} />}
                   </LayoutBox>
                 </Box>

@@ -170,7 +170,7 @@ const SelectFormView = ({ formType, sections }) => {
                     </Button>
                   </Stack>
                 </Stack>
-                <Alert severity="info" sx={{ mb: 3, border: '1px solid #00000012' }}>
+                <Alert severity="info" sx={{ mb: 3, borderRadius: 2 }}>
                   <AlertTitle>
                     Für eine effiziente und korrekte Kalkulation benötigen Sie einen aktuellen Jahresabschluss oder betriebswirtschaftliche
                     Auswertung sowie eine Übersicht der Daten Ihrer Angestellten.
@@ -231,7 +231,7 @@ const SelectFormView = ({ formType, sections }) => {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseSub}>schließen</Button>
-            <Button component={Link} to="/office/billing" autoFocus>
+            <Button variant="contained" component={Link} to="/office/billing" autoFocus>
               Abonnement verwalten
             </Button>
           </DialogActions>

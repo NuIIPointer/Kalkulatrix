@@ -27,7 +27,7 @@ const ProfileTab = ({ handleLogout }) => {
     bgcolor: bgColor,
     color: textColor,
     padding: theme.shape.paddingButton,
-    marginBottom: theme.spacing(1),
+    marginBottom: 0,
     borderRadius: theme.shape.borderRadius * 0.5,
     transition: '.25s',
     '&.Mui-selected': {
