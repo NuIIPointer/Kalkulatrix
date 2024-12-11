@@ -94,7 +94,7 @@ const Dashboard = () => {
           <TextTeaserCard
             primaryText="Kontaktieren"
             prefixText="jetzt"
-            link="/contact"
+            link="/kontakt"
             target="_blank"
             color={theme.palette.primary[200]}
           />

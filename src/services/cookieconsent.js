@@ -54,7 +54,7 @@ const runConsent = () => {
               {
                 title: 'Weitere Informationen',
                 description:
-                  'Bei Fragen zu meiner Cookie-Richtlinie und Ihren Auswahlmöglichkeiten wenden Sie sich bitte an uns: <a href="/contact">Kontakt</a>'
+                  'Bei Fragen zu meiner Cookie-Richtlinie und Ihren Auswahlmöglichkeiten wenden Sie sich bitte an uns: <a href="/kontakt">Kontakt</a>'
               }
             ]
           }

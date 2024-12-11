@@ -8,7 +8,7 @@ import PublicLayout from 'layout/PublicLayout';
 const Start = Loadable(lazy(() => import('pages/start')));
 const Impressum = Loadable(lazy(() => import('pages/impressum')));
 const Datenschutz = Loadable(lazy(() => import('pages/datenschutz')));
-const Contact = Loadable(lazy(() => import('pages/contact')));
+const Contact = Loadable(lazy(() => import('pages/kontakt')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -21,7 +21,7 @@ const MainRoutes = {
       element: <Start />
     },
     {
-      path: '/contact',
+      path: '/kontakt',
       element: <Contact />
     },
     {

@@ -28,14 +28,6 @@ const pages = {
       type: 'item',
       url: '/office/profile',
       icon: Person
-    },
-    {
-      id: 'contact',
-      title: 'Kontakt',
-      target: '_blank',
-      type: 'item',
-      url: '/contact',
-      icon: Email
     }
   ]
 };

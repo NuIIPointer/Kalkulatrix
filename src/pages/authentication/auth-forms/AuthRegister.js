@@ -188,11 +188,18 @@ const AuthRegister = () => {
               <Grid item xs={12}>
                 <Typography variant="body1">
                   Durch die Anmeldung stimmst du unseren{' '}
-                  <Link variant="subtitle2" component={RouterLink} to="#" sx={{ fontSize: 'inherit' }}>
+                  <Link
+                    variant="subtitle2"
+                    component={RouterLink}
+                    to="/files/kalkulatrix-allgemeine-geschaeftsbedingungen.pdf"
+                    target="_blank"
+                    download
+                    sx={{ fontSize: 'inherit' }}
+                  >
                     Nutzungsbedingungen
                   </Link>{' '}
                   und unserer{' '}
-                  <Link variant="subtitle2" component={RouterLink} to="#" sx={{ fontSize: 'inherit' }}>
+                  <Link variant="subtitle2" component={RouterLink} to="/datenschutz" target="_blank" sx={{ fontSize: 'inherit' }}>
                     Datenschutzrichtlinie
                   </Link>{' '}
                   zu.

@@ -50,6 +50,11 @@ const Footer = () => {
               </ListItemButton>
             </ListItem>
             <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
+              <ListItemButton variant="subtitle2" component={RouterLink} to="/kontakt" sx={footerLinkStyles}>
+                Kontakt
+              </ListItemButton>
+            </ListItem>
+            <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
               <ListItemButton variant="subtitle2" component={RouterLink} to="/impressum" sx={footerLinkStyles}>
                 Impressum
               </ListItemButton>
