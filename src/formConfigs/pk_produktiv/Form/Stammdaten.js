@@ -15,7 +15,6 @@ import {
   DialogContentText,
   DialogActions,
   Modal,
-  Alert,
   IconButton,
   Checkbox
 } from '@mui/material';
@@ -28,7 +27,6 @@ import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 
 // formik
 import { FastField, FieldArray, useFormikContext } from 'formik';
-import FormSection from 'components/formComponents/FormSection/index';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import { v4 as uuid } from 'uuid';
 import getInitialMitarbeiterData from '../getInitialMitarbeiterData';
@@ -36,19 +34,7 @@ import formFloat from 'utils/formUtils/formFloat';
 import DataTable from 'components/DataTable/index';
 import LayoutBox from 'components/LayoutBox/index';
 import InitialsCircle from 'components/InitialsCircle/index';
-
-const statCardStyles = (theme) => ({
-  number: {
-    color: theme.palette.primary[500],
-    fontWeight: '700',
-    fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2rem' },
-    textAlign: 'center'
-  },
-  description: {
-    textAlign: 'center',
-    fontSize: { xs: '0.75rem', sm: '0.875rem', md: '1rem' }
-  }
-});
+import StatCard from 'components/StatCard/index';
 
 const columns = [
   {
@@ -130,291 +116,289 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       </Grid>
     </Grid>
     <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
-      <>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.titel`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Name/Titel"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.E9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Sollarbeitsstunden p.a. (ohne Feiertage)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          &nbsp;
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.F9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Urlaub (in Stunden)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                max="8760"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.G9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Krankheit (in Stunden)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                max="8760"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.H9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Fortbildung (in Stunden)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                max="8760"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.I9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Sonstige Abwesenheiten (in Stunden)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                max="8760"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12}>
-          <ReadOnlyBox>
-            <Grid container columnSpacing={{ xs: 2, md: 4 }}>
-              <Grid item xs={12} sm={6}>
-                <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.M9`}>
-                  {({ field, meta }) => (
-                    <TextField
-                      {...field}
-                      label="Anwesenheit (in Std.)"
-                      error={meta?.touched && Boolean(meta.error)}
-                      helperText={meta?.touched && meta.error}
-                      InputProps={{
-                        readOnly: true
-                      }}
-                      type="number"
-                      sx={{ mb: 2 }}
-                    />
-                  )}
-                </FastField>
-              </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.titel`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Name/Titel"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.E9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Sollarbeitsstunden p.a. (ohne Feiertage)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        &nbsp;
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.F9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Urlaub (in Stunden)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              max="8760"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.G9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Krankheit (in Stunden)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              max="8760"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.H9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Fortbildung (in Stunden)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              max="8760"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.I9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Sonstige Abwesenheiten (in Stunden)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              max="8760"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12}>
+        <ReadOnlyBox>
+          <Grid container columnSpacing={{ xs: 2, md: 4 }}>
+            <Grid item xs={12} sm={6}>
+              <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.M9`}>
+                {({ field, meta }) => (
+                  <TextField
+                    {...field}
+                    label="Anwesenheit (in Std.)"
+                    error={meta?.touched && Boolean(meta.error)}
+                    helperText={meta?.touched && meta.error}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    type="number"
+                    sx={{ mb: 2 }}
+                  />
+                )}
+              </FastField>
             </Grid>
-          </ReadOnlyBox>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          &nbsp;
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.N9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Davon direkt verrechenbare Arbeitszeit (in %)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                max="100"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12}>
-          <ReadOnlyBox>
-            <Grid container columnSpacing={{ xs: 2, md: 4 }}>
-              <Grid item xs={12} sm={6}>
-                <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.O9`}>
-                  {({ field, meta }) => (
-                    <TextField
-                      {...field}
-                      value={formFloat(field.value, 2)}
-                      label="Direkt verrechnet (in Std.)"
-                      error={meta?.touched && Boolean(meta.error)}
-                      helperText={meta?.touched && meta.error}
-                      InputProps={{
-                        readOnly: true
-                      }}
-                      type="number"
-                      sx={{ mb: 2 }}
-                    />
-                  )}
-                </FastField>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.P9`}>
-                  {({ field, meta }) => (
-                    <TextField
-                      {...field}
-                      value={formFloat(field.value, 2)}
-                      label="Nicht direkt verrechnet (in Std.)"
-                      error={meta?.touched && Boolean(meta.error)}
-                      helperText={meta?.touched && meta.error}
-                      InputProps={{
-                        readOnly: true
-                      }}
-                      type="number"
-                      sx={{ mb: 2 }}
-                    />
-                  )}
-                </FastField>
-              </Grid>
+          </Grid>
+        </ReadOnlyBox>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        &nbsp;
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.N9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Davon direkt verrechenbare Arbeitszeit (in %)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              max="100"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12}>
+        <ReadOnlyBox>
+          <Grid container columnSpacing={{ xs: 2, md: 4 }}>
+            <Grid item xs={12} sm={6}>
+              <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.O9`}>
+                {({ field, meta }) => (
+                  <TextField
+                    {...field}
+                    value={formFloat(field.value, 2)}
+                    label="Direkt verrechnet (in Std.)"
+                    error={meta?.touched && Boolean(meta.error)}
+                    helperText={meta?.touched && meta.error}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    type="number"
+                    sx={{ mb: 2 }}
+                  />
+                )}
+              </FastField>
             </Grid>
-          </ReadOnlyBox>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          &nbsp;
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.Q9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Bruttostundenlohn (in EUR)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.R9`}>
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Zuschläge (in EUR)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-                sx={{ mb: 2 }}
-              />
-            )}
-          </FastField>
-        </Grid>
-        <Grid item xs={12}>
-          <ReadOnlyBox alwaysOpen title={'Berechnet'}>
-            <Grid container columnSpacing={{ xs: 2, md: 4 }}>
-              <Grid item xs={12} sm={6}>
-                <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.S9`}>
-                  {({ field, meta }) => (
-                    <TextField
-                      {...field}
-                      label="Anwesenheitsentgelt (gesamt, in EUR)"
-                      error={meta?.touched && Boolean(meta.error)}
-                      helperText={meta?.touched && meta.error}
-                      InputProps={{
-                        readOnly: true
-                      }}
-                      value={formFloat(field.value, 2)}
-                      type="number"
-                      sx={{ mb: 2 }}
-                    />
-                  )}
-                </FastField>
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                &nbsp;
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.U9`}>
-                  {({ field, meta }) => (
-                    <TextField
-                      {...field}
-                      label="Verrechenbarkeit (direkt verrechnet, in EUR)"
-                      value={formFloat(field.value, 2)}
-                      error={meta?.touched && Boolean(meta.error)}
-                      helperText={meta?.touched && meta.error}
-                      InputProps={{
-                        readOnly: true
-                      }}
-                      type="number"
-                      sx={{ mb: 2 }}
-                    />
-                  )}
-                </FastField>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.V9`}>
-                  {({ field, meta }) => (
-                    <TextField
-                      {...field}
-                      label="Verrechenbarkeit (nicht direkt verrechnet, in EUR)"
-                      value={formFloat(field.value, 2)}
-                      error={meta?.touched && Boolean(meta.error)}
-                      helperText={meta?.touched && meta.error}
-                      InputProps={{
-                        readOnly: true
-                      }}
-                      type="number"
-                      sx={{ mb: 2 }}
-                    />
-                  )}
-                </FastField>
-              </Grid>
+            <Grid item xs={12} sm={6}>
+              <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.P9`}>
+                {({ field, meta }) => (
+                  <TextField
+                    {...field}
+                    value={formFloat(field.value, 2)}
+                    label="Nicht direkt verrechnet (in Std.)"
+                    error={meta?.touched && Boolean(meta.error)}
+                    helperText={meta?.touched && meta.error}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    type="number"
+                    sx={{ mb: 2 }}
+                  />
+                )}
+              </FastField>
             </Grid>
-          </ReadOnlyBox>
-        </Grid>
-      </>
+          </Grid>
+        </ReadOnlyBox>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        &nbsp;
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.Q9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Bruttostundenlohn (in EUR)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.R9`}>
+          {({ field, meta }) => (
+            <TextField
+              {...field}
+              label="Zuschläge (in EUR)"
+              error={meta?.touched && Boolean(meta.error)}
+              helperText={meta?.touched && meta.error}
+              type="number"
+              onWheel={(event) => event.target.blur()}
+              min="0"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </FastField>
+      </Grid>
+      <Grid item xs={12}>
+        <ReadOnlyBox alwaysOpen title={'Berechnet'}>
+          <Grid container columnSpacing={{ xs: 2, md: 4 }}>
+            <Grid item xs={12} sm={6}>
+              <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.S9`}>
+                {({ field, meta }) => (
+                  <TextField
+                    {...field}
+                    label="Anwesenheitsentgelt (gesamt, in EUR)"
+                    error={meta?.touched && Boolean(meta.error)}
+                    helperText={meta?.touched && meta.error}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    value={formFloat(field.value, 2)}
+                    type="number"
+                    sx={{ mb: 2 }}
+                  />
+                )}
+              </FastField>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              &nbsp;
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.U9`}>
+                {({ field, meta }) => (
+                  <TextField
+                    {...field}
+                    label="Verrechenbarkeit (direkt verrechnet, in EUR)"
+                    value={formFloat(field.value, 2)}
+                    error={meta?.touched && Boolean(meta.error)}
+                    helperText={meta?.touched && meta.error}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    type="number"
+                    sx={{ mb: 2 }}
+                  />
+                )}
+              </FastField>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.V9`}>
+                {({ field, meta }) => (
+                  <TextField
+                    {...field}
+                    label="Verrechenbarkeit (nicht direkt verrechnet, in EUR)"
+                    value={formFloat(field.value, 2)}
+                    error={meta?.touched && Boolean(meta.error)}
+                    helperText={meta?.touched && meta.error}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    type="number"
+                    sx={{ mb: 2 }}
+                  />
+                )}
+              </FastField>
+            </Grid>
+          </Grid>
+        </ReadOnlyBox>
+      </Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
         <Button variant="contained" color="primary" onClick={() => setModalData(null)} startIcon={<Save />}>
           schließen
@@ -432,12 +416,11 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
 
 const Stammdaten = () => {
   const theme = useTheme();
-  const { values, errors, touched, isSubmitting, setFieldValue } = useFormikContext();
+  const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
   const [groupToDelete, setGroupToDelete] = useState(undefined);
   const [checkedRows, setCheckedRows] = useState([]);
-  console.log('errors', errors);
   const onRowCheck = (userId) => {
     setCheckedRows((prev) => {
       if (prev.includes(userId)) {
@@ -612,60 +595,16 @@ const Stammdaten = () => {
                       sx={{ mb: 3, alignItems: 'stretch' }}
                     >
                       <Grid item xs={6} sm={6} md={3}>
-                        <LayoutBox
-                          sx={{
-                            padding: theme.shape.paddingBoxSmall,
-                            boxShadow: '0',
-                            height: '100%'
-                          }}
-                        >
-                          <Typography variant="body2" sx={statCardStyles(theme).number}>
-                            {formFloat(outerField.S9_gesamt, 0) || 0}€
-                          </Typography>
-                          <Typography sx={statCardStyles(theme).description}>Personalkosten</Typography>
-                        </LayoutBox>
+                        <StatCard title="Personalkosten" value={`${formFloat(outerField.S9_gesamt, 0) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <LayoutBox
-                          sx={{
-                            padding: theme.shape.paddingBoxSmall,
-                            boxShadow: '0',
-                            height: '100%'
-                          }}
-                        >
-                          <Typography variant="body2" sx={statCardStyles(theme).number}>
-                            {formFloat(outerField.N9_durchschnitt, 0) || '0'}%
-                          </Typography>
-                          <Typography sx={statCardStyles(theme).description}>Auslastung</Typography>
-                        </LayoutBox>
+                        <StatCard title="Auslastung" value={`${formFloat(outerField.N9_durchschnitt, 0) || 0}%`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <LayoutBox
-                          sx={{
-                            padding: theme.shape.paddingBoxSmall,
-                            boxShadow: '0',
-                            height: '100%'
-                          }}
-                        >
-                          <Typography variant="body2" sx={statCardStyles(theme).number}>
-                            {formFloat(outerField.Q9_durchschnitt, 0) || '0'}€
-                          </Typography>
-                          <Typography sx={statCardStyles(theme).description}>Kosten je Stunde</Typography>
-                        </LayoutBox>
+                        <StatCard title="Kosten je Stunde" value={`${formFloat(outerField.Q9_durchschnitt, 0) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <LayoutBox
-                          sx={{
-                            padding: theme.shape.paddingBoxSmall,
-                            boxShadow: '0',
-                            height: '100%'
-                          }}
-                        >
-                          <Typography variant="body2" sx={statCardStyles(theme).number}>
-                            {formFloat(outerField.fields?.length, 0) || 0}
-                          </Typography>
-                          <Typography sx={statCardStyles(theme).description}>Mitarbeiter</Typography>
-                        </LayoutBox>
+                        <StatCard title="Mitarbeiter" value={outerField.fields?.length || 0} />
                       </Grid>
                     </Grid>
                     <FieldArray name={`pk_produktiv_mitarbeiter.${outerIndex}.fields`}>
