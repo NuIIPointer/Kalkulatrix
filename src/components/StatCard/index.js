@@ -7,7 +7,7 @@ const statCardStyles = (theme) => ({
   number: {
     color: theme.palette.primary[500],
     fontWeight: '700',
-    fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2rem' },
+    fontSize: { xs: '1.25rem', sm: '1.5rem', xl: '2rem' },
     textAlign: 'center'
   },
   description: {

@@ -14,6 +14,7 @@ const TextTeaserCard = ({
   textAlign,
   onClick,
   boxShadow,
+  target,
   outerSx = {}
 }) => {
   const theme = useTheme();
@@ -29,6 +30,7 @@ const TextTeaserCard = ({
       component={link && Link}
       to={link && link}
       onClick={onClick && onClick}
+      target={target}
       sx={{
         boxShadow: boxShadow || theme.customShadows.z1,
         aspectRatio: ratio,

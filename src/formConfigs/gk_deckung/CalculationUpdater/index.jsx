@@ -16,11 +16,19 @@ const StundensatzRechnerValueUpdater = () => {
 
       values.gk_deckung_zuschlaege?.forEach((category, outerIndex) => {
         let H12 = 0;
+        let H8GruppeSumme = 0;
+        let G8GruppeSumme = 0;
+        let E8GruppeSumme = 0;
+        let F8GruppeSumme = 0;
 
         category.fields?.forEach((item, innerIndex) => {
           const G8 = (item.E8 || 0) + ((item.E8 || 0) * (item.F8 || 0)) / 100;
           const H8 = (G8 || 0) - (item.E8 || 0);
 
+          H8GruppeSumme += H8 || 0;
+          G8GruppeSumme += item.G8 || 0;
+          E8GruppeSumme += item.E8 || 0;
+          F8GruppeSumme += item.F8 || 0;
           H8Summe += item.H8 || 0;
           E8Summe += item.E8 || 0;
           H12 += H8;
@@ -32,6 +40,22 @@ const StundensatzRechnerValueUpdater = () => {
             setFieldValue(`gk_deckung_zuschlaege.${outerIndex}.fields.${innerIndex}.H8`, H8);
           }
         });
+
+        const F8GruppeDurchschnitt = F8GruppeSumme / category.fields.length;
+
+        if (F8GruppeDurchschnitt !== category.F8GruppeDurchschnitt) {
+          setFieldValue(`gk_deckung_zuschlaege.${outerIndex}.F8GruppeDurchschnitt`, F8GruppeDurchschnitt);
+        }
+
+        if (H8GruppeSumme !== category.H8GruppeSumme) {
+          setFieldValue(`gk_deckung_zuschlaege.${outerIndex}.H8GruppeSumme`, H8GruppeSumme);
+        }
+        if (G8GruppeSumme !== category.G8GruppeSumme) {
+          setFieldValue(`gk_deckung_zuschlaege.${outerIndex}.G8GruppeSumme`, G8GruppeSumme);
+        }
+        if (E8GruppeSumme !== category.E8GruppeSumme) {
+          setFieldValue(`gk_deckung_zuschlaege.${outerIndex}.E8GruppeSumme`, E8GruppeSumme);
+        }
 
         if (H12 !== category.H12) {
           setFieldValue(`gk_deckung_zuschlaege.${outerIndex}.H12`, H12);
@@ -61,7 +85,15 @@ const StundensatzRechnerValueUpdater = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [setFieldValue, values.gk_deckung_H20, values.gk_deckung_zuschlaege, values.zuschlagProzentDurchschnitt]);
+  }, [
+    setFieldValue,
+    values.E8Summe,
+    values.F8Summe,
+    values.H8Summe,
+    values.gk_deckung_H20,
+    values.gk_deckung_zuschlaege,
+    values.zuschlagProzentDurchschnitt
+  ]);
 
   return <React.Fragment />;
 };
