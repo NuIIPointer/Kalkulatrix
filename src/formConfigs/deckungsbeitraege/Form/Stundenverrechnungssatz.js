@@ -3,10 +3,18 @@ import { Grid, TextField, Box, Typography, Stack, useTheme } from '@mui/material
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
+import StatCard from 'components/StatCard/index';
+import LayoutBox from 'components/LayoutBox/index';
 
 const DGemeinkostenPlangewinn = () => {
   const { values } = useFormikContext();
   const theme = useTheme();
+
+  const chartValues = [
+    { value: 3, title: 'Personalkosten pro Stunde', color: theme.palette.primary[200] },
+    { value: 12, title: 'Personalkosten pro Stunde', color: theme.palette.secondary[400] },
+    { value: 24, title: 'Personalkosten pro Stunde', color: theme.palette.primary[600] }
+  ];
 
   return (
     <>
@@ -15,7 +23,7 @@ const DGemeinkostenPlangewinn = () => {
         backgroundColor={theme.palette.primary.main}
         title={
           <>
-            <Stack flexDirection="row" justifyContent="space-between" width="100%">
+            <Stack flexDirection="row" justifyContent="space-between" width="100%" maxWidth="700px">
               <Typography variant="h2" component="span" style={{ color: 'white' }}>
                 Stundenverrechnungssatz (ohne USt.):
               </Typography>
@@ -36,8 +44,136 @@ const DGemeinkostenPlangewinn = () => {
           </>
         }
       />
-      <FormSection defaultOpen title="Kalkulation Stundenverrrechnungssatz">
-        <Box sx={{ mt: 1 }} />
+      <FormSection collapsable={false} title="Stundensatz">
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <LayoutBox
+              sx={{
+                padding: theme.shape.paddingBoxSmall,
+                boxShadow: '0',
+                height: '100%'
+              }}
+            >
+              <Stack direction="row" justifyContent="space-between" gap={1} mb={1}>
+                {chartValues.map((item) => (
+                  <Box
+                    key={item.title}
+                    sx={{
+                      flexBasis: item.value,
+                      minWidth: 'min-content',
+                      flexGrow: item.value,
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      position: 'relative' // Add position relative to parent
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        ml: 0.25,
+                        borderRadius: '4px',
+                        px: 1,
+                        py: 0,
+                        border: `1px solid ${theme.palette.grey[300]}`,
+                        backgroundColor: item.color,
+                        color: theme.palette.getContrastText(item.color),
+                        position: 'relative', // Add position relative to child
+                        ':after': {
+                          content: '""',
+                          display: 'block',
+                          width: 0,
+                          height: 0,
+                          borderLeft: '0px solid transparent',
+                          borderRight: '10px solid transparent',
+                          borderTop: `7px solid ${item.color}`, // Change to borderTop
+                          position: 'absolute',
+                          bottom: '-5px',
+                          left: '0', // Align to the bottom left
+                          transform: 'translateX(0)' // Remove translateX
+                        }
+                      }}
+                    >
+                      {item.value}
+                    </Box>
+                  </Box>
+                ))}
+              </Stack>
+              <Stack direction="row" justifyContent="space-between" gap={1}>
+                {chartValues.map((item) => (
+                  <Box
+                    key={item.title}
+                    sx={{
+                      flexBasis: item.value,
+                      flexGrow: item.value,
+                      height: theme.spacing(1),
+                      backgroundColor: item.color,
+                      borderRadius: '500px'
+                    }}
+                  />
+                ))}
+              </Stack>
+
+              <Stack direction="row" justifyContent="space-between" gap={1} mt={{ xs: 2, sm: 3, xl: 4 }}>
+                {chartValues.map((item) => (
+                  <Stack
+                    key={item.title}
+                    direction="row"
+                    justifyContent="flex-start"
+                    sx={{
+                      ':before': {
+                        content: '""',
+                        backgroundColor: item.color,
+                        height: theme.spacing(1.5),
+                        width: theme.spacing(1.5),
+                        borderRadius: '500px',
+                        flexShrink: 0,
+                        mt: '5px',
+                        mr: theme.spacing(1)
+                      }
+                    }}
+                  >
+                    <Typography variant="body">{item.title}</Typography>
+                  </Stack>
+                ))}
+              </Stack>
+            </LayoutBox>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <StatCard
+                  title={'Personalkosten pro Stunde'}
+                  value={`${formFloat((values.std_verrechnungssaetze_G10 || 0) * 1.19, 2)
+                    .toString()
+                    .replace('.', ',')}€`}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <StatCard
+                  title={'Betriebskostensatz pro Stunde'}
+                  value={`${formFloat((values.std_verrechnungssaetze_G11 || 0) * 1.19, 2)
+                    .toString()
+                    .replace('.', ',')}€`}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <StatCard
+                  title={'Selbstkosten pro Stunde'}
+                  value={`${formFloat((values.std_verrechnungssaetze_G12 || 0) * 1.19, 2)
+                    .toString()
+                    .replace('.', ',')}€`}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <StatCard
+                  title={'Plangewinnsatz pro Stunde'}
+                  value={`${formFloat((values.std_verrechnungssaetze_G13 || 0) * 1.19, 2)
+                    .toString()
+                    .replace('.', ',')}€`}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
         <ReadOnlyBox title="Alle Angaben im Durchschnitt, in EUR">
           <Grid
             container

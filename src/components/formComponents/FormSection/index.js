@@ -86,7 +86,7 @@ const FormSection = ({
         }}
       >
         <Stack gap={{ xs: 1, sm: 2 }} direction="row" justifyContent="space-between" flexWrap="nowrap" alignItems="flex-start">
-          <Stack flexGrow="1" sx={{ maxWidth: '700px' }}>
+          <Stack flexGrow="1">
             <Typography variant={headlineVariant} sx={{ flexGrow: 1, color: showErrorStatus ? theme.palette.error.main : undefined }}>
               {title}
             </Typography>
@@ -101,29 +101,31 @@ const FormSection = ({
               </Typography>
             )}
           </Stack>
-          <ButtonGroup color="primary" variant="outlined">
-            {onDelete ? (
-              <Button color="error" sx={{ ...buttonStyles }} onClick={() => setOpenPopup(true)}>
-                <DeleteOutlineOutlined />
-              </Button>
-            ) : (
-              ''
-            )}
-            {onAdd ? (
-              <Button color="success" sx={{ ...buttonStyles }} onClick={onAdd}>
-                <NoteAddOutlined />
-              </Button>
-            ) : (
-              ''
-            )}
-            {collapsable ? (
-              <Button color="primary" variant="contained" sx={{ ...buttonStyles }} onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <ClearOutlined /> : <EditOutlined />}
-              </Button>
-            ) : (
-              ''
-            )}
-          </ButtonGroup>
+          {(onDelete || onAdd || collapsable) && (
+            <ButtonGroup color="primary" variant="outlined">
+              {onDelete ? (
+                <Button color="error" sx={{ ...buttonStyles }} onClick={() => setOpenPopup(true)}>
+                  <DeleteOutlineOutlined />
+                </Button>
+              ) : (
+                ''
+              )}
+              {onAdd ? (
+                <Button color="success" sx={{ ...buttonStyles }} onClick={onAdd}>
+                  <NoteAddOutlined />
+                </Button>
+              ) : (
+                ''
+              )}
+              {collapsable ? (
+                <Button color="primary" variant="contained" sx={{ ...buttonStyles }} onClick={() => setIsOpen(!isOpen)}>
+                  {isOpen ? <ClearOutlined /> : <EditOutlined />}
+                </Button>
+              ) : (
+                ''
+              )}
+            </ButtonGroup>
+          )}
         </Stack>
         {collapsable ? <Collapse in={isOpen}>{children}</Collapse> : children}
       </LayoutBox>

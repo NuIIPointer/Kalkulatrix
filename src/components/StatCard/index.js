@@ -16,7 +16,7 @@ const statCardStyles = (theme) => ({
   }
 });
 
-const StatCard = ({ title, value }) => {
+const StatCard = ({ title, value, sx = {} }) => {
   const theme = useTheme();
 
   return (
@@ -24,7 +24,8 @@ const StatCard = ({ title, value }) => {
       sx={{
         padding: theme.shape.paddingBoxSmall,
         boxShadow: '0',
-        height: '100%'
+        height: '100%',
+        ...sx
       }}
     >
       <Typography variant="body2" sx={statCardStyles(theme).number}>

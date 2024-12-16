@@ -1,33 +1,41 @@
 import { FastField } from 'formik';
-import { Grid, TextField } from '@mui/material';
+import { Grid, TextField, Stack, Typography } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 
 const Plangewinn = () => {
   return (
     <FormSection
       collapsable={false}
-      title="Plangewinn"
-      description="Geben Sie hier an, wie hoch ihr geplanter Gewinn für das angegebene Planjahr ausfallen soll."
-    >
-      <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }} sx={{ mt: { xs: 1 } }} alignItems="flex-end">
-        <Grid item xs={12} sm={6}>
-          <FastField name="gk_stundensaetze_H14">
-            {({ field, meta }) => (
-              <TextField
-                {...field}
-                label="Plangewinn (in EUR)"
-                error={meta?.touched && Boolean(meta.error)}
-                helperText={meta?.touched && meta.error}
-                sx={{ mb: 2 }}
-                type="number"
-                onWheel={(event) => event.target.blur()}
-                min="0"
-              />
-            )}
-          </FastField>
-        </Grid>
-      </Grid>
-    </FormSection>
+      title={
+        <Stack sx={{ width: '100%' }}>
+          <Typography variant="h2" sx={{ mb: 2 }}>
+            Plangewinn
+          </Typography>
+          <Grid container spacing={2} sx={{ width: '100%' }}>
+            <Grid item xs={12} md={8} lg={7}>
+              <Typography variant="body1">
+                Geben Sie hier an, wie hoch ihr geplanter Gewinn für das angegebene Planjahr ausfallen soll.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={4} lg={5}>
+              <FastField name="gk_stundensaetze_H14">
+                {({ field, meta }) => (
+                  <TextField
+                    {...field}
+                    error={meta?.touched && Boolean(meta.error)}
+                    helperText={meta?.touched && meta.error}
+                    sx={{ mb: 2, width: '100%' }}
+                    type="number"
+                    onWheel={(event) => event.target.blur()}
+                    min="0"
+                  />
+                )}
+              </FastField>
+            </Grid>
+          </Grid>
+        </Stack>
+      }
+    ></FormSection>
   );
 };
 
