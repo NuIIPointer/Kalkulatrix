@@ -11,14 +11,14 @@ const DGemeinkostenPlangewinn = () => {
   const theme = useTheme();
 
   const chartValues = [
-    { value: 3, title: 'Personalkosten pro Stunde', color: theme.palette.primary[200] },
-    { value: 12, title: 'Personalkosten pro Stunde', color: theme.palette.secondary[400] },
-    { value: 24, title: 'Personalkosten pro Stunde', color: theme.palette.primary[600] }
+    { value: values.std_verrechnungssaetze_G10, title: 'Personalkosten pro Stunde', color: theme.palette.primary[200] },
+    { value: values.std_verrechnungssaetze_G11, title: 'Betriebskosten pro Stunde', color: theme.palette.secondary[400] },
+    { value: values.std_verrechnungssaetze_G13, title: 'Plangewinnsatz pro Stunde', color: theme.palette.primary[600] }
   ];
 
   return (
     <>
-      <FormSection
+      {/* <FormSection
         collapsable={false}
         backgroundColor={theme.palette.primary.main}
         title={
@@ -43,9 +43,9 @@ const DGemeinkostenPlangewinn = () => {
             </Typography>
           </>
         }
-      />
+      /> */}
       <FormSection collapsable={false} title="Stundensatz">
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{ mt: 0 }}>
           <Grid item xs={12} sm={6}>
             <LayoutBox
               sx={{
@@ -54,6 +54,25 @@ const DGemeinkostenPlangewinn = () => {
                 height: '100%'
               }}
             >
+              <Typography
+                component="p"
+                textAlign="center"
+                mt={{ xs: 1, sm: 2, xl: 3 }}
+                mb={-1}
+                fontSize={{ xs: '2rem', xl: '3rem' }}
+                fontWeight="700"
+              >
+                {formFloat(values.std_verrechnungssaetze_G14 || 0, 2)
+                  .toString()
+                  .replace('.', ',')}
+                €
+              </Typography>
+              <Typography component="p" textAlign="center" mb={{ xs: 2, sm: 3, lg: 4, xl: 5 }} fontSize={{ xs: '1rem', xl: '1.1rem' }}>
+                {formFloat((values.std_verrechnungssaetze_G14 || 0) * 1.19, 2)
+                  .toString()
+                  .replace('.', ',')}
+                € (inkl. USt.)
+              </Typography>
               <Stack direction="row" justifyContent="space-between" gap={1} mb={1}>
                 {chartValues.map((item) => (
                   <Box
@@ -82,17 +101,20 @@ const DGemeinkostenPlangewinn = () => {
                           display: 'block',
                           width: 0,
                           height: 0,
-                          borderLeft: '0px solid transparent',
-                          borderRight: '10px solid transparent',
+                          borderLeft: '7px solid transparent',
+                          borderRight: '7px solid transparent',
                           borderTop: `7px solid ${item.color}`, // Change to borderTop
                           position: 'absolute',
                           bottom: '-5px',
-                          left: '0', // Align to the bottom left
-                          transform: 'translateX(0)' // Remove translateX
+                          left: '50%', // Align to the bottom left
+                          transform: 'translateX(-50%)' // Remove translateX
                         }
                       }}
                     >
-                      {item.value}
+                      {formFloat(item.value || 0, 2)
+                        .toString()
+                        .replace('.', ',')}
+                      €
                     </Box>
                   </Box>
                 ))}
@@ -112,7 +134,7 @@ const DGemeinkostenPlangewinn = () => {
                 ))}
               </Stack>
 
-              <Stack direction="row" justifyContent="space-between" gap={1} mt={{ xs: 2, sm: 3, xl: 4 }}>
+              <Stack direction="row" justifyContent="space-between" gap={1} mt={{ xs: 2, sm: 3, xl: 4 }} flexWrap="wrap" px={1}>
                 {chartValues.map((item) => (
                   <Stack
                     key={item.title}
@@ -174,7 +196,7 @@ const DGemeinkostenPlangewinn = () => {
             </Grid>
           </Grid>
         </Grid>
-        <ReadOnlyBox title="Alle Angaben im Durchschnitt, in EUR">
+        {/* <ReadOnlyBox title="Alle Angaben im Durchschnitt, in EUR">
           <Grid
             container
             columnSpacing={{ xs: 2, sm: 4, lg: 6 }}
@@ -182,7 +204,7 @@ const DGemeinkostenPlangewinn = () => {
             sx={{ mt: { xs: 1 } }}
             alignItems="flex-end"
           >
-            {/* <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G8">
                 {({ field, meta }) => (
                   <TextField
@@ -217,7 +239,7 @@ const DGemeinkostenPlangewinn = () => {
                   />
                 )}
               </Field>
-            </Grid> */}
+            </Grid>
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G10">
                 {({ field, meta }) => (
@@ -315,7 +337,7 @@ const DGemeinkostenPlangewinn = () => {
               </FastField>
             </Grid>
           </Grid>
-        </ReadOnlyBox>
+        </ReadOnlyBox> */}
       </FormSection>
     </>
   );
