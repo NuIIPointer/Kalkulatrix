@@ -63,9 +63,9 @@ const MainLayout = () => {
           margin: '0 auto',
           gridTemplateColumns: {
             xs: `0 auto 0 0`,
-            md: `1fr ${theme.shape.layoutDesignGutter.md} minmax(50%, 1100px) ${theme.shape.layoutDesignGutter.md}`,
-            lg: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) ${theme.shape.layoutDesignGutter.lg}`,
-            xl: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) ${theme.shape.layoutDesignGutter.lg}`
+            md: `1fr ${theme.shape.layoutDesignGutter.md} minmax(50%, 1100px) 1fr`,
+            lg: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) 1fr`,
+            xl: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) 1fr`
           },
           gridTemplateRows: {
             xs: `auto ${theme.shape.layoutDesignGutter.xs} 1fr`,
@@ -77,7 +77,7 @@ const MainLayout = () => {
         <Box
           sx={{
             gridColumnStart: '2',
-            gridColumnEnd: '5',
+            gridColumnEnd: '4',
             gridRowStart: '1',
             gridRowEnd: '1'
           }}
@@ -90,7 +90,18 @@ const MainLayout = () => {
               alignItems: 'center',
               justifyContent: 'space-betweend',
               paddingLeft: { md: theme.shape.layoutDesignGutter.md, lg: 0 },
-              borderBottom: { md: `1px solid ${theme.palette.grey[300]}` }
+              borderBottom: { md: `1px solid ${theme.palette.grey[300]}` },
+              position: 'relative',
+              ':after': {
+                content: '""',
+                position: 'absolute',
+                top: '0',
+                left: 'calc(100% - 1px)',
+                backgroundColor: theme.palette.common.white,
+                borderBottom: { md: `1px solid ${theme.palette.grey[300]}` },
+                height: 'calc(100% + 1px)',
+                width: '100vw'
+              }
             }}
           >
             {useDrawerNav ? (
@@ -131,8 +142,8 @@ const MainLayout = () => {
             ) : (
               <Box
                 sx={{
+                  padding: theme.shape.paddingBoxMedium,
                   paddingLeft: theme.shape.layoutDesignGutter,
-                  paddingRight: theme.shape.layoutDesignGutter,
                   width: '100%'
                 }}
               >

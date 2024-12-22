@@ -41,7 +41,7 @@ const Palette = (mode) => {
       mode,
       common: {
         black: '#3f333b',
-        white: '#f1f4fc'
+        white: '#fafcff'
       },
       ...paletteColor,
       // primary: createColor('#007f53'),
