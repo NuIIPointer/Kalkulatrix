@@ -327,6 +327,36 @@ const Imprint = () => {
           vor.
         </p>
         <h2>4. Datenerfassung auf dieser Website</h2>
+        <h3>Nutzung von Firebase Authentication</h3>
+        <p>
+          Wir nutzen in unseren Apps Google Firebase Authentication, einen Dienst der Google Ireland Limited, Gordon House, 4 Barrow Street,
+          D04 E5W5 Dublin, Irland („Google“). Firebase Authentication ist ein von Google bereitgestellter Anmelde- und
+          Authentifizierungsdienst. Um den Anmelde- und Authentifizierungsprozess zu vereinfachen, kann Firebase Authentication
+          Identitätsdienste von Drittparteien benutzen und die Informationen auf ihrer Plattform speichern. In Bezug auf die mögliche
+          Datenerhebung bei Drittparteien weisen wir auf 7.2. und 7.3. hin, wo die jeweils erhobenen Daten aufgeführt werden. Firebase
+          Authentication fungiert somit als Mittler der Datenerhebung, Dritten und uns. Firebase Authentication speichert die erhobenen
+          Daten in unserem Auftrag, sodass wir jene für die Apps nutzen und verarbeiten können. In Bezug auf den
+          Auftragsverarbeitungsvertrag im Sinne des Art. 28 DSGVO halten wir die strengen gesetzlichen Vorgaben für einen solchen Vertrag
+          mit Firebase Authentication ein. Es handelt sich um folgende erhobene personenbezogene Daten: Nutzername, Profilbild und
+          E-Mail-Adresse. Bei der Anmeldung mittels SMS-Identifikation wird ebenfalls die zugehörige Mobilnummer erhoben. In diesen
+          Verarbeitungsfällen erfolgt die Verarbeitung aufgrund Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a in Verbindung mit Art. 7
+          DSGVO. Die Verarbeitung erfolgt somit mit Rechtsgrund. Weitere Informationen zum Datenschutz können den Datenschutzbedingungen
+          https://policies.google.com/privacy von Google entnommen werden.
+        </p>
+        <h3>Firestore</h3>
+        <p>
+          Wir nutzen Firestore, um die Daten, die bei der Nutzung unserer Apps anfallen, sicher zu speichern. Ohne die Speicherung der Daten
+          würden sämtliche Nutzer- und Profildaten verloren gehen und ein erneutes Log-In wäre nicht möglich. Das Speichern der Daten in
+          Firestore ist ferner für die Ausübung jeglicher Interaktionen der User untereinander innerhalb der Apps unentbehrlich. Die
+          Datenspeicherung ist für die Funktionsfähigkeit unserer Apps somit notwendig. Weitergehend dient die Speicherung der Nutzerdaten
+          der Verhinderung von Betrugs- und Manipulationsversuchen von Dritten. Die Funktionsfähigkeit des Dienstes, seine Weiterentwicklung
+          sowie das Sicherstellen der Integrität und Sicherheit unserer informationstechnischen Systeme sind berechtigte Interessen im Sinne
+          des Art. 6 Abs. 1 lit. f DSGVO. Die Verarbeitung in Form der Speicherung erfolgt somit mit Rechtsgrund.
+        </p>
+        <p>
+          Die Datenschutzerklärung von Google finden Nutzer/Nutzerinnen unter&nbsp;
+          <a href="https://www.google.com/policies/privacy/">https://www.google.com/policies/privacy/</a>
+        </p>
         <h3>Cookies</h3>{' '}
         <p>
           Unsere Internetseiten verwenden so genannte &bdquo;Cookies&ldquo;. Cookies sind kleine Datenpakete und richten auf Ihrem
