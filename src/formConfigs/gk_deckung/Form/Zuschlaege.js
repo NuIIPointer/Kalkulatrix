@@ -220,9 +220,7 @@ const MaterialzuschlagFremdleistungen = () => {
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
   const [groupToDelete, setGroupToDelete] = useState(undefined);
-  console.log('groupToDelete', groupToDelete);
   const [checkedRows, setCheckedRows] = useState([]);
-  console.log('checkedRows', checkedRows);
   const onRowCheck = (itemId) => {
     setCheckedRows((prev) => {
       if (prev.includes(itemId)) {

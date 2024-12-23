@@ -8,7 +8,6 @@ const ConsentWrapper = ({
   errorDescription = 'Sie müssen den Diensten zustimmen um dieses Element sehen zu können.'
 }) => {
   const hasConsent = useHasConsent(consentKeys || []);
-  console.log('consentwrapper', consentKeys, hasConsent);
 
   if (!hasConsent) {
     return (

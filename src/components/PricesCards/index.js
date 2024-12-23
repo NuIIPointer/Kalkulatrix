@@ -39,8 +39,6 @@ const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLin
   const onCardClick = () => {
     if (isLoadingCardAction) return;
 
-    console.log('customLink', customLink);
-
     if (customLink) {
       navigate(customLink);
     } else if (!isLoggedIn) {

@@ -70,7 +70,6 @@ export const useConsentSettings = () => {
 
   useEffect(() => {
     const updateConset = (data = {}) => {
-      console.log('updateConset', data);
       const { cookie } = data;
       if (cookie && (cookie.categories || cookie.services)) {
         setCategories(cookie.categories || []);
@@ -93,8 +92,6 @@ export const useConsentSettings = () => {
       window.removeEventListener('cc:onChange', updateConset);
     };
   }, []);
-
-  console.log('changed consent', categories, services);
 
   return { categories, services };
 };
