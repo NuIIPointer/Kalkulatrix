@@ -63,9 +63,9 @@ const MainLayout = () => {
           margin: '0 auto',
           gridTemplateColumns: {
             xs: `0 auto 0 0`,
-            md: `1fr ${theme.shape.layoutDesignGutter.md} minmax(50%, 1100px) 1fr`,
-            lg: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) 1fr`,
-            xl: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) 1fr`
+            md: `1fr ${theme.shape.layoutDesignGutter.md} minmax(50%, 1100px) minmax(${theme.spacing(2)}, 1fr)`,
+            lg: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) minmax(${theme.spacing(4)}, 1fr)`,
+            xl: `1fr ${theme.shape.layoutDesignGutter.lg} minmax(50%, 1100px) minmax(${theme.spacing(4)}, 1fr)`
           },
           gridTemplateRows: {
             xs: `auto ${theme.shape.layoutDesignGutter.xs} 1fr`,
@@ -100,7 +100,11 @@ const MainLayout = () => {
                 backgroundColor: theme.palette.common.white,
                 borderBottom: { md: `1px solid ${theme.palette.grey[300]}` },
                 height: 'calc(100% + 1px)',
-                width: '100vw'
+                width: '100vw',
+                display: {
+                  xs: 'none',
+                  md: 'block'
+                }
               }
             }}
           >
@@ -144,6 +148,7 @@ const MainLayout = () => {
                 sx={{
                   padding: theme.shape.paddingBoxMedium,
                   paddingLeft: theme.shape.layoutDesignGutter,
+                  paddingRight: `${theme.spacing(3)} !important`,
                   width: '100%'
                 }}
               >

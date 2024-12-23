@@ -11,7 +11,7 @@ import { UserContext } from 'context/user/index';
 
 const NavItem = ({ item, level }) => {
   const theme = useTheme();
-  const { activeFormId } = useContext(UserContext);
+  const { activeFormId, user } = useContext(UserContext);
   const { pathname } = useLocation();
   const drawerOpen = true;
   const urlReplaced = item.url.replace('{form}', activeFormId);
@@ -38,6 +38,10 @@ const NavItem = ({ item, level }) => {
   const iconColor = isActive ? theme.palette.common.white : theme.palette.primary.main;
   const bgColor = isActive ? (isSubItem ? theme.palette.primary[900] : theme.palette.primary[500]) : 'transparent';
   const bgColorHover = isActive ? (isSubItem ? theme.palette.primary[800] : theme.palette.primary[400]) : theme.palette.grey[300];
+
+  if (item.requiresAdmin && !user?.isAdmin) {
+    return null;
+  }
 
   return (
     <ListItem sx={{ padding: 0 }} className={isActive ? 'isActive' : undefined}>
