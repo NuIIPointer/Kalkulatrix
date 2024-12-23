@@ -102,7 +102,7 @@ const columns = [
   }
 ];
 
-const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, errors }) => (
+const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }) => (
   <React.Fragment>
     <Stack justifyContent="space-between" alignItems="center" flexDirection="row">
       <Typography variant="h3">{maTitle} bearbeiten</Typography>
