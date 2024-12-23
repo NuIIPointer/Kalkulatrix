@@ -15,7 +15,14 @@ const getSubscriptions = async (userId) => {
     // const allDocs = await getDocs(query(checkoutSessionRef));
     const snap = await getDocs(query(checkoutSessionRef, where('status', 'in', ['trialing', 'active'])));
 
-    return snap;
+    const docsDataResolved = snap.docs.map(async (doc) => {
+      const data = doc.data();
+      return { priceId: data.price?.id, productId: data.product?.id };
+    });
+
+    const resolvedDocs = await Promise.all(docsDataResolved);
+
+    return resolvedDocs;
   }
 };
 
@@ -31,7 +38,7 @@ export const StripeContextProvider = ({ children }) => {
     setLoadingGetSubscriptionStatus(true);
     const subs = await getSubscriptions(user.uid);
 
-    setActiveSubscriptions(subs?.docs);
+    setActiveSubscriptions(subs);
     setLoadingGetSubscriptionStatus(false);
   }, [user.uid]);
 
@@ -53,6 +60,7 @@ export const StripeContextProvider = ({ children }) => {
             const { error, url } = snap.data() || {};
             if (error) {
               unsubscribe();
+              console.log('error', error);
               reject(new Error(`An error occurred: ${error.message}`));
               setLoadingCreateSubscription(false);
             }
@@ -77,7 +85,7 @@ export const StripeContextProvider = ({ children }) => {
       const functionRef = httpsCallable(functions, 'ext-firestore-stripe-payments-createPortalLink');
       const { data } = await functionRef({
         customerId: user?.uid,
-        returnUrl: window.location.origin
+        returnUrl: `${window.location.origin}/office/billing`
       });
 
       // Add a type to the data
@@ -104,6 +112,7 @@ export const StripeContextProvider = ({ children }) => {
       value={{
         createSubscription,
         hasActiveSubscription,
+        activeSubscriptions,
         loadingCreateSubscription,
         loadingGetSubscriptionStatus,
         getPortalUrl
