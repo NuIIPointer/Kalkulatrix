@@ -3,7 +3,8 @@ import { useTheme } from '@mui/material/styles';
 import { StripeContext } from 'context/stripe/index';
 import { UserContext } from 'context/user/index';
 import { useContext, useState } from 'react';
-import { useNavigate } from '../../../node_modules/react-router-dom/dist/index';
+import { useNavigate } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLink, customLinkText }) => {
   const navigate = useNavigate();
@@ -117,7 +118,12 @@ const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLin
         tabIndex={-1}
         role="presentation"
       >
-        {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten!')}
+        {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten!')}{' '}
+        {isLoadingCardAction ? (
+          <CircularProgress color="inherit" stroke="currentColor" size={20} sx={{ marginLeft: theme.spacing(1) }} />
+        ) : (
+          ''
+        )}
       </Button>
     </Button>
   );
