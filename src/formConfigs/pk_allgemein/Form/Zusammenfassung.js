@@ -1,12 +1,13 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 // formik
 import { FastField, useFormikContext } from 'formik';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Zusammenfassung = () => {
   const { values } = useFormikContext();
@@ -25,7 +26,7 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="pk_allgemein_N53">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Gesamtsumme aller Mitarbeiter"

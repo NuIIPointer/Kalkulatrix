@@ -1,13 +1,14 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Divider, Typography } from '@mui/material';
+import { Grid, Divider, Typography } from '@mui/material';
 
 // formik
 import { FastField } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
+import CustomTextField from 'components/CustomTextField/index';
 
 export const sachkosten_fieldTitles = [
   'Raumkosten',
@@ -61,7 +62,7 @@ const Sachkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name={`gemeinkosten_sachkosten_F${sachkosten_startingRow + index}`}>
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       label="Plankosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
@@ -77,7 +78,7 @@ const Sachkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name={`gemeinkosten_sachkosten_G${sachkosten_startingRow + index}`}>
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       label="Variable Kosten (in %)"
                       error={meta?.touched && Boolean(meta.error)}
@@ -96,7 +97,7 @@ const Sachkosten = () => {
                     <Grid item xs={12} sm={6}>
                       <FastField name={`gemeinkosten_sachkosten_H${sachkosten_startingRow + index}`}>
                         {({ field, meta }) => (
-                          <TextField
+                          <CustomTextField
                             {...field}
                             value={formFloat(field.value, 2)}
                             label="Variable Kosten (in EUR)"
@@ -114,7 +115,7 @@ const Sachkosten = () => {
                     <Grid item xs={12} sm={6}>
                       <FastField name={`gemeinkosten_sachkosten_I${sachkosten_startingRow + index}`}>
                         {({ field, meta }) => (
-                          <TextField
+                          <CustomTextField
                             {...field}
                             value={formFloat(field.value, 2)}
                             label="Fixe Kosten (in EUR)"
@@ -144,7 +145,7 @@ const Sachkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_F39">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: Plankosten (berechnet, in EUR)"
@@ -162,7 +163,7 @@ const Sachkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_H39">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: variabele Kosten (in EUR)"
@@ -180,7 +181,7 @@ const Sachkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_I39">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: fixe Kosten (in EUR)"

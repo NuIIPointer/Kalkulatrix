@@ -1,12 +1,13 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Divider } from '@mui/material';
+import { Grid, Divider } from '@mui/material';
 
 // formik
 import { FastField } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Stammdaten = () => {
   return (
@@ -24,7 +25,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="pk_allgemein_K5">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Lohnnebenkosten (bis Beitragsbemessungsgrenze, in %)"
                 error={meta?.touched && Boolean(meta.error)}
@@ -54,7 +55,7 @@ const Stammdaten = () => {
                   </>
                 }
               >
-                <TextField
+                <CustomTextField
                   {...field}
                   label="Beitragsbemessungsgrenze (in EUR, p.m.)"
                   error={meta?.touched && Boolean(meta.error)}
@@ -84,7 +85,7 @@ const Stammdaten = () => {
                   </p>
                 }
               >
-                <TextField
+                <CustomTextField
                   {...field}
                   label="Lohnnebenkosten (oberhalb Beitragsbemessungsgrenze, in %)"
                   error={meta?.touched && Boolean(meta.error)}
@@ -102,7 +103,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="pk_allgemein_K78">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Anzahl der Gehälter (p.a., max. 12)"
                 error={meta?.touched && Boolean(meta.error)}

@@ -1,13 +1,14 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Divider, Typography } from '@mui/material';
+import { Grid, Divider, Typography } from '@mui/material';
 
 // formik
 import { FastField } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Stammdaten = () => {
   return (
@@ -29,7 +30,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="gemeinkosten_material_F9">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Plankosten (in EUR)"
                 error={meta?.touched && Boolean(meta.error)}
@@ -45,7 +46,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="gemeinkosten_material_G9">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Variable Kosten (in %)"
                 error={meta?.touched && Boolean(meta.error)}
@@ -64,7 +65,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_material_H9">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Variable Kosten (in EUR)"
@@ -82,7 +83,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_material_I9">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Fixe Kosten (in EUR)"
@@ -111,7 +112,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="gemeinkosten_material_F10">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Plankosten (in EUR)"
                 error={meta?.touched && Boolean(meta.error)}
@@ -127,7 +128,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="gemeinkosten_material_G10">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Variable Kosten (in %)"
                 error={meta?.touched && Boolean(meta.error)}
@@ -146,7 +147,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_material_H10">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Variable Kosten (in EUR)"
@@ -164,7 +165,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_material_I10">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Fixe Kosten (in EUR)"
@@ -193,7 +194,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="gemeinkosten_material_F11">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Plankosten (in EUR)"
                 error={meta?.touched && Boolean(meta.error)}
@@ -209,7 +210,7 @@ const Stammdaten = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="gemeinkosten_material_G11">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 label="Variable Kosten (in %)"
                 error={meta?.touched && Boolean(meta.error)}
@@ -228,7 +229,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_material_H11">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Variable Kosten (in EUR)"
@@ -246,7 +247,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_material_I11">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Fixe Kosten (in EUR)"
@@ -273,7 +274,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_F12">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: Plankosten (berechnet, in EUR)"
@@ -291,7 +292,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_H12">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: variabele Kosten (in EUR)"
@@ -309,7 +310,7 @@ const Stammdaten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_I12">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: fixe Kosten (in EUR)"

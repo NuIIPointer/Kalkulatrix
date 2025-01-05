@@ -1,8 +1,9 @@
 import { FastField } from 'formik';
-import { Grid, TextField, Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const DGemeinkostenPlangewinn = () => {
   return (
@@ -18,7 +19,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_F23">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Personalkosten (pro Stunde, in EUR)"
@@ -36,7 +37,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_H11">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Direkt verrechenbare Stunden (in EUR)"
@@ -54,7 +55,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_H23">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Direkt verrechnet (in EUR)"
@@ -72,7 +73,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H29">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 1)}
                   label="Gemeinkosten: Aufschlagssatz auf Personalkosten (in %)"
@@ -101,7 +102,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_F33">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Personalkosten (pro Stunde, in EUR)"
@@ -119,7 +120,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_H29">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Aufschlagssatz (in %)"
@@ -137,7 +138,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_H33">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Gemeinkostenstundensatz (in EUR)"
@@ -155,7 +156,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H38">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 1)}
                   label="Plangewinn: Aufschlagssatz auf Personalkosten (in %)"
@@ -184,7 +185,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="std_verrechnungssaetze_G8">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Personalkosten (pro Stunde, in EUR)"
@@ -202,7 +203,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_H38">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Aufschlagssatz (in %)"
@@ -220,7 +221,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gk_stundensaetze_H42">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Plangewinnsatz (in EUR)"

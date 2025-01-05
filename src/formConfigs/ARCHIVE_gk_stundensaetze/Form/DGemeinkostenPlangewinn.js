@@ -1,8 +1,9 @@
 import { FastField } from 'formik';
-import { Grid, TextField, Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const DGemeinkostenPlangewinn = () => {
   return (
@@ -19,7 +20,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H8">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Gesamtsumme Gemeinkosten (fix + var, in EUR)"
@@ -40,7 +41,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H9">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Beiträge zu Gemeinkosten"
@@ -58,7 +59,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H10">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Verbleibende Gemeinkosten (nach Abzug von GK-Beiträgen)"
@@ -76,7 +77,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H11">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Direkt verrechenbare Stunden"
@@ -94,7 +95,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H12">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Ø Gemeinkostensatz pro Stunde"
@@ -123,7 +124,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H14">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   label="Plangewinn (in EUR)"
                   error={meta?.touched && Boolean(meta.error)}
@@ -142,7 +143,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H15">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   label="Direkt verrechenbare Stunden"
                   error={meta?.touched && Boolean(meta.error)}
@@ -159,7 +160,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gk_stundensaetze_H16">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Ø Plangewinnsatz pro Stunde (in %)"

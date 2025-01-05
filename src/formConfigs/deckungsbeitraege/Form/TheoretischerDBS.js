@@ -1,8 +1,9 @@
 import { FastField, useFormikContext } from 'formik';
-import { Grid, TextField, Box, Typography, Chip } from '@mui/material';
+import { Grid, Box, Typography, Chip } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const DGemeinkostenPlangewinn = () => {
   const { values } = useFormikContext();
@@ -21,7 +22,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="deckungsbeitraege_J25">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   label="Erzielbarer Nettoverkaufspreis pro Std. (ohne USt., in EUR)"
                   error={meta?.touched && Boolean(meta.error)}
@@ -40,7 +41,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="deckungsbeitraege_J26">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Grenzkosten pro Stunde (in EUR)"
@@ -58,7 +59,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="deckungsbeitraege_J27">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Deckungsbeitrag pro Stunde (in EUR)"

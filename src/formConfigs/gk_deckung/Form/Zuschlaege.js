@@ -3,7 +3,6 @@ import React, { useState, memo } from 'react';
 // material-ui
 import {
   Grid,
-  TextField,
   Divider,
   Button,
   Typography,
@@ -35,6 +34,7 @@ import { getInitialGemeinkostenItem } from '../getInitialGemeinkostenData';
 import LayoutBox from 'components/LayoutBox/index';
 import StatCard from 'components/StatCard/index';
 import InitialsCircle from 'components/InitialsCircle/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const columns = [
   {
@@ -119,7 +119,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
       <Grid item xs={12} sm={6}>
         <FastField name={`gk_deckung_zuschlaege.${outerIndex}.fields.${innerIndex}.D8`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Bezeichnung"
               error={meta?.touched && Boolean(meta.error)}
@@ -135,7 +135,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
       <Grid item xs={12} sm={6}>
         <FastField name={`gk_deckung_zuschlaege.${outerIndex}.fields.${innerIndex}.E8`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Einsatz  (in EUR)"
               error={meta?.touched && Boolean(meta.error)}
@@ -151,7 +151,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
       <Grid item xs={12} sm={6}>
         <FastField name={`gk_deckung_zuschlaege.${outerIndex}.fields.${innerIndex}.F8`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Zuschlagssatz (in %)"
               error={meta?.touched && Boolean(meta.error)}
@@ -171,7 +171,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
             <Grid item xs={12} sm={6}>
               <FastField name={`gk_deckung_zuschlaege.${outerIndex}.fields.${innerIndex}.G8`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Erlös (in EUR)"
@@ -189,7 +189,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
             <Grid item xs={12} sm={6}>
               <FastField name={`gk_deckung_zuschlaege.${outerIndex}.fields.${innerIndex}.H8`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Davon Zuschlag (in EUR)"
@@ -340,7 +340,7 @@ const MaterialzuschlagFremdleistungen = () => {
                       <Grid item xs={12} sm={5} md={4}>
                         <FastField name={`gk_deckung_zuschlaege.${openedTab}.groupTitle`}>
                           {({ field, meta }) => (
-                            <TextField
+                            <CustomTextField
                               {...field}
                               label="Gruppenbezeichnung"
                               error={meta?.touched && Boolean(meta.error)}

@@ -1,8 +1,9 @@
 import { FastField, Field, useFormikContext } from 'formik';
-import { Grid, TextField, Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const DGemeinkostenPlangewinn = () => {
   const { values } = useFormikContext();
@@ -22,7 +23,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G8">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Brutto-Stundenentgelt (inkl. Zulagen)"
@@ -40,7 +41,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <Field name="std_verrechnungssaetze_G9">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label={`Personalnebenkosten (${formFloat(values.annahmen_I46, 1)}%)`}
@@ -58,7 +59,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G10">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Personalkosten pro Stunde"
@@ -79,7 +80,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G11">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="GK-Satz pro Stunde"
@@ -100,7 +101,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G12">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Selbstkosten pro Stunde"
@@ -121,7 +122,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G13">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Plangewinnsatz pro Stunde"
@@ -142,7 +143,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G14">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Stundenverrechnungssatz (ohne USt.)"
@@ -160,7 +161,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G15">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 0)}
                     label="Durchschnittlicher Zuschlag Personalkosten (in %)"

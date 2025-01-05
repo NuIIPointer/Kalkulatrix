@@ -3,7 +3,6 @@ import React, { memo, useState } from 'react';
 // material-ui
 import {
   Grid,
-  TextField,
   Button,
   Typography,
   Stack,
@@ -36,6 +35,7 @@ import LayoutBox from 'components/LayoutBox/index';
 import InitialsCircle from 'components/InitialsCircle/index';
 import StatCard from 'components/StatCard/index';
 import ModalHeader from 'components/ModalHeader/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const columns = [
   {
@@ -110,7 +110,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.titel`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Name/Titel"
               error={meta?.touched && Boolean(meta.error)}
@@ -123,7 +123,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.E9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Sollarbeitsstunden p.a. (ohne Feiertage)"
               error={meta?.touched && Boolean(meta.error)}
@@ -142,7 +142,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.F9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Urlaub (in Stunden)"
               error={meta?.touched && Boolean(meta.error)}
@@ -159,7 +159,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.G9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Krankheit (in Stunden)"
               error={meta?.touched && Boolean(meta.error)}
@@ -176,7 +176,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.H9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Fortbildung (in Stunden)"
               error={meta?.touched && Boolean(meta.error)}
@@ -193,7 +193,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.I9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Sonstige Abwesenheiten (in Stunden)"
               error={meta?.touched && Boolean(meta.error)}
@@ -213,7 +213,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.M9`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     label="Anwesenheit (in Std.)"
                     error={meta?.touched && Boolean(meta.error)}
@@ -236,7 +236,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.N9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Davon direkt verrechenbare Arbeitszeit (in %)"
               error={meta?.touched && Boolean(meta.error)}
@@ -256,7 +256,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.O9`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Direkt verrechnet (in Std.)"
@@ -274,7 +274,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.P9`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Nicht direkt verrechnet (in Std.)"
@@ -298,7 +298,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.Q9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Bruttostundenlohn (in EUR)"
               error={meta?.touched && Boolean(meta.error)}
@@ -314,7 +314,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.R9`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Zuschläge (in EUR)"
               error={meta?.touched && Boolean(meta.error)}
@@ -333,7 +333,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.S9`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     label="Anwesenheitsentgelt (gesamt, in EUR)"
                     error={meta?.touched && Boolean(meta.error)}
@@ -354,7 +354,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.U9`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     label="Verrechenbarkeit (direkt verrechnet, in EUR)"
                     value={formFloat(field.value, 2)}
@@ -372,7 +372,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_produktiv_mitarbeiter.${outerIndex}.fields.${innerIndex}.V9`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     label="Verrechenbarkeit (nicht direkt verrechnet, in EUR)"
                     value={formFloat(field.value, 2)}
@@ -515,7 +515,7 @@ const Stammdaten = () => {
             <ModalHeader title="Neue Abteilung anlegen" onClose={() => setNewAbteilungValue(false)} />
             <Grid container columnSpacing={2} alignItems="end">
               <Grid item xs={12} sm={12} md={8}>
-                <TextField
+                <CustomTextField
                   name="newAbteilungValue"
                   onChange={(e) => setNewAbteilungValue(e.target.value)}
                   value={newAbteilungValue}
@@ -573,7 +573,7 @@ const Stammdaten = () => {
             />
             <Grid container columnSpacing={2} alignItems="end">
               <Grid item xs={12} sm={12} md={6}>
-                <TextField
+                <CustomTextField
                   name="abteilungToEditTmpTitle"
                   onChange={(e) => setAbteilungToEditTmpTitle(e.target.value)}
                   value={

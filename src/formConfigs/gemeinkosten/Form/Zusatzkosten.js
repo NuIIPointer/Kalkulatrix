@@ -1,13 +1,14 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Divider, Typography } from '@mui/material';
+import { Grid, Divider, Typography } from '@mui/material';
 
 // formik
 import { FastField } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
+import CustomTextField from 'components/CustomTextField/index';
 
 export const zusatzkosten_fieldTitles = ['Unternehmerlohn', 'Eigenkapital-Zinsen', 'Fremdkapital-Zinsen', 'Kalkulatorische Wagnisse'];
 export const zusatzkosten_startingRow = 42;
@@ -32,7 +33,7 @@ const Zusatzkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name={`gemeinkosten_zusatzkosten_F${zusatzkosten_startingRow + index}`}>
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       label="Plankosten (in EUR)"
                       error={meta?.touched && Boolean(meta.error)}
@@ -48,7 +49,7 @@ const Zusatzkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name={`gemeinkosten_zusatzkosten_G${zusatzkosten_startingRow + index}`}>
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       label="Variable Kosten (in %)"
                       error={meta?.touched && Boolean(meta.error)}
@@ -67,7 +68,7 @@ const Zusatzkosten = () => {
                     <Grid item xs={12} sm={6}>
                       <FastField name={`gemeinkosten_zusatzkosten_H${zusatzkosten_startingRow + index}`}>
                         {({ field, meta }) => (
-                          <TextField
+                          <CustomTextField
                             {...field}
                             value={formFloat(field.value, 2)}
                             label="Variable Kosten (in EUR)"
@@ -85,7 +86,7 @@ const Zusatzkosten = () => {
                     <Grid item xs={12} sm={6}>
                       <FastField name={`gemeinkosten_zusatzkosten_I${zusatzkosten_startingRow + index}`}>
                         {({ field, meta }) => (
-                          <TextField
+                          <CustomTextField
                             {...field}
                             value={formFloat(field.value, 2)}
                             label="Fixe Kosten (in EUR)"
@@ -115,7 +116,7 @@ const Zusatzkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_F47">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: Plankosten (berechnet, in EUR)"
@@ -133,7 +134,7 @@ const Zusatzkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_H47">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: variabele Kosten (in EUR)"
@@ -151,7 +152,7 @@ const Zusatzkosten = () => {
               <Grid item xs={12} sm={6}>
                 <FastField name="gemeinkosten_I47">
                   {({ field, meta }) => (
-                    <TextField
+                    <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
                       label="Gesamt: fixe Kosten (in EUR)"

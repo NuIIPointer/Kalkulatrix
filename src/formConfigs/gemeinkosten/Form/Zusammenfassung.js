@@ -1,13 +1,14 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 // formik
 import { FastField, useFormikContext } from 'formik';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Zusammenfassung = () => {
   const { values } = useFormikContext();
@@ -26,7 +27,7 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gemeinkosten_F49">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Gesamtsumme aller Plan-Gemeinkosten (in EUR)"
@@ -44,7 +45,7 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gemeinkosten_H49">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Gesamtsumme aller variablen-Gemeinkosten (in EUR)"
@@ -62,7 +63,7 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={4}>
             <FastField name="gemeinkosten_I49">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Gesamtsumme aller fixen-Gemeinkosten (in EUR)"
@@ -89,7 +90,7 @@ const Zusammenfassung = () => {
                     </p>
                   }
                 >
-                  <TextField
+                  <CustomTextField
                     {...field}
                     label="Kfix nicht ausgabenwirksam (in EUR)"
                     error={meta?.touched && Boolean(meta.error)}
@@ -106,7 +107,7 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="gemeinkosten_I53">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Kfix ausgabenwirksam (=Rest, in EUR)"

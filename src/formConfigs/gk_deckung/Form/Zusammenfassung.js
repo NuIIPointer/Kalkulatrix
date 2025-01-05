@@ -1,7 +1,8 @@
 import { FastField } from 'formik';
-import { Grid, TextField } from '@mui/material';
+import { Grid } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Zusammenfassung = () => {
   return (
@@ -10,7 +11,7 @@ const Zusammenfassung = () => {
         <Grid item xs={12} sm={6}>
           <FastField name="gk_deckung_H20">
             {({ field, meta }) => (
-              <TextField
+              <CustomTextField
                 {...field}
                 value={formFloat(field.value, 2)}
                 label="Gesamtsumme der Beiträge zu den Gemeinkosten (in EUR)"

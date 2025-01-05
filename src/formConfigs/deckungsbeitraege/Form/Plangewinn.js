@@ -1,6 +1,7 @@
 import { FastField } from 'formik';
 import { Grid, TextField, Stack, Typography } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Plangewinn = () => {
   return (
@@ -20,7 +21,7 @@ const Plangewinn = () => {
             <Grid item xs={12} md={4} lg={5}>
               <FastField name="gk_stundensaetze_H14">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}

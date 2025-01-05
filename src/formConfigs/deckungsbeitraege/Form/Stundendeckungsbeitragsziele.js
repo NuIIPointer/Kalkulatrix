@@ -1,8 +1,9 @@
 import { FastField } from 'formik';
-import { Grid, TextField, Box, Typography } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const DGemeinkostenPlangewinn = () => {
   return (
@@ -19,7 +20,7 @@ const DGemeinkostenPlangewinn = () => {
           <Grid item xs={12} sm={6}>
             <FastField name="pk_produktiv_O36">
               {({ field, meta }) => (
-                <TextField
+                <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Berechnungsbasis (Summe direkt verrechenbarer Std., in EUR)"
@@ -51,7 +52,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_I12">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -69,7 +70,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_J12">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -92,7 +93,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_I13">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -110,7 +111,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_J13">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -143,7 +144,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_I14">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -161,7 +162,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_J14">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -184,7 +185,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_I15">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -202,7 +203,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_J15">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -225,7 +226,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_I16">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -243,7 +244,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_J16">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -276,7 +277,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_I17">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -294,7 +295,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_J17">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -312,7 +313,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_L17">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Deckungsbeitragsziel 1 (in EUR)"
@@ -335,7 +336,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_I18">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesam (in EUR)"
@@ -353,7 +354,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_J18">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -386,7 +387,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_I19">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -404,7 +405,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_J19">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -422,7 +423,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_L19">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Deckungsbeitragsziel 2 (in EUR)"
@@ -445,7 +446,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_I18">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -463,7 +464,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={6}>
               <FastField name="deckungsbeitraege_J18">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -496,7 +497,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_I21">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamt (in EUR)"
@@ -514,7 +515,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_J21">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="pro verrechn. Std. (in EUR)"
@@ -532,7 +533,7 @@ const DGemeinkostenPlangewinn = () => {
             <Grid item xs={12} sm={4}>
               <FastField name="deckungsbeitraege_L21">
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Deckungsbeitragsziel 3 (in EUR)"

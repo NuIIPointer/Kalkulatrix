@@ -14,7 +14,6 @@ import {
   ListItemText,
   MenuItem,
   Stack,
-  TextField,
   Typography
 } from '@mui/material';
 
@@ -33,6 +32,7 @@ import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
+import CustomTextField from 'components/CustomTextField/index';
 
 // avatar style
 const avatarSX = {
@@ -192,7 +192,7 @@ const DashboardDefault = () => {
             <Typography variant="h5">Sales Report</Typography>
           </Grid>
           <Grid item>
-            <TextField
+            <CustomTextField
               id="standard-select-currency"
               size="small"
               select
@@ -205,7 +205,7 @@ const DashboardDefault = () => {
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </CustomTextField>
           </Grid>
         </Grid>
         <MainCard sx={{ mt: 1.75 }}>

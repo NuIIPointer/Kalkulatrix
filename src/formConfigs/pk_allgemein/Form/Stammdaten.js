@@ -3,10 +3,8 @@ import React, { useState, memo } from 'react';
 // material-ui
 import {
   Grid,
-  TextField,
   Divider,
   Button,
-  ButtonGroup,
   Typography,
   Stack,
   Tab,
@@ -36,6 +34,7 @@ import DataTable from 'components/DataTable/index';
 import { Modal } from '../../../../node_modules/@mui/material/index';
 import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 import StatCard from 'components/StatCard/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const columns = [
   {
@@ -110,7 +109,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.titel`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Name/Titel"
               error={meta?.touched && Boolean(meta.error)}
@@ -126,7 +125,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.F14`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Beschäftigung von (Monat)"
               error={meta?.touched && Boolean(meta.error)}
@@ -143,7 +142,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.G14`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Beschäftigung bis (Monat)"
               error={meta?.touched && Boolean(meta.error)}
@@ -160,7 +159,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.I14`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Bruttoeinkommen (p.m., in EUR)"
               error={meta?.touched && Boolean(meta.error)}
@@ -176,7 +175,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.J14`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Bruttoeinkommen gesamt (in EUR)"
               error={meta?.touched && Boolean(meta.error)}
@@ -193,7 +192,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
       <Grid item xs={12} sm={6}>
         <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.K14`}>
           {({ field, meta }) => (
-            <TextField
+            <CustomTextField
               {...field}
               label="Sonderzahlungen (p.A., in EUR)"
               error={meta?.touched && Boolean(meta.error)}
@@ -215,7 +214,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.L14`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     label="Brutto inkl. SZ (in EUR)"
                     error={meta?.touched && Boolean(meta.error)}
@@ -232,7 +231,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <Field name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.M14`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label={`Lohnnebenkosten (in EUR)`}
@@ -250,7 +249,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.N14`}>
                 {({ field, meta }) => (
-                  <TextField
+                  <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Gesamtkosten (p.a., in EUR)"
@@ -409,7 +408,7 @@ const Stammdaten = () => {
                       <Grid item xs={12} sm={5} md={4}>
                         <FastField name={`pk_allgemein_mitarbeiter.${openedTab}.groupTitle`}>
                           {({ field, meta }) => (
-                            <TextField
+                            <CustomTextField
                               {...field}
                               label="Gruppenbezeichnung"
                               error={meta?.touched && Boolean(meta.error)}
