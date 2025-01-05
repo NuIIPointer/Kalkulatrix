@@ -74,8 +74,8 @@ const StundensatzRechnerValueUpdater = () => {
           }
         });
 
-        const N9_durchschnitt = N9_gesamt / category.fields.length;
-        const Q9_durchschnitt = Q9_gesamt / category.fields.length;
+        const N9_durchschnitt = N9_gesamt / (category.fields?.length || 1);
+        const Q9_durchschnitt = Q9_gesamt / (category.fields?.length || 1);
 
         if (N9_durchschnitt !== category.N9_durchschnitt) {
           setFieldValue(`pk_produktiv_mitarbeiter.${outerIndex}.N9_durchschnitt`, N9_durchschnitt);

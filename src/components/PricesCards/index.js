@@ -118,7 +118,7 @@ const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLin
         tabIndex={-1}
         role="presentation"
       >
-        {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten!')}{' '}
+        {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten')}{' '}
         {isLoadingCardAction ? (
           <CircularProgress color="inherit" stroke="currentColor" size={20} sx={{ marginLeft: theme.spacing(1) }} />
         ) : (
