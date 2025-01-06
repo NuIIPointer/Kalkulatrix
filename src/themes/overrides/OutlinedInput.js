@@ -42,6 +42,23 @@ export default function OutlinedInput(theme) {
           padding: 0
         }
       }
+    },
+    MuiInputAdornment: {
+      styleOverrides: {
+        root: {
+          height: 'auto',
+          maxHeight: 'auto',
+          backgroundColor: '#e9e9e9',
+          padding: '7px 8px',
+          marginRight: '-8px',
+          borderRadius: '4px',
+          opacity: '1',
+          '>p': {
+            color: '#363636',
+            fontSize: '0.85rem'
+          }
+        }
+      }
     }
   };
 }
