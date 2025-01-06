@@ -15,12 +15,13 @@ import {
   Modal,
   IconButton,
   Checkbox,
-  ButtonGroup
+  ButtonGroup,
+  Popover
 } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { DeleteOutlineOutlined, EditOutlined, ContentCopy, DeleteOutlined, Save } from '@mui/icons-material';
+import { InfoOutlined, DeleteOutlineOutlined, EditOutlined, ContentCopy, DeleteOutlined, Save } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 
@@ -423,6 +424,7 @@ const Stammdaten = () => {
   const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
+  const [showAbteilungPopover, setShowAbteilungPopover] = useState(null);
   const [newAbteilungValue, setNewAbteilungValue] = useState(null);
   const [abteilungToEdit, setAbteilungToEdit] = useState(null);
   const [abteilungToEditTmpTitle, setAbteilungToEditTmpTitle] = useState(null);
@@ -701,16 +703,47 @@ const Stammdaten = () => {
                     );
                   })}
                 </TabList>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setNewAbteilungValue(`Abteilung ${values.pk_produktiv_mitarbeiter?.length + 1}`);
-                  }}
-                  disabled={isSubmitting}
-                  sx={{ fontWeight: 500, margin: 1, marginLeft: 'auto', mt: 0, mb: 0, height: 'auto' }}
-                >
-                  Neue Abteilung
-                </Button>
+                <Stack flexDirection="row" gap={0.5} alignItems="center" marginLeft="auto">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={(e) => setShowAbteilungPopover(!showAbteilungPopover ? e.currentTarget : null)}
+                    disabled={isSubmitting}
+                    sx={{ fontWeight: 500, margin: 0, px: 0, minWidth: '44px', minHeight: '44px' }}
+                  >
+                    <InfoOutlined />
+                  </Button>
+                  <Popover
+                    id={'abteilungenpopover'}
+                    open={showAbteilungPopover}
+                    anchorEl={showAbteilungPopover}
+                    onClose={() => setShowAbteilungPopover(false)}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left'
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right'
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>
+                      Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher Bezahlung,
+                      Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter erstellen und angeben,
+                      wie oft dieser berücksichtigt wird (Anzahl).
+                    </Typography>
+                  </Popover>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setNewAbteilungValue(`Abteilung ${values.pk_produktiv_mitarbeiter?.length + 1}`);
+                    }}
+                    disabled={isSubmitting}
+                    sx={{ fontWeight: 500, margin: 1, marginLeft: 'auto', mt: 0, mb: 0, height: 'auto' }}
+                  >
+                    Neue Abteilung
+                  </Button>
+                </Stack>
               </Stack>
               {values.pk_produktiv_mitarbeiter?.map((outerField, outerIndex) => (
                 <TabPanel value={outerIndex.toString()} key={outerIndex} sx={{ padding: 0 }}>
@@ -866,29 +899,18 @@ const Stammdaten = () => {
                         };
 
                         return (
-                          <>
-                            <Typography
-                              variant="body2"
-                              sx={{ pt: { xs: 0, md: 1, lg: 2 }, pb: { xs: 3, sm: 4, md: 4, lg: 6 }, px: { xs: 2, sm: 4, md: 8, lg: 14 } }}
-                              textAlign="center"
-                            >
-                              Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher
-                              Bezahlung, Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter
-                              erstellen und angeben, wie oft dieser berücksichtigt wird (Anzahl).
-                            </Typography>
-                            <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
-                              <DataTable
-                                data={tableData}
-                                columns={columns}
-                                slots={{
-                                  footer: CustomFooter
-                                }}
-                                slotProps={{
-                                  footer: { onCopy, onDelete, onCreate }
-                                }}
-                              />
-                            </LayoutBox>
-                          </>
+                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
+                            <DataTable
+                              data={tableData}
+                              columns={columns}
+                              slots={{
+                                footer: CustomFooter
+                              }}
+                              slotProps={{
+                                footer: { onCopy, onDelete, onCreate }
+                              }}
+                            />
+                          </LayoutBox>
                         );
                       }}
                     </FieldArray>
