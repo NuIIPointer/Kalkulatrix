@@ -293,6 +293,7 @@ const Stammdaten = () => {
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
   const [groupToDelete, setGroupToDelete] = useState(undefined);
+  const [maToDelete, setMaToDelete] = useState(null);
   const [checkedRows, setCheckedRows] = useState([]);
   const onRowCheck = (userId) => {
     setCheckedRows((prev) => {
@@ -373,6 +374,33 @@ const Stammdaten = () => {
             {modalData || ''}
           </LayoutBox>
         </Modal>
+      )}
+      {maToDelete && (
+        <Dialog
+          open={!!maToDelete}
+          onClose={() => setMaToDelete(null)}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Mitarbeiter löschen</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Wollen Sie &quot;{maToDelete.maTitle}&quot; wirklich löschen?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setMaToDelete(null)}>Abbrechen</Button>
+            <Button
+              onClick={() => {
+                maToDelete.innerRemove();
+                setMaToDelete(null);
+              }}
+              autoFocus
+            >
+              Ja, löschen
+            </Button>
+          </DialogActions>
+        </Dialog>
       )}
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_allgemein_mitarbeiter">
@@ -535,7 +563,7 @@ const Stammdaten = () => {
                                 <IconButton
                                   variant="outlined"
                                   color="secondary"
-                                  onClick={() => innerRemove(innerIndex)}
+                                  onClick={() => setMaToDelete({ maTitle, innerRemove: () => innerRemove(innerIndex) })}
                                   sx={tableButtonStyles}
                                 >
                                   <DeleteOutlined />
@@ -557,16 +585,21 @@ const Stammdaten = () => {
                           });
                         };
                         const onDelete = () => {
+                          const rows = values.pk_allgemein_mitarbeiter?.[outerIndex]?.fields;
                           const rowIndexesToDelete = checkedRows.map((row) => {
-                            const rows = values.pk_allgemein_mitarbeiter?.[outerIndex]?.fields;
                             const rowToDelete = rows?.findIndex((r) => row === r.userId);
                             return rowToDelete;
                           });
-                          const newRows = values.pk_allgemein_mitarbeiter?.[outerIndex]?.fields.filter(
-                            (row, index) => !rowIndexesToDelete.includes(index)
-                          );
-                          setFieldValue(`pk_allgemein_mitarbeiter.${outerIndex}.fields`, newRows);
-                          setCheckedRows([]);
+                          const rowsToDelete = rowIndexesToDelete.map((index) => rows[index]);
+                          const innerRemove = () => {
+                            const newRows = values.pk_allgemein_mitarbeiter?.[outerIndex]?.fields.filter(
+                              (_row, index) => !rowIndexesToDelete.includes(index)
+                            );
+                            setFieldValue(`pk_allgemein_mitarbeiter.${outerIndex}.fields`, newRows);
+                            setCheckedRows([]);
+                          };
+
+                          setMaToDelete({ maTitle: rowsToDelete.map((ma) => ma.titel || 'Mitarbeiter').join(', '), innerRemove });
                         };
                         const onCreate = () => {
                           innerPush(getInitialMitarbeiterData(values));

@@ -77,9 +77,9 @@ const DGemeinkostenPlangewinn = () => {
                   <Box
                     key={item.title}
                     sx={{
-                      flexBasis: item.value,
+                      flexBasis: item.value || 1,
                       minWidth: 'min-content',
-                      flexGrow: item.value,
+                      flexGrow: item.value || 1,
                       display: 'flex',
                       justifyContent: 'flex-start',
                       position: 'relative' // Add position relative to parent
@@ -123,8 +123,8 @@ const DGemeinkostenPlangewinn = () => {
                   <Box
                     key={item.title}
                     sx={{
-                      flexBasis: item.value,
-                      flexGrow: item.value,
+                      flexBasis: item.value || 1,
+                      flexGrow: item.value || 1,
                       height: theme.spacing(1),
                       backgroundColor: item.color,
                       borderRadius: '500px'
