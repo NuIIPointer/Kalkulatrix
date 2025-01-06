@@ -1,12 +1,13 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Grid, TextField, Stack, Typography, Button } from '@mui/material';
-import { Formik, Form, Field } from 'formik';
+import { Box, Grid, Stack, Typography, Button } from '@mui/material';
+import { Formik, Form } from 'formik';
 import validationSchema from 'formConfigs/authLogin/rules/validation/schema';
 import { UserContext } from 'context/user/index';
 import { CircularProgress } from '@mui/material';
 import LayoutBox from 'components/LayoutBox/index';
 import { useSnackbar } from 'notistack';
+import CustomTextField from 'components/CustomTextField/index';
 
 const EditCredentials = () => {
   const theme = useTheme();
@@ -95,8 +96,8 @@ const EditCredentials = () => {
             >
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                 <Grid item xs={12} sm={6} mt={4}>
-                  <CustomTextField asFormikField
-
+                  <CustomTextField
+                    asFormikField
                     id="email"
                     name="email"
                     label="E-Mail"
@@ -111,8 +112,8 @@ const EditCredentials = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} mt={4}>
-                  <CustomTextField asFormikField
-
+                  <CustomTextField
+                    asFormikField
                     id="emailConfirm"
                     name="emailConfirm"
                     label="E-Mail bestätigen"
@@ -160,8 +161,8 @@ const EditCredentials = () => {
               <Stack mt={4} />
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                 <Grid item xs={12} sm={6}>
-                  <CustomTextField asFormikField
-
+                  <CustomTextField
+                    asFormikField
                     id="password"
                     name="password"
                     label="Neues Passwort"
@@ -176,8 +177,8 @@ const EditCredentials = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <CustomTextField asFormikField
-
+                  <CustomTextField
+                    asFormikField
                     id="passwordConfirm"
                     name="passwordConfirm"
                     label="Passwort bestätigen"

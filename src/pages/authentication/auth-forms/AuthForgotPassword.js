@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
 // material-ui
-import { Button, FormHelperText, Grid, TextField } from '@mui/material';
+import { Button, FormHelperText, Grid } from '@mui/material';
 
 // Form
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 
 // project import
 import AnimateButton from 'components/@extended/AnimateButton';
@@ -13,6 +13,7 @@ import { UserContext } from 'context/user';
 // assets
 import validationSchema from 'formConfigs/authForgotPassword/rules/validation/schema';
 import { enqueueSnackbar } from 'notistack';
+import CustomTextField from 'components/CustomTextField/index';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
 
@@ -46,8 +47,8 @@ const AuthForgotPassword = () => {
           <Form autoComplete="off" noValidate>
             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
               <Grid item xs={12}>
-                <CustomTextField asFormikField
-
+                <CustomTextField
+                  asFormikField
                   id="email"
                   name="email"
                   label="E-Mail"
