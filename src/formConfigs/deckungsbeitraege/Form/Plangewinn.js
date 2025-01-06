@@ -23,6 +23,7 @@ const Plangewinn = () => {
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2, width: '100%' }}

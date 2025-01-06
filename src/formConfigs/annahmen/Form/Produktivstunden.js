@@ -26,10 +26,10 @@ const Produktivstunden = () => {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             asFormikField
-
             id="annahmen_G16"
             name="annahmen_G16"
-            label="Wochenarbeitszeit (in Std.)"
+            label="Wochenarbeitszeit"
+            endAdornment="Stunden"
             value={values.annahmen_G16}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -73,7 +73,6 @@ const Produktivstunden = () => {
               <Grid item xs={12} md={6}>
                 <CustomTextField
                   asFormikField
-
                   InputProps={{
                     readOnly: true
                   }}
@@ -88,7 +87,6 @@ const Produktivstunden = () => {
               <Grid item xs={12} sm={6}>
                 <CustomTextField
                   asFormikField
-
                   InputProps={{
                     readOnly: true
                   }}
@@ -102,7 +100,6 @@ const Produktivstunden = () => {
               <Grid item xs={12} sm={6}>
                 <CustomTextField
                   asFormikField
-
                   id="annahmen_G22"
                   name="annahmen_G22"
                   label={`Wochenendtage im Jahr ${values.annahmen_allgemein_planjahr || ''}`}
@@ -117,7 +114,6 @@ const Produktivstunden = () => {
               <Grid item xs={12} md={6}>
                 <CustomTextField
                   asFormikField
-
                   InputProps={{
                     readOnly: true
                   }}
@@ -132,7 +128,6 @@ const Produktivstunden = () => {
               <Grid item xs={12} md={6}>
                 <CustomTextField
                   asFormikField
-
                   InputProps={{
                     readOnly: true
                   }}
@@ -153,10 +148,10 @@ const Produktivstunden = () => {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             asFormikField
-
             id="annahmen_G26"
             name="annahmen_G26"
             label="⌀ Urlaubstage pro Mitarbeiter"
+            endAdornment="Tage"
             value={values.annahmen_G26}
             type="number"
             onWheel={(event) => event.target.blur()}
@@ -172,10 +167,10 @@ const Produktivstunden = () => {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             asFormikField
-
             id="annahmen_G27"
             name="annahmen_G27"
             label="⌀ Krankentage pro Mitarbeiter"
+            endAdornment="Tage"
             value={values.annahmen_G27}
             type="number"
             onWheel={(event) => event.target.blur()}
@@ -192,10 +187,10 @@ const Produktivstunden = () => {
           <EnrichedField infoText="z.B. wg. Freistellung, Umzug, Behörden etc.">
             <CustomTextField
               asFormikField
-
               id="annahmen_G28"
               name="annahmen_G28"
-              label="⌀ Sonstige Arbeitsverhinderungen (in Tagen)"
+              label="⌀ Sonstige Arbeitsverhinderungen"
+              endAdornment="Tage"
               value={values.annahmen_G28}
               type="number"
               onWheel={(event) => event.target.blur()}

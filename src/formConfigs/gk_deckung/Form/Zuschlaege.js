@@ -137,7 +137,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Einsatz  (in EUR)"
+              label="Einsatz"
+              endAdornment="€"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               sx={{ mb: 2 }}
@@ -153,7 +154,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Zuschlagssatz (in %)"
+              label="Zuschlagssatz"
+              endAdornment="%"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               sx={{ mb: 2 }}
@@ -174,7 +176,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Erlös (in EUR)"
+                    label="Erlös"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -192,7 +195,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex }
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Davon Zuschlag (in EUR)"
+                    label="Davon Zuschlag"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}

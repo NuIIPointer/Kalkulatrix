@@ -22,7 +22,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Personalkosten (pro Stunde, in EUR)"
+                  label="Personalkosten (pro Stunde)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -40,7 +41,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Direkt verrechenbare Stunden (in EUR)"
+                  label="Direkt verrechenbare Stunden"
+                  endAdornment="in €"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -58,7 +60,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Direkt verrechnet (in EUR)"
+                  label="Direkt verrechnet"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -76,7 +79,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 1)}
-                  label="Gemeinkosten: Aufschlagssatz auf Personalkosten (in %)"
+                  label="Gemeinkosten: Aufschlagssatz auf Personalkosten"
+                  endAdornment="%"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -105,7 +109,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Personalkosten (pro Stunde, in EUR)"
+                  label="Personalkosten (pro Stunde)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -123,7 +128,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Aufschlagssatz (in %)"
+                  label="Aufschlagssatz"
+                  endAdornment="%"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -141,7 +147,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gemeinkostenstundensatz (in EUR)"
+                  label="Gemeinkostenstundensatz"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -159,7 +166,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 1)}
-                  label="Plangewinn: Aufschlagssatz auf Personalkosten (in %)"
+                  label="Plangewinn: Aufschlagssatz auf Personalkosten"
+                  endAdornment="%"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -188,7 +196,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Personalkosten (pro Stunde, in EUR)"
+                  label="Personalkosten (pro Stunde)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -206,7 +215,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Aufschlagssatz (in %)"
+                  label="Aufschlagssatz"
+                  endAdornment="%"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -224,7 +234,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Plangewinnsatz (in EUR)"
+                  label="Plangewinnsatz"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}

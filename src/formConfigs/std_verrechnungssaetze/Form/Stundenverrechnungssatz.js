@@ -27,6 +27,7 @@ const DGemeinkostenPlangewinn = () => {
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Brutto-Stundenentgelt (inkl. Zulagen)"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -45,6 +46,7 @@ const DGemeinkostenPlangewinn = () => {
                     {...field}
                     value={formFloat(field.value, 2)}
                     label={`Personalnebenkosten (${formFloat(values.annahmen_I46, 1)}%)`}
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -63,6 +65,7 @@ const DGemeinkostenPlangewinn = () => {
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Personalkosten pro Stunde"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -84,6 +87,7 @@ const DGemeinkostenPlangewinn = () => {
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="GK-Satz pro Stunde"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -105,6 +109,7 @@ const DGemeinkostenPlangewinn = () => {
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Selbstkosten pro Stunde"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -126,6 +131,7 @@ const DGemeinkostenPlangewinn = () => {
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Plangewinnsatz pro Stunde"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -147,6 +153,7 @@ const DGemeinkostenPlangewinn = () => {
                     {...field}
                     value={formFloat(field.value, 2)}
                     label="Stundenverrechnungssatz (ohne USt.)"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -164,7 +171,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 0)}
-                    label="Durchschnittlicher Zuschlag Personalkosten (in %)"
+                    label="Durchschnittlicher Zuschlag Personalkosten"
+                    endAdornment="%"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}

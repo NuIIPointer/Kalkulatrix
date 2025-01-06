@@ -85,7 +85,6 @@ const AuthRegister = () => {
               <Grid item xs={12} sm={6}>
                 <CustomTextField
                   asFormikField
-
                   id="firstName"
                   name="firstName"
                   label="Vorname"
@@ -101,7 +100,6 @@ const AuthRegister = () => {
               <Grid item xs={12} sm={6}>
                 <CustomTextField
                   asFormikField
-
                   id="lastName"
                   name="lastName"
                   label="Nachname"
@@ -116,7 +114,6 @@ const AuthRegister = () => {
               <Grid item xs={12}>
                 <CustomTextField
                   asFormikField
-
                   id="company"
                   name="company"
                   label="Unternehmen"
@@ -130,7 +127,6 @@ const AuthRegister = () => {
               <Grid item xs={12}>
                 <CustomTextField
                   asFormikField
-
                   id="email"
                   name="email"
                   label="E-Mail"
@@ -147,7 +143,6 @@ const AuthRegister = () => {
               <Grid item xs={12}>
                 <CustomTextField
                   asFormikField
-
                   id="password"
                   name="password"
                   label="Passwort"

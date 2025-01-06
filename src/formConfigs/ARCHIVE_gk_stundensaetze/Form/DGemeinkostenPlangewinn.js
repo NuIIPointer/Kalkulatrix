@@ -23,7 +23,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme Gemeinkosten (fix + var, in EUR)"
+                  label="Gesamtsumme Gemeinkosten (fix + var)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -45,6 +46,7 @@ const DGemeinkostenPlangewinn = () => {
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Beiträge zu Gemeinkosten"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -63,6 +65,7 @@ const DGemeinkostenPlangewinn = () => {
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Verbleibende Gemeinkosten (nach Abzug von GK-Beiträgen)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -81,6 +84,7 @@ const DGemeinkostenPlangewinn = () => {
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Direkt verrechenbare Stunden"
+                  endAdornment="in €"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -99,6 +103,7 @@ const DGemeinkostenPlangewinn = () => {
                   {...field}
                   value={formFloat(field.value, 2)}
                   label="Ø Gemeinkostensatz pro Stunde"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}

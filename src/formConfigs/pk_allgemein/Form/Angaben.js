@@ -27,7 +27,8 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <CustomTextField
                 {...field}
-                label="Lohnnebenkosten (bis Beitragsbemessungsgrenze, in %)"
+                label="Lohnnebenkosten (bis Beitragsbemessungsgrenze"
+                endAdornment="%"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}
@@ -57,7 +58,8 @@ const Stammdaten = () => {
               >
                 <CustomTextField
                   {...field}
-                  label="Beitragsbemessungsgrenze (in EUR, p.m.)"
+                  label="Beitragsbemessungsgrenze (p.m.)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -87,7 +89,8 @@ const Stammdaten = () => {
               >
                 <CustomTextField
                   {...field}
-                  label="Lohnnebenkosten (oberhalb Beitragsbemessungsgrenze, in %)"
+                  label="Lohnnebenkosten (oberhalb Beitragsbemessungsgrenze)"
+                  endAdornment="%"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}

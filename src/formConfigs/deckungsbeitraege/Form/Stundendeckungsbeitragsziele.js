@@ -23,7 +23,8 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Berechnungsbasis (Summe direkt verrechenbarer Std., in EUR)"
+                  label="Berechnungsbasis (Summe direkt verrechenbarer Std.)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -55,7 +56,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -73,7 +75,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -96,7 +99,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -114,7 +118,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -147,7 +152,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -165,7 +171,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -188,7 +195,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -206,7 +214,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -229,7 +238,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -247,7 +257,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -280,7 +291,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -298,7 +310,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -316,7 +329,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Deckungsbeitragsziel 1 (in EUR)"
+                    label="Deckungsbeitragsziel 1"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -339,7 +353,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesam (in EUR)"
+                    label="Gesam"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -357,7 +372,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -390,7 +406,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -408,7 +425,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -426,7 +444,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Deckungsbeitragsziel 2 (in EUR)"
+                    label="Deckungsbeitragsziel 2"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -449,7 +468,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -467,7 +487,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -500,7 +521,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamt (in EUR)"
+                    label="Gesamt"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -518,7 +540,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="pro verrechn. Std. (in EUR)"
+                    label="pro verrechn. Std."
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -536,7 +559,8 @@ const DGemeinkostenPlangewinn = () => {
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Deckungsbeitragsziel 3 (in EUR)"
+                    label="Deckungsbeitragsziel 3"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}

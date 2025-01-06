@@ -161,7 +161,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Bruttoeinkommen (p.m., in EUR)"
+              label="Bruttoeinkommen (p.m.)"
+              endAdornment="€"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               sx={{ mb: 2 }}
@@ -177,7 +178,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Bruttoeinkommen gesamt (in EUR)"
+              label="Bruttoeinkommen gesamt"
+              endAdornment="€"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               sx={{ mb: 2 }}
@@ -216,7 +218,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
-                    label="Brutto inkl. SZ (in EUR)"
+                    label="Brutto inkl. SZ"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -234,7 +237,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label={`Lohnnebenkosten (in EUR)`}
+                    label={`Lohnnebenkosten`}
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -252,7 +256,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Gesamtkosten (p.a., in EUR)"
+                    label="Gesamtkosten (p.a.)"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}

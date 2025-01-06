@@ -42,7 +42,6 @@ const Annahmen = () => {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             asFormikField
-
             id="annahmen_allgemein_unternehmensname"
             name="annahmen_allgemein_unternehmensname"
             label="Unternehmensname"
@@ -57,7 +56,6 @@ const Annahmen = () => {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             asFormikField
-
             id="annahmen_allgemein_planungsverantwortlicher"
             name="annahmen_allgemein_planungsverantwortlicher"
             label="Planungsverantwortlicher"
@@ -72,7 +70,6 @@ const Annahmen = () => {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             asFormikField
-
             id="annahmen_allgemein_unternehmensstrasse"
             name="annahmen_allgemein_unternehmensstrasse"
             label="Straße, Hausnummer"
@@ -90,7 +87,6 @@ const Annahmen = () => {
         <Grid item xs={12} sm={6}>
           <CustomTextField
             asFormikField
-
             id="annahmen_allgemein_unternehmensplz"
             name="annahmen_allgemein_unternehmensplz"
             label="PLZ und Ort"

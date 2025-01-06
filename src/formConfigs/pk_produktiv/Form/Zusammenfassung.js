@@ -148,10 +148,10 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={4}>
             <CustomTextField
               asFormikField
-
               id={`pk_produktiv_P42`}
               name={`pk_produktiv_P42`}
-              label="Direkt verrechenbar (in EUR)"
+              label="Direkt verrechenbar"
+              endAdornment="€"
               value={formFloat(values.pk_produktiv_P42, 2)}
               InputProps={{
                 readOnly: true
@@ -163,10 +163,10 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={4}>
             <CustomTextField
               asFormikField
-
               id={`pk_produktiv_Q42`}
               name={`pk_produktiv_Q42`}
-              label="Nicht direkt verrechenbar (in EUR)"
+              label="Nicht direkt verrechenbar"
+              endAdornment="€"
               value={formFloat(values.pk_produktiv_Q42, 2)}
               InputProps={{
                 readOnly: true
@@ -178,10 +178,10 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={4}>
             <CustomTextField
               asFormikField
-
               id={`pk_produktiv_S42`}
               name={`pk_produktiv_S42`}
-              label="Gesamtkosten (p.a., in EUR)"
+              label="Gesamtkosten (p.a.)"
+              endAdornment="€"
               value={formFloat(values.pk_produktiv_S42, 2)}
               InputProps={{
                 readOnly: true
@@ -193,10 +193,10 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={6}>
             <CustomTextField
               asFormikField
-
               id={`pk_produktiv_R42`}
               name={`pk_produktiv_R42`}
-              label="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge, in EUR)"
+              label="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge)"
+              endAdornment="€"
               value={formFloat(values.pk_produktiv_R42, 2)}
               InputProps={{
                 readOnly: true
@@ -208,10 +208,10 @@ const Zusammenfassung = () => {
           <Grid item xs={12} sm={6}>
             <CustomTextField
               asFormikField
-
               id={`pk_produktiv_auslastung`}
               name={`pk_produktiv_auslastung`}
-              label="Ø Auslastung (in %)"
+              label="Ø Auslastung"
+              endAdornment="%"
               value={formFloat(values.pk_produktiv_auslastung, 2)}
               InputProps={{
                 readOnly: true

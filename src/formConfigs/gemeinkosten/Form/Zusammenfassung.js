@@ -30,7 +30,8 @@ const Zusammenfassung = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme aller Plan-Gemeinkosten (in EUR)"
+                  label="Gesamtsumme aller Plan-Gemeinkosten"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -48,7 +49,8 @@ const Zusammenfassung = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme aller variablen-Gemeinkosten (in EUR)"
+                  label="Gesamtsumme aller variablen-Gemeinkosten"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -66,7 +68,8 @@ const Zusammenfassung = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme aller fixen-Gemeinkosten (in EUR)"
+                  label="Gesamtsumme aller fixen-Gemeinkosten"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}
@@ -92,7 +95,8 @@ const Zusammenfassung = () => {
                 >
                   <CustomTextField
                     {...field}
-                    label="Kfix nicht ausgabenwirksam (in EUR)"
+                    label="Kfix nicht ausgabenwirksam"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     sx={{ mb: 2 }}
@@ -110,7 +114,8 @@ const Zusammenfassung = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Kfix ausgabenwirksam (=Rest, in EUR)"
+                  label="Kfix ausgabenwirksam (=Rest)"
+                  endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
                   sx={{ mb: 2 }}

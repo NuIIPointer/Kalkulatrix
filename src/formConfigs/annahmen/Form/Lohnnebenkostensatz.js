@@ -39,10 +39,10 @@ const Lohnnebenkostensatz = () => {
             >
               <CustomTextField
                 asFormikField
-
                 id="annahmen_E39"
                 name="annahmen_E39"
-                label="Sonderzahlungen (in Monaten)"
+                label="Sonderzahlungen"
+                endAdornment="Monate"
                 type="number"
                 onWheel={(event) => event.target.blur()}
                 min="0"
@@ -72,10 +72,10 @@ const Lohnnebenkostensatz = () => {
             >
               <CustomTextField
                 asFormikField
-
                 id="annahmen_E41"
                 name="annahmen_E41"
-                label="SV-Abgaben Arbeitgeber (in %)"
+                label="SV-Abgaben Arbeitgeber"
+                endAdornment="%"
                 type="number"
                 onWheel={(event) => event.target.blur()}
                 min="0"
@@ -101,10 +101,10 @@ const Lohnnebenkostensatz = () => {
             >
               <CustomTextField
                 asFormikField
-
                 id="annahmen_E42"
                 name="annahmen_E42"
-                label="Sonstige Kosten (in %)"
+                label="Sonstige Kosten"
+                endAdornment="%"
                 type="number"
                 onWheel={(event) => event.target.blur()}
                 min="0"
@@ -121,14 +121,14 @@ const Lohnnebenkostensatz = () => {
           <Grid item xs={12} md={6}>
             <CustomTextField
               asFormikField
-
               InputProps={{
                 readOnly: true
               }}
               type="number"
               id="annahmen_I46"
               name="annahmen_I46"
-              label="Lohnnebenkostensatz in %"
+              label="Lohnnebenkostensatz"
+              endAdornment="%"
               value={formFloat(values.annahmen_I46, 2)}
               sx={{ mb: 2 }}
             />

@@ -14,7 +14,8 @@ const Zusammenfassung = () => {
               <CustomTextField
                 {...field}
                 value={formFloat(field.value, 2)}
-                label="Gesamtsumme der Beiträge zu den Gemeinkosten (in EUR)"
+                label="Gesamtsumme der Beiträge zu den Gemeinkosten"
+                endAdornment="€"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
                 sx={{ mb: 2 }}

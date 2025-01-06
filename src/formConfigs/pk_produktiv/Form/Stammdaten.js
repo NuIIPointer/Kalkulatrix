@@ -126,6 +126,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
             <CustomTextField
               {...field}
               label="Sollarbeitsstunden p.a. (ohne Feiertage)"
+              endAdornment="Stunden"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               type="number"
@@ -144,7 +145,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Urlaub (in Stunden)"
+              label="Urlaub"
+              endAdornment="Stunden"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               type="number"
@@ -161,7 +163,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Krankheit (in Stunden)"
+              label="Krankheit"
+              endAdornment="Stunden"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               type="number"
@@ -178,7 +181,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Fortbildung (in Stunden)"
+              label="Fortbildung"
+              endAdornment="Stunden"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               type="number"
@@ -195,7 +199,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Sonstige Abwesenheiten (in Stunden)"
+              label="Sonstige Abwesenheiten"
+              endAdornment="Stunden"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               type="number"
@@ -215,7 +220,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
-                    label="Anwesenheit (in Std.)"
+                    label="Anwesenheit"
+                    endAdornment="Stunden"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     InputProps={{
@@ -259,7 +265,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Direkt verrechnet (in Std.)"
+                    label="Direkt verrechnet"
+                    endAdornment="Stunden"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     InputProps={{
@@ -277,7 +284,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Nicht direkt verrechnet (in Std.)"
+                    label="Nicht direkt verrechnet"
+                    endAdornment="Stunden"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     InputProps={{
@@ -300,7 +308,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Bruttostundenlohn (in EUR)"
+              label="Bruttostundenlohn"
+              endAdornment="€"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               type="number"
@@ -316,7 +325,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Zuschläge (in EUR)"
+              label="Zuschläge"
+              endAdornment="€"
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               type="number"
@@ -335,7 +345,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
-                    label="Anwesenheitsentgelt (gesamt, in EUR)"
+                    label="Anwesenheitsentgelt (gesamt)"
+                    endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
                     InputProps={{
@@ -356,7 +367,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
-                    label="Verrechenbarkeit (direkt verrechnet, in EUR)"
+                    label="Verrechenbarkeit (direkt verrechnet)"
+                    endAdornment="€"
                     value={formFloat(field.value, 2)}
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
@@ -374,7 +386,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
-                    label="Verrechenbarkeit (nicht direkt verrechnet, in EUR)"
+                    label="Verrechenbarkeit (nicht direkt verrechnet)"
+                    endAdornment="€"
                     value={formFloat(field.value, 2)}
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}

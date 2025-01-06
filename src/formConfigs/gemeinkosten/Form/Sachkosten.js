@@ -64,7 +64,8 @@ const Sachkosten = () => {
                   {({ field, meta }) => (
                     <CustomTextField
                       {...field}
-                      label="Plankosten (in EUR)"
+                      label="Plankosten"
+                      endAdornment="€"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
                       sx={{ mb: 2 }}
@@ -80,7 +81,8 @@ const Sachkosten = () => {
                   {({ field, meta }) => (
                     <CustomTextField
                       {...field}
-                      label="Variable Kosten (in %)"
+                      label="Variable Kosten"
+                      endAdornment="%"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
                       sx={{ mb: 2 }}
@@ -100,7 +102,8 @@ const Sachkosten = () => {
                           <CustomTextField
                             {...field}
                             value={formFloat(field.value, 2)}
-                            label="Variable Kosten (in EUR)"
+                            label="Variable Kosten"
+                            endAdornment="€"
                             error={meta?.touched && Boolean(meta.error)}
                             helperText={meta?.touched && meta.error}
                             sx={{ mb: 2 }}
@@ -118,7 +121,8 @@ const Sachkosten = () => {
                           <CustomTextField
                             {...field}
                             value={formFloat(field.value, 2)}
-                            label="Fixe Kosten (in EUR)"
+                            label="Fixe Kosten"
+                            endAdornment="€"
                             error={meta?.touched && Boolean(meta.error)}
                             helperText={meta?.touched && meta.error}
                             sx={{ mb: 2 }}
@@ -148,7 +152,8 @@ const Sachkosten = () => {
                     <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
-                      label="Gesamt: Plankosten (berechnet, in EUR)"
+                      label="Gesamt: Plankosten (berechnet)"
+                      endAdornment="€"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
                       sx={{ mb: 2 }}
@@ -166,7 +171,8 @@ const Sachkosten = () => {
                     <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
-                      label="Gesamt: variabele Kosten (in EUR)"
+                      label="Gesamt: variabele Kosten"
+                      endAdornment="€"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
                       sx={{ mb: 2 }}
@@ -184,7 +190,8 @@ const Sachkosten = () => {
                     <CustomTextField
                       {...field}
                       value={formFloat(field.value, 2)}
-                      label="Gesamt: fixe Kosten (in EUR)"
+                      label="Gesamt: fixe Kosten"
+                      endAdornment="€"
                       error={meta?.touched && Boolean(meta.error)}
                       helperText={meta?.touched && meta.error}
                       sx={{ mb: 2 }}
