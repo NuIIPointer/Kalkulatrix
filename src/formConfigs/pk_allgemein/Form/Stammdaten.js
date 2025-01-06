@@ -15,7 +15,8 @@ import {
   DialogActions,
   IconButton,
   Checkbox,
-  Modal
+  Modal,
+  ButtonGroup
 } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -34,6 +35,7 @@ import LayoutBox from 'components/LayoutBox/index';
 import DataTable from 'components/DataTable/index';
 import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 import StatCard from 'components/StatCard/index';
+import ModalHeader from 'components/ModalHeader/index';
 import CustomTextField from 'components/CustomTextField/index';
 
 const columns = [
@@ -292,6 +294,9 @@ const Stammdaten = () => {
   const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
+  const [newAbteilungValue, setNewAbteilungValue] = useState(null);
+  const [abteilungToEdit, setAbteilungToEdit] = useState(null);
+  const [abteilungToEditTmpTitle, setAbteilungToEditTmpTitle] = useState(null);
   const [groupToDelete, setGroupToDelete] = useState(undefined);
   const [maToDelete, setMaToDelete] = useState(null);
   const [checkedRows, setCheckedRows] = useState([]);
@@ -375,6 +380,126 @@ const Stammdaten = () => {
           </LayoutBox>
         </Modal>
       )}
+      {newAbteilungValue && (
+        <Modal open={true} onClose={() => setNewAbteilungValue(false)}>
+          <LayoutBox
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '500px',
+              maxWidth: '90vw',
+              maxHeight: '80vh',
+              overflow: 'scroll',
+              borderRadius: theme.shape.borderRadiusBox,
+              backgroundColor: theme.palette.common.white,
+              padding: 3
+            }}
+          >
+            <ModalHeader title="Neue Abteilung anlegen" onClose={() => setNewAbteilungValue(false)} />
+            <Grid container columnSpacing={2} alignItems="end">
+              <Grid item xs={12} sm={12} md={8}>
+                <CustomTextField
+                  name="newAbteilungValue"
+                  onChange={(e) => setNewAbteilungValue(e.target.value)}
+                  value={newAbteilungValue}
+                  label="Abteilungsname"
+                  sx={{ mb: 2 }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setNewAbteilungValue(false);
+                    setFieldValue(`pk_allgemein_mitarbeiter.${values.pk_allgemein_mitarbeiter?.length}.groupTitle`, newAbteilungValue);
+                    changeTab(null, values.pk_allgemein_mitarbeiter?.length);
+                  }}
+                  sx={{ mb: 2 }}
+                >
+                  speichern
+                </Button>
+              </Grid>
+            </Grid>
+          </LayoutBox>
+        </Modal>
+      )}
+      {abteilungToEdit !== null && (
+        <Modal
+          open={true}
+          onClose={() => {
+            setAbteilungToEdit(null);
+            setAbteilungToEditTmpTitle(null);
+          }}
+        >
+          <LayoutBox
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '500px',
+              maxWidth: '90vw',
+              maxHeight: '80vh',
+              overflow: 'scroll',
+              borderRadius: theme.shape.borderRadiusBox,
+              backgroundColor: theme.palette.common.white,
+              padding: 3
+            }}
+          >
+            <ModalHeader
+              title="Abteilung bearbeiten"
+              onClose={() => {
+                setAbteilungToEdit(null);
+                setAbteilungToEditTmpTitle(null);
+              }}
+            />
+            <Grid container columnSpacing={2} alignItems="end">
+              <Grid item xs={12} sm={12} md={6}>
+                <CustomTextField
+                  name="abteilungToEditTmpTitle"
+                  onChange={(e) => setAbteilungToEditTmpTitle(e.target.value)}
+                  value={
+                    abteilungToEditTmpTitle ||
+                    values.pk_allgemein_mitarbeiter?.[abteilungToEdit]?.groupTitle ||
+                    `Abteilung ${abteilungToEdit + 1}`
+                  }
+                  label="Abteilungsname"
+                  sx={{ mb: 2 }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <ButtonGroup>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                      setFieldValue(`pk_allgemein_mitarbeiter.${abteilungToEdit}.groupTitle`, abteilungToEditTmpTitle);
+                      changeTab(null, abteilungToEdit);
+                      setAbteilungToEditTmpTitle(null);
+                      setAbteilungToEdit(null);
+                    }}
+                    sx={{ mb: 2 }}
+                  >
+                    speichern
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setGroupToDelete(abteilungToEdit)}
+                    sx={{ mb: 2 }}
+                    color="error"
+                    startIcon={<DeleteOutlineOutlined />}
+                  >
+                    löschen
+                  </Button>
+                </ButtonGroup>
+              </Grid>
+            </Grid>
+          </LayoutBox>
+        </Modal>
+      )}
       {maToDelete && (
         <Dialog
           open={!!maToDelete}
@@ -413,8 +538,33 @@ const Stammdaten = () => {
                       <Tab
                         key={index}
                         label={
-                          <Stack sx={{ color: errors.pk_allgemein_mitarbeiter?.[index] ? theme.palette.error.main : undefined }}>
-                            {category.groupTitle || `Abteilung ${index + 1}`}
+                          <Stack
+                            sx={{
+                              color: errors.pk_allgemein_mitarbeiter?.[index] ? theme.palette.error.main : undefined,
+                              paddingRight: openedTab == index ? '8px' : '0',
+                              '&:hover': { button: { opacity: '1' } }
+                            }}
+                            flexDirection="row"
+                            alignItems="center"
+                          >
+                            {category.groupTitle || `Abteilung ${index + 1}`}{' '}
+                            <IconButton
+                              sx={{
+                                padding: 0.5,
+                                borderRadius: '10000px',
+                                height: 'auto',
+                                width: 'auto',
+                                opacity: openedTab == index ? '1' : '0',
+                                transition: '.25s',
+                                position: 'absolute',
+                                left: `calc(100% + ${openedTab == index ? 0 : 4}px)`,
+                                top: '50%',
+                                transform: 'translate(-50%, -50%)'
+                              }}
+                              onClick={() => setAbteilungToEdit(index)}
+                            >
+                              <EditOutlined fontSize="8" />
+                            </IconButton>
                           </Stack>
                         }
                         value={index.toString()}
@@ -437,33 +587,6 @@ const Stammdaten = () => {
               {values.pk_allgemein_mitarbeiter?.map((outerField, outerIndex) => (
                 <TabPanel key={outerIndex} value={outerIndex.toString()} sx={{ padding: 0, marginTop: 3 }}>
                   <LayoutBox sx={{ backgroundColor: theme.palette.common.white, padding: theme.shape.paddingBoxMedium }}>
-                    <Grid container columnSpacing={2} alignItems="end">
-                      <Grid item xs={12} sm={5} md={4}>
-                        <FastField name={`pk_allgemein_mitarbeiter.${openedTab}.groupTitle`}>
-                          {({ field, meta }) => (
-                            <CustomTextField
-                              {...field}
-                              label="Gruppenbezeichnung"
-                              error={meta?.touched && Boolean(meta.error)}
-                              helperText={meta?.touched && meta.error}
-                              sx={{ mb: 3 }}
-                            />
-                          )}
-                        </FastField>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Button
-                          variant="outlined"
-                          onClick={() => setGroupToDelete(outerIndex)}
-                          disabled={isSubmitting}
-                          sx={{ mb: 3 }}
-                          color="error"
-                          startIcon={<DeleteOutlineOutlined />}
-                        >
-                          Gruppe löschen
-                        </Button>
-                      </Grid>
-                    </Grid>
                     <Dialog
                       open={groupToDelete === outerIndex}
                       onClose={() => setGroupToDelete(undefined)}

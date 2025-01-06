@@ -42,7 +42,7 @@ const ButtonBar = () => {
             mappedTOTouched[key] = true;
           });
           setTouched(mappedTOTouched, true);
-          enqueueSnackbar('Angaben gespeichert. Es gibt fehlende oder fehlerhafte Angaben.', { variant: 'warning' });
+          enqueueSnackbar('Formular erfolgreich gespeichert.', { variant: 'success' });
         }
       }
     },
