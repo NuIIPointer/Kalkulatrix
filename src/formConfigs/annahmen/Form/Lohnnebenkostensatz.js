@@ -4,10 +4,11 @@ import React from 'react';
 import { Grid, TextField, Divider, Typography } from '@mui/material';
 
 // formik
-import { Field, useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
 import formFloat from 'utils/formUtils/formFloat';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Lohnnebenkostensatz = () => {
   const { values, errors, touched, handleChange, handleBlur } = useFormikContext();
@@ -36,8 +37,9 @@ const Lohnnebenkostensatz = () => {
                 </>
               }
             >
-              <Field
-                component={TextField}
+              <CustomTextField
+                asFormikField
+
                 id="annahmen_E39"
                 name="annahmen_E39"
                 label="Sonderzahlungen (in Monaten)"
@@ -68,8 +70,9 @@ const Lohnnebenkostensatz = () => {
                 </>
               }
             >
-              <Field
-                component={TextField}
+              <CustomTextField
+                asFormikField
+
                 id="annahmen_E41"
                 name="annahmen_E41"
                 label="SV-Abgaben Arbeitgeber (in %)"
@@ -96,8 +99,9 @@ const Lohnnebenkostensatz = () => {
                 </>
               }
             >
-              <Field
-                component={TextField}
+              <CustomTextField
+                asFormikField
+
                 id="annahmen_E42"
                 name="annahmen_E42"
                 label="Sonstige Kosten (in %)"
@@ -115,8 +119,9 @@ const Lohnnebenkostensatz = () => {
             </EnrichedField>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Field
-              component={TextField}
+            <CustomTextField
+              asFormikField
+
               InputProps={{
                 readOnly: true
               }}
@@ -133,8 +138,8 @@ const Lohnnebenkostensatz = () => {
       {/* <ReadOnlyBox white title={'Berechnet: Lohnnebenkostensatz'} alwaysOpen>
         <Grid container spacing={{ xs: 2, md: 4 }}>
           <Grid item xs={12} md={6}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               InputProps={{
                 readOnly: true
               }}

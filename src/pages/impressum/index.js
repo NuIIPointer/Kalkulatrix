@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Typography, Box, Grid } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 
 const Imprint = () => {
   const theme = useTheme();
@@ -85,9 +85,7 @@ const Imprint = () => {
         <Typography variant="h2" sx={{ mb: 1 }}>
           Redaktionell verantwortlich
         </Typography>
-        <Typography variant="body2">
-          Felix Adel
-        </Typography>
+        <Typography variant="body2">Felix Adel</Typography>
       </Grid>
       <Grid
         item

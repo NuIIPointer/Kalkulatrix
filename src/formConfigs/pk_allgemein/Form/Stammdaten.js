@@ -14,7 +14,8 @@ import {
   DialogContentText,
   DialogActions,
   IconButton,
-  Checkbox
+  Checkbox,
+  Modal
 } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -24,14 +25,13 @@ import { useTheme } from '@mui/material/styles';
 import formFloat from 'utils/formUtils/formFloat';
 
 // formik
-import { FastField, Field, FieldArray, useFormikContext } from 'formik';
+import { FastField, FieldArray, useFormikContext } from 'formik';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import { v4 as uuid } from 'uuid';
 import getInitialMitarbeiterData from '../getInitialMitarbeiterData';
 import InitialsCircle from 'components/InitialsCircle/index';
 import LayoutBox from 'components/LayoutBox/index';
 import DataTable from 'components/DataTable/index';
-import { Modal } from '../../../../node_modules/@mui/material/index';
 import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 import StatCard from 'components/StatCard/index';
 import CustomTextField from 'components/CustomTextField/index';
@@ -229,7 +229,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
               </FastField>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.M14`}>
+              <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.M14`}>
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
@@ -244,7 +244,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                     type="number"
                   />
                 )}
-              </Field>
+              </FastField>
             </Grid>
             <Grid item xs={12} sm={6}>
               <FastField name={`pk_allgemein_mitarbeiter.${outerIndex}.fields.${innerIndex}.N14`}>

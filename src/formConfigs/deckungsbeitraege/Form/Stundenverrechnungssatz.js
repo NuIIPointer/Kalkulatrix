@@ -222,7 +222,7 @@ const DGemeinkostenPlangewinn = () => {
               </FastField>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="std_verrechnungssaetze_G9">
+              <FastField name="std_verrechnungssaetze_G9">
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
@@ -237,7 +237,7 @@ const DGemeinkostenPlangewinn = () => {
                     type="number"
                   />
                 )}
-              </Field>
+              </FastField>
             </Grid>
             <Grid item xs={12} sm={6}>
               <FastField name="std_verrechnungssaetze_G10">

@@ -96,8 +96,8 @@ const AuthLogin = () => {
             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
               <Grid item xs={12}>
                 <Stack columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     id="email"
                     name="email"
                     label="E-Mail"
@@ -109,8 +109,8 @@ const AuthLogin = () => {
                     error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
                   />
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     id="password"
                     name="password"
                     label="Passwort"

@@ -8,9 +8,9 @@ import Zusammenfassung from './Zusammenfassung';
 const PKAllgemein = memo(() => {
   return (
     <>
-      <Angaben />
+      {/* <Angaben /> */}
       <Stammdaten />
-      <Zusammenfassung />
+      {/* <Zusammenfassung /> */}
     </>
   );
 });

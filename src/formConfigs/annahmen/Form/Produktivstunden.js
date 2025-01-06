@@ -4,11 +4,12 @@ import React from 'react';
 import { Typography, Grid, TextField, Divider, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 
 // formik
-import { Field, FastField, useFormikContext } from 'formik';
+import { FastField, useFormikContext } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Produktivstunden = () => {
   const { values, errors, touched, handleChange, handleBlur } = useFormikContext();
@@ -23,8 +24,9 @@ const Produktivstunden = () => {
           <Divider sx={{ mt: 2, mb: 4 }} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <CustomTextField
+            asFormikField
+
             id="annahmen_G16"
             name="annahmen_G16"
             label="Wochenarbeitszeit (in Std.)"
@@ -69,8 +71,9 @@ const Produktivstunden = () => {
           <ReadOnlyBox title={`Jahresarbeitszeit gesamt (${values.annahmen_G23 || 0} Tage)`}>
             <Grid container spacing={{ xs: 2, md: 4 }}>
               <Grid item xs={12} md={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   InputProps={{
                     readOnly: true
                   }}
@@ -83,8 +86,9 @@ const Produktivstunden = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   InputProps={{
                     readOnly: true
                   }}
@@ -96,8 +100,9 @@ const Produktivstunden = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   id="annahmen_G22"
                   name="annahmen_G22"
                   label={`Wochenendtage im Jahr ${values.annahmen_allgemein_planjahr || ''}`}
@@ -110,8 +115,9 @@ const Produktivstunden = () => {
                 />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   InputProps={{
                     readOnly: true
                   }}
@@ -124,8 +130,9 @@ const Produktivstunden = () => {
                 />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   InputProps={{
                     readOnly: true
                   }}
@@ -144,8 +151,9 @@ const Produktivstunden = () => {
           &nbsp;
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <CustomTextField
+            asFormikField
+
             id="annahmen_G26"
             name="annahmen_G26"
             label="⌀ Urlaubstage pro Mitarbeiter"
@@ -162,8 +170,9 @@ const Produktivstunden = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <CustomTextField
+            asFormikField
+
             id="annahmen_G27"
             name="annahmen_G27"
             label="⌀ Krankentage pro Mitarbeiter"
@@ -181,8 +190,9 @@ const Produktivstunden = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <EnrichedField infoText="z.B. wg. Freistellung, Umzug, Behörden etc.">
-            <Field
-              component={TextField}
+            <CustomTextField
+              asFormikField
+
               id="annahmen_G28"
               name="annahmen_G28"
               label="⌀ Sonstige Arbeitsverhinderungen (in Tagen)"
@@ -204,8 +214,8 @@ const Produktivstunden = () => {
           <ReadOnlyBox title={'Summe Nichtanwesenheit'} alwaysOpen>
             <Grid container spacing={{ xs: 2, md: 4 }}>
               <Grid item xs={12} md={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField asFormikField
+
                   InputProps={{
                     readOnly: true
                   }}
@@ -218,8 +228,8 @@ const Produktivstunden = () => {
                 />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField asFormikField
+
                   InputProps={{
                     readOnly: true
                   }}
@@ -240,8 +250,8 @@ const Produktivstunden = () => {
             <ReadOnlyBox title={'Summe Arbeitszeiten'} alwaysOpen>
               <Grid container spacing={{ xs: 2, md: 4 }}>
                 <Grid item xs={12} md={6}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     InputProps={{
                       readOnly: true
                     }}
@@ -254,8 +264,8 @@ const Produktivstunden = () => {
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     InputProps={{
                       readOnly: true
                     }}

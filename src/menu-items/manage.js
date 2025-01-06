@@ -1,5 +1,5 @@
 // assets
-import { Person, CalendarMonth, WalletOutlined, Email } from '@mui/icons-material';
+import { Person, CalendarMonth, WalletOutlined } from '@mui/icons-material';
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 

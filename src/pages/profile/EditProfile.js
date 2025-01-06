@@ -1,12 +1,13 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Grid, TextField, Stack, Typography, Button } from '@mui/material';
-import { Formik, Form, Field } from 'formik';
+import { Box, Grid, Stack, Typography, Button } from '@mui/material';
+import { Formik, Form } from 'formik';
 import validationSchema from 'formConfigs/authLogin/rules/validation/schema';
 import { UserContext } from 'context/user/index';
 import { CircularProgress } from '@mui/material';
 import LayoutBox from 'components/LayoutBox/index';
 import { useSnackbar } from 'notistack';
+import CustomTextField from 'components/CustomTextField/index';
 
 const EditProfile = () => {
   const theme = useTheme();
@@ -73,8 +74,8 @@ const EditProfile = () => {
               <Stack mt={4} />
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                 <Grid item xs={12} sm={6}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField
+                    asFormikField
                     id="firstName"
                     name="firstName"
                     label="Vorname"
@@ -88,8 +89,8 @@ const EditProfile = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField
+                    asFormikField
                     id="lastName"
                     name="lastName"
                     label="Nachname"
@@ -102,8 +103,8 @@ const EditProfile = () => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField
+                    asFormikField
                     id="company"
                     name="company"
                     label="Unternehmen"

@@ -4,8 +4,9 @@ import React from 'react';
 import { Grid, TextField, Divider, MenuItem, Select, FormControl, InputLabel, FormHelperText } from '@mui/material';
 
 // formik
-import { Field, FastField, useFormikContext } from 'formik';
+import { FastField, useFormikContext } from 'formik';
 import FormSection from 'components/formComponents/FormSection/index';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Annahmen = () => {
   const { values, errors, touched, handleChange, handleBlur } = useFormikContext();
@@ -17,11 +18,12 @@ const Annahmen = () => {
           <Divider sx={{ mt: 2, mb: 4 }} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <TextField
+            asFormikField
             id="annahmen_allgemein_planjahr"
             name="annahmen_allgemein_planjahr"
             label="Planjahr"
+            fixedDecimals={false}
             value={values.annahmen_allgemein_planjahr}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -38,8 +40,9 @@ const Annahmen = () => {
           &nbsp;
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <CustomTextField
+            asFormikField
+
             id="annahmen_allgemein_unternehmensname"
             name="annahmen_allgemein_unternehmensname"
             label="Unternehmensname"
@@ -52,8 +55,9 @@ const Annahmen = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <CustomTextField
+            asFormikField
+
             id="annahmen_allgemein_planungsverantwortlicher"
             name="annahmen_allgemein_planungsverantwortlicher"
             label="Planungsverantwortlicher"
@@ -66,8 +70,9 @@ const Annahmen = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <CustomTextField
+            asFormikField
+
             id="annahmen_allgemein_unternehmensstrasse"
             name="annahmen_allgemein_unternehmensstrasse"
             label="Straße, Hausnummer"
@@ -83,8 +88,9 @@ const Annahmen = () => {
           &nbsp;
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
-            component={TextField}
+          <CustomTextField
+            asFormikField
+
             id="annahmen_allgemein_unternehmensplz"
             name="annahmen_allgemein_unternehmensplz"
             label="PLZ und Ort"

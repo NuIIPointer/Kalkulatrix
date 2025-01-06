@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 // project import
 import { UserContext } from 'context/user';
@@ -12,13 +11,11 @@ import useFormLiteral from './useFormLiteral';
 import { Formik, Form } from 'formik';
 import { getInitialGemeinkostenCategory } from 'formConfigs/gk_deckung/getInitialGemeinkostenData';
 import ButtonBar from 'components/formComponents/ButtonBar/index';
-import dayjs from 'dayjs';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const FormComponent = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
   const formLiteral = useFormLiteral();
   const { activeFormId, activeFormData, setActiveFormId } = useContext(UserContext);
   const { formId, formSection } = useParams();

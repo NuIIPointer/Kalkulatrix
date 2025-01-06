@@ -95,8 +95,8 @@ const EditCredentials = () => {
             >
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                 <Grid item xs={12} sm={6} mt={4}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     id="email"
                     name="email"
                     label="E-Mail"
@@ -111,8 +111,8 @@ const EditCredentials = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} mt={4}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     id="emailConfirm"
                     name="emailConfirm"
                     label="E-Mail bestätigen"
@@ -160,8 +160,8 @@ const EditCredentials = () => {
               <Stack mt={4} />
               <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
                 <Grid item xs={12} sm={6}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     id="password"
                     name="password"
                     label="Neues Passwort"
@@ -176,8 +176,8 @@ const EditCredentials = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Field
-                    component={TextField}
+                  <CustomTextField asFormikField
+
                     id="passwordConfirm"
                     name="passwordConfirm"
                     label="Passwort bestätigen"

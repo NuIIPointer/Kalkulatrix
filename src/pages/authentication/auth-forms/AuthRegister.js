@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Button, FormControl, FormHelperText, Grid, Link, IconButton, InputAdornment, Typography, TextField } from '@mui/material';
 
 // Form
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 
 // project import
 import AnimateButton from 'components/@extended/AnimateButton';
@@ -18,6 +18,7 @@ import validationSchema from 'formConfigs/authRegister/rules/validation/schema';
 import { Alert, CircularProgress } from '@mui/material';
 import Loader from 'components/Loader';
 import { StatusCodes } from 'http-status-codes';
+import CustomTextField from 'components/CustomTextField/index';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
 
@@ -82,8 +83,9 @@ const AuthRegister = () => {
           <Form autoComplete="off" noValidate>
             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
               <Grid item xs={12} sm={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   id="firstName"
                   name="firstName"
                   label="Vorname"
@@ -97,8 +99,9 @@ const AuthRegister = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   id="lastName"
                   name="lastName"
                   label="Nachname"
@@ -111,8 +114,9 @@ const AuthRegister = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   id="company"
                   name="company"
                   label="Unternehmen"
@@ -124,8 +128,9 @@ const AuthRegister = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   id="email"
                   name="email"
                   label="E-Mail"
@@ -140,8 +145,9 @@ const AuthRegister = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Field
-                  component={TextField}
+                <CustomTextField
+                  asFormikField
+
                   id="password"
                   name="password"
                   label="Passwort"

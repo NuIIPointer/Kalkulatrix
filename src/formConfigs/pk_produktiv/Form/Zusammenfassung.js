@@ -4,9 +4,10 @@ import React from 'react';
 import { Grid, TextField, Typography } from '@mui/material';
 
 // formik
-import { Field, useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
+import CustomTextField from 'components/CustomTextField/index';
 
 const Zusammenfassung = () => {
   const { values } = useFormikContext();
@@ -23,8 +24,8 @@ const Zusammenfassung = () => {
       <ReadOnlyBox alwaysOpen white title="Berechnet: Anwesenheitsentgelt inkl. Personalnebenkosten">
         <Grid container spacing={{ xs: 2, md: 4 }} alignItems="flex-end">
           {/* <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_P40`}
               name={`pk_produktiv_P40`}
               label="Direkt verrechenbar (in EUR)"
@@ -37,8 +38,8 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_Q40`}
               name={`pk_produktiv_Q40`}
               label="Nicht direkt verrechenbar (in EUR)"
@@ -51,8 +52,8 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_S40`}
               name={`pk_produktiv_S40`}
               label="Gesamtkosten (p.a., in EUR)"
@@ -65,8 +66,8 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_R40`}
               name={`pk_produktiv_R40`}
               label="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge, in EUR)"
@@ -84,8 +85,8 @@ const Zusammenfassung = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_P41`}
               name={`pk_produktiv_P41`}
               label="Direkt verrechenbar (in EUR)"
@@ -98,8 +99,8 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_Q41`}
               name={`pk_produktiv_Q41`}
               label="Nicht direkt verrechenbar (in EUR)"
@@ -112,8 +113,8 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_S41`}
               name={`pk_produktiv_S41`}
               label="Gesamtkosten (p.a., in EUR)"
@@ -126,8 +127,8 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Field
-              component={TextField}
+            <CustomTextField asFormikField
+
               id={`pk_produktiv_R41`}
               name={`pk_produktiv_R41`}
               label="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge, in EUR)"
@@ -145,8 +146,9 @@ const Zusammenfassung = () => {
             </Typography>
           </Grid> */}
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField
+              asFormikField
+
               id={`pk_produktiv_P42`}
               name={`pk_produktiv_P42`}
               label="Direkt verrechenbar (in EUR)"
@@ -159,8 +161,9 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField
+              asFormikField
+
               id={`pk_produktiv_Q42`}
               name={`pk_produktiv_Q42`}
               label="Nicht direkt verrechenbar (in EUR)"
@@ -173,8 +176,9 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Field
-              component={TextField}
+            <CustomTextField
+              asFormikField
+
               id={`pk_produktiv_S42`}
               name={`pk_produktiv_S42`}
               label="Gesamtkosten (p.a., in EUR)"
@@ -187,8 +191,9 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Field
-              component={TextField}
+            <CustomTextField
+              asFormikField
+
               id={`pk_produktiv_R42`}
               name={`pk_produktiv_R42`}
               label="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge, in EUR)"
@@ -201,8 +206,9 @@ const Zusammenfassung = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Field
-              component={TextField}
+            <CustomTextField
+              asFormikField
+
               id={`pk_produktiv_auslastung`}
               name={`pk_produktiv_auslastung`}
               label="Ø Auslastung (in %)"

@@ -46,8 +46,8 @@ const AuthForgotPassword = () => {
           <Form autoComplete="off" noValidate>
             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
               <Grid item xs={12}>
-                <Field
-                  component={TextField}
+                <CustomTextField asFormikField
+
                   id="email"
                   name="email"
                   label="E-Mail"

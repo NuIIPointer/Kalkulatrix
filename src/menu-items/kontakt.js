@@ -16,7 +16,6 @@ const pages = {
       url: '/kontakt',
       icon: Email
     }
-
   ]
 };
 
