@@ -43,7 +43,7 @@ const Produktivstunden = () => {
             sx={{ mb: 2 }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <FastField name="annahmen_G17_days">
             {({ field, meta }) => (
               <FormControl fullWidth>
