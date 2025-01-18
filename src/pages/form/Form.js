@@ -23,7 +23,7 @@ const FormComponent = () => {
   const initialValues = {
     formTitle: activeFormData?.title,
     deckungsbeitraege_J25: undefined,
-    pk_allgemein_K6: 5175,
+    pk_allgemein_K6: 5512.5,
     pk_allgemein_K7: undefined,
     pk_allgemein_K78: undefined,
     annahmen_allgemein_planjahr: undefined,

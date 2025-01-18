@@ -27,7 +27,7 @@ const Stammdaten = () => {
             {({ field, meta }) => (
               <CustomTextField
                 {...field}
-                label="Lohnnebenkosten (bis Beitragsbemessungsgrenze"
+                label="Lohnnebenkosten (bis Beitragsbemessungsgrenze)"
                 endAdornment="%"
                 error={meta?.touched && Boolean(meta.error)}
                 helperText={meta?.touched && meta.error}
@@ -67,7 +67,7 @@ const Stammdaten = () => {
                     readOnly: true
                   }}
                   onWheel={(event) => event.target.blur()}
-                  min="0"
+                  type="number"
                 />
               </EnrichedField>
             )}

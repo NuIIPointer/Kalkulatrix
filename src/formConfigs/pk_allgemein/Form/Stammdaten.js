@@ -79,12 +79,12 @@ const columns = [
   },
   {
     field: 'brutto',
-    headerName: 'Brutto inkl. SZ',
+    headerName: 'Brutto inkl. SZ (p.a.)',
     width: 220
   },
   {
     field: 'anwesenheitsentgelt',
-    headerName: 'Lohn p.a.',
+    headerName: 'Lohn (p.a).',
     width: 220
   },
   {
@@ -199,7 +199,8 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
           {({ field, meta }) => (
             <CustomTextField
               {...field}
-              label="Sonderzahlungen (p.A., in EUR)"
+              label="Sonderzahlungen (p.A.)"
+              endAdornment={'€'}
               error={meta?.touched && Boolean(meta.error)}
               helperText={meta?.touched && meta.error}
               sx={{ mb: 2 }}
@@ -221,7 +222,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                 {({ field, meta }) => (
                   <CustomTextField
                     {...field}
-                    label="Brutto inkl. SZ"
+                    label="Brutto inkl. SZ (p.a.)"
                     endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
@@ -240,7 +241,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label={`Lohnnebenkosten`}
+                    label={`Lohnnebenkosten (p.a)`}
                     endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
@@ -653,6 +654,9 @@ const Stammdaten = () => {
                     >
                       <Grid item xs={6} sm={6} md={4}>
                         <StatCard title="Personalkosten" value={`${formFloat(outerField.N24, 0) || 0}€`} />
+                      </Grid>
+                      <Grid item xs={6} sm={6} md={4}>
+                        <StatCard title="Davon Sonderzahlungen" value={`${formFloat(outerField.K14Gesamt, 0) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={4}>
                         <StatCard title="Mitarbeiter" value={outerField.fields?.length || 0} />

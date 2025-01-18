@@ -93,7 +93,7 @@ const columns = [
   },
   {
     field: 'anwesenheitsentgelt',
-    headerName: 'Lohn p.a.',
+    headerName: 'Lohn (p.a).',
     width: 140
   },
   {

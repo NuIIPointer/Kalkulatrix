@@ -25,6 +25,9 @@ const StatCard = ({ title, value, sx = {} }) => {
         padding: theme.shape.paddingBoxSmall,
         boxShadow: '0',
         height: '100%',
+        justifyContent: 'center',
+        display: 'flex',
+        flexDirection: 'column',
         ...sx
       }}
     >

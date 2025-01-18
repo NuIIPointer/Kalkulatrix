@@ -21,12 +21,15 @@ const StundensatzRechnerValueUpdater = () => {
 
       values.pk_allgemein_mitarbeiter?.forEach((category, outerIndex) => {
         let N24 = 0;
+        let K14Gesamt = 0;
 
         category.fields?.forEach((ma, innerIndex) => {
           const H14 = (ma.G14 || 0) - (ma.F14 || 0) + 1;
           const J14 = (H14 || 0) * (ma.I14 || 0);
-          const L14 = (J14 || 0) + (ma.K14 || 0);
+          const L14 = (J14 || 0) + (parseInt(ma.K14) || 0);
           const I14 = ma.I14 || 0;
+
+          K14Gesamt += parseInt(ma.K14) || 0;
 
           const BGG = values.pk_allgemein_K6 || 0;
           let result = 0;
@@ -70,6 +73,10 @@ const StundensatzRechnerValueUpdater = () => {
 
         if (N24 !== category.N24) {
           setFieldValue(`pk_allgemein_mitarbeiter.${outerIndex}.N24`, N24);
+        }
+
+        if (K14Gesamt !== category.K14Gesamt) {
+          setFieldValue(`pk_allgemein_mitarbeiter.${outerIndex}.K14Gesamt`, K14Gesamt);
         }
       });
 

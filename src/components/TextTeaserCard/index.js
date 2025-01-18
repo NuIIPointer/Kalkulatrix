@@ -41,8 +41,8 @@ const TextTeaserCard = ({
         color: textColor,
         padding: {
           xs: `${theme.spacing(1.5)} ${theme.spacing(2)}`,
-          sm: `${theme.spacing(3)} ${theme.spacing(4)}`,
-          md: `${theme.spacing(4)} ${theme.spacing(5)}`
+          sm: `${theme.spacing(2.5)} ${theme.spacing(3.5)}`,
+          md: `${theme.spacing(3)} ${theme.spacing(4)}`
         },
         borderRadius: {
           xs: theme.shape.borderRadiusBox * 0.5,
@@ -79,18 +79,19 @@ const TextTeaserCard = ({
         ...outerSx
       }}
     >
-      <Stack direction="column" textAlign={textAlign || 'left'} spacing={{ xs: 0, md: 1 }} sx={{ width: '100%', color: 'inherit' }}>
+      <Stack direction="column" textAlign={textAlign || 'left'} spacing={{ xs: 0, md: 0.5 }} sx={{ width: '100%', color: 'inherit' }}>
         {/* <Icon sx={{ fontSize: { xs: 32, md: 32, lg: 40 }, color: textColor }} /> */}
         {prefixText && (
           <Typography
             paragraph
             sx={{
-              fontSize: { sx: 14, sm: 18, md: 22, lg: 24 },
+              fontSize: { sx: 14, sm: 16, md: 18, lg: 20 },
               lineHeight: '1.25em',
               textTransform: 'none',
               fontWeight: theme.typography.fontWeightBolder,
               margin: '0px',
-              color: 'inherit'
+              color: 'inherit',
+              marginBottom: 0
             }}
           >
             {prefixText}
@@ -99,7 +100,7 @@ const TextTeaserCard = ({
         <Typography
           paragraph
           sx={{
-            fontSize: { xs: 20, sm: 28, md: 30, xl: 34 },
+            fontSize: { xs: 18, sm: 20, md: 23, xl: 26 },
             lineHeight: '1.15em',
             textTransform: 'none',
             fontWeight: theme.typography.fontWeightLight,
