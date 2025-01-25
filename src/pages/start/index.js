@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { Scrollama, Step } from 'react-scrollama';
 import SectionHeadlineText from './SectionHeadlineText';
 import SectionVorteile from './SectionVorteile';
-import SectionPartnerSlider from './SectionPartnerSlider';
+// import SectionPartnerSlider from './SectionPartnerSlider';
 import SectionCalendar from './SectionCalendar';
 import SectionGewinn from './SectionGewinn';
 import SectionKalkulieren from './SectionKalkulieren';
@@ -25,7 +25,7 @@ const Start = () => {
   const sections = [
     SectionHeadlineText,
     SectionVorteile,
-    SectionPartnerSlider,
+    // SectionPartnerSlider,
     SectionGewinn,
     SectionKalkulieren,
     SectionCheckline,

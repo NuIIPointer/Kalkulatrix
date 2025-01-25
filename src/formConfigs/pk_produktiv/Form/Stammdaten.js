@@ -37,6 +37,7 @@ import InitialsCircle from 'components/InitialsCircle/index';
 import StatCard from 'components/StatCard/index';
 import ModalHeader from 'components/ModalHeader/index';
 import CustomTextField from 'components/CustomTextField/index';
+import formattedNumber from 'utils/formUtils/formattedNumber';
 
 const columns = [
   {
@@ -702,6 +703,7 @@ const Stammdaten = () => {
                       />
                     );
                   })}
+                  <Tab key="gesamt" value="gesamt" label="Gesamt"></Tab>
                 </TabList>
                 <Stack flexDirection="row" gap={0.5} alignItems="center" marginLeft="auto">
                   <Button
@@ -781,13 +783,16 @@ const Stammdaten = () => {
                       sx={{ mb: 3, alignItems: 'stretch' }}
                     >
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Personalkosten" value={`${formFloat(outerField.S9_gesamt, 0) || 0}€`} />
+                        <StatCard title="Personalkosten" value={`${formattedNumber(outerField.S9_gesamt, { decimals: 0 }) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Auslastung" value={`${formFloat(outerField.N9_durchschnitt, 0) || 0}%`} />
+                        <StatCard title="Auslastung" value={`${formattedNumber(outerField.N9_durchschnitt, { decimals: 0 }) || 0}%`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Kosten je Stunde" value={`${formFloat(outerField.Q9_durchschnitt, 0) || 0}€`} />
+                        <StatCard
+                          title="Kosten je Stunde"
+                          value={`${formattedNumber(outerField.Q9_durchschnitt, { decimals: 0 }) || 0}€`}
+                        />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
                         <StatCard title="Mitarbeiter" value={outerField.fields?.length || 0} />
@@ -917,6 +922,39 @@ const Stammdaten = () => {
                   </LayoutBox>
                 </TabPanel>
               ))}
+              <TabPanel value="gesamt" key="gesamt" sx={{ padding: 0 }}>
+                <LayoutBox sx={{ backgroundColor: theme.palette.common.white, padding: theme.shape.paddingBoxMedium }}>
+                  <Grid
+                    container
+                    columnSpacing={{ xs: 1, sm: 2 }}
+                    rowSpacing={{ xs: 1, sm: 2 }}
+                    alignItems="end"
+                    sx={{ mb: 0, alignItems: 'stretch' }}
+                  >
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard title="Direkt verrechenbar" value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 0 }) || 0}€`} />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard
+                        title="Nicht direkt verrechenbar"
+                        value={`${formattedNumber(values.pk_produktiv_Q42, { decimals: 0 }) || 0}%`}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard title="Gesamtkosten (p.a.)" value={`${formattedNumber(values.pk_produktiv_S42, { decimals: 0 }) || 0}€`} />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard
+                        title="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge)"
+                        value={`${formattedNumber(values.pk_produktiv_R42, { decimals: 0 }) || 0}€`}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard title="Ø Auslastung" value={`${formattedNumber(values.pk_produktiv_auslastung, { decimals: 2 }) || 0}%`} />
+                    </Grid>
+                  </Grid>
+                </LayoutBox>
+              </TabPanel>
             </>
           )}
         </FieldArray>

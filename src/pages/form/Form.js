@@ -66,7 +66,7 @@ const FormComponent = () => {
         }
 
         return (
-          <Box key={key} sx={{ minHeight: 'calc(100vh - 550px)' }}>
+          <Box key={key} sx={{ minHeight: 'calc(100vh - 380px)' }}>
             {/* <Typography variant="h5" sx={{ mb: 5, mt: -3 }}>
               Letzte Änderung: {dayjs(activeFormData?.values?.lastChanged).format('DD.MM.YYYY')}
             </Typography> */}

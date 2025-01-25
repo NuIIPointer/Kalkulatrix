@@ -35,6 +35,7 @@ import LayoutBox from 'components/LayoutBox/index';
 import StatCard from 'components/StatCard/index';
 import InitialsCircle from 'components/InitialsCircle/index';
 import CustomTextField from 'components/CustomTextField/index';
+import formattedNumber from 'utils/formUtils/formattedNumber';
 
 const columns = [
   {
@@ -399,19 +400,28 @@ const MaterialzuschlagFremdleistungen = () => {
                       sx={{ mb: 3, alignItems: 'stretch' }}
                     >
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Einsatz" value={`${formFloat(values.gk_deckung_zuschlaege[outerIndex].E8GruppeSumme, 0) || 0}€`} />
+                        <StatCard
+                          title="Einsatz"
+                          value={`${formattedNumber(values.gk_deckung_zuschlaege[outerIndex].E8GruppeSumme, { decimals: 0 }) || 0}€`}
+                        />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Erlöse" value={`${formFloat(values.gk_deckung_zuschlaege[outerIndex].G8GruppeSumme, 0) || 0}€`} />
+                        <StatCard
+                          title="Erlöse"
+                          value={`${formattedNumber(values.gk_deckung_zuschlaege[outerIndex].G8GruppeSumme, { decimals: 0 }) || 0}€`}
+                        />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
                         <StatCard
                           title="Marge"
-                          value={`${formFloat(values.gk_deckung_zuschlaege[outerIndex].F8GruppeDurchschnitt, 1) || 0}%`}
+                          value={`${formattedNumber(values.gk_deckung_zuschlaege[outerIndex].F8GruppeDurchschnitt, { decimals: 2 }) || 0}%`}
                         />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Gewinn" value={`${formFloat(values.gk_deckung_zuschlaege[outerIndex].H8GruppeSumme, 0) || 0}€`} />
+                        <StatCard
+                          title="Gewinn"
+                          value={`${formattedNumber(values.gk_deckung_zuschlaege[outerIndex].H8GruppeSumme, { decimals: 0 }) || 0}€`}
+                        />
                       </Grid>
                     </Grid>
                     <FieldArray name={`gk_deckung_zuschlaege.${outerIndex}.fields`}>

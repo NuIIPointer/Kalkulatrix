@@ -57,7 +57,6 @@ const SectionHeadlineText = () => {
   return (
     <Stack
       sx={{
-        mb: { xs: 8, md: 16, lg: 22 },
         justifyContent: { xs: 'flex-start', md: 'center' },
         textAlign: { xs: 'left', md: 'center' },
         pl: { xs: 4 }

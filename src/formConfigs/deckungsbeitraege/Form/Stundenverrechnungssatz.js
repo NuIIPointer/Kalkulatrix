@@ -4,6 +4,7 @@ import FormSection from 'components/formComponents/FormSection/index';
 import formFloat from 'utils/formUtils/formFloat';
 import StatCard from 'components/StatCard/index';
 import LayoutBox from 'components/LayoutBox/index';
+import formattedNumber from 'utils/formUtils/formattedNumber';
 
 const DGemeinkostenPlangewinn = () => {
   const { values } = useFormikContext();
@@ -74,7 +75,7 @@ const DGemeinkostenPlangewinn = () => {
                 € (inkl. USt.)
               </Typography>
               <Stack direction="row" justifyContent="space-between" gap={1} mb={1}>
-                {chartValues.map((item) => (
+                {chartValues.map((item, index) => (
                   <Box
                     key={item.title}
                     sx={{
@@ -107,8 +108,8 @@ const DGemeinkostenPlangewinn = () => {
                           borderTop: `7px solid ${item.color}`, // Change to borderTop
                           position: 'absolute',
                           bottom: '-5px',
-                          left: '50%', // Align to the bottom left
-                          transform: 'translateX(-50%)' // Remove translateX
+                          left: index === 0 ? '0%' : index === chartValues.length - 1 ? '100%' : '50%', // Align to the bottom left
+                          transform: index === 0 ? '' : index === chartValues.length - 1 ? 'translateX(-100%)' : 'translateX(-50%)' // Remove translateX
                         }
                       }}
                     >
@@ -165,7 +166,7 @@ const DGemeinkostenPlangewinn = () => {
               <Grid item xs={12} sm={6} sx={{ flexGrow: 1 }}>
                 <StatCard
                   title={'Personalkosten pro Stunde'}
-                  value={`${formFloat((values.std_verrechnungssaetze_G10 || 0) * 1.19, 2)
+                  value={`${formattedNumber((values.std_verrechnungssaetze_G10 || 0) * 1.19, { decimals: 2 })
                     .toString()
                     .replace('.', ',')}€`}
                 />
@@ -173,7 +174,7 @@ const DGemeinkostenPlangewinn = () => {
               <Grid item xs={12} sm={6} sx={{ flexGrow: 1 }}>
                 <StatCard
                   title={'Betriebskostensatz pro Stunde'}
-                  value={`${formFloat((values.std_verrechnungssaetze_G11 || 0) * 1.19, 2)
+                  value={`${formattedNumber((values.std_verrechnungssaetze_G11 || 0) * 1.19, { decimals: 2 })
                     .toString()
                     .replace('.', ',')}€`}
                 />
@@ -181,7 +182,7 @@ const DGemeinkostenPlangewinn = () => {
               <Grid item xs={12} sm={6} sx={{ flexGrow: 1 }}>
                 <StatCard
                   title={'Selbstkosten pro Stunde'}
-                  value={`${formFloat((values.std_verrechnungssaetze_G12 || 0) * 1.19, 2)
+                  value={`${formattedNumber((values.std_verrechnungssaetze_G12 || 0) * 1.19, { decimals: 2 })
                     .toString()
                     .replace('.', ',')}€`}
                 />
@@ -189,7 +190,7 @@ const DGemeinkostenPlangewinn = () => {
               <Grid item xs={12} sm={6} sx={{ flexGrow: 1 }}>
                 <StatCard
                   title={'Plangewinnsatz pro Stunde'}
-                  value={`${formFloat((values.std_verrechnungssaetze_G13 || 0) * 1.19, 2)
+                  value={`${formattedNumber((values.std_verrechnungssaetze_G13 || 0) * 1.19, { decimals: 2 })
                     .toString()
                     .replace('.', ',')}€`}
                 />

@@ -38,6 +38,7 @@ import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 import StatCard from 'components/StatCard/index';
 import ModalHeader from 'components/ModalHeader/index';
 import CustomTextField from 'components/CustomTextField/index';
+import formattedNumber from 'utils/formUtils/formattedNumber';
 
 const columns = [
   {
@@ -574,6 +575,7 @@ const Stammdaten = () => {
                       />
                     );
                   })}
+                  <Tab key="gesamt" value="gesamt" label="Gesamt"></Tab>
                 </TabList>
                 <Stack flexDirection="row" gap={0.5} alignItems="center" marginLeft="auto">
                   <Button
@@ -608,11 +610,10 @@ const Stammdaten = () => {
                   <Button
                     variant="contained"
                     onClick={() => {
-                      push({ categoryId: uuid(), fields: [getInitialMitarbeiterData(values)] });
-                      changeTab(null, values.pk_allgemein_mitarbeiter?.length);
+                      setNewAbteilungValue(`Abteilung ${values.pk_allgemein_mitarbeiter?.length + 1}`);
                     }}
                     disabled={isSubmitting}
-                    sx={{ fontWeight: 500, height: 'auto' }}
+                    sx={{ fontWeight: 500, margin: 1, marginLeft: 'auto', mt: 0, mb: 0, height: 'auto' }}
                   >
                     Neue Abteilung
                   </Button>
@@ -653,10 +654,10 @@ const Stammdaten = () => {
                       sx={{ mb: 3, alignItems: 'stretch' }}
                     >
                       <Grid item xs={6} sm={6} md={4}>
-                        <StatCard title="Personalkosten" value={`${formFloat(outerField.N24, 0) || 0}€`} />
+                        <StatCard title="Personalkosten" value={`${formattedNumber(outerField.N24, { decimals: 0 }) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={4}>
-                        <StatCard title="Davon Sonderzahlungen" value={`${formFloat(outerField.K14Gesamt, 0) || 0}€`} />
+                        <StatCard title="Davon Sonderzahlungen" value={`${formattedNumber(outerField.K14Gesamt, { decimals: 0 }) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={4}>
                         <StatCard title="Mitarbeiter" value={outerField.fields?.length || 0} />
@@ -783,6 +784,39 @@ const Stammdaten = () => {
                   </LayoutBox>
                 </TabPanel>
               ))}
+              {/* <TabPanel value="gesamt" key="gesamt" sx={{ padding: 0 }}>
+                <LayoutBox sx={{ backgroundColor: theme.palette.common.white, padding: theme.shape.paddingBoxMedium }}>
+                  <Grid
+                    container
+                    columnSpacing={{ xs: 1, sm: 2 }}
+                    rowSpacing={{ xs: 1, sm: 2 }}
+                    alignItems="end"
+                    sx={{ mb: 0, alignItems: 'stretch' }}
+                  >
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard title="Direkt verrechenbar" value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 0 }) || 0}€`} />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard
+                        title="Nicht direkt verrechenbar"
+                        value={`${formattedNumber(values.pk_produktiv_Q42, { decimals: 0 }) || 0}%`}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard title="Gesamtkosten (p.a.)" value={`${formattedNumber(values.pk_produktiv_S42, { decimals: 0 }) || 0}€`} />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard
+                        title="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge)"
+                        value={`${formattedNumber(values.pk_produktiv_R42, { decimals: 0 }) || 0}€`}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={4}>
+                      <StatCard title="Ø Auslastung" value={`${formattedNumber(values.pk_produktiv_auslastung, { decimals: 2 }) || 0}%`} />
+                    </Grid>
+                  </Grid>
+                </LayoutBox>
+              </TabPanel> */}
             </>
           )}
         </FieldArray>

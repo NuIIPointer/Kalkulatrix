@@ -2,6 +2,7 @@ import { TextField, InputAdornment } from '@mui/material';
 import { useCallback } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Field } from 'formik';
+import { useFormikContext } from 'formik';
 
 const CustomTextField = ({
   type,
@@ -14,6 +15,7 @@ const CustomTextField = ({
   InputProps = {},
   ...others
 }) => {
+  const { setFieldValue } = useFormikContext();
   const FieldComponentWrapped = useCallback(
     (props) => {
       return asFormikField ? <Field component={TextField} {...props} /> : <TextField {...props} />;
@@ -23,21 +25,21 @@ const CustomTextField = ({
 
   const handleChange = useCallback(
     (event) => {
-      event.target.value = parseFloat(`${event.target.value}`.replaceAll('.', '').replaceAll(',', '.'));
-      onChange(event);
+      const formattedValue = parseInt(parseFloat(`${event.target.value}`.replaceAll('.', '').replaceAll(',', '.')) || '', 10);
+      setFieldValue(others.name, formattedValue);
     },
-    [onChange]
+    [others, setFieldValue]
   );
   if (type === 'number') {
     return (
       <NumericFormat
-        onChange={handleChange}
         fixedDecimalScale={fixedDecimals}
         decimalScale={decimals}
         customInput={FieldComponentWrapped}
         thousandSeparator="."
         decimalSeparator=","
         {...others}
+        onChange={handleChange}
         InputProps={
           endAdornment
             ? {
