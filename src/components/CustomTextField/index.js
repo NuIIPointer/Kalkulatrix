@@ -25,7 +25,7 @@ const CustomTextField = ({
 
   const handleChange = useCallback(
     (event) => {
-      const formattedValue = parseInt(parseFloat(`${event.target.value}`.replaceAll('.', '').replaceAll(',', '.')) || '', 10);
+      const formattedValue = parseFloat(`${event.target.value}`.replaceAll('.', '').replaceAll(',', '.')) || 0;
       setFieldValue(others.name, formattedValue);
     },
     [others, setFieldValue]

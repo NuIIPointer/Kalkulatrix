@@ -361,6 +361,16 @@ const Stammdaten = () => {
     );
   };
 
+  const N24SummeVonAllenGruppen = values.pk_allgemein_mitarbeiter?.reduce((acc, group) => {
+    return (
+      acc +
+      (group.fields?.reduce((acc, field) => {
+        return acc + (field.N24 || 0);
+      }, 0) || 0)
+    );
+  }, 0);
+  console.log('N24SummeVonAllenGruppen', N24SummeVonAllenGruppen);
+
   return (
     <>
       {modalData && (
@@ -784,7 +794,7 @@ const Stammdaten = () => {
                   </LayoutBox>
                 </TabPanel>
               ))}
-              {/* <TabPanel value="gesamt" key="gesamt" sx={{ padding: 0 }}>
+              <TabPanel value="gesamt" key="gesamt" sx={{ padding: 0 }}>
                 <LayoutBox sx={{ backgroundColor: theme.palette.common.white, padding: theme.shape.paddingBoxMedium }}>
                   <Grid
                     container
@@ -816,7 +826,7 @@ const Stammdaten = () => {
                     </Grid>
                   </Grid>
                 </LayoutBox>
-              </TabPanel> */}
+              </TabPanel>
             </>
           )}
         </FieldArray>
