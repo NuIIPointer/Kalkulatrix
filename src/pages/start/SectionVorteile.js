@@ -33,10 +33,10 @@ const SectionHeadlineText = () => {
       key={i}
       sx={{
         display: 'flex',
-        alignItems: { xs: 'flex-start', md: 'center' },
+        alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        textAlign: { xs: 'left', md: 'center' },
+        textAlign: 'center',
         mb: { xs: 6, sm: 8, md: 0 }
       }}
     >
@@ -57,9 +57,9 @@ const SectionHeadlineText = () => {
   return (
     <Stack
       sx={{
-        justifyContent: { xs: 'flex-start', md: 'center' },
-        textAlign: { xs: 'left', md: 'center' },
-        pl: { xs: 4 }
+        justifyContent: 'center',
+        textAlign: 'center',
+        paddingInline: { xs: 4 }
       }}
     >
       <SectionChip colorPreset="primaryLight" sx={{ mx: { xs: 'none', md: 'auto' }, mb: 2, display: { xs: 'none', md: 'initial' } }}>
@@ -68,7 +68,7 @@ const SectionHeadlineText = () => {
       <Typography variant="h2" sx={{ mb: { xs: 6, sm: 7, md: 8 }, fontSize: { xs: 28, md: 32, lg: 42 } }}>
         Entdecken Sie die Vorteile von Kalkulatrix
       </Typography>
-      <Grid container justifyContent={{ xs: 'flex-start', md: 'center' }} columnGap={4}>
+      <Grid container justifyContent={'center'} columnGap={4}>
         {itemsRendered}
       </Grid>
     </Stack>

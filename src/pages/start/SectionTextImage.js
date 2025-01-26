@@ -38,7 +38,7 @@ export default function SectionTextImage() {
         xs={12}
         md={6}
         sx={{
-          pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
+          pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
           pr: { xs: theme.spacing(4), md: 0 },
           py: { xs: theme.spacing(2), md: theme.spacing(20), lg: theme.spacing(25) }
         }}

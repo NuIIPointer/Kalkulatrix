@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 const styledSizePresets = {
   large: {
     card: {
-      borderRadius: 2,
+      borderRadius: 5,
       width: 120,
       height: 120
     },
@@ -14,7 +14,7 @@ const styledSizePresets = {
   },
   medium: {
     card: {
-      borderRadius: 1.5,
+      borderRadius: 3,
       width: 72,
       height: 72
     },
@@ -38,7 +38,7 @@ const styledColorPreset = {
       backgroundColor: 'common.white'
     },
     icon: {
-      color: 'primary.600'
+      color: 'primary.500'
     }
   },
   secondary: {

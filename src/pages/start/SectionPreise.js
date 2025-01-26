@@ -10,7 +10,7 @@ const SectionPreise = () => {
     <Grid
       container
       flexDirection="column"
-      sx={{ px: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) }, py: { xs: 4, md: 6 } }}
+      sx={{ px: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) }, py: { xs: 4, md: 6 } }}
     >
       <Typography
         textAlign={{ xs: 'left', md: 'center' }}

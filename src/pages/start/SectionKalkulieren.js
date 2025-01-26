@@ -1,7 +1,9 @@
 import React from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import SectionChip from 'components/SecitonChip';
+
+import phoneCollage from 'assets/images/content/phone_collage.png';
 
 const SectionGewinn = () => {
   const theme = useTheme();
@@ -9,15 +11,24 @@ const SectionGewinn = () => {
   return (
     <>
       <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }}>
-        <Grid item xs={12} md={5}>
-          {/* <img src='https://placehold.co/1000x700/EEE/31343C' alt="Kalkulatrix Anwendung" /> */}
+        <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box
+            as="img"
+            src={phoneCollage}
+            alt="Kalkulatrix Anwendung"
+            sx={{
+              width: '100%',
+              maxWidth: { xs: '700px', lg: '100%' },
+              paddingLeft: { md: 6 },
+            }}
+          />
         </Grid>
         <Grid
           item
           xs={12}
           md={6}
           sx={{
-            pr: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(30) },
+            pr: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
             pl: { xs: theme.spacing(4), md: 0 },
             pt: { xs: theme.spacing(6), md: theme.spacing(15), lg: theme.spacing(20) },
             pb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
