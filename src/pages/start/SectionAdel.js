@@ -1,9 +1,10 @@
 import React from 'react';
-import { Grid, Typography, Stack } from '@mui/material';
+import { Grid, Typography, Stack, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import IconChip from 'components/IconChip';
 import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
 import SectionChip from 'components/SecitonChip';
+import felixPortrait from 'assets/images/content/felix_ade_portrait.png';
 
 const SectionAdel = () => {
   const theme = useTheme();
@@ -66,7 +67,7 @@ const SectionAdel = () => {
           sx={{
             pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
             pr: { xs: theme.spacing(4), md: 0 },
-            py: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
+            pt: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
           }}
         >
           <SectionChip colorPreset="primaryLight" sx={{ mx: 'auto', mb: 2, mr: 'auto', width: 'auto' }}>
@@ -80,10 +81,39 @@ const SectionAdel = () => {
               Ein Produkt der Adel Consulting
             </Typography>
           </Typography>
+        </Grid>
+        <Grid item xs={12} />
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
+            pr: { xs: theme.spacing(4), md: 0 },
+            pb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
+          }}
+        >
           {itemsRendered}
         </Grid>
-        <Grid item xs={12} md={5}>
-          {/* <img src='https://placehold.co/1000x700/EEE/31343C' alt="Kalkulatrix Anwendung" /> */}
+        <Grid
+          item
+          xs={12}
+          md={5}
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', marginBlock: { xs: 4, sm: 6, md: 8, lg: 0 } }}
+        >
+          <Box
+            as="img"
+            src={felixPortrait}
+            alt="Portrait des Geschäftsführers Felix Adel"
+            sx={{
+              width: '100%',
+              maxWidth: { xs: '700px', lg: '100%' },
+              borderRadius: { xs: 0, sm: 3, lg: 4 },
+              overflow: 'hidden',
+              boxShadow: theme.customShadows.z1,
+              marginRight: { xs: 0, sm: 4, md: 6, lg: 10 }
+            }}
+          />
         </Grid>
       </Grid>
     </>

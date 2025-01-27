@@ -38,7 +38,7 @@ const SectionHeadlineText = () => {
           </Typography>
           <Typography variant="body2" sx={{ mb: { xs: 2, md: 5, lg: 6 }, fontSize: { xs: 16, sm: 18, md: 22 } }}>
             Der Konkurrenz einen Schritt voraus. Berechnen Sie präzise Stundensätze und senken Sie Mitarbeiterkosten. Steigern Sie
-            Effizienz, maximieren Sie Gewinne. Einfache Anwendung – sofortige Ergebnisse.
+            Effizienz, maximieren Sie Gewinne. Einfache Anwendung - sofortige Ergebnisse.
           </Typography>
           <Stack gap={2} sx={{ flexDirection: 'row' }}>
             <Button variant="outlined" color="primary">
@@ -59,7 +59,7 @@ const SectionHeadlineText = () => {
         <Box
           as="img"
           src={macbookImage}
-          alt="Kalkulatrix Anwendung"
+          alt="Bildschirmfoto der Stundensatzkalkulation"
           sx={{ width: '100%', maxWidth: { xs: '700px', lg: '100%' }, padding: { md: 6 } }}
         />
       </Grid>
