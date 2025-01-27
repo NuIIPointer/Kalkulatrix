@@ -37,19 +37,19 @@ const Zusammenfassung = () => {
           <Grid item xs={6} sm={6} md={4}>
             <StatCard
               title="Gesamtsumme aller Plan-Gemeinkosten"
-              value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 0 }) || 0}€`}
+              value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 2 }) || 0}€`}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={4}>
             <StatCard
               title="Gesamtsumme aller variablen-Gemeinkosten"
-              value={`${formattedNumber(values.gemeinkosten_F49, { decimals: 0 }) || 0}€`}
+              value={`${formattedNumber(values.gemeinkosten_F49, { decimals: 2 }) || 0}€`}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={4}>
             <StatCard
               title="Gesamtsumme aller fixen-Gemeinkosten"
-              value={`${formattedNumber(values.gemeinkosten_I49, { decimals: 0 }) || 0}€`}
+              value={`${formattedNumber(values.gemeinkosten_I49, { decimals: 2 }) || 0}€`}
             />
           </Grid>
           <Grid item xs={12}></Grid>

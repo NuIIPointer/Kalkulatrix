@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
 // material-ui
 import {
@@ -21,7 +21,7 @@ import {
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { InfoOutlined, DeleteOutlineOutlined, EditOutlined, ContentCopy, DeleteOutlined, Save } from '@mui/icons-material';
+import { Add, InfoOutlined, DeleteOutlineOutlined, EditOutlined, ContentCopy, DeleteOutlined, Save } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import { GridFooterContainer, GridFooter } from '@mui/x-data-grid';
 
@@ -38,6 +38,7 @@ import StatCard from 'components/StatCard/index';
 import ModalHeader from 'components/ModalHeader/index';
 import CustomTextField from 'components/CustomTextField/index';
 import formattedNumber from 'utils/formUtils/formattedNumber';
+import { usePrevious } from 'utils/usePrevious';
 
 const columns = [
   {
@@ -105,7 +106,7 @@ const columns = [
   }
 ];
 
-const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, errors }) => (
+const MemorizedTabData = memo(({ maTitle = 'Mitarbeiter', setModalData, outerIndex, innerIndex, errors }) => (
   <React.Fragment>
     <ModalHeader title={`${maTitle} bearbeiten`} onClose={() => setModalData(null)} />
     <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
@@ -423,6 +424,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
 const Stammdaten = () => {
   const theme = useTheme();
   const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
+  const prevMaGroups = usePrevious(values.pk_produktiv_mitarbeiter);
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
   const [showAbteilungPopover, setShowAbteilungPopover] = useState(null);
@@ -444,6 +446,23 @@ const Stammdaten = () => {
   const changeTab = (_event, newValue) => {
     setOpenedTab(newValue);
   };
+
+  useEffect(() => {
+    prevMaGroups?.forEach((prevMaGroup, index) => {
+      const maGroup = values.pk_produktiv_mitarbeiter[index];
+      if (maGroup && prevMaGroup && prevMaGroup?.fields && prevMaGroup?.fields?.length < maGroup.fields?.length) {
+        setModalData(
+          <MemorizedTabData
+            maTitle={maGroup.fields[maGroup.fields.length - 1].titel}
+            setModalData={setModalData}
+            outerIndex={index}
+            innerIndex={maGroup.fields.length - 1}
+            errors={errors}
+          />
+        );
+      }
+    });
+  }, [values.pk_produktiv_mitarbeiter, errors, prevMaGroups]);
 
   const tableButtonStyles = {
     width: '28px',
@@ -479,7 +498,7 @@ const Stammdaten = () => {
               </Button>
             </>
           ) : (
-            <Button variant="contained" color="primary" size="small" onClick={onCreate} disabled={isSubmitting}>
+            <Button variant="contained" color="primary" size="small" onClick={onCreate} disabled={isSubmitting} startIcon={<Add />}>
               Neuen Mitarbeiter anlegen
             </Button>
           )}
@@ -742,6 +761,7 @@ const Stammdaten = () => {
                     }}
                     disabled={isSubmitting}
                     sx={{ fontWeight: 500, margin: 1, marginLeft: 'auto', mt: 0, mb: 0, height: 'auto' }}
+                    startIcon={<Add />}
                   >
                     Neue Abteilung
                   </Button>
@@ -764,10 +784,10 @@ const Stammdaten = () => {
                         <Button onClick={() => setGroupToDelete(undefined)}>Abbrechen</Button>
                         <Button
                           onClick={() => {
-                            remove(outerIndex);
                             changeTab(null, 0);
                             setAbteilungToEdit(null);
                             setGroupToDelete(undefined);
+                            remove(outerIndex);
                           }}
                           autoFocus
                         >
@@ -783,15 +803,15 @@ const Stammdaten = () => {
                       sx={{ mb: 3, alignItems: 'stretch' }}
                     >
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Personalkosten" value={`${formattedNumber(outerField.S9_gesamt, { decimals: 0 }) || 0}€`} />
+                        <StatCard title="Personalkosten" value={`${formattedNumber(outerField.S9_gesamt, { decimals: 2 }) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
-                        <StatCard title="Auslastung" value={`${formattedNumber(outerField.N9_durchschnitt, { decimals: 0 }) || 0}%`} />
+                        <StatCard title="Auslastung" value={`${formattedNumber(outerField.N9_durchschnitt, { decimals: 1 }) || 0}%`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
                         <StatCard
                           title="Kosten je Stunde"
-                          value={`${formattedNumber(outerField.Q9_durchschnitt, { decimals: 0 }) || 0}€`}
+                          value={`${formattedNumber(outerField.Q9_durchschnitt, { decimals: 2 }) || 0}€`}
                         />
                       </Grid>
                       <Grid item xs={6} sm={6} md={3}>
@@ -932,21 +952,21 @@ const Stammdaten = () => {
                     sx={{ mb: 0, alignItems: 'stretch' }}
                   >
                     <Grid item xs={6} sm={6} md={4}>
-                      <StatCard title="Direkt verrechenbar" value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 0 }) || 0}€`} />
+                      <StatCard title="Direkt verrechenbar" value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 2 }) || 0}€`} />
                     </Grid>
                     <Grid item xs={6} sm={6} md={4}>
                       <StatCard
                         title="Nicht direkt verrechenbar"
-                        value={`${formattedNumber(values.pk_produktiv_Q42, { decimals: 0 }) || 0}%`}
+                        value={`${formattedNumber(values.pk_produktiv_Q42, { decimals: 1 }) || 0}%`}
                       />
                     </Grid>
                     <Grid item xs={6} sm={6} md={4}>
-                      <StatCard title="Gesamtkosten (p.a.)" value={`${formattedNumber(values.pk_produktiv_S42, { decimals: 0 }) || 0}€`} />
+                      <StatCard title="Gesamtkosten (p.a.)" value={`${formattedNumber(values.pk_produktiv_S42, { decimals: 2 }) || 0}€`} />
                     </Grid>
                     <Grid item xs={6} sm={6} md={4}>
                       <StatCard
                         title="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge)"
-                        value={`${formattedNumber(values.pk_produktiv_R42, { decimals: 0 }) || 0}€`}
+                        value={`${formattedNumber(values.pk_produktiv_R42, { decimals: 2 }) || 0}€`}
                       />
                     </Grid>
                     <Grid item xs={6} sm={6} md={4}>

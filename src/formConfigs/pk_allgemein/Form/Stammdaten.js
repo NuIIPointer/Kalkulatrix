@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 
 // material-ui
 import {
@@ -22,7 +22,7 @@ import {
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { InfoOutlined, DeleteOutlineOutlined, Close, EditOutlined, ContentCopy, DeleteOutlined, Save } from '@mui/icons-material';
+import { Add, InfoOutlined, DeleteOutlineOutlined, Close, EditOutlined, ContentCopy, DeleteOutlined, Save } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import formFloat from 'utils/formUtils/formFloat';
 
@@ -39,6 +39,7 @@ import StatCard from 'components/StatCard/index';
 import ModalHeader from 'components/ModalHeader/index';
 import CustomTextField from 'components/CustomTextField/index';
 import formattedNumber from 'utils/formUtils/formattedNumber';
+import { usePrevious } from 'utils/usePrevious';
 
 const columns = [
   {
@@ -96,7 +97,7 @@ const columns = [
   }
 ];
 
-const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, errors }) => (
+const MemorizedTabData = memo(({ maTitle = 'Mitarbeiter', setModalData, outerIndex, innerIndex, errors }) => (
   <React.Fragment>
     <Stack justifyContent="space-between" alignItems="center" flexDirection="row">
       <Typography variant="h3">{maTitle} bearbeiten</Typography>
@@ -295,6 +296,7 @@ const MemorizedTabData = memo(({ maTitle, setModalData, outerIndex, innerIndex, 
 const Stammdaten = () => {
   const theme = useTheme();
   const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
+  const prevMaGroups = usePrevious(values.pk_allgemein_mitarbeiter);
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
   const [showAbteilungPopover, setShowAbteilungPopover] = useState(null);
@@ -316,6 +318,23 @@ const Stammdaten = () => {
   const changeTab = (_event, newValue) => {
     setOpenedTab(newValue);
   };
+
+  useEffect(() => {
+    prevMaGroups?.forEach((prevMaGroup, index) => {
+      const maGroup = values.pk_allgemein_mitarbeiter[index];
+      if (maGroup && prevMaGroup?.fields && prevMaGroup?.fields?.length < maGroup.fields?.length) {
+        setModalData(
+          <MemorizedTabData
+            maTitle={maGroup.fields[maGroup.fields.length - 1].titel}
+            setModalData={setModalData}
+            outerIndex={index}
+            innerIndex={maGroup.fields.length - 1}
+            errors={errors}
+          />
+        );
+      }
+    });
+  }, [values.pk_allgemein_mitarbeiter, errors, prevMaGroups]);
 
   const tableButtonStyles = {
     width: '28px',
@@ -351,7 +370,7 @@ const Stammdaten = () => {
               </Button>
             </>
           ) : (
-            <Button variant="contained" color="primary" size="small" onClick={onCreate} disabled={isSubmitting}>
+            <Button variant="contained" color="primary" size="small" onClick={onCreate} disabled={isSubmitting} startIcon={<Add />}>
               Neuen Mitarbeiter anlegen
             </Button>
           )}
@@ -361,15 +380,13 @@ const Stammdaten = () => {
     );
   };
 
-  const N24SummeVonAllenGruppen = values.pk_allgemein_mitarbeiter?.reduce((acc, group) => {
-    return (
-      acc +
-      (group.fields?.reduce((acc, field) => {
-        return acc + (field.N24 || 0);
-      }, 0) || 0)
-    );
+  const groupValuesCombined = values.pk_allgemein_mitarbeiter?.reduce((acc, group) => {
+    return {
+      N24: (acc.N24 || 0) + (group.N24 || 0),
+      K14Gesamt: (acc.K14Gesamt || 0) + (group.K14Gesamt || 0),
+      maCount: (acc.maCount || 0) + (group.fields?.length || 0)
+    };
   }, 0);
-  console.log('N24SummeVonAllenGruppen', N24SummeVonAllenGruppen);
 
   return (
     <>
@@ -543,7 +560,7 @@ const Stammdaten = () => {
       )}
       <TabContext value={openedTab.toString()}>
         <FieldArray name="pk_allgemein_mitarbeiter">
-          {({ push, remove }) => (
+          {({ remove }) => (
             <>
               <Stack direction="row" flexWrap="wrap" alignItems="center" sx={{ mb: 2, mt: { xs: 4, sm: 6, md: 7, lg: 8 } }}>
                 <TabList onChange={changeTab}>
@@ -624,6 +641,7 @@ const Stammdaten = () => {
                     }}
                     disabled={isSubmitting}
                     sx={{ fontWeight: 500, margin: 1, marginLeft: 'auto', mt: 0, mb: 0, height: 'auto' }}
+                    startIcon={<Add />}
                   >
                     Neue Abteilung
                   </Button>
@@ -646,9 +664,10 @@ const Stammdaten = () => {
                         <Button onClick={() => setGroupToDelete(undefined)}>Abbrechen</Button>
                         <Button
                           onClick={() => {
-                            remove(outerIndex);
                             changeTab(null, 0);
                             setGroupToDelete(undefined);
+                            setAbteilungToEdit(null);
+                            remove(outerIndex);
                           }}
                           autoFocus
                         >
@@ -664,10 +683,10 @@ const Stammdaten = () => {
                       sx={{ mb: 3, alignItems: 'stretch' }}
                     >
                       <Grid item xs={6} sm={6} md={4}>
-                        <StatCard title="Personalkosten" value={`${formattedNumber(outerField.N24, { decimals: 0 }) || 0}€`} />
+                        <StatCard title="Personalkosten" value={`${formattedNumber(outerField.N24, { decimals: 2 }) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={4}>
-                        <StatCard title="Davon Sonderzahlungen" value={`${formattedNumber(outerField.K14Gesamt, { decimals: 0 }) || 0}€`} />
+                        <StatCard title="Davon Sonderzahlungen" value={`${formattedNumber(outerField.K14Gesamt, { decimals: 2 }) || 0}€`} />
                       </Grid>
                       <Grid item xs={6} sm={6} md={4}>
                         <StatCard title="Mitarbeiter" value={outerField.fields?.length || 0} />
@@ -804,25 +823,16 @@ const Stammdaten = () => {
                     sx={{ mb: 0, alignItems: 'stretch' }}
                   >
                     <Grid item xs={6} sm={6} md={4}>
-                      <StatCard title="Direkt verrechenbar" value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 0 }) || 0}€`} />
+                      <StatCard title="Personalkosten" value={`${formattedNumber(groupValuesCombined.N24, { decimals: 2 }) || 0}€`} />
                     </Grid>
                     <Grid item xs={6} sm={6} md={4}>
                       <StatCard
-                        title="Nicht direkt verrechenbar"
-                        value={`${formattedNumber(values.pk_produktiv_Q42, { decimals: 0 }) || 0}%`}
+                        title="Davon Sonderzahlungen"
+                        value={`${formattedNumber(groupValuesCombined.K14Gesamt, { decimals: 2 }) || 0}€`}
                       />
                     </Grid>
                     <Grid item xs={6} sm={6} md={4}>
-                      <StatCard title="Gesamtkosten (p.a.)" value={`${formattedNumber(values.pk_produktiv_S42, { decimals: 0 }) || 0}€`} />
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={4}>
-                      <StatCard
-                        title="Ø Kosten je Std. (inkl. Zulagen/ Zuschläge)"
-                        value={`${formattedNumber(values.pk_produktiv_R42, { decimals: 0 }) || 0}€`}
-                      />
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={4}>
-                      <StatCard title="Ø Auslastung" value={`${formattedNumber(values.pk_produktiv_auslastung, { decimals: 2 }) || 0}%`} />
+                      <StatCard title="Mitarbeiter" value={`${formattedNumber(groupValuesCombined.maCount, { decimals: 0 }) || 0}`} />
                     </Grid>
                   </Grid>
                 </LayoutBox>

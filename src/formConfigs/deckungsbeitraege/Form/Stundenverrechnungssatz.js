@@ -13,7 +13,7 @@ const DGemeinkostenPlangewinn = () => {
   const chartValues = [
     { value: values.std_verrechnungssaetze_G10, title: 'Personalkosten pro Stunde', color: theme.palette.primary[200] },
     { value: values.std_verrechnungssaetze_G11, title: 'Betriebskosten pro Stunde', color: theme.palette.secondary[400] },
-    { value: values.std_verrechnungssaetze_G12, title: 'Selbstkosten pro Stunde', color: theme.palette.primary[800] },
+    // { value: values.std_verrechnungssaetze_G12, title: 'Selbstkosten pro Stunde', color: theme.palette.primary[800] },
     { value: values.std_verrechnungssaetze_G13, title: 'Plangewinnsatz pro Stunde', color: theme.palette.primary[600] }
   ];
 
