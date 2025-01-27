@@ -5,8 +5,6 @@ import { Grid, Typography, useTheme } from '@mui/material';
 
 // formik
 import { FastField, useFormikContext } from 'formik';
-import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
-import formFloat from 'utils/formUtils/formFloat';
 import EnrichedField from 'components/formComponents/EnrichedField/index';
 import CustomTextField from 'components/CustomTextField/index';
 import LayoutBox from 'components/LayoutBox/index';
