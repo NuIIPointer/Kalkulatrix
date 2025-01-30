@@ -30,12 +30,12 @@ const Footer = () => {
       }}
     >
       <Grid container spacing={3} justifyContent="flex-end">
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <List
             sx={{
               display: 'flex',
               flexWrap: 'wrap',
-              justifyContent: { xs: 'center', sm: 'flex-end' },
+              justifyContent: 'center',
               gap: `${theme.spacing(1)} ${theme.spacing(3)}`,
               height: '100%',
               alignItems: 'center'
