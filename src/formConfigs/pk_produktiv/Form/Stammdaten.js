@@ -408,7 +408,7 @@ const MemorizedTabData = memo(({ maTitle = 'Mitarbeiter', setModalData, outerInd
       </Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
         <Button variant="contained" color="primary" onClick={() => setModalData(null)} startIcon={<Save />}>
-          schließen
+          speichern
         </Button>
       </Grid>
       <Grid item>
@@ -450,7 +450,7 @@ const Stammdaten = () => {
   useEffect(() => {
     prevMaGroups?.forEach((prevMaGroup, index) => {
       const maGroup = values.pk_produktiv_mitarbeiter[index];
-      if (maGroup && prevMaGroup && prevMaGroup?.fields && prevMaGroup?.fields?.length < maGroup.fields?.length) {
+      if (maGroup && (prevMaGroup?.fields?.length || 0) < maGroup.fields?.length) {
         setModalData(
           <MemorizedTabData
             maTitle={maGroup.fields[maGroup.fields.length - 1].titel}
@@ -837,9 +837,9 @@ const Stammdaten = () => {
                             checked: checkedRows.includes(innerField.userId),
                             name: maTitle,
                             groupName: outerField.groupTitle || `Abteilung ${outerIndex + 1}`,
-                            stundenlohn: `${formFloat(innerField.Q9 || 0, 2).replace('.', ',')}€`,
-                            auslastung: `${formFloat(innerField.N9 || 0, 2).replace('.', ',')}%`,
-                            anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
+                            stundenlohn: `${formattedNumber(innerField.Q9 || 0, 2)}€`,
+                            auslastung: `${formattedNumber(innerField.N9 || 0, 2)}%`,
+                            anwesenheitsentgelt: `${formattedNumber(innerField.S9 || 0, 2)}€`,
                             krankenzeit: `${innerField.G9 || 0} Stunden`,
                             newField: innerField.newField,
                             hasError: maHasError,

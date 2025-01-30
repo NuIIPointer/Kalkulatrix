@@ -46,7 +46,7 @@ const CustomTextField = ({
                 ...InputProps,
                 endAdornment: <InputAdornment position="end">{endAdornment}</InputAdornment>
               }
-            : undefined
+            : InputProps
         }
       >
         {children}

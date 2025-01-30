@@ -207,7 +207,7 @@ const MemorizedTabData = memo(({ maTitle = 'Artikel', setModalData, outerIndex, 
       </Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
         <Button variant="contained" color="primary" onClick={() => setModalData(null)} startIcon={<Save />}>
-          schließen
+          speichern
         </Button>
       </Grid>
       <Grid item>
@@ -247,9 +247,10 @@ const MaterialzuschlagFremdleistungen = () => {
   };
 
   useEffect(() => {
+    console.log('update', prevMaGroups);
     prevMaGroups?.forEach((prevMaGroup, index) => {
       const maGroup = values.gk_deckung_zuschlaege[index];
-      if (maGroup && prevMaGroup?.fields && prevMaGroup?.fields?.length < maGroup.fields?.length) {
+      if (maGroup && (prevMaGroup?.fields?.length || 0) < maGroup.fields?.length) {
         setModalData(
           <MemorizedTabData
             maTitle={maGroup.fields[maGroup.fields.length - 1].titel}
@@ -652,10 +653,10 @@ const MaterialzuschlagFremdleistungen = () => {
                             checked: checkedRows.includes(itemId),
                             name: maTitle,
                             groupName: outerField.groupTitle || `Gruppe ${outerIndex + 1}`,
-                            einsatz: `${formFloat(innerField.E8 || 0, 2).replace('.', ',')}€`,
-                            marge: `${formFloat(innerField.F8 || 0, 2).replace('.', ',')}%`,
-                            erloes: `${formFloat(innerField.G8 || 0, 2).replace('.', ',')}€`,
-                            gewinn: `${formFloat(innerField.H8 || 0, 2).replace('.', ',')}€`,
+                            einsatz: `${formattedNumber(innerField.E8 || 0, 2)}€`,
+                            marge: `${formattedNumber(innerField.F8 || 0, 2)}%`,
+                            erloes: `${formattedNumber(innerField.G8 || 0, 2)}€`,
+                            gewinn: `${formattedNumber(innerField.H8 || 0, 2)}€`,
                             // anwesenheitsentgelt: `${formFloat(innerField.S9 || 0, 2).replace('.', ',')}€`,
                             // krankenzeit: `${innerField.G9 || 0} Stunden`,
                             // newField: innerField.newField,

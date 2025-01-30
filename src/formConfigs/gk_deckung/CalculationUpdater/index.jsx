@@ -41,7 +41,7 @@ const StundensatzRechnerValueUpdater = () => {
           }
         });
 
-        const F8GruppeDurchschnitt = F8GruppeSumme / category.fields.length;
+        const F8GruppeDurchschnitt = F8GruppeSumme / (category.fields?.length || 1);
 
         if (F8GruppeDurchschnitt !== category.F8GruppeDurchschnitt) {
           setFieldValue(`gk_deckung_zuschlaege.${outerIndex}.F8GruppeDurchschnitt`, F8GruppeDurchschnitt);
