@@ -42,10 +42,10 @@ const SectionHeadlineText = () => {
           </Typography>
           <Stack gap={2} sx={{ flexDirection: 'row' }}>
             <Button variant="outlined" color="primary">
-              Video ansehen
+              Demo buchen
             </Button>
             <Button variant="contained" color="primary">
-              Kostenlos testen
+              Jetzt starten
             </Button>
           </Stack>
         </Box>
