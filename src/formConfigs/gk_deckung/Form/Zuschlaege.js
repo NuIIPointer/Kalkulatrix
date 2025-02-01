@@ -189,7 +189,7 @@ const MemorizedTabData = memo(({ maTitle = 'Artikel', setModalData, outerIndex, 
                   <CustomTextField
                     {...field}
                     value={formFloat(field.value, 2)}
-                    label="Davon Zuschlag"
+                    label="Gewinn"
                     endAdornment="€"
                     error={meta?.touched && Boolean(meta.error)}
                     helperText={meta?.touched && meta.error}
@@ -774,7 +774,7 @@ const MaterialzuschlagFremdleistungen = () => {
                     <Grid item xs={6} sm={6} md={3}>
                       <StatCard
                         title="Marge"
-                        value={`${formattedNumber(groupValuesCombined.F8GruppeDurchschnitt, { decimals: 2 }) || 0}€`}
+                        value={`${formattedNumber(groupValuesCombined.F8GruppeDurchschnitt, { decimals: 2 }) || 0}%`}
                       />
                     </Grid>
                     <Grid item xs={6} sm={6} md={3}>

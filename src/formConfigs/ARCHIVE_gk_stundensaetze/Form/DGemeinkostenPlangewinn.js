@@ -7,7 +7,7 @@ import CustomTextField from 'components/CustomTextField/index';
 
 const DGemeinkostenPlangewinn = () => {
   return (
-    <FormSection defaultOpen title="1. Durchschnittliche Gemeinkosten und Plangewinn pro Stunde">
+    <FormSection defaultOpen title="1. Durchschnittliche Betriebskosten und Plangewinn pro Stunde">
       <Box sx={{ mt: 1 }} />
       <ReadOnlyBox alwaysOpen title="Gemeinkostensatz">
         <Grid
@@ -23,7 +23,7 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme Gemeinkosten (fix + var)"
+                  label="Gesamtsumme Betriebskosten (fix + var)"
                   endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
@@ -45,7 +45,7 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Beiträge zu Gemeinkosten"
+                  label="Beiträge zu Betriebskosten"
                   endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
@@ -64,7 +64,7 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Verbleibende Gemeinkosten (nach Abzug von GK-Beiträgen)"
+                  label="Verbleibende Betriebskosten (nach Abzug von GK-Beiträgen)"
                   endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}

@@ -13,7 +13,7 @@ import PersonalkostenAllgemein from 'formConfigs/pk_allgemein/Form/index';
 import personalkostenAllgemeinValidationSchema from 'formConfigs/pk_allgemein/rules/validation/schema';
 import PersonalkostenAllgemeinUpdater from 'formConfigs/pk_allgemein/CalculationUpdater/index';
 
-import Gemeinkosten from 'formConfigs/gemeinkosten/Form/index';
+import Betriebskosten from 'formConfigs/gemeinkosten/Form/index';
 import gemeinkostenValidationSchema from 'formConfigs/gemeinkosten/rules/validation/schema';
 import GemeinkostenUpdater from 'formConfigs/gemeinkosten/CalculationUpdater/index';
 
@@ -69,7 +69,7 @@ const useFormLiteral = () => {
     },
     gemeinkosten: {
       linkPart: 'gemeinkosten',
-      content: <Gemeinkosten />,
+      content: <Betriebskosten />,
       calucationUpdater: <GemeinkostenUpdater />,
       validationSchema: gemeinkostenValidationSchema,
       title: 'Betriebskosten',
@@ -98,7 +98,7 @@ const useFormLiteral = () => {
     //   linkPart: 'gk_stundensaetze',
     //   content: <GKStundensaetze />,
     //   validationSchema: gKStundensaetzeValidationSchema,
-    //   title: 'Gemeinkosten-Stundensätze'
+    //   title: 'Betriebskosten-Stundensätze'
     // },
     // std_verrechnungssaetze: {
     //   linkPart: 'std_verrechnungssaetze',

@@ -34,19 +34,19 @@ const Zusammenfassung = () => {
         >
           <Grid item xs={6} sm={6} md={4}>
             <StatCard
-              title="Gesamtsumme aller Plan-Gemeinkosten"
+              title="Gesamtsumme aller Plan-Betriebskosten"
               value={`${formattedNumber(values.pk_produktiv_P42, { decimals: 2 }) || 0}€`}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={4}>
             <StatCard
-              title="Gesamtsumme aller variablen-Gemeinkosten"
-              value={`${formattedNumber(values.gemeinkosten_F49, { decimals: 2 }) || 0}€`}
+              title="Gesamtsumme aller variablen-Betriebskosten"
+              value={`${formattedNumber(values.gemeinkosten_H49, { decimals: 2 }) || 0}€`}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={4}>
             <StatCard
-              title="Gesamtsumme aller fixen-Gemeinkosten"
+              title="Gesamtsumme aller fixen-Betriebskosten"
               value={`${formattedNumber(values.gemeinkosten_I49, { decimals: 2 }) || 0}€`}
             />
           </Grid>
@@ -92,7 +92,7 @@ const Zusammenfassung = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme aller Plan-Gemeinkosten"
+                  label="Gesamtsumme aller Plan-Betriebskosten"
                   endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
@@ -111,7 +111,7 @@ const Zusammenfassung = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme aller variablen-Gemeinkosten"
+                  label="Gesamtsumme aller variablen-Betriebskosten"
                   endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
@@ -130,7 +130,7 @@ const Zusammenfassung = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 2)}
-                  label="Gesamtsumme aller fixen-Gemeinkosten"
+                  label="Gesamtsumme aller fixen-Betriebskosten"
                   endAdornment="€"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}

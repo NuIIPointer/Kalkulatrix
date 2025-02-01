@@ -90,7 +90,7 @@ const DGemeinkostenPlangewinn = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h3" sx={{ mb: 0, mt: 1 }}>
-                Variable Gemeinkosten
+                Variable Betriebskosten
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -186,7 +186,7 @@ const DGemeinkostenPlangewinn = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h3" sx={{ mb: 0, mt: 1 }}>
-                Fixe Gemeinkosten (ausgabenwirksam)
+                Fixe Betriebskosten (ausgabenwirksam)
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -229,7 +229,7 @@ const DGemeinkostenPlangewinn = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h3" sx={{ mb: 0, mt: 1 }}>
-                Beiträge zu den Gemeinkosten
+                Beiträge zu den Betriebskosten
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -344,7 +344,7 @@ const DGemeinkostenPlangewinn = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h3" sx={{ mb: 0, mt: 1 }}>
-                Fixe Gemeinkosten (nicht ausgabenwirksam)
+                Fixe Betriebskosten (nicht ausgabenwirksam)
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>

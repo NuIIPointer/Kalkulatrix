@@ -8,7 +8,7 @@ const validationSchema = object().shape({
         object().shape({
           D8: string().required('Geben Sie Eine Bezeichnung an.'),
           E8: number().required('Geben Sie einen Wert an.'),
-          F8: number().min(0, 'Geben Sie einen gültigen Wert an.')
+          F8: number('Geben Sie einen gültigen Wert an.')
         })
       )
     })

@@ -79,7 +79,7 @@ const DGemeinkostenPlangewinn = () => {
                 <CustomTextField
                   {...field}
                   value={formFloat(field.value, 1)}
-                  label="Gemeinkosten: Aufschlagssatz auf Personalkosten"
+                  label="Betriebskosten: Aufschlagssatz auf Personalkosten"
                   endAdornment="%"
                   error={meta?.touched && Boolean(meta.error)}
                   helperText={meta?.touched && meta.error}
