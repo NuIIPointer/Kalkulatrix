@@ -79,7 +79,7 @@ const SectionGewinn = () => {
             Mit der intuitiven Eingabe Ihrer Ausgaben und Gewinnziele, ermitteln wir den für Sie optimalen Stundensatzverkaufssatz. So
             steigern Sie Ihren Gewinn und Ihre Effizienz.
           </Typography>
-          <Button variant="contained" color="primary">
+          <Button href="/login" variant="contained" color="primary">
             Jetzt starten
           </Button>
         </Grid>

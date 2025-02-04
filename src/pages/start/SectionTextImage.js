@@ -81,7 +81,7 @@ export default function SectionTextImage() {
             />
           </ListItem>
         </List>
-        <Button href="/register" color="primary" variant="contained" sx={{ mt: theme.spacing(4), mr: theme.spacing(1) }}>
+        <Button href="/login" color="primary" variant="contained" sx={{ mt: theme.spacing(4), mr: theme.spacing(1) }}>
           Jetzt starten
         </Button>
         <Button href="/kontakt" color="primary" variant="contained" sx={{ mt: theme.spacing(4) }}>

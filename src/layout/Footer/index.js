@@ -1,5 +1,4 @@
 import { Box, Grid, List, ListItemButton, ListItem } from '@mui/material';
-import Logo from 'components/Logo/Logo';
 import { useTheme } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import * as CookieConsent from 'vanilla-cookieconsent';
@@ -59,6 +58,17 @@ const Footer = () => {
             <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
               <ListItemButton variant="subtitle2" component={RouterLink} to="/datenschutz" sx={footerLinkStyles}>
                 Datenschutz
+              </ListItemButton>
+            </ListItem>
+            <ListItem sx={{ padding: 0, flexBasis: '0', width: 'auto' }}>
+              <ListItemButton
+                variant="subtitle2"
+                component={RouterLink}
+                to="/files/kalkulatrix-allgemeine-geschaeftsbedingungen.pdf"
+                target="_blank"
+                sx={footerLinkStyles}
+              >
+                AGB
               </ListItemButton>
             </ListItem>
           </List>

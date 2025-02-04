@@ -14,6 +14,7 @@ import { InlineWidget } from 'react-calendly';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { Link } from 'react-router-dom';
 import ConsentWrapper from 'components/ConsentWrapper/index';
+import formattedNumber from 'utils/formUtils/formattedNumber';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -25,14 +26,13 @@ const Dashboard = () => {
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
   const formValues = formToShow?.values || {};
   const formResult = formValues.std_verrechnungssaetze_G14;
-  const auslastung = formValues.pk_produktiv_auslastung
-    ? `${formFloat(formValues.pk_produktiv_auslastung, 2).toString().replace('.', ',')}%`
-    : 'Kein Ergebnis';
+  const auslastung = formValues.pk_produktiv_auslastung ? `${formattedNumber(formValues.pk_produktiv_auslastung, 2)}%` : 'Kein Ergebnis';
+  console.log(typeof formValues.zuschlagProzentDurchschnitt, formValues.zuschlagProzentDurchschnitt);
   const zuschlagProzentDurchschnitt = formValues.zuschlagProzentDurchschnitt
-    ? formFloat(formValues.zuschlagProzentDurchschnitt, 2) * 100 + '%'
+    ? formattedNumber(parseFloat(formValues.zuschlagProzentDurchschnitt * 100, 10).toFixed(2), 2) + '%'
     : 'Kein Ergebnis';
   const anzMitarbeiter = (formValues.pk_produktiv_anzahl || 0) + (formValues.pk_allgemein_anzahl || 0);
-  const formResultFormatted = formResult ? `${formFloat(formResult, 2).toString().replace('.', ',')}€` : 'Kein Ergebnis';
+  const formResultFormatted = formResult ? `${formattedNumber(formResult, 2)}€` : 'Kein Ergebnis';
   const formFrom = `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
 
   const lastCreatedForm = Object.values(formsData).reduce((prevForm, currentForm) => {

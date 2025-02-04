@@ -6,7 +6,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
-const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLink, customLinkText }) => {
+const PriceCard = ({ price, smallPrice, stripePriceId, bullets, feature, featured, customLink, customLinkText }) => {
   const navigate = useNavigate();
   const [isLoadingCardAction, setIsLoadingCardAction] = useState();
   const { getPortalUrl, createSubscription, activeSubscriptions } = useContext(StripeContext);
@@ -29,7 +29,8 @@ const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLin
   };
 
   const { user } = useContext(UserContext);
-  const isLoggedIn = !!user;
+  console.log('user', user);
+  const isLoggedIn = !!user?.uid;
   const theme = useTheme();
   const bulletsRendered = bullets.map((bullet) => (
     <li key={bullet} style={{ marginBottom: 4 }}>
@@ -51,12 +52,15 @@ const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLin
     }
   };
 
+  console.log('isLoggedIn', isLoggedIn);
+
   return (
     <Button
       component={Stack}
       tabIndex={-1}
       color="secondary"
       onClick={onCardClick}
+      type="button"
       sx={{
         width: '100%',
         flexDirection: 'column',
@@ -101,14 +105,21 @@ const PriceCard = ({ price, stripePriceId, bullets, feature, featured, customLin
         )}
       </Stack>
       <Typography>
-        <Typography variant="span" fontSize={{ xs: 26, md: 32, lg: 42 }} fontWeight="bold">
+        <Typography
+          variant="span"
+          fontSize={smallPrice ? { xs: 22, md: 24, lg: 36 } : { xs: 26, md: 32, lg: 42 }}
+          fontWeight="bold"
+          lineHeight="1.15em"
+        >
           {price}
         </Typography>
-        <Typography variant="span" sx={{ opacity: 0.7 }}>
-          /Monat
-        </Typography>
+        {!smallPrice && (
+          <Typography variant="span" sx={{ opacity: 0.7 }}>
+            /Monat
+          </Typography>
+        )}
       </Typography>
-      <Stack sx={{ mb: { xs: 2, md: 4, lg: 6 } }}>
+      <Stack sx={{ mb: { xs: 2, md: 2.5, lg: 3 } }}>
         <ul style={{ paddingLeft: theme.spacing(2) }}>{bulletsRendered}</ul>
       </Stack>
       <Button
@@ -138,6 +149,7 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
             key={priceConfig.price}
             feature={priceConfig.title}
             price={priceConfig.price}
+            smallPrice={priceConfig.smallPrice}
             stripePriceId={priceConfig.stripePriceId}
             bullets={priceConfig.bullets}
             featured={priceConfig.featured}
@@ -151,43 +163,59 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
 };
 
 const pricesConfigPreset = [
-  // {
-  //   title: 'FREE',
-  //   price: '0€',
-  //   stripePriceId: 'price_1QZBBaFGa3DH0yAqy766ghH0',
-  //   bullets: ['Das ist ein Test']
-  // },
   {
     title: 'Pro',
     price: '69€',
     stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW',
     featured: true,
     bullets: [
-      'Unbegrenzte Kalkulationen',
-      'Kundensupport',
-      'Multi-User Zugang',
-      'Priorisierter Kunden-Support per Telefon und E-Mail',
-      'Monatliches Beratungsgespräch'
-    ]
+      'Unbegrenzte Stundensatzkalkulation',
+      'Mitarbeiterkostenplanung',
+      'Produktmargenplanung',
+      'Erfassung des Plangewinns',
+      'Kundensupport'
+    ],
+    priceIds: {
+      monthly: 'asd',
+      halfYearly: 'asd',
+      yearly: 'asd'
+    }
   },
   {
     title: 'Premium',
     price: '299€',
     stripePriceId: 'price_1QUSazFGa3DH0yAqzUU4v4U9',
-    bullets: ['Unbegrenzte Kalkulationen', '1-User Zugang', 'Kundensupport']
+    bullets: [
+      'Monatliches Beratungsgespräch',
+      'Exklusive Vorlagen & Checklisten',
+      'Regelmäßige Schulungen und Webinare',
+      'Alle Funktionen des Pro Plan',
+      'Priorisierter Kundensupport'
+    ],
+    priceIds: {
+      monthly: 'asd',
+      halfYearly: 'asd',
+      yearly: 'asd'
+    }
   },
   {
-    title: 'Enterprise (auf Anfrage)',
-    price: '300€+',
+    title: 'Enterprise',
+    price: 'Preis auf Anfrage',
+    smallPrice: true,
     customLink: '/kontakt',
-    customLinkText: 'Kontaktieren Sie uns',
+    customLinkText: 'Jetzt anfragen',
     bullets: [
-      'Unbegrenzte Nutzerzahl',
-      'Regelmäßige Schulungen und Webinare',
-      'Alle Funktionen des Pro-Plans',
-      'Persönlicher Account-Manager',
-      'Durchführung der Kalkulation vor Ort'
-    ]
+      'Durchführung der Kalkulation in ihrem Betrieb',
+      'Individuelle Handlungsempfehlungen',
+      'Für Unternehmens- und Steuerberater',
+      'Alle Features des Premiumplan',
+      'Persönlicher Accountmanager'
+    ],
+    priceIds: {
+      monthly: 'asd',
+      halfYearly: 'asd',
+      yearly: 'asd'
+    }
   }
 ];
 

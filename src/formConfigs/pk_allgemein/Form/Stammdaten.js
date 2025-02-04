@@ -80,13 +80,18 @@ const columns = [
     )
   },
   {
-    field: 'brutto',
-    headerName: 'Brutto inkl. SZ (p.a.)',
+    field: 'bruttoMonat',
+    headerName: 'Bruttolohn (p.m.)',
     width: 220
   },
   {
-    field: 'anwesenheitsentgelt',
-    headerName: 'Lohn (p.a).',
+    field: 'sonderzahlungen',
+    headerName: 'Sonderzahlungen (p.a.)',
+    width: 220
+  },
+  {
+    field: 'gesamtkosten',
+    headerName: 'Gesamtkosten (p.a.)',
     width: 220
   },
   {
@@ -712,7 +717,9 @@ const Stammdaten = () => {
                             name: maTitle,
                             groupName: outerField.groupTitle || `Abteilung ${outerIndex + 1}`,
                             anwesenheitsentgelt: `${formattedNumber(innerField.N14 || 0, 2)}€`,
-                            brutto: `${formattedNumber(innerField.L14 || 0, 2)}€`,
+                            bruttoMonat: `${formattedNumber(innerField.I14 || 0, 2)}€`,
+                            sonderzahlungen: `${formattedNumber(innerField.K14 || 0, 2)}€`,
+                            gesamtkosten: `${formattedNumber(innerField.N14 || 0, 2)}€`,
                             newField: innerField.newField,
                             hasError: maHasError,
                             theme,

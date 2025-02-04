@@ -6,6 +6,7 @@ import { db, auth, app } from 'services/firebase';
 
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { query, where, getDocs, collection, addDoc, onSnapshot } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 export const StripeContext = createContext(null);
 
@@ -27,6 +28,7 @@ const getSubscriptions = async (userId) => {
 };
 
 export const StripeContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [loadingCreateSubscription, setLoadingCreateSubscription] = useState(false);
   const [loadingGetSubscriptionStatus, setLoadingGetSubscriptionStatus] = useState(false);
@@ -71,9 +73,12 @@ export const StripeContextProvider = ({ children }) => {
             }
           });
         });
+      } else {
+        setLoadingCreateSubscription(false);
+        navigate('/login');
       }
     },
-    [user.uid]
+    [navigate, user.uid]
   );
 
   const getPortalUrl = async () => {

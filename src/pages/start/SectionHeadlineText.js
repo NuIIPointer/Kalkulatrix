@@ -44,7 +44,7 @@ const SectionHeadlineText = () => {
             <Button variant="outlined" color="primary">
               Demo buchen
             </Button>
-            <Button variant="contained" color="primary">
+            <Button href="/login" variant="contained" color="primary">
               Jetzt starten
             </Button>
           </Stack>
