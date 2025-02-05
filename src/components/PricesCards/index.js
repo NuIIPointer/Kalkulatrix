@@ -1,4 +1,4 @@
-import { Typography, Stack, Grid, Button } from '@mui/material';
+import { Typography, Stack, Grid, Button, ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { StripeContext } from 'context/stripe/index';
 import { UserContext } from 'context/user/index';
@@ -6,7 +6,18 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
-const PriceCard = ({ price, smallPrice, stripePriceId, bullets, feature, featured, customLink, customLinkText }) => {
+const PriceCard = ({
+  price,
+  viewState,
+  priceNotice,
+  originalPrice,
+  stripePriceId,
+  bullets,
+  feature,
+  featured,
+  customLink,
+  customLinkText
+}) => {
   const navigate = useNavigate();
   const [isLoadingCardAction, setIsLoadingCardAction] = useState();
   const { getPortalUrl, createSubscription, activeSubscriptions } = useContext(StripeContext);
@@ -29,7 +40,6 @@ const PriceCard = ({ price, smallPrice, stripePriceId, bullets, feature, feature
   };
 
   const { user } = useContext(UserContext);
-  console.log('user', user);
   const isLoggedIn = !!user?.uid;
   const theme = useTheme();
   const bulletsRendered = bullets.map((bullet) => (
@@ -107,18 +117,31 @@ const PriceCard = ({ price, smallPrice, stripePriceId, bullets, feature, feature
       <Typography>
         <Typography
           variant="span"
-          fontSize={smallPrice ? { xs: 22, md: 24, lg: 36 } : { xs: 26, md: 32, lg: 42 }}
+          fontSize={priceNotice && !price ? { xs: 22, md: 24, lg: 36 } : { xs: 26, md: 32, lg: 42 }}
           fontWeight="bold"
           lineHeight="1.15em"
+          display="inline-flex"
         >
-          {price}
+          {price ? `${price}€` : priceNotice}
         </Typography>
-        {!smallPrice && (
+        {!priceNotice && (
           <Typography variant="span" sx={{ opacity: 0.7 }}>
-            /Monat
+            /{viewState === 'monthly' ? 'Monat' : viewState === 'halfYearly' ? 'Halbjahr' : 'Jahr'}
           </Typography>
         )}
       </Typography>
+      {originalPrice && (
+        <Typography variant="span" sx={{ opacity: 0.7, display: 'flex', gap: 1 }} aria-hidden>
+          <Stack
+            sx={{
+              textDecoration: 'line-through'
+            }}
+          >
+            {originalPrice}€
+          </Stack>
+          spare {Math.round(((originalPrice - price) / originalPrice) * 100)}%
+        </Typography>
+      )}
       <Stack sx={{ mb: { xs: 2, md: 2.5, lg: 3 } }}>
         <ul style={{ paddingLeft: theme.spacing(2) }}>{bulletsRendered}</ul>
       </Stack>
@@ -141,16 +164,59 @@ const PriceCard = ({ price, smallPrice, stripePriceId, bullets, feature, feature
 };
 
 const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
+  const theme = useTheme();
+  const [viewState, setViewState] = useState('monthly');
+  const handleViewChange = (_event, newViewState) => {
+    if (newViewState !== null) {
+      setViewState(newViewState);
+    }
+  };
+
   return (
     <Grid container columnSpacing={{ xs: 2, sm: 3, md: 4 }} rowSpacing={{ xs: 2, sm: 3, md: 4 }} {...containerProps}>
+      <Grid item xs={12}>
+        <Stack sx={{ display: 'flex', alignItems: { xs: 'start', sm: 'center' }, marginBottom: 2 }}>
+          {/* <Box sx={{ backgroundColor: theme.palette.common.white }}> */}
+          <ToggleButtonGroup
+            value={viewState}
+            exclusive
+            onChange={handleViewChange}
+            color="primary"
+            sx={{
+              padding: 1.5,
+              backgroundColor: theme.palette.common.white,
+              boxShadow: theme.customShadows.z1,
+              borderRadius: theme.shape.borderRadiusBox,
+              justifyContent: 'center',
+              '.MuiButtonBase-root.MuiToggleButtonGroup-grouped.MuiToggleButton-root': {
+                border: `1px solid ${theme.palette.grey[300]}`
+              }
+            }}
+          >
+            <ToggleButton value="monthly">Monatlich</ToggleButton>
+            <ToggleButton value="halfYearly">Halbjährlich</ToggleButton>
+            <ToggleButton value="yearly">Jährlich</ToggleButton>
+          </ToggleButtonGroup>
+          {/* </Box> */}
+        </Stack>
+      </Grid>
       {pricesConfig.map((priceConfig) => (
         <Grid key={priceConfig.title} item xs={12} sm={6} lg={4}>
           <PriceCard
-            key={priceConfig.price}
+            key={priceConfig.prices?.[viewState].stripePriceId || priceConfig.priceNotice}
             feature={priceConfig.title}
-            price={priceConfig.price}
-            smallPrice={priceConfig.smallPrice}
-            stripePriceId={priceConfig.stripePriceId}
+            viewState={viewState}
+            price={priceConfig.prices?.[viewState].price}
+            originalPrice={
+              priceConfig.prices &&
+              (viewState === 'halfYearly'
+                ? priceConfig.prices?.monthly.price * 6
+                : viewState === 'yearly'
+                ? priceConfig.prices?.monthly.price * 12
+                : null)
+            }
+            priceNotice={priceConfig.priceNotice}
+            stripePriceId={priceConfig.prices?.[viewState].stripePriceId}
             bullets={priceConfig.bullets}
             featured={priceConfig.featured}
             customLink={priceConfig.customLink}
@@ -165,8 +231,11 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
 const pricesConfigPreset = [
   {
     title: 'Pro',
-    price: '69€',
-    stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW',
+    prices: {
+      monthly: { price: 69, stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW' },
+      halfYearly: { price: 360, stripePriceId: 'price_1QNB4UFGa3DH0yAqgxE3OQ0B' },
+      yearly: { price: 620, stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm' }
+    },
     featured: true,
     bullets: [
       'Unbegrenzte Stundensatzkalkulation',
@@ -174,34 +243,26 @@ const pricesConfigPreset = [
       'Produktmargenplanung',
       'Erfassung des Plangewinns',
       'Kundensupport'
-    ],
-    priceIds: {
-      monthly: 'asd',
-      halfYearly: 'asd',
-      yearly: 'asd'
-    }
+    ]
   },
   {
     title: 'Premium',
-    price: '299€',
-    stripePriceId: 'price_1QUSazFGa3DH0yAqzUU4v4U9',
+    prices: {
+      monthly: { price: 299, stripePriceId: 'price_1QUSazFGa3DH0yAqzUU4v4U9' },
+      halfYearly: { price: 1520, stripePriceId: 'price_1QUSazFGa3DH0yAqPZk0IBrb' },
+      yearly: { price: 2690, stripePriceId: 'price_1QUSazFGa3DH0yAq85zvOhaH' }
+    },
     bullets: [
       'Monatliches Beratungsgespräch',
       'Exklusive Vorlagen & Checklisten',
       'Regelmäßige Schulungen und Webinare',
       'Alle Funktionen des Pro Plan',
       'Priorisierter Kundensupport'
-    ],
-    priceIds: {
-      monthly: 'asd',
-      halfYearly: 'asd',
-      yearly: 'asd'
-    }
+    ]
   },
   {
     title: 'Enterprise',
-    price: 'Preis auf Anfrage',
-    smallPrice: true,
+    priceNotice: 'Preis auf Anfrage',
     customLink: '/kontakt',
     customLinkText: 'Jetzt anfragen',
     bullets: [
@@ -210,12 +271,7 @@ const pricesConfigPreset = [
       'Für Unternehmens- und Steuerberater',
       'Alle Features des Premiumplan',
       'Persönlicher Accountmanager'
-    ],
-    priceIds: {
-      monthly: 'asd',
-      halfYearly: 'asd',
-      yearly: 'asd'
-    }
+    ]
   }
 ];
 
