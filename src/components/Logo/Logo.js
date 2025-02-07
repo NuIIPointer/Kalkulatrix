@@ -30,7 +30,7 @@ const Logo = ({ variant, ...otherProps }) => {
      *
      */
     <>
-      <LogoComponent alt="Kalkulatrix - Adel Consultant - Logo" style={{ width: '100%', height: 'auto' }} {...otherProps} />
+      <LogoComponent alt="Kalkulatrix - Adel Consulting - Logo" style={{ width: '100%', height: 'auto' }} {...otherProps} />
     </>
     // <Box
     //   component="svg"
@@ -49,7 +49,7 @@ const Logo = ({ variant, ...otherProps }) => {
     //     Kalkulatrix
     //   </Typography>
     //   <Typography x="0" y="70" component="text" sx={{ fontWeight: 700, fontSize: '18px !important', fill: 'currentColor' }}>
-    //     Adel Consultant
+    //     Adel Consulting
     //   </Typography>
     // </Box>
   );
