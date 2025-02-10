@@ -17,9 +17,6 @@ const SupportContact = () => {
         </Typography>
       </Typography>
       <Typography variant="body2" sx={{ mb: 2 }}>
-        Bei Fragen senden Sie bitte eine E-Mail an <a href="mailto:support@kalkulatrix.de">support@kalkulatrix.de</a>.
-      </Typography>
-      <Typography variant="body2" sx={{ mb: 2 }}>
         Wir freuen uns über Ihr Feedback und beantworten gerne Ihre Fragen. Zögern Sie nicht, uns zu kontaktieren, wenn Sie Unterstützung
         benötigen oder Anregungen haben. Unser Team steht Ihnen jederzeit zur Verfügung.
       </Typography>
@@ -27,6 +24,20 @@ const SupportContact = () => {
         Besuchen Sie auch unsere FAQ-Seite, um Antworten auf häufig gestellte Fragen zu finden. Dort finden Sie nützliche Informationen zu
         unseren Produkten und Services.
       </Typography>
+      <Box
+        as="iframe"
+        src="https://adel-consulting.com/kontakt-kalkulatrix/"
+        width="100%"
+        height={{ xs: 1320, xl: 860 }}
+        sx={{
+          border: 0,
+          borderRadius: theme.shape.borderRadiusBox,
+          overflow: 'hidden',
+          width: '100%',
+          mt: { xs: 0, sm: 2, md: 4, lg: 6 }
+        }}
+        title="Kontakt zu Kalulatrix Mitarbeitern"
+      />
     </Box>
   );
 };
