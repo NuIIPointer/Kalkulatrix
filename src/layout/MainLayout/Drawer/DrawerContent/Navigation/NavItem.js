@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { ListItemButton, ListItemIcon, ListItem } from '@mui/material';
+import { OpenInNew } from '@mui/icons-material';
 import { UserContext } from 'context/user/index';
 
 // ==============================|| NAVIGATION - LIST ITEM ||============================== //
@@ -30,7 +31,7 @@ const NavItem = ({ item, level }) => {
   }
 
   const Icon = item.icon;
-  const itemIcon = item.icon ? <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} /> : false;
+  const itemIcon = item.icon ? <Icon style={{ fontSize: '1.25rem' }} /> : false;
 
   const isSubItem = level === 2;
   const textColor = isActive ? (isSubItem ? theme.palette.common.black : theme.palette.common.white) : theme.palette.common.black;
@@ -91,13 +92,23 @@ const NavItem = ({ item, level }) => {
           <ListItemIcon
             sx={{
               color: iconColor,
-              marginRight: 0.5
+              marginRight: drawerOpen ? 1 : 0.5
             }}
           >
             {itemIcon}
           </ListItemIcon>
         )}
         {item.title}
+        {item.target === '_blank' && (
+          <ListItemIcon
+            sx={{
+              color: textColor,
+              marginRight: 0.5
+            }}
+          >
+            <OpenInNew sx={{ fontSize: '0.7em', display: 'inline-block', marginLeft: 0.5, marginTop: -0.75 }} />
+          </ListItemIcon>
+        )}
       </ListItemButton>
     </ListItem>
   );

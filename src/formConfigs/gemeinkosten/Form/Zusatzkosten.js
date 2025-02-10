@@ -10,7 +10,12 @@ import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 import CustomTextField from 'components/CustomTextField/index';
 
-export const zusatzkosten_fieldTitles = ['Unternehmerlohn', 'Eigenkapital-Zinsen', 'Fremdkapital-Zinsen', 'Kalkulatorische Wagnisse'];
+export const zusatzkosten_fieldTitles = [
+  'Unternehmerlohn',
+  'Eigenkapital-Zinsen',
+  'Fremdkapital-Zinsen',
+  'Kalkulatorische Wagnisse',
+];
 export const zusatzkosten_startingRow = 42;
 
 const Zusatzkosten = () => {
@@ -114,6 +119,28 @@ const Zusatzkosten = () => {
             </>
           );
         })}
+        <Grid item xs={12}>
+          <Typography variant="h3" sx={{ mb: 1 }}>
+            Zusatzangaben
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FastField name={`gemeinkosten_zusatzkosten_F_Skonti_Boni`}>
+            {({ field, meta }) => (
+              <CustomTextField
+                {...field}
+                label="Skonti, Boni, ..."
+                endAdornment="€"
+                error={meta?.touched && Boolean(meta.error)}
+                helperText={meta?.touched && meta.error}
+                sx={{ mb: 2 }}
+                type="number"
+                onWheel={(event) => event.target.blur()}
+                min="0"
+              />
+            )}
+          </FastField>
+        </Grid>
         <Grid item xs={12}>
           <ReadOnlyBox alwaysOpen title={'Zusatzkosten gesamt'} headlineVariant="h3">
             <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }} alignItems="flex-end">

@@ -8,6 +8,7 @@ import PublicLayout from 'layout/PublicLayout';
 const Start = Loadable(lazy(() => import('pages/start')));
 const Impressum = Loadable(lazy(() => import('pages/impressum')));
 const Datenschutz = Loadable(lazy(() => import('pages/datenschutz')));
+const FAQ = Loadable(lazy(() => import('pages/faq')));
 const Contact = Loadable(lazy(() => import('pages/kontakt')));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -31,6 +32,10 @@ const MainRoutes = {
     {
       path: '/datenschutz',
       element: <Datenschutz />
+    },
+    {
+      path: '/faq',
+      element: <FAQ />
     }
   ]
 };

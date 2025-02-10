@@ -287,7 +287,7 @@ const StundensatzRechnerValueUpdater = () => {
   useEffect(() => {
     clearTimeout(timeoutSachkosten2);
     const reCalculateZusatzkostenValues = () => {
-      let gemeinkosten_F47 = 0;
+      let gemeinkosten_F47 = values.gemeinkosten_zusatzkosten_F_Skonti_Boni || 0;
       let gemeinkosten_H47 = 0;
       let gemeinkosten_I47 = 0;
 

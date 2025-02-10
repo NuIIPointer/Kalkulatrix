@@ -34,7 +34,7 @@ const newFormName = `Kalkulation vom ${dayjs(new Date()).format('DD.MM.YYYY')}`;
 const SelectFormView = ({ formType, sections }) => {
   const theme = useTheme();
   const { createForm, copyForm: copyFormContext, formsData = {}, deleteForm } = useContext(UserContext);
-  const { hasActiveSubscription } = useContext(StripeContext);
+  const { hasActiveSubscription, canCreateNewCalulation } = useContext(StripeContext);
   const [openSubBanner, setOpenSubBanner] = useState(false);
   const [showMoreFormsWarning, setShowMoreFormsWarning] = useState(false);
   const [showDeleteFormDialog, setShowDeleteFormDialog] = useState(false);
@@ -190,31 +190,33 @@ const SelectFormView = ({ formType, sections }) => {
         <Grid container spacing={3} sx={{ marginBottom: theme.spacing(3) }}>
           {formCards}
 
-          <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
-            {showMoreFormsWarning && (
-              <Alert sx={{ mb: 2 }} severity="warning">
-                Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort um alle Kalkulationen anzuzeigen.
-              </Alert>
-            )}
-            <TextTeaserCard
-              onClick={hasActiveSubscription ? addForm : handleOpenSub}
-              primaryText={
-                <Stack flexDirection="row" alignItems="center">
-                  Neue Kalkulation
-                  <ChevronRight
-                    sx={{
-                      opacity: '0.2',
-                      fontSize: '1em',
-                      margin: '0 0 -0.2em 0.25rem'
-                    }}
-                  />
-                </Stack>
-              }
-              prefixText="Erstellen Sie eine"
-              color={theme.palette.common.white}
-              light
-            ></TextTeaserCard>
-          </Grid>
+          {(!hasActiveSubscription || canCreateNewCalulation) && (
+            <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
+              {showMoreFormsWarning && (
+                <Alert sx={{ mb: 2 }} severity="warning">
+                  Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort um alle Kalkulationen anzuzeigen.
+                </Alert>
+              )}
+              <TextTeaserCard
+                onClick={hasActiveSubscription ? addForm : handleOpenSub}
+                primaryText={
+                  <Stack flexDirection="row" alignItems="center">
+                    neue Kalkulation
+                    <ChevronRight
+                      sx={{
+                        opacity: '0.2',
+                        fontSize: '1em',
+                        margin: '0 0 -0.2em 0.25rem'
+                      }}
+                    />
+                  </Stack>
+                }
+                prefixText="Erstellen Sie eine"
+                color={theme.palette.common.white}
+                light
+              ></TextTeaserCard>
+            </Grid>
+          )}
         </Grid>
         <Dialog
           open={openSubBanner}

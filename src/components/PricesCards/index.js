@@ -36,7 +36,7 @@ const PriceCard = ({
     setIsLoadingCardAction(false);
   };
   const onLoggedOutClick = () => {
-    navigate(`/login`);
+    navigate(`/register`);
   };
 
   const { user } = useContext(UserContext);
@@ -237,13 +237,7 @@ const pricesConfigPreset = [
       yearly: { price: 620, stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm' }
     },
     featured: true,
-    bullets: [
-      'Unbegrenzte Stundensatzkalkulation',
-      'Mitarbeiterkostenplanung',
-      'Produktmargenplanung',
-      'Erfassung des Plangewinns',
-      'Kundensupport'
-    ]
+    bullets: ['Mitarbeiterkostenplanung', 'Produktmargenplanung', 'Erfassung des Plangewinns', 'Kundensupport']
   },
   {
     title: 'Premium',
@@ -266,6 +260,7 @@ const pricesConfigPreset = [
     customLink: '/kontakt',
     customLinkText: 'Jetzt anfragen',
     bullets: [
+      'Unbegrenzte Stundensatzkalkulation',
       'Durchführung der Kalkulation in ihrem Betrieb',
       'Individuelle Handlungsempfehlungen',
       'Für Unternehmens- und Steuerberater',

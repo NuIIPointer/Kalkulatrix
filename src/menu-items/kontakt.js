@@ -1,5 +1,5 @@
 // assets
-import { Email } from '@mui/icons-material';
+import { Email, LiveHelp } from '@mui/icons-material';
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
@@ -15,6 +15,14 @@ const pages = {
       type: 'item',
       url: '/kontakt',
       icon: Email
+    },
+    {
+      id: 'faq',
+      title: 'FAQ',
+      target: '_blank',
+      type: 'item',
+      url: '/faq',
+      icon: LiveHelp
     }
   ]
 };

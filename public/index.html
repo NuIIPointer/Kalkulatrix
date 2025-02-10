@@ -39,6 +39,12 @@
       content="Berechnen Sie mit dem Stundensatzkalkulator von Kalkulatrix ganz einfach den individuellen Deckungsbeitrag Ihres Unternehmens."
     />
     <meta property="twitter:image" content="/og_image.png" />
+    <script>
+      function resizeIframe(obj) {
+        console.log('obj', obj);
+        obj.style.height = obj.target.contentWindow.document.documentElement.scrollHeight + 'px';
+      }
+    </script>
     <!-- <meta name="twitter:creator" content="@codedthemes" /> -->
 
     <!--
