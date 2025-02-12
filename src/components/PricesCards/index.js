@@ -2,7 +2,7 @@ import { Typography, Stack, Grid, Button, ToggleButtonGroup, ToggleButton, Box }
 import { useTheme } from '@mui/material/styles';
 import { StripeContext } from 'context/stripe/index';
 import { UserContext } from 'context/user/index';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
@@ -21,7 +21,8 @@ const PriceCard = ({
   const navigate = useNavigate();
   const [isLoadingCardAction, setIsLoadingCardAction] = useState();
   const { getPortalUrl, createSubscription, activeSubscriptions } = useContext(StripeContext);
-  const isActive = activeSubscriptions?.some((sub) => sub.priceId === stripePriceId);
+  const activeSubscription = activeSubscriptions?.find((sub) => sub.priceId === stripePriceId);
+  const isActive = !!activeSubscription;
 
   const onStripeSub = async () => {
     setIsLoadingCardAction(true);
@@ -62,8 +63,6 @@ const PriceCard = ({
     }
   };
 
-  console.log('isLoggedIn', isLoggedIn);
-
   return (
     <Button
       component={Stack}
@@ -72,6 +71,7 @@ const PriceCard = ({
       onClick={onCardClick}
       type="button"
       sx={{
+        position: 'relative',
         width: '100%',
         flexDirection: 'column',
         maxWidth: { xs: 500, md: 'none' },
@@ -84,7 +84,9 @@ const PriceCard = ({
         color: isActive ? theme.palette.common.white : theme.palette.text.primary,
         textAlign: 'left',
         alignItems: 'stretch',
+        justifyContent: 'flex-start',
         transition: '.25s',
+        outline: isActive ? '4px solid gold' : 'none',
         ':hover': {
           borderColor: featured ? theme.palette.primary[500] : theme.palette.grey[500],
           backgroundColor: isActive ? theme.palette.primary[400] : theme.palette.grey[100],
@@ -103,7 +105,7 @@ const PriceCard = ({
               borderRadius: '1000px',
               px: 2,
               py: 0.25,
-              backgroundColor: theme.palette.warning.main + '44',
+              backgroundColor: isActive ? theme.palette.common.white : theme.palette.warning.main + '44',
               color: theme.palette.warning.dark,
               my: -2
             }}
@@ -145,32 +147,56 @@ const PriceCard = ({
       <Stack sx={{ mb: { xs: 2, md: 2.5, lg: 3 } }}>
         <ul style={{ paddingLeft: theme.spacing(2) }}>{bulletsRendered}</ul>
       </Stack>
-      <Button
-        variant={featured ? 'contained' : 'outlined'}
-        color={isActive ? 'white' : undefined}
-        sx={{ mt: 'auto' }}
-        tabIndex={-1}
-        role="presentation"
-      >
-        {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten')}{' '}
-        {isLoadingCardAction ? (
-          <CircularProgress color="inherit" stroke="currentColor" size={20} sx={{ marginLeft: theme.spacing(1) }} />
-        ) : (
-          ''
-        )}
-      </Button>
+      {activeSubscriptions.length === 0 || isActive || customLinkText ? (
+        <Button
+          variant={featured ? 'contained' : 'outlined'}
+          color={isActive ? 'white' : undefined}
+          sx={{ mt: 'auto' }}
+          tabIndex={-1}
+          role="presentation"
+        >
+          {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten')}
+          {isLoadingCardAction ? (
+            <CircularProgress color="inherit" stroke="currentColor" size={20} sx={{ marginLeft: theme.spacing(1) }} />
+          ) : (
+            ''
+          )}
+        </Button>
+      ) : (
+        ''
+      )}
     </Button>
   );
 };
 
 const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
   const theme = useTheme();
+  const { activeSubscriptions } = useContext(StripeContext);
+  const activeSubscription = activeSubscriptions[0];
   const [viewState, setViewState] = useState('monthly');
   const handleViewChange = (_event, newViewState) => {
     if (newViewState !== null) {
       setViewState(newViewState);
     }
   };
+
+  useEffect(() => {
+    if (activeSubscription) {
+      const tabToOpen = pricesConfig
+        .map((priceConfig) =>
+          priceConfig.prices
+            ? Object.entries(priceConfig.prices)
+                .map(([key, value]) => (value.stripePriceId === activeSubscription.priceId ? key : null))
+                .filter(Boolean)
+            : []
+        )
+        .flat()?.[0];
+
+      if (tabToOpen) {
+        setViewState(tabToOpen);
+      }
+    }
+  }, [activeSubscription, pricesConfig]);
 
   return (
     <Grid container columnSpacing={{ xs: 2, sm: 3, md: 4 }} rowSpacing={{ xs: 2, sm: 3, md: 4 }} {...containerProps}>
@@ -218,7 +244,7 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
             priceNotice={priceConfig.priceNotice}
             stripePriceId={priceConfig.prices?.[viewState].stripePriceId}
             bullets={priceConfig.bullets}
-            featured={priceConfig.featured}
+            featured={priceConfig.prices?.[viewState].featured}
             customLink={priceConfig.customLink}
             customLinkText={priceConfig.customLinkText}
           />
@@ -232,11 +258,14 @@ const pricesConfigPreset = [
   {
     title: 'Pro',
     prices: {
-      monthly: { price: 69, stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW' },
+      monthly: {
+        price: 69,
+        stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW',
+        featured: true
+      },
       halfYearly: { price: 360, stripePriceId: 'price_1QNB4UFGa3DH0yAqgxE3OQ0B' },
       yearly: { price: 620, stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm' }
     },
-    featured: true,
     bullets: ['Mitarbeiterkostenplanung', 'Produktmargenplanung', 'Erfassung des Plangewinns', 'Kundensupport']
   },
   {
@@ -257,7 +286,7 @@ const pricesConfigPreset = [
   {
     title: 'Enterprise',
     priceNotice: 'Preis auf Anfrage',
-    customLink: '/kontakt',
+    customLink: '/enterprise',
     customLinkText: 'Jetzt anfragen',
     bullets: [
       'Unbegrenzte Stundensatzkalkulation',

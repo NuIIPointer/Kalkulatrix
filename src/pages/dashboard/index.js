@@ -9,7 +9,6 @@ import { PeopleAlt, Receipt, LocalAtm, Inbox } from '@mui/icons-material';
 import { UserContext } from 'context/user';
 // import FullCalendarConfigured from 'components/FullCalendarConfigured';
 import TeaserCard from 'components/TeaserCard';
-import formFloat from 'utils/formUtils/formFloat';
 import { InlineWidget } from 'react-calendly';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { Link } from 'react-router-dom';
@@ -24,6 +23,7 @@ const Dashboard = () => {
   const formsKeys = Object.keys(formsData);
   const formIdToShow = formsKeys?.[activeFormKey];
   const formToShow = formIdToShow !== undefined && formsData?.[formIdToShow];
+  console.log('formToShow', formToShow);
   const formValues = formToShow?.values || {};
   const formResult = formValues.std_verrechnungssaetze_G14;
   const auslastung = formValues.pk_produktiv_auslastung ? `${formattedNumber(formValues.pk_produktiv_auslastung, 2)}%` : 'Kein Ergebnis';
@@ -35,17 +35,18 @@ const Dashboard = () => {
   const formResultFormatted = formResult ? `${formattedNumber(formResult, 2)}€` : 'Kein Ergebnis';
   const formFrom = `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
 
-  const lastCreatedForm = Object.values(formsData).reduce((prevForm, currentForm) => {
-    if (!prevForm || currentForm.creationDate > prevForm.creationDate) {
+  const lastSavedForm = Object.values(formsData).reduce((prevForm, currentForm) => {
+    if (!prevForm || currentForm.lastSaved > prevForm.lastSaved) {
       return currentForm;
     }
     return prevForm;
   }, null);
-  const lastCreatedFormTimestamp = lastCreatedForm?.creationDate;
-  const daysSinceLastCreated = lastCreatedFormTimestamp ? dayjs().diff(dayjs(lastCreatedFormTimestamp), 'days') : null;
-  const lastCreatedPlusOffset = lastCreatedFormTimestamp ? dayjs(lastCreatedFormTimestamp).add(3, 'months') : null;
+  console.log('lastSavedForm', lastSavedForm);
+  const lastSavedFormTimestamp = lastSavedForm?.lastSaved;
+  const daysSinceLastCreated = lastSavedFormTimestamp ? dayjs().diff(dayjs(lastSavedFormTimestamp), 'days') : null;
+  const lastCreatedPlusOffset = lastSavedFormTimestamp ? dayjs(lastSavedFormTimestamp).add(3, 'months') : null;
   const lastCreatedPlusOffsetInDays = lastCreatedPlusOffset
-    ? dayjs(lastCreatedPlusOffset).diff(dayjs(lastCreatedFormTimestamp), 'days')
+    ? dayjs(lastCreatedPlusOffset).diff(dayjs(lastSavedFormTimestamp), 'days')
     : null;
   const nextCalculationInDays = lastCreatedPlusOffsetInDays - daysSinceLastCreated;
 
@@ -55,7 +56,7 @@ const Dashboard = () => {
     {
       value: daysSinceLastCreated,
       label: `Tage seit der letzten Kalkulation:`,
-      color: lastCreatedFormTimestamp ? theme.palette.primary[500] : theme.palette.grey[500]
+      color: lastSavedFormTimestamp ? theme.palette.primary[500] : theme.palette.grey[500]
     },
     ...(nextCalculationInDays >= 1
       ? [
@@ -77,7 +78,7 @@ const Dashboard = () => {
       cy: 120,
       cx: 120,
       hideTooltip: true,
-      data: lastCreatedFormTimestamp ? chartData : chartDummyData
+      data: lastSavedFormTimestamp ? chartData : chartDummyData
     }
   ];
 
@@ -141,7 +142,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={Receipt}
                 title="Aktueller Stundensatz"
-                subTitle={formFrom}
+                subTitle={`"${formFrom}"`}
                 value={formResultFormatted}
                 // valueChanged="12,25%"
               />
@@ -151,7 +152,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={LocalAtm}
                 title="Auslastung"
-                subTitle={formFrom}
+                subTitle={`"${formFrom}"`}
                 value={auslastung}
                 // valueChanged="10%"
               />
@@ -161,7 +162,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={Inbox}
                 title="Ø-Marge auf Produkte"
-                subTitle={formFrom}
+                subTitle={`"${formFrom}"`}
                 value={zuschlagProzentDurchschnitt}
                 // valueChanged="10%"
               />
@@ -171,7 +172,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={PeopleAlt}
                 title="Anzahl Mitarbeiter"
-                subTitle={formFrom}
+                subTitle={`"${formFrom}"`}
                 value={anzMitarbeiter}
                 // valueChanged="3"
                 changedUpDown="down"
@@ -210,7 +211,7 @@ const Dashboard = () => {
                     textAlign: 'center'
                   }}
                 >
-                  {lastCreatedFormTimestamp ? (
+                  {lastSavedFormTimestamp ? (
                     <>
                       <Typography variant="h3" component="p">
                         {dayjs(lastCreatedPlusOffset).format('DD.MM.YYYY')}
@@ -224,7 +225,7 @@ const Dashboard = () => {
                       to="/office/form/overview"
                       sx={{ color: 'initial', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}
                     >
-                      Beginnen Sie jetzt ihre erste Kalkulation!
+                      Beginnen Sie jetzt ihre Kalkulation!
                     </Typography>
                   )}
                 </Stack>

@@ -34,9 +34,13 @@ const newFormName = `Kalkulation vom ${dayjs(new Date()).format('DD.MM.YYYY')}`;
 const SelectFormView = ({ formType, sections }) => {
   const theme = useTheme();
   const { createForm, copyForm: copyFormContext, formsData = {}, deleteForm } = useContext(UserContext);
-  const { hasActiveSubscription, canCreateNewCalulation } = useContext(StripeContext);
+  const { hasActiveSubscription, canCreateNewCalulation, maxCalculations } = useContext(StripeContext);
   const [openSubBanner, setOpenSubBanner] = useState(false);
-  const [showMoreFormsWarning, setShowMoreFormsWarning] = useState(false);
+  const showMoreFormsWarning = useMemo(
+    () => maxCalculations !== -1 && maxCalculations < Object.keys(formsData).length,
+    [formsData, maxCalculations]
+  );
+  console.log('showMoreFormsWarning', showMoreFormsWarning);
   const [showDeleteFormDialog, setShowDeleteFormDialog] = useState(false);
 
   const removeForm = async (formId) => {
@@ -45,7 +49,7 @@ const SelectFormView = ({ formType, sections }) => {
   };
 
   const copyForm = async (formId) => {
-    if (hasActiveSubscription) {
+    if (canCreateNewCalulation) {
       const newFormId = await copyFormContext({ formId, title: newFormName });
       if (newFormId) {
         enqueueSnackbar('Das Formular wurde erfolgreich kopiert.', { variant: 'success' });
@@ -54,31 +58,28 @@ const SelectFormView = ({ formType, sections }) => {
         enqueueSnackbar('Es ist ein Fehler aufgetreten. Versuchen Sie es später erneut.', { variant: 'error' });
       }
     } else {
-      enqueueSnackbar('Sie benötigen ein aktives Abonnement um Formulare kopieren zu können.', { variant: 'warning' });
+      enqueueSnackbar('Sie haben bereits die maximale Anzahl an Formularen erreicht.', { variant: 'warning' });
     }
   };
 
+  console.log('formsData', formsData);
+
   const visibleForms = useMemo(() => {
     const formsToUse = {};
-    let shouldSetShowWarning = false;
     formsData &&
-      Object.keys(formsData)?.forEach((formKey) => {
+      Object.keys(formsData)?.forEach((formKey, key) => {
         const currentForm = formsData[formKey];
         if (currentForm.type === formType) {
-          const shouldAddFormToView = hasActiveSubscription || Object.keys(formsToUse)?.length === 0;
+          const shouldAddFormToView = maxCalculations === -1 || key < maxCalculations;
 
           if (shouldAddFormToView) {
             formsToUse[formKey] = currentForm;
-          } else {
-            shouldSetShowWarning = true;
           }
         }
       });
 
-    setShowMoreFormsWarning(shouldSetShowWarning);
-
     return formsToUse;
-  }, [formType, formsData, hasActiveSubscription]);
+  }, [formType, formsData, maxCalculations]);
 
   const addForm = () => {
     createForm({ title: newFormName, type: formType });
@@ -154,7 +155,7 @@ const SelectFormView = ({ formType, sections }) => {
                   <Stack flexDirection={{ xs: 'column', sm: 'row' }} gap={1}>
                     <Button
                       startIcon={<CopyAllOutlined />}
-                      color={hasActiveSubscription ? 'primary' : 'secondary'}
+                      color={canCreateNewCalulation ? 'primary' : 'secondary'}
                       variant="outlined"
                       onClick={() => copyForm(formId)}
                     >
@@ -190,13 +191,15 @@ const SelectFormView = ({ formType, sections }) => {
         <Grid container spacing={3} sx={{ marginBottom: theme.spacing(3) }}>
           {formCards}
 
+          <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
+            {showMoreFormsWarning && (
+              <Alert sx={{ mb: 2, boxShadow: theme.customShadows.z1 }} severity="warning">
+                Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort oder wählen Sie ein umfangreicheres Abonement um alle Kalkulationen anzuzeigen.
+              </Alert>
+            )}
+          </Grid>
           {(!hasActiveSubscription || canCreateNewCalulation) && (
             <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
-              {showMoreFormsWarning && (
-                <Alert sx={{ mb: 2 }} severity="warning">
-                  Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort um alle Kalkulationen anzuzeigen.
-                </Alert>
-              )}
               <TextTeaserCard
                 onClick={hasActiveSubscription ? addForm : handleOpenSub}
                 primaryText={

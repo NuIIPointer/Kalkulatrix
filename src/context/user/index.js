@@ -56,7 +56,8 @@ export const getForms = async (formIds) => {
       title: docData.title,
       type: docData.type,
       values: docData.values ? JSON.parse(docData.values) : {},
-      creationDate: docData.creationDate
+      creationDate: docData.creationDate,
+      lastSaved: docData.lastSaved
     };
   });
   return tmpForms;
@@ -371,6 +372,7 @@ export const UserContextProvider = ({ children }) => {
           doc(db, 'forms', activeFormId),
           {
             title: values.formTitle,
+            lastSaved: dayjs().valueOf(),
             values: JSON.stringify({ ...values, lastChanged: dayjs().valueOf() }) || ''
           },
           { merge: true }

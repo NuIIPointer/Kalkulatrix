@@ -30,18 +30,21 @@ const getSubscriptions = async (userId) => {
 const productConfig = {
   // Test
   prod_RS5Mwa8DhYvhGA: {
-    maxCalculations: 1,
-    prices: ['price_1QZBBaFGa3DH0yAqy766ghH0']
+    maxCalculations: 1
+    // prices: ['price_1QZBBaFGa3DH0yAqy766ghH0']
   },
   // Pro
   prod_RFgQbyJhgjwWPa: {
-    maxCalculations: 1,
-    prices: ['price_1QUSccFGa3DH0yAqeNCcleFW', 'price_1QNB4UFGa3DH0yAqgxE3OQ0B', 'price_1QNB5JFGa3DH0yAqcJCNddLm']
+    maxCalculations: 2
+    // prices: ['price_1QUSccFGa3DH0yAqeNCcleFW', 'price_1QNB4UFGa3DH0yAqgxE3OQ0B', 'price_1QNB5JFGa3DH0yAqcJCNddLm']
   },
   // Premium
   prod_RND1xoBl19Y4PT: {
-    maxCalculations: 1,
-    prices: ['price_1QUSazFGa3DH0yAqzUU4v4U9', 'price_1QUSazFGa3DH0yAqPZk0IBrb', 'price_1QUSazFGa3DH0yAq85zvOhaH']
+    maxCalculations: 1
+    // prices: ['price_1QUSazFGa3DH0yAqzUU4v4U9', 'price_1QUSazFGa3DH0yAqPZk0IBrb', 'price_1QUSazFGa3DH0yAq85zvOhaH']
+  },
+  prod_RjffeKdrDoeGcS: {
+    maxCalculations: -1
   }
 };
 
@@ -53,14 +56,19 @@ export const StripeContextProvider = ({ children }) => {
 
   const [activeSubscriptions, setActiveSubscriptions] = useState([]);
   const hasActiveSubscription = useMemo(() => activeSubscriptions?.length > 0, [activeSubscriptions]);
-  const canCreateNewCalulation = useMemo(() => {
+  const maxCalculations = useMemo(() => {
     if (hasActiveSubscription) {
       const activeProduct = activeSubscriptions[0].productId;
-      const maxCalculations = productConfig[activeProduct].maxCalculations;
-
-      return maxCalculations > Object.keys(formsData).length;
+      return productConfig[activeProduct].maxCalculations;
     }
-  }, [activeSubscriptions, formsData, hasActiveSubscription]);
+  }, [activeSubscriptions, hasActiveSubscription]);
+  const canCreateNewCalulation = useMemo(() => {
+    if (hasActiveSubscription) {
+      const isInfinite = maxCalculations === -1;
+
+      return isInfinite || maxCalculations > Object.keys(formsData).length;
+    }
+  }, [formsData, hasActiveSubscription, maxCalculations]);
 
   const updateSubscriptions = useCallback(async () => {
     setLoadingGetSubscriptionStatus(true);
@@ -147,7 +155,8 @@ export const StripeContextProvider = ({ children }) => {
         loadingCreateSubscription,
         loadingGetSubscriptionStatus,
         getPortalUrl,
-        canCreateNewCalulation
+        canCreateNewCalulation,
+        maxCalculations
       }}
     >
       {children}
