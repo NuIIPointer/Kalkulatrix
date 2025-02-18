@@ -5,8 +5,8 @@ const styledSizePresets = {
   large: {
     card: {
       borderRadius: 5,
-      width: 120,
-      height: 120
+      width: { xs: 90, md: 120 },
+      height: { xs: 90, md: 120 }
     },
     icon: {
       fontSize: 48
@@ -15,8 +15,8 @@ const styledSizePresets = {
   medium: {
     card: {
       borderRadius: 3,
-      width: 72,
-      height: 72
+      width: { xs: 60, md: 72 },
+      height: { xs: 60, md: 72 }
     },
     icon: {
       fontSize: 32
@@ -99,7 +99,16 @@ const defaultIconSx = {
   color: 'primary.700'
 };
 
-const IconChip = ({ icon, cardSx, iconSx, sizePreset = 'medium', colorPreset = 'primary', shadowPreset = 'none', ...otherProps }) => {
+const IconChip = ({
+  icon,
+  altContent,
+  cardSx,
+  iconSx,
+  sizePreset = 'medium',
+  colorPreset = 'primary',
+  shadowPreset = 'none',
+  ...otherProps
+}) => {
   const theme = useTheme();
   const Icon = icon;
 
@@ -135,7 +144,7 @@ const IconChip = ({ icon, cardSx, iconSx, sizePreset = 'medium', colorPreset = '
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', ...cardStyles }} {...otherProps}>
-      <Icon sx={{ fontSize: 20, ...iconStyles }} />
+      {Icon ? <Icon sx={{ fontSize: 20, ...iconStyles }} /> : altContent}
     </Box>
   );
 };

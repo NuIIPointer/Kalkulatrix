@@ -266,7 +266,7 @@ const pricesConfigPreset = [
       halfYearly: { price: 360, stripePriceId: 'price_1QNB4UFGa3DH0yAqgxE3OQ0B' },
       yearly: { price: 620, stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm' }
     },
-    bullets: ['Mitarbeiterkostenplanung', 'Produktmargenplanung', 'Erfassung des Plangewinns', 'Kundensupport']
+    bullets: ['Stundensatzkalkulation', 'Mitarbeiterkostenplanung', 'Produktmargenplanung', 'Erfassung des Plangewinns', 'Kundensupport']
   },
   {
     title: 'Premium',
@@ -277,7 +277,6 @@ const pricesConfigPreset = [
     },
     bullets: [
       'Monatliches Beratungsgespräch',
-      'Exklusive Vorlagen & Checklisten',
       'Regelmäßige Schulungen und Webinare',
       'Alle Funktionen des Pro Plan',
       'Priorisierter Kundensupport'

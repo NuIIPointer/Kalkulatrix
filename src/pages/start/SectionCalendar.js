@@ -12,7 +12,7 @@ const SectionCalendar = () => {
         </Typography>
       </Typography>
 
-      <ConsentWrapper title="Kalender - Termin vereinbaren" consentKeys={['necessary']}>
+      <ConsentWrapper title="Kalender - Termin vereinbaren" consentKeys={['necessary']} sx={{ maxWidth: '1000px', mx: 'auto', my: 4 }}>
         <InlineWidget
           url="https://calendly.com/adel-consulting/30min"
           styles={{

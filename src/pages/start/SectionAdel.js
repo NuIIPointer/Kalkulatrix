@@ -46,8 +46,8 @@ const SectionAdel = () => {
       }}
     >
       <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="medium" cardSx={{ flexShrink: 0 }} shadowPreset="small" />
-      <Stack>
-        <Typography variant="h3" sx={{ mb: 0, fontWeight: 700 }}>
+      <Stack mt={1.5}>
+        <Typography variant="h3" sx={{ mb: 1, fontWeight: 700 }}>
           {item.title}
         </Typography>
         <Typography variant="body2" sx={{ mb: 0, fontWeight: 600 }}>
