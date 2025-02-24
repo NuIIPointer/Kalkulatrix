@@ -79,7 +79,7 @@ const AuthLogin = () => {
         initialValues={{
           email: '',
           password: '',
-          keepSignedIn: false
+          keepSignedIn: true
         }}
         validationSchema={validationSchema}
         validateOnChange

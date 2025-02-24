@@ -191,13 +191,14 @@ const SelectFormView = ({ formType, sections }) => {
         <Grid container spacing={3} sx={{ marginBottom: theme.spacing(3) }}>
           {formCards}
 
-          <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
-            {showMoreFormsWarning && (
+          {showMoreFormsWarning && (
+            <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
               <Alert sx={{ mb: 2, boxShadow: theme.customShadows.z1 }} severity="warning">
-                Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort oder wählen Sie ein umfangreicheres Abonement um alle Kalkulationen anzuzeigen.
+                Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort oder wählen Sie ein umfangreicheres Abonement um alle
+                Kalkulationen anzuzeigen.
               </Alert>
-            )}
-          </Grid>
+            </Grid>
+          )}
           {(!hasActiveSubscription || canCreateNewCalulation) && (
             <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
               <TextTeaserCard

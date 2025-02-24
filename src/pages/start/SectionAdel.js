@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import IconChip from 'components/IconChip';
 import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
 import SectionChip from 'components/SecitonChip';
-import felixPortrait from 'assets/images/content/felix_ade_portrait.png';
+import felixPortrait from 'assets/images/content/felix_ade_portrait.jpg';
 
 const SectionAdel = () => {
   const theme = useTheme();
