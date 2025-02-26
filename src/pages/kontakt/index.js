@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material/styles';
-import { Box, Typography, Stack } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const SupportContact = () => {
   const theme = useTheme();
@@ -16,7 +16,7 @@ const SupportContact = () => {
           Kalkulatrix
         </Typography>
       </Typography>
-      <Stack sx={{ mb: 2, maxWidth: 800, mx: 'auto' }}>
+      {/* <Stack sx={{ mb: 2, maxWidth: 800, mx: 'auto' }}>
         <Typography variant="body2" sx={{ mb: 2, textAlign: 'center' }}>
           Wir freuen uns über Ihr Feedback und beantworten gerne Ihre Fragen. Zögern Sie nicht, uns zu kontaktieren, wenn Sie Unterstützung
           benötigen oder Anregungen haben. Unser Team steht Ihnen jederzeit zur Verfügung.
@@ -25,7 +25,7 @@ const SupportContact = () => {
           Besuchen Sie auch unsere FAQ-Seite, um Antworten auf häufig gestellte Fragen zu finden. Dort finden Sie nützliche Informationen zu
           unseren Produkten und Services.
         </Typography>
-      </Stack>
+      </Stack> */}
       <Box
         as="iframe"
         src="https://adel-consulting.com/kontakt-kalkulatrix/"
