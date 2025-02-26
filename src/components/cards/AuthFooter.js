@@ -18,7 +18,7 @@ const AuthFooter = () => {
       >
         <Typography variant="subtitle2" component="span">
           &copy; Kalkulatrix&nbsp;
-          <Typography component={Link} variant="subtitle2" href="/" underline="hover">
+          <Typography component={Link} variant="subtitle2" href="https://adel-consulting.com/" target="_blank" underline="hover">
             Adel Consulting
           </Typography>
         </Typography>
