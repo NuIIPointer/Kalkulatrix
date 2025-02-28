@@ -87,6 +87,7 @@ export const StripeContextProvider = ({ children }) => {
 
         const docRef = await addDoc(checkoutSessionRef, {
           price: priceId,
+          allow_promotion_codes: true,
           success_url: `${window.location.origin}/office/billing`,
           cancel_url: `${window.location.origin}/office/billing`
         });
