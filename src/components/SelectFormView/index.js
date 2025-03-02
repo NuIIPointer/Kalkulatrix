@@ -229,12 +229,12 @@ const SelectFormView = ({ formType, sections }) => {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">Ein neue Kalkulation können Sie nur mit gültigem Abonnement erstellen.</DialogTitle>
-          <DialogContent>
+          {/* <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
               aliquyam
             </DialogContentText>
-          </DialogContent>
+          </DialogContent> */}
           <DialogActions>
             <Button onClick={handleCloseSub}>schließen</Button>
             <Button variant="contained" component={Link} to="/office/billing" autoFocus>
