@@ -79,7 +79,7 @@ export const StripeContextProvider = ({ children }) => {
   }, [user.uid]);
 
   const createSubscription = useCallback(
-    async (priceId = 'price_1OQu81KhU0UrNVcbwBrW9GNg') => {
+    async (priceId = '') => {
       setLoadingCreateSubscription(true);
 
       if (user.uid) {

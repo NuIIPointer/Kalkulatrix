@@ -1,9 +1,8 @@
-import { Typography, Stack, Grid, Button, ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
+import { Typography, Stack, Grid, Button, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { StripeContext } from 'context/stripe/index';
 import { UserContext } from 'context/user/index';
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState, useMemo } from 'react';
 import { CircularProgress } from '@mui/material';
 
 const PriceCard = ({
@@ -18,27 +17,29 @@ const PriceCard = ({
   customLink,
   customLinkText
 }) => {
-  const navigate = useNavigate();
-  const [isLoadingCardAction, setIsLoadingCardAction] = useState();
   const { getPortalUrl, createSubscription, activeSubscriptions } = useContext(StripeContext);
+  const [stripeLink, setStripeLink] = useState();
+  const [portalUrl, setPortalUrl] = useState();
   const activeSubscription = activeSubscriptions?.find((sub) => sub.priceId === stripePriceId);
   const isActive = !!activeSubscription;
 
-  const onStripeSub = async () => {
-    setIsLoadingCardAction(true);
-    const checkoutUrl = await createSubscription(stripePriceId);
-    window.open(checkoutUrl, '_blank', 'noreferrer');
-    setIsLoadingCardAction(false);
-  };
-  const onPortalClick = async () => {
-    setIsLoadingCardAction(true);
-    const portalUrl = await getPortalUrl();
-    window.open(portalUrl, '_blank', 'noreferrer');
-    setIsLoadingCardAction(false);
-  };
-  const onLoggedOutClick = () => {
-    navigate(`/register`);
-  };
+  useEffect(() => {
+    const calc = async () => {
+      const checkoutUrl = await createSubscription(stripePriceId);
+      setStripeLink(checkoutUrl);
+    };
+
+    stripePriceId && calc();
+  }, [activeSubscription, createSubscription, isActive, stripePriceId]);
+
+  useEffect(() => {
+    const calc = async () => {
+      const portalUrl = await getPortalUrl();
+      setPortalUrl(portalUrl);
+    };
+
+    calc();
+  }, [activeSubscription, getPortalUrl, isActive]);
 
   const { user } = useContext(UserContext);
   const isLoggedIn = !!user?.uid;
@@ -49,27 +50,25 @@ const PriceCard = ({
     </li>
   ));
 
-  const onCardClick = () => {
-    if (isLoadingCardAction) return;
-
+  const cardHref = useMemo(() => {
     if (customLink) {
-      navigate(customLink);
+      return customLink;
     } else if (!isLoggedIn) {
-      onLoggedOutClick();
+      return '/register';
     } else if (isActive) {
-      onPortalClick();
+      return portalUrl;
     } else {
-      onStripeSub();
+      return stripeLink;
     }
-  };
+  }, [customLink, isLoggedIn, isActive, portalUrl, stripeLink]);
 
   return (
-    <Button
-      component={Stack}
+    <Stack
+      component={cardHref ? 'a' : 'span'}
       tabIndex={-1}
       color="secondary"
-      onClick={onCardClick}
-      type="button"
+      href={cardHref}
+      target="_blank"
       sx={{
         position: 'relative',
         width: '100%',
@@ -87,6 +86,7 @@ const PriceCard = ({
         justifyContent: 'flex-start',
         transition: '.25s',
         outline: isActive ? '4px solid gold' : 'none',
+        textDecoration: 'none',
         ':hover': {
           borderColor: featured ? theme.palette.primary[500] : theme.palette.grey[500],
           backgroundColor: isActive ? theme.palette.primary[400] : theme.palette.grey[100],
@@ -156,16 +156,16 @@ const PriceCard = ({
           role="presentation"
         >
           {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten')}
-          {isLoadingCardAction ? (
+          {/* {isLoadingCardAction ? (
             <CircularProgress color="inherit" stroke="currentColor" size={20} sx={{ marginLeft: theme.spacing(1) }} />
           ) : (
             ''
-          )}
+          )} */}
         </Button>
       ) : (
         ''
       )}
-    </Button>
+    </Stack>
   );
 };
 
