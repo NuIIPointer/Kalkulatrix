@@ -135,7 +135,7 @@ const EditProfile = () => {
           )}
         </Formik>
       ) : (
-        <Stack alignItems="flex-end" direction="row" gap={2}>
+        <Stack alignItems="flex-end" direction="row" flexWrap="wrap" gap={2}>
           <Box
             component="dl"
             sx={{
@@ -148,7 +148,7 @@ const EditProfile = () => {
             {renderListItem('Name', `${user.firstName} ${user.lastName}`)}
             {renderListItem('Unternehmen', user.company)}
           </Box>
-          <Button variant="contained" color="primary" onClick={() => setEditMode(true)} sx={{ mt: 3 }}>
+          <Button variant="contained" color="primary" onClick={() => setEditMode(true)}>
             Benutzerdaten bearbeiten
           </Button>
         </Stack>

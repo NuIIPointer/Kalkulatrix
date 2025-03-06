@@ -4,6 +4,7 @@ import { useState } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 // assets
 import { LogoutOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
@@ -12,12 +13,6 @@ import { LogoutOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons'
 
 const ProfileTab = ({ handleLogout }) => {
   const theme = useTheme();
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
-
   const textColor = theme.palette.common.black;
   const textColorHover = textColor;
   const bgColor = theme.palette.common.white;
@@ -51,19 +46,19 @@ const ProfileTab = ({ handleLogout }) => {
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
-      <ListItemButton sx={listItemButtonStyle} selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 1)}>
+      <ListItemButton sx={listItemButtonStyle} as={Link} to="/office/profile">
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
         <ListItemText primary="Profil" />
       </ListItemButton>
-      <ListItemButton sx={listItemButtonStyle} selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 4)}>
+      <ListItemButton sx={listItemButtonStyle} as={Link} to="/office/billing">
         <ListItemIcon>
           <WalletOutlined />
         </ListItemIcon>
         <ListItemText primary="Abonnement" />
       </ListItemButton>
-      <ListItemButton sx={listItemButtonStyle} selected={selectedIndex === 2} onClick={handleLogout}>
+      <ListItemButton sx={listItemButtonStyle} onClick={handleLogout}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>

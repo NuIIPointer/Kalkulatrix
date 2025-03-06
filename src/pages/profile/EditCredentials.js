@@ -71,7 +71,7 @@ const EditCredentials = () => {
       sx={{
         backgroundColor: theme.palette.common.white,
         padding: theme.shape.paddingBoxMedium,
-        mb: 2
+        mb: 2,
       }}
     >
       <Typography variant="h2" sx={{ mb: 1 }}>
@@ -213,7 +213,7 @@ const EditCredentials = () => {
         </Formik>
       )}
       {!editMode && !editModePassword && (
-        <Stack alignItems="flex-end" direction="row" gap={2}>
+        <Stack alignItems="flex-end" direction="row" flexWrap="wrap" gap={2}>
           <Box
             component="dl"
             sx={{
@@ -226,12 +226,14 @@ const EditCredentials = () => {
             {renderListItem('E-Mail', user.email)}
             {renderListItem('Passwort', '********')}
           </Box>
-          <Button variant="contained" color="primary" onClick={() => setEditMode(true)} sx={{ mt: 3 }}>
-            E-Mail ändern
-          </Button>
-          <Button variant="contained" color="primary" onClick={() => setEditModePassword(true)} sx={{ mt: 3 }}>
-            Passwort ändern
-          </Button>
+          <Stack direction="row" gap={1}>
+            <Button variant="contained" color="primary" onClick={() => setEditMode(true)}>
+              E-Mail ändern
+            </Button>
+            <Button variant="contained" color="primary" onClick={() => setEditModePassword(true)}>
+              Passwort ändern
+            </Button>
+          </Stack>
         </Stack>
       )}
     </LayoutBox>

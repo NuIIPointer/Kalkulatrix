@@ -18,6 +18,7 @@ const PriceCard = ({
   customLinkText
 }) => {
   const { getPortalUrl, createSubscription, activeSubscriptions } = useContext(StripeContext);
+  const { user } = useContext(UserContext);
   const [stripeLink, setStripeLink] = useState();
   const [portalUrl, setPortalUrl] = useState();
   const activeSubscription = activeSubscriptions?.find((sub) => sub.priceId === stripePriceId);
@@ -29,8 +30,8 @@ const PriceCard = ({
       setStripeLink(checkoutUrl);
     };
 
-    stripePriceId && calc();
-  }, [activeSubscription, createSubscription, isActive, stripePriceId]);
+    stripePriceId && user.uid && calc();
+  }, [activeSubscription, createSubscription, isActive, stripePriceId, user.uid]);
 
   useEffect(() => {
     const calc = async () => {
@@ -38,10 +39,9 @@ const PriceCard = ({
       setPortalUrl(portalUrl);
     };
 
-    calc();
-  }, [activeSubscription, getPortalUrl, isActive]);
+    user.uid && calc();
+  }, [activeSubscription, getPortalUrl, isActive, user.uid]);
 
-  const { user } = useContext(UserContext);
   const isLoggedIn = !!user?.uid;
   const theme = useTheme();
   const bulletsRendered = bullets.map((bullet) => (
@@ -51,7 +51,9 @@ const PriceCard = ({
   ));
 
   const cardHref = useMemo(() => {
-    if (customLink) {
+    if (!user.uid) {
+      return '/login';
+    } else if (customLink) {
       return customLink;
     } else if (!isLoggedIn) {
       return '/register';
@@ -60,7 +62,7 @@ const PriceCard = ({
     } else {
       return stripeLink;
     }
-  }, [customLink, isLoggedIn, isActive, portalUrl, stripeLink]);
+  }, [user.uid, customLink, isLoggedIn, isActive, portalUrl, stripeLink]);
 
   return (
     <Stack
@@ -260,8 +262,7 @@ const pricesConfigPreset = [
     prices: {
       monthly: {
         price: 69,
-        stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW',
-        featured: true
+        stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW'
       },
       halfYearly: { price: 360, stripePriceId: 'price_1QNB4UFGa3DH0yAqgxE3OQ0B' },
       yearly: { price: 620, stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm' }
@@ -271,9 +272,21 @@ const pricesConfigPreset = [
   {
     title: 'Premium',
     prices: {
-      monthly: { price: 299, stripePriceId: 'price_1QUSazFGa3DH0yAqzUU4v4U9' },
-      halfYearly: { price: 1520, stripePriceId: 'price_1QUSazFGa3DH0yAqPZk0IBrb' },
-      yearly: { price: 2690, stripePriceId: 'price_1QUSazFGa3DH0yAq85zvOhaH' }
+      monthly: {
+        price: 299,
+        stripePriceId: 'price_1QUSazFGa3DH0yAqzUU4v4U9',
+        featured: true
+      },
+      halfYearly: {
+        price: 1520,
+        stripePriceId: 'price_1QUSazFGa3DH0yAqPZk0IBrb',
+        featured: true
+      },
+      yearly: {
+        price: 2690,
+        stripePriceId: 'price_1QUSazFGa3DH0yAq85zvOhaH',
+        featured: true
+      }
     },
     bullets: [
       'Monatliches Beratungsgespräch',

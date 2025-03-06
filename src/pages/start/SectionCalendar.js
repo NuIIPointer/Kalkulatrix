@@ -11,10 +11,10 @@ const SectionCalendar = () => {
           Noch Fragen?
         </Typography>
       </Typography>
-      <Typography align="center" variant="body1" fontSize={{ xs: 18, sm: 22, md: 28, lg: 34 }} mb={{ xs: 0.5, md: 1 }} display="block">
+      <Typography align="center" variant="body1" fontSize={{ xs: 18, sm: 22, md: 24, lg: 26 }} mb={{ xs: 0.5 }} display="block">
         In unserer <Link to="/faq">FAQ</Link> werden viele Fragen bereits beantwortet.
       </Typography>
-      <Typography align="center" variant="body1" fontSize={{ xs: 18, sm: 22, md: 28, lg: 34 }} mb={{ xs: 0.5, md: 1 }} display="block">
+      <Typography align="center" variant="body1" fontSize={{ xs: 18, sm: 22, md: 24, lg: 26 }} mb={{ xs: 0.5 }} display="block">
         Ansonsten freuen wir uns auf Ihre Kontaktaufnahme über einen Beratungstermin.
       </Typography>
 

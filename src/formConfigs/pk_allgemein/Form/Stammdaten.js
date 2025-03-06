@@ -634,9 +634,7 @@ const Stammdaten = () => {
                     }}
                   >
                     <Typography sx={{ p: 2 }}>
-                      Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Sollten Sie mehrere Mitarbeiter mit gleicher Bezahlung,
-                      Urlaubstagen und geschätzten Krankheitstagen haben, können Sie einen allgemeinen Mitarbeiter erstellen und angeben,
-                      wie oft dieser berücksichtigt wird (Anzahl).
+                      Pflegen Sie hier allgemeine Angaben zu Ihrem Mitarbeiter ein. Mitarbeiter können dupliziert werden.
                     </Typography>
                   </Popover>
                   <Button

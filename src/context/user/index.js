@@ -9,6 +9,7 @@ import {
   auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   updateProfile,
   updateEmail,
   updatePassword,
@@ -268,6 +269,7 @@ export const UserContextProvider = ({ children }) => {
                   password: password
                 }
               });
+              sendEmailVerification(userCredential.user);
               setCreateUser(StatusCodes.OK);
             });
         })

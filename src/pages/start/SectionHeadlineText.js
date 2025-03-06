@@ -5,6 +5,13 @@ import { TypeAnimation } from 'react-type-animation';
 import macbookImage from 'assets/images/content/macbook_mockup_dashboard_2.png';
 
 const SectionHeadlineText = () => {
+  const scrollIntoViewWithOffset = (selector, offset) => {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: document.querySelector(selector).getBoundingClientRect().top - document.body.getBoundingClientRect().top - offset
+    });
+  };
+
   return (
     <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }}>
       <Grid item xs={12} md={6}>
@@ -41,7 +48,7 @@ const SectionHeadlineText = () => {
             Effizienz, maximieren Sie Gewinne. Einfache Anwendung - sofortige Ergebnisse.
           </Typography>
           <Stack gap={2} sx={{ flexDirection: 'row' }}>
-            <Button variant="outlined" color="primary">
+            <Button variant="outlined" color="primary" onClick={() => scrollIntoViewWithOffset('#webinarDemo', 100)}>
               Demo buchen
             </Button>
             <Button href="/login" variant="contained" color="primary">

@@ -110,10 +110,10 @@ export const StripeContextProvider = ({ children }) => {
         });
       } else {
         setLoadingCreateSubscription(false);
-        navigate('/login');
+        return '/login';
       }
     },
-    [navigate, user.uid]
+    [user.uid]
   );
 
   const getPortalUrl = async () => {

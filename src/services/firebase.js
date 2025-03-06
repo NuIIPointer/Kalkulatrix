@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   updateProfile,
   updateEmail,
   updatePassword,
@@ -44,6 +45,7 @@ export {
   httpsCallable,
   auth,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   updateProfile,
   updateEmail,
   updatePassword,

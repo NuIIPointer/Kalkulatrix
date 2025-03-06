@@ -4,7 +4,7 @@ import { Grid, Box } from '@mui/material';
 const SectionAnmeldung = () => {
   return (
     <>
-      <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }}>
+      <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }} id="webinarDemo">
         <Grid item xs={12} sx={{ marginBlock: { xs: 4, sm: 6, md: 8, lg: 0 } }}>
           <Box
             as="iframe"

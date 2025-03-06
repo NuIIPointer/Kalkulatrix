@@ -61,12 +61,12 @@ const Lohnnebenkostensatz = () => {
                 <>
                   <p>Beitragssätze für Deutschland (2024)</p>
                   <ul>
-                    <li>Rentenversicherung (RV): 18,6%</li>
-                    <li>Arbeitslosenversicherung (AV): 2,6%</li>
-                    <li>Krankenversicherung (KV): 14,6%</li>
-                    <li>Pflegeversicherung (PV): 3,4%</li>
+                    <li>Rentenversicherung (RV): 18,60%</li>
+                    <li>Arbeitslosenversicherung (AV): 2,60%</li>
+                    <li>Krankenversicherung (KV): 14,60%</li>
+                    <li>Pflegeversicherung (PV): 3,60%</li>
                   </ul>
-                  <p>={'>'} Davon 50% für Arbeitgeber: 19,33%</p>
+                  <p>= 39,40% Davon 50% für Arbeitgeber: 19,70%</p>
                 </>
               }
             >
