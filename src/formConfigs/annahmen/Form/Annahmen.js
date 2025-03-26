@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Grid, TextField, Divider, MenuItem, Select, FormControl, InputLabel, FormHelperText } from '@mui/material';
+import { Grid, Divider, MenuItem, Select, FormControl, InputLabel, FormHelperText } from '@mui/material';
 
 // formik
 import { FastField, useFormikContext } from 'formik';
@@ -18,7 +18,7 @@ const Annahmen = () => {
           <Divider sx={{ mt: 2, mb: 4 }} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <CustomTextField
             asFormikField
             id="annahmen_allgemein_planjahr"
             name="annahmen_allgemein_planjahr"
@@ -34,6 +34,9 @@ const Annahmen = () => {
             error={touched.annahmen_allgemein_planjahr && Boolean(errors.annahmen_allgemein_planjahr)}
             helperText={touched.annahmen_allgemein_planjahr && errors.annahmen_allgemein_planjahr}
             sx={{ mb: 2 }}
+            decimals={0}
+            disableThousandSeperator
+            onlyPremium
           />
         </Grid>
         <Grid item xs={12} sm={6}>

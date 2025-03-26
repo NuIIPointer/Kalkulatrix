@@ -40,7 +40,6 @@ const SelectFormView = ({ formType, sections }) => {
     () => maxCalculations !== -1 && maxCalculations < Object.keys(formsData).length,
     [formsData, maxCalculations]
   );
-  console.log('showMoreFormsWarning', showMoreFormsWarning);
   const [showDeleteFormDialog, setShowDeleteFormDialog] = useState(false);
 
   const removeForm = async (formId) => {
@@ -62,8 +61,6 @@ const SelectFormView = ({ formType, sections }) => {
     }
   };
 
-  console.log('formsData', formsData);
-
   const visibleForms = useMemo(() => {
     const formsToUse = {};
     formsData &&
@@ -82,7 +79,13 @@ const SelectFormView = ({ formType, sections }) => {
   }, [formType, formsData, maxCalculations]);
 
   const addForm = () => {
-    createForm({ title: newFormName, type: formType });
+    if (canCreateNewCalulation) {
+      createForm({ title: newFormName, type: formType });
+    } else {
+      enqueueSnackbar('Sie haben bereits die maximale Anzahl an Formularen entsprechend ihres Abonements erreicht.', {
+        variant: 'warning'
+      });
+    }
   };
 
   const handleOpenSub = () => {
@@ -202,7 +205,7 @@ const SelectFormView = ({ formType, sections }) => {
           {(!hasActiveSubscription || canCreateNewCalulation) && (
             <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
               <TextTeaserCard
-                onClick={hasActiveSubscription ? addForm : handleOpenSub}
+                onClick={canCreateNewCalulation ? addForm : handleOpenSub}
                 primaryText={
                   <Stack flexDirection="row" alignItems="center">
                     neue Kalkulation
@@ -228,7 +231,9 @@ const SelectFormView = ({ formType, sections }) => {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Ein neue Kalkulation können Sie nur mit gültigem Abonnement erstellen.</DialogTitle>
+          <DialogTitle id="alert-dialog-title">
+            Ein weitere Kalkulation können Sie nur mit einem erweiterten Abonnement erstellen.
+          </DialogTitle>
           {/* <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna

@@ -67,7 +67,7 @@ const DashboardCard = ({ icon, title, subTitle, value, valueChanged, changedUpDo
             </Box>
           )}
         </Stack>
-        {subTitle && <Typography sx={{ fontSize: { xs: 14, md: 15 }, opacity: 0.5 }}>{subTitle}</Typography>}
+        {subTitle && <Typography sx={{ fontSize: { xs: 14, md: 15 }, opacity: 0.5, lineHeight: '1.2em' }}>{subTitle}</Typography>}
       </Stack>
     </TeaserCard>
   );

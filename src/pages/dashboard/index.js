@@ -33,7 +33,9 @@ const Dashboard = () => {
     : 'Kein Ergebnis';
   const anzMitarbeiter = (formValues.pk_produktiv_anzahl || 0) + (formValues.pk_allgemein_anzahl || 0);
   const formResultFormatted = formResult ? `${formattedNumber(formResult, 2)}€` : 'Kein Ergebnis';
-  const formFrom = `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`;
+  const formFrom = formsData?.[activeFormKey]?.creationDate
+    ? `Kalkulation vom ${dayjs(formsData?.[activeFormKey]?.creationDate).format('DD.MM.YYYY')}`
+    : 'Es wurde noch keine Kalkulation durchgeführt.';
 
   const lastSavedForm = Object.values(formsData).reduce((prevForm, currentForm) => {
     if (!prevForm || currentForm.lastSaved > prevForm.lastSaved) {
@@ -142,7 +144,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={Receipt}
                 title="Aktueller Stundensatz"
-                subTitle={`"${formFrom}"`}
+                subTitle={formFrom}
                 value={formResultFormatted}
                 // valueChanged="12,25%"
               />
@@ -152,7 +154,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={LocalAtm}
                 title="Auslastung"
-                subTitle={`"${formFrom}"`}
+                subTitle={formFrom}
                 value={auslastung}
                 // valueChanged="10%"
               />
@@ -162,7 +164,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={Inbox}
                 title="Ø-Marge auf Produkte"
-                subTitle={`"${formFrom}"`}
+                subTitle={formFrom}
                 value={zuschlagProzentDurchschnitt}
                 // valueChanged="10%"
               />
@@ -172,7 +174,7 @@ const Dashboard = () => {
                 sx={{ height: '100%' }}
                 icon={PeopleAlt}
                 title="Anzahl Mitarbeiter"
-                subTitle={`"${formFrom}"`}
+                subTitle={formFrom}
                 value={anzMitarbeiter}
                 // valueChanged="3"
                 changedUpDown="down"

@@ -10,11 +10,14 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  ButtonGroup
+  ButtonGroup,
+  Box
 } from '@mui/material/index';
 import { DeleteOutlineOutlined, NoteAddOutlined, EditOutlined, ClearOutlined } from '@mui/icons-material';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, useContext } from 'react';
 import { useFormikContext } from 'formik';
+import DisabledPattern from 'components/DisabledPattern/index';
+import { StripeContext } from 'context/stripe/index';
 
 const FormSection = ({
   children,
@@ -29,13 +32,16 @@ const FormSection = ({
   isError,
   forceShowError,
   headlineVariant = 'h2',
-  small
+  small,
+  onlyPremium
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen || false);
   const [openPopup, setOpenPopup] = useState(false);
   const theme = useTheme();
   const { errors, touched } = useFormikContext();
+  const { hasActiveSubscription } = useContext(StripeContext);
   const sectionRef = useRef(null);
+  const disabledByPremium = onlyPremium && !hasActiveSubscription;
 
   const hasErrorField = useMemo(() => {
     if (sectionRef.current) {
@@ -82,9 +88,13 @@ const FormSection = ({
           border: showErrorStatus ? `2px solid ${theme.palette.error.main}` : border,
           padding: small ? theme.shape.paddingBoxSmall : theme.shape.paddingBoxMedium,
           mb: { xs: theme.spacing(1.5), md: theme.spacing(1.75), lg: theme.spacing(2) },
-          overflow: 'hidden'
+          overflow: 'hidden',
+          position: disabledByPremium ? 'relative' : undefined
         }}
       >
+        {disabledByPremium && (
+          <DisabledPattern sx={{ position: 'absolute', top: '0', left: '0', height: '100%', width: '100%', zIndex: '1' }} />
+        )}
         <Stack gap={{ xs: 1, sm: 2 }} direction="row" justifyContent="space-between" flexWrap="nowrap" alignItems="flex-start">
           <Stack flexGrow="1">
             <Typography variant={headlineVariant} sx={{ flexGrow: 1, color: showErrorStatus ? theme.palette.error.main : undefined }}>
@@ -99,6 +109,25 @@ const FormSection = ({
               <Typography variant="text" component="div" sx={{ mr: 'auto', mt: 1 }}>
                 {description}
               </Typography>
+            )}
+            {disabledByPremium && (
+              <Box
+                variant="text"
+                component="div"
+                sx={{
+                  mr: 'auto',
+                  mt: 1,
+                  px: 2,
+                  py: 1.5,
+                  backgroundColor: theme.palette.grey[600],
+                  color: theme.palette.common.white,
+                  borderRadius: 2,
+                  position: 'relative',
+                  zIndex: 2
+                }}
+              >
+                Dieser Bereich kann nur mit aktivem Abonnement bearbeitet werden.
+              </Box>
             )}
           </Stack>
           {(onDelete || onAdd || collapsable) && (
@@ -118,7 +147,13 @@ const FormSection = ({
                 ''
               )}
               {collapsable ? (
-                <Button color="primary" variant="contained" sx={{ ...buttonStyles }} onClick={() => setIsOpen(!isOpen)}>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  sx={{ ...buttonStyles }}
+                  onClick={() => setIsOpen(!isOpen)}
+                  disabled={disabledByPremium}
+                >
                   {isOpen ? <ClearOutlined /> : <EditOutlined />}
                 </Button>
               ) : (
@@ -127,7 +162,7 @@ const FormSection = ({
             </ButtonGroup>
           )}
         </Stack>
-        {collapsable ? <Collapse in={isOpen}>{children}</Collapse> : children}
+        {!disabledByPremium && (collapsable ? <Collapse in={isOpen}>{children}</Collapse> : children)}
       </LayoutBox>
       <Dialog
         open={openPopup}

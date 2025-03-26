@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState, useContext } from 'react';
 
 // material-ui
 import {
@@ -39,6 +39,9 @@ import ModalHeader from 'components/ModalHeader/index';
 import CustomTextField from 'components/CustomTextField/index';
 import formattedNumber from 'utils/formUtils/formattedNumber';
 import { usePrevious } from 'utils/usePrevious';
+import { StripeContext } from 'context/stripe/index';
+
+const maxAbteilungenforFreePlan = 2;
 
 const columns = [
   {
@@ -424,6 +427,7 @@ const MemorizedTabData = memo(({ maTitle = 'Mitarbeiter', setModalData, outerInd
 const Stammdaten = () => {
   const theme = useTheme();
   const { values, errors, isSubmitting, setFieldValue } = useFormikContext();
+  const { hasActiveSubscription } = useContext(StripeContext);
   const prevMaGroups = usePrevious(values.pk_produktiv_mitarbeiter);
   const [openedTab, setOpenedTab] = useState(0);
   const [modalData, setModalData] = useState(null);
@@ -506,6 +510,14 @@ const Stammdaten = () => {
         <GridFooter />
       </GridFooterContainer>
     );
+  };
+
+  const onIncreaseAbteilung = () => {
+    if (!hasActiveSubscription && values.pk_produktiv_mitarbeiter?.length >= maxAbteilungenforFreePlan) {
+      return;
+    }
+
+    setNewAbteilungValue(`Abteilung ${values.pk_produktiv_mitarbeiter?.length + 1}`);
   };
 
   return (
@@ -754,9 +766,7 @@ const Stammdaten = () => {
                   </Popover>
                   <Button
                     variant="contained"
-                    onClick={() => {
-                      setNewAbteilungValue(`Abteilung ${values.pk_produktiv_mitarbeiter?.length + 1}`);
-                    }}
+                    onClick={onIncreaseAbteilung}
                     disabled={isSubmitting}
                     sx={{ fontWeight: 500, margin: 1, marginLeft: 'auto', mt: 0, mb: 0, height: 'auto' }}
                     startIcon={<Add />}

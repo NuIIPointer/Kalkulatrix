@@ -30,6 +30,7 @@ const Plangewinn = () => {
                     type="number"
                     onWheel={(event) => event.target.blur()}
                     min="0"
+                    onlyPremium
                   />
                 )}
               </FastField>

@@ -10,17 +10,12 @@ import ReadOnlyBox from 'components/formComponents/ReadOnlyBox/index';
 import formFloat from 'utils/formUtils/formFloat';
 import CustomTextField from 'components/CustomTextField/index';
 
-export const zusatzkosten_fieldTitles = [
-  'Unternehmerlohn',
-  'Eigenkapital-Zinsen',
-  'Fremdkapital-Zinsen',
-  'Kalkulatorische Wagnisse',
-];
+export const zusatzkosten_fieldTitles = ['Unternehmerlohn', 'Eigenkapital-Zinsen', 'Fremdkapital-Zinsen', 'Kalkulatorische Wagnisse'];
 export const zusatzkosten_startingRow = 42;
 
 const Zusatzkosten = () => {
   return (
-    <FormSection title="Zusatzkosten" description="In diesem Abschnitt werden Angaben zu Zusatzkosten eingetragen.">
+    <FormSection title="Zusatzkosten" description="In diesem Abschnitt werden Angaben zu Zusatzkosten eingetragen." onlyPremium>
       <Grid container columnSpacing={{ xs: 2, sm: 4, lg: 6 }} rowSpacing={{ xs: 1, lg: 1.5 }}>
         <Grid item xs={12}>
           <Divider sx={{ mt: 2, mb: 4 }} />

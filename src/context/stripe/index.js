@@ -6,7 +6,6 @@ import { db, auth, app } from 'services/firebase';
 
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { query, where, getDocs, collection, addDoc, onSnapshot } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
 
 export const StripeContext = createContext(null);
 
@@ -26,6 +25,8 @@ const getSubscriptions = async (userId) => {
     return resolvedDocs;
   }
 };
+
+const maxFreeCalculations = 1;
 
 const productConfig = {
   // Test
@@ -49,7 +50,6 @@ const productConfig = {
 };
 
 export const StripeContextProvider = ({ children }) => {
-  const navigate = useNavigate();
   const { user, formsData } = useContext(UserContext);
   const [loadingCreateSubscription, setLoadingCreateSubscription] = useState(false);
   const [loadingGetSubscriptionStatus, setLoadingGetSubscriptionStatus] = useState(false);
@@ -60,15 +60,14 @@ export const StripeContextProvider = ({ children }) => {
     if (hasActiveSubscription) {
       const activeProduct = activeSubscriptions[0].productId;
       return productConfig[activeProduct].maxCalculations;
+    } else {
+      return maxFreeCalculations;
     }
   }, [activeSubscriptions, hasActiveSubscription]);
   const canCreateNewCalulation = useMemo(() => {
-    if (hasActiveSubscription) {
-      const isInfinite = maxCalculations === -1;
-
-      return isInfinite || maxCalculations > Object.keys(formsData).length;
-    }
-  }, [formsData, hasActiveSubscription, maxCalculations]);
+    const isInfinite = maxCalculations === -1;
+    return isInfinite || maxCalculations > Object.keys(formsData).length;
+  }, [formsData, maxCalculations]);
 
   const updateSubscriptions = useCallback(async () => {
     setLoadingGetSubscriptionStatus(true);

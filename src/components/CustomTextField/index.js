@@ -1,8 +1,11 @@
-import { TextField, InputAdornment } from '@mui/material';
-import { useCallback } from 'react';
+import { TextField, InputAdornment, Box } from '@mui/material';
+import { useCallback, useContext } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Field } from 'formik';
 import { useFormikContext } from 'formik';
+import { EditOffOutlined } from '@mui/icons-material';
+import { useTheme } from '@mui/material/styles';
+import { StripeContext } from 'context/stripe/index';
 
 const CustomTextField = ({
   type,
@@ -13,9 +16,14 @@ const CustomTextField = ({
   asFormikField,
   endAdornment,
   InputProps = {},
+  onlyPremium,
+  disableThousandSeperator = false,
+  helperText,
   ...others
 }) => {
+  const theme = useTheme();
   const { setFieldValue } = useFormikContext();
+  const { hasActiveSubscription } = useContext(StripeContext);
   const FieldComponentWrapped = useCallback(
     (props) => {
       return asFormikField ? <Field component={TextField} {...props} /> : <TextField {...props} />;
@@ -30,24 +38,51 @@ const CustomTextField = ({
     },
     [others, setFieldValue]
   );
+
+  const readOnlySetting = InputProps.readOnly || (!hasActiveSubscription && onlyPremium);
+  const helperTextSetting =
+    helperText ||
+    (onlyPremium && !hasActiveSubscription ? (
+      <Box
+        sx={{
+          display: 'inline-block',
+          backgroundColor: theme.palette.grey[600],
+          color: theme.palette.common.white,
+          px: 1,
+          py: 0.5,
+          borderRadius: 1,
+          lineHeight: '1.1em'
+        }}
+      >
+        Schließen Sie ein Abonenment ab, um dieses Feld ändern zu können.
+      </Box>
+    ) : (
+      ''
+    ));
+  const endAdornmentSetting = readOnlySetting ? (
+    <InputAdornment position="end">
+      <EditOffOutlined fontSize=".8em" />
+    </InputAdornment>
+  ) : (
+    endAdornment && <InputAdornment position="end">{endAdornment}</InputAdornment>
+  );
+
   if (type === 'number') {
     return (
       <NumericFormat
         fixedDecimalScale={fixedDecimals}
         decimalScale={decimals}
         customInput={FieldComponentWrapped}
-        thousandSeparator="."
+        thousandSeparator={disableThousandSeperator ? '' : '.'}
         decimalSeparator=","
         {...others}
         onChange={handleChange}
-        InputProps={
-          endAdornment
-            ? {
-                ...InputProps,
-                endAdornment: <InputAdornment position="end">{endAdornment}</InputAdornment>
-              }
-            : InputProps
-        }
+        InputProps={{
+          endAdornment: endAdornmentSetting,
+          readOnly: readOnlySetting
+        }}
+        helperText={helperTextSetting}
+        endAdornment={endAdornmentSetting}
       >
         {children}
       </NumericFormat>
@@ -55,7 +90,13 @@ const CustomTextField = ({
   }
 
   return (
-    <FieldComponentWrapped type={type} onChange={onChange} {...others}>
+    <FieldComponentWrapped
+      type={type}
+      onChange={onChange}
+      {...others}
+      InputProps={{ ...InputProps, readOnly: readOnlySetting, endAdornment: endAdornmentSetting }}
+      helperText={helperTextSetting}
+    >
       {children}
     </FieldComponentWrapped>
   );

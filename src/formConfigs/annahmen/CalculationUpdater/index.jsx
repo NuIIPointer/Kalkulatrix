@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useFormikContext } from 'formik';
 import useGetFeiertage from 'hooks/useGetFeiertage';
+import { UserContext } from 'context/user/index';
 
 const StundensatzRechnerValueUpdater = () => {
   const { values = {}, setFieldValue } = useFormikContext();
+  const { hasActiveSubscription } = useContext(UserContext);
   const { feiertageWochentage } = useGetFeiertage(
     values.annahmen_allgemein_unternehmensBundesland,
     values.annahmen_allgemein_planjahr,
     values.annahmen_G17_days || undefined
   );
+
+  useEffect(() => {
+    if (!values.annahmen_allgemein_planjahr && !hasActiveSubscription) {
+      setFieldValue('annahmen_allgemein_planjahr', new Date().getFullYear());
+    }
+  }, [setFieldValue, values.annahmen_allgemein_planjahr, hasActiveSubscription]);
 
   // Tage pro Jahr
   useEffect(() => {

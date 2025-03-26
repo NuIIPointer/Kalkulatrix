@@ -26,7 +26,7 @@ const FormComponent = () => {
     pk_allgemein_K6: 5512.5,
     pk_allgemein_K7: undefined,
     pk_allgemein_K78: undefined,
-    annahmen_allgemein_planjahr: undefined,
+    annahmen_allgemein_planjahr: new Date().getFullYear(),
     annahmen_E41: 19.7,
     annahmen_G16: undefined,
     annahmen_G17_days: [1, 2, 3, 4, 5],
