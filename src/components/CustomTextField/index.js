@@ -54,7 +54,7 @@ const CustomTextField = ({
           lineHeight: '1.1em'
         }}
       >
-        Schließen Sie ein Abonenment ab, um dieses Feld ändern zu können.
+        Dieses Feld kann nur mit einem aktiven Abonnement bearbeitet werden.
       </Box>
     ) : (
       ''
