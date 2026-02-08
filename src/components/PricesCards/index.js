@@ -268,7 +268,7 @@ const pricesConfigPreset = [
     prices: {
       monthly: {
         price: 29.95,
-        stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm'
+        stripePriceId: 'price_1Syh0wFGa3DH0yAqNDwevvob'
       }
     },
     bullets: [
@@ -285,7 +285,7 @@ const pricesConfigPreset = [
     prices: {
       monthly: {
         price: 119.95,
-        stripePriceId: 'price_1QUSazFGa3DH0yAq85zvOhaH',
+        stripePriceId: 'price_1Syh27FGa3DH0yAqvNnHjeOc',
         featured: true
       }
     },
