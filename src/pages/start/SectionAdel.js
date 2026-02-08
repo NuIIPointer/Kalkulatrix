@@ -4,31 +4,33 @@ import { useTheme } from '@mui/material/styles';
 import IconChip from 'components/IconChip';
 import { AutoGraph, CalendarToday, Wallet } from '@mui/icons-material';
 import SectionChip from 'components/SecitonChip';
-import felixPortrait from 'assets/images/content/felix_ade_portrait.jpg';
+import felixPortrait from 'assets/images/content/felix-adel-portrait.jpeg';
 
 const SectionAdel = () => {
   const theme = useTheme();
   const items = [
     {
-      title: 'Aufbau Arbeitgebermarke',
+      title: 'Kostenoptimierung',
       description:
-        'Niemand bewirbt sich auf ihre Stellenanzeige? Wir helfen Ihnen sich als bevorzugter Arbeitgeber in der Region zu positionieren und qualifizierte Fachkräfte zu finden.',
+        'Steigende Löhne, Material- und Gemeinkosten drücken die Marge. Wir schaffen Transparenz über Ihre tatsächlichen Kosten und zeigen, wo unbemerkt Geld verloren geht.',
       icon: AutoGraph
     },
     {
-      title: 'Social Media Marketing & Recruiting',
-      description: 'Wir erhöhen Ihre digitale Sichtbarkeit und entwickeln gezielte Kampagnen zur Gewinnung neuer Mitarbeiter oder Kunden',
+      title: 'Regelmäßige Checks',
+      description:
+        'Ein einmal berechneter Stundensatz reicht nicht aus. Durch regelmäßige betriebswirtschaftliche Überprüfungen stellen wir sicher, dass Ihre Zahlen dauerhaft stimmen.',
       icon: Wallet
     },
     {
-      title: 'Prozess & Produktivitätsoptimierung',
+      title: 'Preise richtig kommunizieren',
       description:
-        'Kostensenken,Durchlaufzeitenverkürzen&Produktivität erhöhen.WirdurchleuchtenihreProzesseundunterstützen mit klaren Handlungsempfehlungen.',
+        'Der beste Stundensatz bringt nichts, wenn er nicht durchsetzbar ist. Wir unterstützen Sie dabei, Preise nachvollziehbar zu begründen und souverän gegenüber Kunden zu vertreten.',
       icon: CalendarToday
     },
     {
-      title: 'Digitalisierung',
-      description: 'Professionelle Beratung bei Implementierung von neuen Technologien und KI-Anwendungen.',
+      title: 'Langfristige Planung',
+      description:
+        'Unternehmerische Entscheidungen brauchen belastbare Grundlagen. Wir helfen Ihnen, Preise, Auslastung und Ertrag vorausschauend zu planen – statt nur auf Entwicklungen zu reagieren.',
       icon: CalendarToday
     }
   ];
@@ -90,7 +92,8 @@ const SectionAdel = () => {
           sx={{
             pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
             pr: { xs: theme.spacing(4), md: 0 },
-            pb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
+            pb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) },
+            mt: { xl: theme.spacing(8) }
           }}
         >
           {itemsRendered}
@@ -99,7 +102,7 @@ const SectionAdel = () => {
           item
           xs={12}
           md={5}
-          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', marginBlock: { xs: 4, sm: 6, md: 8, lg: 0 } }}
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', marginBlock: { xs: 4, sm: 6, md: 0, lg: 0 } }}
         >
           <Box
             as="img"
@@ -107,7 +110,7 @@ const SectionAdel = () => {
             alt="Portrait des Geschäftsführers Felix Adel"
             sx={{
               width: '100%',
-              maxWidth: { xs: '700px', lg: '100%' },
+              maxWidth: { xs: '500px' },
               borderRadius: { xs: 0, sm: 3, lg: 4 },
               overflow: 'hidden',
               boxShadow: theme.customShadows.z1,

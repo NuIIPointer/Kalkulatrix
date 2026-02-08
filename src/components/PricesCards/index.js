@@ -1,9 +1,8 @@
-import { Typography, Stack, Grid, Button, ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { Typography, Stack, Grid, Button, CircularProgress } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { StripeContext } from 'context/stripe/index';
 import { UserContext } from 'context/user/index';
-import { useContext, useEffect, useState, useMemo } from 'react';
-import { CircularProgress } from '@mui/material';
+import { useContext, useEffect, useState, useMemo, useCallback } from 'react';
 
 const PriceCard = ({
   price,
@@ -35,20 +34,65 @@ const PriceCard = ({
 
   useEffect(() => {
     const calc = async () => {
-      const portalUrl = await getPortalUrl();
-      setPortalUrl(portalUrl);
+      try {
+        const portalUrl = await getPortalUrl();
+        setPortalUrl(portalUrl);
+      } catch (error) {
+        console.warn('Portal URL not available:', error.message);
+      }
     };
 
-    user.uid && calc();
+    // Nur Portal-URL laden wenn User eingeloggt UND aktives Abo hat
+    if (user.uid && isActive) {
+      calc();
+    }
   }, [activeSubscription, getPortalUrl, isActive, user.uid]);
 
   const isLoggedIn = !!user?.uid;
+  const [isLoadingCheckout, setIsLoadingCheckout] = useState(false);
   const theme = useTheme();
   const bulletsRendered = bullets.map((bullet) => (
     <li key={bullet} style={{ marginBottom: 4 }}>
       {bullet}
     </li>
   ));
+
+  // Click-Handler für Subscription-Erstellung
+  const handleCardClick = useCallback(
+    async (e) => {
+      // Wenn customLink vorhanden oder nicht eingeloggt, normales Link-Verhalten
+      if (customLink || !user.uid) {
+        return;
+      }
+
+      // Wenn aktives Abo und Portal-URL vorhanden, normales Link-Verhalten
+      if (isActive && portalUrl) {
+        return;
+      }
+
+      // Wenn stripeLink bereits vorhanden, normales Link-Verhalten
+      if (stripeLink) {
+        return;
+      }
+
+      // Subscription erstellen wenn noch kein Link vorhanden
+      if (stripePriceId && !isLoadingCheckout) {
+        e.preventDefault();
+        setIsLoadingCheckout(true);
+        try {
+          const checkoutUrl = await createSubscription(stripePriceId);
+          if (checkoutUrl) {
+            window.open(checkoutUrl, '_blank');
+          }
+        } catch (error) {
+          console.error('Error creating subscription:', error);
+        } finally {
+          setIsLoadingCheckout(false);
+        }
+      }
+    },
+    [customLink, user.uid, isActive, portalUrl, stripeLink, stripePriceId, isLoadingCheckout, createSubscription]
+  );
 
   const cardHref = useMemo(() => {
     if (!user.uid) {
@@ -58,9 +102,10 @@ const PriceCard = ({
     } else if (!isLoggedIn) {
       return '/register';
     } else if (isActive) {
-      return portalUrl;
+      return portalUrl || '#';
     } else {
-      return stripeLink;
+      // Platzhalter # falls stripeLink noch nicht geladen - onClick übernimmt
+      return stripeLink || '#';
     }
   }, [user.uid, customLink, isLoggedIn, isActive, portalUrl, stripeLink]);
 
@@ -70,7 +115,8 @@ const PriceCard = ({
       tabIndex={-1}
       color="secondary"
       href={cardHref}
-      target="_blank"
+      target={customLink ? '_self' : '_blank'}
+      onClick={handleCardClick}
       sx={{
         position: 'relative',
         width: '100%',
@@ -156,8 +202,10 @@ const PriceCard = ({
           sx={{ mt: 'auto' }}
           tabIndex={-1}
           role="presentation"
+          disabled={isLoadingCheckout}
         >
           {customLinkText || (isActive ? 'Abo verwalten' : 'Jetzt starten')}
+          {isLoadingCheckout && <CircularProgress color="inherit" size={20} sx={{ marginLeft: theme.spacing(1) }} />}
           {/* {isLoadingCardAction ? (
             <CircularProgress color="inherit" stroke="currentColor" size={20} sx={{ marginLeft: theme.spacing(1) }} />
           ) : (
@@ -173,61 +221,26 @@ const PriceCard = ({
 
 const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
   const theme = useTheme();
-  const { activeSubscriptions } = useContext(StripeContext);
-  const activeSubscription = activeSubscriptions[0];
-  const [viewState, setViewState] = useState('monthly');
-  const handleViewChange = (_event, newViewState) => {
-    if (newViewState !== null) {
-      setViewState(newViewState);
-    }
-  };
-
-  useEffect(() => {
-    if (activeSubscription) {
-      const tabToOpen = pricesConfig
-        .map((priceConfig) =>
-          priceConfig.prices
-            ? Object.entries(priceConfig.prices)
-                .map(([key, value]) => (value.stripePriceId === activeSubscription.priceId ? key : null))
-                .filter(Boolean)
-            : []
-        )
-        .flat()?.[0];
-
-      if (tabToOpen) {
-        setViewState(tabToOpen);
-      }
-    }
-  }, [activeSubscription, pricesConfig]);
+  const viewState = 'monthly';
 
   return (
     <Grid container columnSpacing={{ xs: 2, sm: 3, md: 4 }} rowSpacing={{ xs: 2, sm: 3, md: 4 }} {...containerProps}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Stack sx={{ display: 'flex', alignItems: { xs: 'start', sm: 'center' }, marginBottom: 2 }}>
-          {/* <Box sx={{ backgroundColor: theme.palette.common.white }}> */}
-          <ToggleButtonGroup
-            value={viewState}
-            exclusive
-            onChange={handleViewChange}
-            color="primary"
+          <Typography
+            variant="body2"
             sx={{
               padding: 1.5,
-              backgroundColor: theme.palette.common.white,
-              boxShadow: theme.customShadows.z1,
+              backgroundColor: theme.palette.grey[100],
               borderRadius: theme.shape.borderRadiusBox,
-              justifyContent: 'center',
-              '.MuiButtonBase-root.MuiToggleButtonGroup-grouped.MuiToggleButton-root': {
-                border: `1px solid ${theme.palette.grey[300]}`
-              }
+              color: theme.palette.grey[700],
+              fontWeight: 500
             }}
           >
-            <ToggleButton value="monthly">Monatlich</ToggleButton>
-            <ToggleButton value="halfYearly">Halbjährlich</ToggleButton>
-            <ToggleButton value="yearly">Jährlich</ToggleButton>
-          </ToggleButtonGroup>
-          {/* </Box> */}
+            Mindestbindung: 12 Monate
+          </Typography>
         </Stack>
-      </Grid>
+      </Grid> */}
       {pricesConfig.map((priceConfig) => (
         <Grid key={priceConfig.title} item xs={12} sm={6} lg={4}>
           <PriceCard
@@ -235,14 +248,7 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
             feature={priceConfig.title}
             viewState={viewState}
             price={priceConfig.prices?.[viewState].price}
-            originalPrice={
-              priceConfig.prices &&
-              (viewState === 'halfYearly'
-                ? priceConfig.prices?.monthly.price * 6
-                : viewState === 'yearly'
-                ? priceConfig.prices?.monthly.price * 12
-                : null)
-            }
+            originalPrice={null}
             priceNotice={priceConfig.priceNotice}
             stripePriceId={priceConfig.prices?.[viewState].stripePriceId}
             bullets={priceConfig.bullets}
@@ -258,32 +264,27 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
 
 const pricesConfigPreset = [
   {
-    title: 'Pro',
+    title: 'Reine Toolnutzung',
     prices: {
       monthly: {
-        price: 69,
-        stripePriceId: 'price_1QUSccFGa3DH0yAqeNCcleFW'
-      },
-      halfYearly: { price: 360, stripePriceId: 'price_1QNB4UFGa3DH0yAqgxE3OQ0B' },
-      yearly: { price: 620, stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm' }
+        price: 29.95,
+        stripePriceId: 'price_1QNB5JFGa3DH0yAqcJCNddLm'
+      }
     },
-    bullets: ['Stundensatzkalkulation', 'Mitarbeiterkostenplanung', 'Produktmargenplanung', 'Erfassung des Plangewinns', 'Kundensupport']
+    bullets: [
+      'Stundensatzkalkulation',
+      'Mitarbeiterkostenplanung',
+      'Produktmargenplanung',
+      'Erfassung des Plangewinns',
+      'Kundensupport',
+      '12 Monate Laufzeit'
+    ]
   },
   {
-    title: 'Premium',
+    title: 'Tool + Beratung',
     prices: {
       monthly: {
-        price: 299,
-        stripePriceId: 'price_1QUSazFGa3DH0yAqzUU4v4U9',
-        featured: true
-      },
-      halfYearly: {
-        price: 1520,
-        stripePriceId: 'price_1QUSazFGa3DH0yAqPZk0IBrb',
-        featured: true
-      },
-      yearly: {
-        price: 2690,
+        price: 119.95,
         stripePriceId: 'price_1QUSazFGa3DH0yAq85zvOhaH',
         featured: true
       }
@@ -291,8 +292,9 @@ const pricesConfigPreset = [
     bullets: [
       'Monatliches Beratungsgespräch',
       'Regelmäßige Schulungen und Webinare',
-      'Alle Funktionen des Pro Plan',
-      'Priorisierter Kundensupport'
+      'Alle Funktionen des Toolnutzung-Plans',
+      'Priorisierter Kundensupport',
+      '12 Monate Laufzeit'
     ]
   },
   {
@@ -305,8 +307,9 @@ const pricesConfigPreset = [
       'Durchführung der Kalkulation in ihrem Betrieb',
       'Individuelle Handlungsempfehlungen',
       'Für Unternehmens- und Steuerberater',
-      'Alle Features des Premiumplan',
-      'Persönlicher Accountmanager'
+      'Alle Features des Tool + Beratung Plans',
+      'Persönlicher Accountmanager',
+      '12 Monate Laufzeit'
     ]
   }
 ];
