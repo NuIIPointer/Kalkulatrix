@@ -95,6 +95,14 @@ const userRoutes = (isAdmin) => ({
           element: <Redirect to="/office/dashboard" />
         }
       ]
+    },
+    {
+      path: 'office/*',
+      element: (
+        <ProtectedRoute>
+          <Redirect to="/office/dashboard" />
+        </ProtectedRoute>
+      )
     }
   ]
 });

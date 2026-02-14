@@ -232,6 +232,30 @@ export const UserContextProvider = ({ children }) => {
     }
   }, []);
 
+  const updateAdminAccess = useCallback(
+    async ({ enabled, scope, allowedFormIds }) => {
+      try {
+        const adminAccess = {
+          enabled: !!enabled,
+          scope: scope || 'all',
+          allowedFormIds: allowedFormIds || []
+        };
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          adminAccess
+        });
+        await setUser({
+          ...user,
+          adminAccess
+        });
+        return true;
+      } catch (error) {
+        console.log('error', error);
+        return false;
+      }
+    },
+    [user]
+  );
+
   const resetPasswordMail = useCallback(async (email) => {
     try {
       const successful = await sendPasswordResetEmail(auth, email);
@@ -435,6 +459,7 @@ export const UserContextProvider = ({ children }) => {
         changeUser,
         changeEmail,
         changePassword,
+        updateAdminAccess,
         resetPasswordMail,
         addUserForm,
         reloadUser,

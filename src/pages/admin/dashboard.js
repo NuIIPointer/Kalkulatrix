@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { AdminContext } from 'context/admin/index';
-import { Box, Button, Stack, Modal, Typography } from '@mui/material';
+import { Box, Button, Chip, Stack, Modal, Typography } from '@mui/material';
 import useFormLiteral from 'pages/form/useFormLiteral';
 import DataTable from 'components/DataTable/index';
 import LayoutBox from 'components/LayoutBox/index';
@@ -34,17 +34,21 @@ const AdminDashboard = () => {
       width: 450,
       renderCell: (params) => (
         <Stack gap={2} direction="row" justifyContent="flex-start" alignItems="center" flexWrap="wrap" sx={{ height: '100%' }}>
-          {params.value?.map((formData) => (
-            <Button
-              size="small"
-              color="primary"
-              variant="contained"
-              onClick={() => setModalData({ formData: formData, rowData: params.row })}
-              key={FormData.id}
-            >
-              {formData.title}
-            </Button>
-          ))}
+          {params.row.adminAccessEnabled === false ? (
+            <Chip label="Kein Zugriff" size="small" variant="outlined" color="default" />
+          ) : (
+            params.value?.map((formData) => (
+              <Button
+                size="small"
+                color="primary"
+                variant="contained"
+                onClick={() => setModalData({ formData: formData, rowData: params.row })}
+                key={formData.id}
+              >
+                {formData.title}
+              </Button>
+            ))
+          )}
         </Stack>
       )
     }

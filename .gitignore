@@ -106,5 +106,8 @@ dist
 # Backup file
 *.bak
 
+# Firebase
+firestore.rules
+
 #output
 build

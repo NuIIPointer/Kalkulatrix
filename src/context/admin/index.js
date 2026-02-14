@@ -71,10 +71,24 @@ export const AdminContextProvider = ({ children }) => {
           const formsToGet = new Set();
           clientsUserData.forEach((el) => el.userFormIds?.length > 0 && el.userFormIds.forEach((formId) => formsToGet.add(formId)));
           const fetchedForms = await getForms([...formsToGet]);
-          const clientsWithFormData = clientsUserData.map((user) => {
+          const clientsWithFormData = clientsUserData.map((client) => {
+            const adminAccess = client.adminAccess;
+            const hasConsent = adminAccess?.enabled === true;
+
+            let usersFormData = [];
+            if (hasConsent) {
+              const allForms = client.userFormIds?.map((formId) => fetchedForms[formId]).filter(Boolean) || [];
+              if (adminAccess.scope === 'selected' && Array.isArray(adminAccess.allowedFormIds)) {
+                usersFormData = allForms.filter((form) => adminAccess.allowedFormIds.includes(form.id));
+              } else {
+                usersFormData = allForms;
+              }
+            }
+
             return {
-              ...user,
-              usersFormData: user.userFormIds?.map((formId) => fetchedForms[formId]).filter(Boolean)
+              ...client,
+              adminAccessEnabled: hasConsent,
+              usersFormData
             };
           });
 
