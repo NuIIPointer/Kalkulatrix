@@ -8,7 +8,7 @@ const LayoutBox = ({ children, sx, ...otherProps }) => {
     <Box
       sx={{
         borderRadius: theme.shape.borderRadiusBox,
-        boxShadow: theme.customShadows.z0,
+        boxShadow: theme.customShadows.z1,
         border: '1px solid #00000012',
         ...sx
       }}

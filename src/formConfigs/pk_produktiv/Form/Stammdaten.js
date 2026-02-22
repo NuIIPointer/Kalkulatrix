@@ -932,7 +932,7 @@ const Stammdaten = () => {
                         };
 
                         return (
-                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%' }}>
+                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%', boxShadow: 'none' }}>
                             <DataTable
                               data={tableData}
                               columns={columns}

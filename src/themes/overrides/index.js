@@ -45,7 +45,7 @@ export default function ComponentsOverrides(theme) {
     TextField(),
     Select(),
     FormHelperText(),
-    MuiCard(),
+    MuiCard(theme),
     Divider(theme),
     InputLabel(theme),
     Input(theme),

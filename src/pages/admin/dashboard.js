@@ -58,7 +58,7 @@ const AdminDashboard = () => {
     <>
       {/* <ColoredSection bgGradient={headerBgColor} bgColor={theme.palette.secondary.dark} headline={'Admin Dashboard'} /> */}
       {clientsData && (
-        <LayoutBox sx={{ padding: { xs: 2, sm: 3, md: 4 }, backgroundColor: '#fff' }}>
+        <LayoutBox sx={{ padding: { xs: 2, sm: 3, md: 4 }, backgroundColor: '#fff', boxShadow: 'none' }}>
           <DataTable data={clientsData} columns={columns} />
           <Modal
             open={!!modalData?.formData}

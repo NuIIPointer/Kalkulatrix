@@ -20,7 +20,7 @@ export default function ThemeCustomization({ children }) {
   const theme = Palette('light', 'default');
 
   const themeTypography = Typography(`'Red Hat Display', sans-serif`);
-  const themeCustomShadows = useMemo(() => CustomShadows(theme), [theme]);
+  const themeCustomShadows = useMemo(() => CustomShadows(), []);
 
   const themeOptions = useMemo(
     () => ({

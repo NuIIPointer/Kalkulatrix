@@ -45,9 +45,9 @@ const MainCard = forwardRef(
           border: border ? '1px solid' : 'none',
           borderRadius: 2,
           borderColor: borderColor,
-          boxShadow: boxShadow && (!border || theme.palette.mode === 'dark') ? shadow || theme.customShadows.z1 : 'inherit',
+          boxShadow: shadow || undefined,
           ':hover': {
-            boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'inherit'
+            boxShadow: shadow || undefined
           },
           '& pre': {
             m: 0,
