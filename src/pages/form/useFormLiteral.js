@@ -1,4 +1,6 @@
+import { useContext, useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { StripeContext } from 'context/stripe/index';
 
 import Annahmen from 'formConfigs/annahmen/Form/index';
 import AnnahmenUpdater from 'formConfigs/annahmen/CalculationUpdater/index';
@@ -33,6 +35,12 @@ import DeckungsbeitraegeUpdaterStdVerrechnungssaetze from 'formConfigs/deckungsb
 
 const useFormLiteral = () => {
   const theme = useTheme();
+  const { hasActiveSubscription } = useContext(StripeContext);
+
+  const effectiveAnnahmenSchema = useMemo(
+    () => (hasActiveSubscription ? annahmenValidationSchema : annahmenValidationSchema.omit(['annahmen_G16', 'annahmen_G17_days'])),
+    [hasActiveSubscription]
+  );
 
   return {
     annahmen: {
@@ -44,7 +52,7 @@ const useFormLiteral = () => {
           <CalculationUpdaterGkStundensaetze />
         </>
       ),
-      validationSchema: annahmenValidationSchema,
+      validationSchema: effectiveAnnahmenSchema,
       title: 'Allgemeine Unternehmensangaben',
       description:
         'Bitte tragen Sie hier Ihre Unternehmensdaten, Arbeitszeiten sowie Lohnnebenkosten ein. Diese Angaben dienen zum einen zur Ermittlung der jährlichen Arbeitszeit und zur Vorbelegung von bspw. Urlaubstagen für die Anlagen ihrer Mitarbeiter.'

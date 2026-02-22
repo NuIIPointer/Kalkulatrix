@@ -13,8 +13,7 @@ const PublicLayout = () => {
   const theme = useTheme();
 
   return (
-    <>
-      <Box
+    <Box
         sx={{
           background: `radial-gradient(circle at 2% 10%, ${theme.palette.common.white}, transparent 100%),radial-gradient(circle at 95% 20%, ${theme.palette.primary[800]}, transparent 100%),radial-gradient(circle at 25% 90%, ${theme.palette.grey[200]}, transparent 100%)`,
           '& .calendly-badge-content': {
@@ -40,7 +39,8 @@ const PublicLayout = () => {
               top: '0',
               left: '0',
               width: '100%',
-              backgroundColor: theme.palette.common.white,
+              ...theme.glass({ intensity: 'medium', border: false }),
+              borderBottom: `1px solid rgba(255, 255, 255, 0.18)`,
               zIndex: 10000
             }}
           >
@@ -55,9 +55,8 @@ const PublicLayout = () => {
             <Outlet />
           </Box>
         </Box>
-      </Box>
       <Footer />
-    </>
+    </Box>
   );
 };
 

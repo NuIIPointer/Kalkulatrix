@@ -45,7 +45,7 @@ const SectionHeadlineText = () => {
         colorPreset="primaryLight"
         sizePreset="large"
         cardSx={{ mb: { xs: 2, md: 3, lg: 5 } }}
-        shadowPreset="small"
+        shadowPreset="button"
       />
       <Typography variant="h3" sx={{ mb: { xs: 1, md: 2 } }}>
         {item.title}

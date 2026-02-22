@@ -122,6 +122,9 @@ const IconChip = ({
     large: {
       boxShadow: theme.customShadows.z3
     },
+    button: {
+      boxShadow: theme.customShadows.card
+    },
     none: {
       boxShadow: 'none'
     }

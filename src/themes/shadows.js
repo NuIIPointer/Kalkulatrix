@@ -15,6 +15,18 @@ const buttonShadow = (color) =>
     `0 30px 30px -2.5px rgba(${color}, 0.05)`
   ].join(', ');
 
+const cardShadow = (color) =>
+  [
+    `0 0.8px 0.5px -0.3px rgba(${color}, 0.025)`,
+    `0 2px 1px -0.6px rgba(${color}, 0.025)`,
+    `0 3.6px 2.2px -0.9px rgba(${color}, 0.03)`,
+    `0 6px 3.6px -1.2px rgba(${color}, 0.025)`,
+    `0 9px 6px 1px rgba(${color}, 0.025)`,
+    `0 16px 9px -2px rgba(${color}, 0.025)`,
+    `0 24px 16px -2px rgba(${color}, 0.025)`,
+    `0 30px 30px -2.5px rgba(${color}, 0.02)`
+  ].join(', ');
+
 const buttonHoverShadow = (color) =>
   [
     `0 1px 1px -0.5px rgba(${color}, 0.05)`,
@@ -25,6 +37,7 @@ const buttonHoverShadow = (color) =>
   ].join(', ');
 
 const CustomShadows = () => ({
+  card: cardShadow(sc),
   button: buttonShadow(sc),
   buttonHover: buttonHoverShadow(sc),
   buttonWarning: buttonShadow('140, 100, 10'),

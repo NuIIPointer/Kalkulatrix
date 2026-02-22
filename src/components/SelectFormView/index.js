@@ -196,7 +196,7 @@ const SelectFormView = ({ formType, sections }) => {
 
           {showMoreFormsWarning && (
             <Grid item xs={12} sm={6} sx={{ mt: theme.spacing(4) }}>
-              <Alert sx={{ mb: 2, boxShadow: theme.customShadows.z1 }} severity="warning">
+              <Alert sx={{ mb: 2, boxShadow: theme.customShadows.buttonWarning }} severity="warning">
                 Es gibt weitere Kalkulationen. Setzen Sie das Abonnement fort oder wählen Sie ein umfangreicheres Abonement um alle
                 Kalkulationen anzuzeigen.
               </Alert>

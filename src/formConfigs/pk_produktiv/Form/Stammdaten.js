@@ -486,7 +486,7 @@ const Stammdaten = () => {
                 size="small"
                 onClick={onDelete}
                 startIcon={<DeleteOutlined />}
-                sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
+                sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0, boxShadow: 'none', '&:hover': { boxShadow: 'none' } }}
               >
                 <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Löschen</Stack>
               </Button>
@@ -496,13 +496,21 @@ const Stammdaten = () => {
                 size="small"
                 onClick={onCopy}
                 startIcon={<Save />}
-                sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0 }}
+                sx={{ paddingRight: { xs: 0.5, sm: 2 }, minWidth: 0, boxShadow: 'none', '&:hover': { boxShadow: 'none' } }}
               >
                 <Stack sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Kopieren</Stack>
               </Button>
             </>
           ) : (
-            <Button variant="contained" color="primary" size="small" onClick={onCreate} disabled={isSubmitting} startIcon={<Add />}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={onCreate}
+              disabled={isSubmitting}
+              startIcon={<Add />}
+              sx={{ boxShadow: 'none', '&:hover': { boxShadow: 'none' } }}
+            >
               Neuen Mitarbeiter anlegen
             </Button>
           )}
@@ -932,7 +940,7 @@ const Stammdaten = () => {
                         };
 
                         return (
-                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%', boxShadow: 'none' }}>
+                          <LayoutBox sx={{ overflow: 'hidden', borderRadius: theme.spacing(2), width: '100%', maxWidth: '100%', boxShadow: 'none', border: `1px solid ${theme.palette.grey[300]}` }}>
                             <DataTable
                               data={tableData}
                               columns={columns}

@@ -1,5 +1,7 @@
 // ==============================|| OVERRIDES - Dialog ||============================== //
 
+import glassEffect from '../glass';
+
 export default function Dialog(theme) {
   return {
     MuiDialog: {
@@ -8,7 +10,9 @@ export default function Dialog(theme) {
           // borderRadius: theme.spacing(2)
         },
         paper: {
-          borderRadius: theme.spacing(theme.shape.borderRadiusBox)
+          borderRadius: theme.spacing(theme.shape.borderRadiusBox),
+          ...glassEffect({ intensity: 'medium' }),
+          boxShadow: theme.customShadows.z3
         }
       }
     },

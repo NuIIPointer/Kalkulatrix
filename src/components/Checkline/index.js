@@ -82,7 +82,7 @@ const Checkline = ({ items, textProps, iconProps = {}, breakpointWrap = 'md' }) 
             borderStyle: iconProps.borderStyle || 'solid',
             ...iconProps.cardSx
           }}
-          shadowPreset="small"
+          shadowPreset="button"
         />
       </Stack>
     );

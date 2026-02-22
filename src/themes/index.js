@@ -13,6 +13,8 @@ import Palette from './palette';
 import Typography from './typography';
 import CustomShadows from './shadows';
 import componentsOverride from './overrides';
+import glassEffect from './glass';
+import getGradient from './gradients';
 
 // ==============================|| DEFAULT THEME - MAIN  ||============================== //
 
@@ -43,6 +45,8 @@ export default function ThemeCustomization({ children }) {
       },
       palette: theme.palette,
       customShadows: themeCustomShadows,
+      glass: glassEffect,
+      gradient: getGradient,
       typography: themeTypography,
       shape: {
         paddingButton: `${theme.spacing(1.5)} ${theme.spacing(2)}`,

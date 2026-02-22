@@ -122,8 +122,10 @@ const PriceCard = ({
         width: '100%',
         flexDirection: 'column',
         maxWidth: { xs: 500, md: 'none' },
-        backgroundColor: isActive ? theme.palette.primary[500] : theme.palette.common.white,
-        boxShadow: theme.customShadows.z1,
+        ...(isActive
+          ? { backgroundColor: theme.palette.primary[500] }
+          : theme.glass({ intensity: 'medium' })),
+        boxShadow: theme.customShadows.card,
         padding: theme.shape.paddingBoxMedium,
         borderRadius: theme.shape.borderRadiusBox,
         height: '100%',
@@ -137,7 +139,7 @@ const PriceCard = ({
         textDecoration: 'none',
         ':hover': {
           borderColor: featured ? theme.palette.primary[500] : theme.palette.grey[500],
-          backgroundColor: isActive ? theme.palette.primary[400] : theme.palette.grey[100],
+          backgroundColor: isActive ? theme.palette.primary[400] : theme.glass({ intensity: 'strong' }).backgroundColor,
           cursor: 'pointer',
           boxShadow: theme.customShadows.z3
         }

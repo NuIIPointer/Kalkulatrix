@@ -47,7 +47,7 @@ const SectionAdel = () => {
         mb: { xs: 2, sm: 4, md: 6 }
       }}
     >
-      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="medium" cardSx={{ flexShrink: 0 }} shadowPreset="small" />
+      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="medium" cardSx={{ flexShrink: 0 }} shadowPreset="button" />
       <Stack mt={1.5}>
         <Typography variant="h3" sx={{ mb: 1, fontWeight: 700 }}>
           {item.title}
@@ -60,66 +60,69 @@ const SectionAdel = () => {
   ));
 
   return (
-    <>
-      <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }}>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
-            pr: { xs: theme.spacing(4), md: 0 },
-            pt: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
-          }}
-        >
-          <SectionChip colorPreset="primaryLight" sx={{ mx: 'auto', mb: 2, mr: 'auto', width: 'auto' }}>
-            Professionelle Beratung
-          </SectionChip>
-          <Typography variant="h2" sx={{ mb: { xs: 4, md: 7, lg: 10 }, fontWeight: 700, fontSize: { xs: 22, sm: 28, md: 36, lg: 48 } }}>
-            <Typography variant="span" display="block">
-              KALKULATRIX
-            </Typography>
-            <Typography variant="span" fontSize="0.8em" lineHeight="0.8em" fontWeight="400">
-              Ein Produkt der Adel Consulting
-            </Typography>
+    <Grid container justifyContent="space-between" sx={{ overflow: 'hidden' }}>
+      {/* Left column: Header + Items */}
+      <Grid
+        item
+        xs={12}
+        md={7}
+        sx={{
+          pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
+          pr: { xs: theme.spacing(4), md: 0 },
+          py: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) }
+        }}
+      >
+        <SectionChip colorPreset="primaryLight" sx={{ mx: 'auto', mb: 2, mr: 'auto', width: 'auto' }}>
+          Professionelle Beratung
+        </SectionChip>
+        <Typography variant="h2" sx={{ mb: { xs: 4, md: 7, lg: 10 }, fontWeight: 700, fontSize: { xs: 22, sm: 28, md: 36, lg: 48 } }}>
+          <Typography variant="span" display="block">
+            KALKULATRIX
           </Typography>
-        </Grid>
-        <Grid item xs={12} />
-        <Grid
-          item
-          xs={12}
-          md={6}
+          <Typography variant="span" fontSize="0.8em" lineHeight="0.8em" fontWeight="400">
+            Ein Produkt der Adel Consulting
+          </Typography>
+        </Typography>
+        {itemsRendered}
+      </Grid>
+      {/* Right column: Portrait */}
+      <Grid
+        item
+        xs={12}
+        md={5}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: { xs: 'center', md: 'flex-start' },
+          marginBlock: { xs: 4, sm: 6, md: 0 },
+          pt: { md: theme.spacing(28), lg: theme.spacing(34), xl: theme.spacing(38) }
+        }}
+      >
+        <Box
           sx={{
-            pl: { xs: theme.spacing(4), md: theme.spacing(10), lg: theme.spacing(20), xl: theme.spacing(24) },
-            pr: { xs: theme.spacing(4), md: 0 },
-            pb: { xs: theme.spacing(6), md: theme.spacing(12), lg: theme.spacing(15) },
-            mt: { xl: theme.spacing(8) }
+            width: { xs: 260, sm: 300, md: 300, lg: 380, xl: '540px' },
+            height: { xs: 260, sm: 300, md: 300, lg: 380, xl: '540px' },
+            borderRadius: '50%',
+            p: 0.5,
+            background: `linear-gradient(145deg, ${theme.palette.primary[100]} 0%, ${theme.palette.primary[300]} 50%, ${theme.palette.primary[100]} 100%)`,
+            boxShadow: theme.customShadows.button
           }}
-        >
-          {itemsRendered}
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={5}
-          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', marginBlock: { xs: 4, sm: 6, md: 0, lg: 0 } }}
         >
           <Box
-            as="img"
+            component="img"
             src={felixPortrait}
             alt="Portrait des Geschäftsführers Felix Adel"
             sx={{
               width: '100%',
-              maxWidth: { xs: '500px' },
-              borderRadius: { xs: 0, sm: 3, lg: 4 },
-              overflow: 'hidden',
-              boxShadow: theme.customShadows.z1,
-              marginRight: { xs: 0, sm: 4, md: 6, lg: 10 }
+              height: '100%',
+              borderRadius: '50%',
+              objectFit: 'cover',
+              objectPosition: 'center 20%'
             }}
           />
-        </Grid>
+        </Box>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

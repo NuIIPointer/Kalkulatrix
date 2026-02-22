@@ -32,7 +32,7 @@ const TextTeaserCard = ({
       onClick={onClick && onClick}
       target={target}
       sx={{
-        boxShadow: boxShadow || theme.customShadows.z1,
+        boxShadow: boxShadow || theme.customShadows.button,
         aspectRatio: ratio,
         width: '100%',
         height: grow && '100%',
@@ -70,7 +70,7 @@ const TextTeaserCard = ({
         '&:hover': {
           color: textColorHover,
           backgroundColor: bgHoverColor,
-          boxShadow: theme.customShadows.z2,
+          boxShadow: theme.customShadows.z3,
 
           '&:after': link && {
             transform: 'rotate(20deg) translateY(-50%) translateX(-15%)'

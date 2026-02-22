@@ -45,7 +45,7 @@ const SectionGewinn = () => {
         mb: { xs: 2, sm: 4, lg: 0 }
       }}
     >
-      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="medium" cardSx={{ flexShrink: 0 }} shadowPreset="small" />
+      <IconChip icon={item.icon} colorPreset="primaryLight" sizePreset="medium" cardSx={{ flexShrink: 0 }} shadowPreset="button" />
       <Typography variant="body2" sx={{ mb: 0, fontWeight: 600 }}>
         {item.title}
       </Typography>
@@ -125,7 +125,7 @@ const SectionGewinn = () => {
                   position: 'relative',
                   borderRadius: { xs: 2, md: 4 },
                   overflow: 'hidden',
-                  boxShadow: theme.customShadows.z1,
+                  boxShadow: theme.customShadows.card,
                   objectFit: 'cover',
                   border: `1px solid ${theme.palette.grey[300]}`
                 }}

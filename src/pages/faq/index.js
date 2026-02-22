@@ -66,7 +66,7 @@ const FAQ = () => {
         colorPreset="primaryLight"
         sizePreset="medium"
         cardSx={{ flexShrink: 0 }}
-        shadowPreset="small"
+        shadowPreset="button"
       />
       <Stack mt={1.5}>
         <Typography variant="h3" sx={{ mb: 1, fontWeight: 700 }}>

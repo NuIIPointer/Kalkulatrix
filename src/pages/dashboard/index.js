@@ -122,7 +122,7 @@ const Dashboard = () => {
                 overlflow: 'hidden',
                 borderColor: theme.palette.common.white
               },
-              boxShadow: theme.customShadows.z1,
+              boxShadow: theme.customShadows.card,
               mb: 3
             }}
             value={activeFormKey}
@@ -250,7 +250,7 @@ const Dashboard = () => {
         </Grid>
       </Grid>
       {bottomBoxRendering()}
-      <ConsentWrapper title="Kalender - Termin vereinbaren" consentKeys={['necessary']}>
+      <ConsentWrapper title="Kalender - Termin vereinbaren" consentKeys={['necessary']} sx={{ mb: 4 }}>
         <InlineWidget
           url="https://calendly.com/adel-consulting/30min"
           styles={{

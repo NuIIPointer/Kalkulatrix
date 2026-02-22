@@ -84,8 +84,7 @@ const Profile = () => {
         anchorEl={anchorRef.current}
         role={undefined}
         transition
-        disablePortal
-        sx={{ zIndex: 1 }}
+        sx={{ zIndex: 1300 }}
         popperOptions={{
           modifiers: [
             {

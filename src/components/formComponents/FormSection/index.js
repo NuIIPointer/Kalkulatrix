@@ -14,7 +14,7 @@ import {
   Box
 } from '@mui/material/index';
 import { DeleteOutlineOutlined, NoteAddOutlined, EditOutlined, ClearOutlined } from '@mui/icons-material';
-import { useMemo, useRef, useState, useContext } from 'react';
+import { useEffect, useMemo, useRef, useState, useContext } from 'react';
 import { useFormikContext } from 'formik';
 import DisabledPattern from 'components/DisabledPattern/index';
 import { StripeContext } from 'context/stripe/index';
@@ -74,6 +74,12 @@ const FormSection = ({
   }, [touched]);
 
   const showErrorStatus = (hasTouchedField || forceShowError) && (hasErrorField || isError);
+
+  useEffect(() => {
+    if (showErrorStatus && !isOpen) {
+      setIsOpen(true);
+    }
+  }, [showErrorStatus]);
 
   const buttonStyles = {
     aspectRatio: '1/1',

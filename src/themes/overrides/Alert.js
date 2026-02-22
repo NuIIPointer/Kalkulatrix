@@ -6,11 +6,18 @@ export default function Alert(theme) {
       styleOverrides: {
         root: {
           borderRadius: theme.spacing(theme.shape.borderRadiusBox),
+          overflow: 'visible',
+          paddingBottom: theme.spacing(2)
+        },
+        message: {
           overflow: 'visible'
         },
         icon: {
           paddingTop: theme.spacing(1.5),
           paddingBottom: 0
+        },
+        standardWarning: {
+          overflow: 'visible'
         },
         standardInfo: {
           backgroundColor: theme.palette.primary[900],

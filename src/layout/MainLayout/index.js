@@ -84,7 +84,10 @@ const MainLayout = () => {
         >
           <Box
             sx={{
-              backgroundColor: { md: theme.palette.common.white },
+              ...{ md: theme.glass({ intensity: 'light', border: false }) },
+              backgroundColor: { xs: 'transparent', md: theme.glass({ intensity: 'light' }).backgroundColor },
+              backdropFilter: { xs: 'none', md: theme.glass({ intensity: 'light' }).backdropFilter },
+              WebkitBackdropFilter: { xs: 'none', md: theme.glass({ intensity: 'light' }).WebkitBackdropFilter },
               minHeight: '100px',
               display: 'flex',
               alignItems: 'center',
@@ -97,7 +100,7 @@ const MainLayout = () => {
                 position: 'absolute',
                 top: '0',
                 left: 'calc(100% - 1px)',
-                backgroundColor: theme.palette.common.white,
+                ...theme.glass({ intensity: 'light', border: false }),
                 borderBottom: { md: `1px solid ${theme.palette.grey[300]}` },
                 height: 'calc(100% + 1px)',
                 width: '100vw',
@@ -115,8 +118,8 @@ const MainLayout = () => {
                     position: 'fixed',
                     top: '16px',
                     right: '16px',
-                    backgroundColor: theme.palette.common.white,
-                    boxShadow: theme.shadows[8],
+                    ...theme.glass({ intensity: 'strong' }),
+                    boxShadow: theme.customShadows.z2,
                     padding: 1,
                     zIndex: '1000',
                     borderRadius: '500px',
@@ -165,7 +168,9 @@ const MainLayout = () => {
             gridColumnEnd: '1',
             gridRowStart: '1',
             gridRowEnd: '5',
-            backgroundColor: { lg: theme.palette.common.white },
+            backgroundColor: { xs: 'transparent', lg: theme.glass({ intensity: 'light' }).backgroundColor },
+            backdropFilter: { xs: 'none', lg: theme.glass({ intensity: 'light' }).backdropFilter },
+            WebkitBackdropFilter: { xs: 'none', lg: theme.glass({ intensity: 'light' }).WebkitBackdropFilter },
             borderRight: { lg: `1px solid ${theme.palette.grey[300]}` },
             position: 'relative',
             ':after': {
@@ -173,7 +178,7 @@ const MainLayout = () => {
               position: 'absolute',
               top: '0',
               right: 'calc(100% - 1px)',
-              backgroundColor: theme.palette.common.white,
+              ...theme.glass({ intensity: 'light', border: false }),
               height: '100%',
               width: '100vw'
             },

@@ -3,10 +3,12 @@ import * as CookieConsent from 'vanilla-cookieconsent';
 import { useEffect, useState } from 'react';
 
 const runConsent = () => {
-  /**
-   * All config. options available here:
-   * https://cookieconsent.orestbida.com/reference/configuration-reference.html
-   */
+  try {
+    CookieConsent.reset();
+  } catch (e) {
+    window._ccRun = false;
+  }
+
   CookieConsent.run({
     categories: {
       necessary: {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Scrollama, Step } from 'react-scrollama';
 import SectionHeadlineText from './SectionHeadlineText';
 import SectionVorteile from './SectionVorteile';
@@ -19,38 +20,53 @@ import SectionPreise from './SectionPreise';
 
 const Start = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(null);
+  // const theme = useTheme();
 
   const onStepEnter = ({ data }) => {
     setCurrentStepIndex(data);
   };
 
   const sections = [
-    SectionHeadlineText,
-    SectionVorteile,
-    // SectionPartnerSlider,
-    SectionGewinn,
-    SectionKalkulieren,
-    SectionCheckline,
-    // SectionAnmeldung, // AUFBEWAHRT: Webinar-Anmeldung
-    SectionAdel,
-    SectionPreise,
-    SectionCalendar
+    { Component: SectionHeadlineText },
+    { Component: SectionVorteile },
+    // { Component: SectionPartnerSlider },
+    { Component: SectionGewinn },
+    { Component: SectionKalkulieren },
+    { Component: SectionCheckline, fullWidth: true },
+    // { Component: SectionAnmeldung }, // AUFBEWAHRT: Webinar-Anmeldung
+    { Component: SectionAdel },
+    { Component: SectionPreise },
+    { Component: SectionCalendar }
   ];
 
+  // const sectionGradients = [
+  //   null,                            // SectionHeadlineText — hero
+  //   theme.gradient('blueMesh'),      // SectionVorteile — feature cards
+  //   null,                            // SectionGewinn — screenshot
+  //   theme.gradient('warmNeutral'),   // SectionKalkulieren
+  //   null,                            // SectionCheckline
+  //   theme.gradient('warmNeutral'),   // SectionAdel
+  //   theme.gradient('deepBlue'),      // SectionPreise — pricing
+  //   null                             // SectionCalendar
+  // ];
+
   return (
-    <>
-      <Box>
-        <Scrollama onStepEnter={onStepEnter} offset={0.3}>
-          {sections.map((Section, index) => (
-            <Step data={index} key={index}>
-              <div>
-                <Section isActive={currentStepIndex === index} />
-              </div>
-            </Step>
-          ))}
-        </Scrollama>
-      </Box>
-    </>
+    <Box>
+      <Scrollama onStepEnter={onStepEnter} offset={0.3}>
+        {sections.map(({ Component, fullWidth }, index) => (
+          <Step data={index} key={index}>
+            <Box
+              sx={{
+                mb: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
+                ...(!fullWidth && { maxWidth: 1800, mx: 'auto' })
+              }}
+            >
+              <Component isActive={currentStepIndex === index} />
+            </Box>
+          </Step>
+        ))}
+      </Scrollama>
+    </Box>
   );
 };
 

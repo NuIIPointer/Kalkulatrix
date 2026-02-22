@@ -7,9 +7,9 @@ const LayoutBox = ({ children, sx, ...otherProps }) => {
   return (
     <Box
       sx={{
+        ...theme.glass({ intensity: 'medium' }),
         borderRadius: theme.shape.borderRadiusBox,
-        boxShadow: theme.customShadows.z1,
-        border: '1px solid #00000012',
+        boxShadow: theme.customShadows.card,
         ...sx
       }}
       {...otherProps}
