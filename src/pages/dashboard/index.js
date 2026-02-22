@@ -87,13 +87,13 @@ const Dashboard = () => {
   const bottomBoxRendering = useCallback(() => {
     return (
       <Grid container spacing={3} mb={6}>
-        <Grid item xs={6} sm={6} xl={4}>
+        <Grid item xs={6} sm={6} xl={3}>
           <TextTeaserCard primaryText="Angaben" prefixText="zu den" link="/office/form/overview" color={theme.palette.primary.dark} />
         </Grid>
-        <Grid item xs={6} sm={6} xl={4}>
+        <Grid item xs={6} sm={6} xl={3}>
           <TextTeaserCard primaryText="Profil" prefixText="zum" link="/office/profile" color={theme.palette.primary.light} />
         </Grid>
-        <Grid item xs={6} sm={6} xl={4}>
+        <Grid item xs={6} sm={6} xl={3}>
           <TextTeaserCard
             primaryText="Kontaktieren"
             prefixText="jetzt"
@@ -101,6 +101,9 @@ const Dashboard = () => {
             target="_blank"
             color={theme.palette.primary[200]}
           />
+        </Grid>
+        <Grid item xs={6} sm={6} xl={3}>
+          <TextTeaserCard primaryText="Abonnements" prefixText="zu den" link="/office/billing" color={theme.palette.primary.main} />
         </Grid>
       </Grid>
     );

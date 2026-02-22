@@ -10,11 +10,16 @@ const PublicNav = () => {
         padding: { xs: `${theme.spacing(2)} ${theme.spacing(2)}`, md: `${theme.spacing(3)} ${theme.spacing(6)}` }
       }}
     >
-      <Stack justifyContent="space-between" direction="row">
+      <Stack justifyContent="space-between" direction="row" alignItems="center">
         <Logo sx={{ maxWidth: '200px' }} variant="dark" />
-        <Button href="/login" color="primary" variant="contained" startIcon={<Login />}>
-          Zum Login
-        </Button>
+        <Stack direction="row" gap={2}>
+          <Button href="/register" color="primary" variant="outlined">
+            Kostenlos testen
+          </Button>
+          <Button href="/login" color="primary" variant="contained" startIcon={<Login />}>
+            Zum Login
+          </Button>
+        </Stack>
       </Stack>
     </Box>
   );

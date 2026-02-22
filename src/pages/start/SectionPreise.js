@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Stack } from '@mui/material';
+import { Grid, Typography, Stack, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import PricesCards from 'components/PricesCards/index';
 
@@ -22,10 +22,15 @@ const SectionPreise = () => {
       <Typography
         variant="bod2"
         textAlign={{ xs: 'left', md: 'center' }}
-        sx={{ mb: { xs: 3, md: 4, lg: 6 }, fontSize: { xs: 18, sm: 20, md: 22, lg: 24 } }}
+        sx={{ mb: 1, fontSize: { xs: 18, sm: 20, md: 22, lg: 24 } }}
       >
         Wählen Sie ein Paket, welches zu Ihren individuellen Anforderungen passt.
       </Typography>
+      <Stack alignItems={{ xs: 'flex-start', md: 'center' }} sx={{ mb: { xs: 3, md: 4, lg: 6 } }}>
+        <Button href="/register" variant="contained" color="primary" size="large">
+          Hier können Sie Kalkulatrix kostenlos testen
+        </Button>
+      </Stack>
       <Stack>
         <PricesCards />
       </Stack>
