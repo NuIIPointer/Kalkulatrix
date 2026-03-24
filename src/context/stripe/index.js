@@ -31,21 +31,26 @@ const maxFreeCalculations = 1;
 const productConfig = {
   // Test
   prod_RS5Mwa8DhYvhGA: {
+    name: 'Test',
     maxCalculations: 1
     // prices: ['price_1QZBBaFGa3DH0yAqy766ghH0']
   },
   // Pro
   prod_RFgQbyJhgjwWPa: {
+    name: 'Pro',
     maxCalculations: 2
     // prices: ['price_1QUSccFGa3DH0yAqeNCcleFW', 'price_1QNB4UFGa3DH0yAqgxE3OQ0B', 'price_1QNB5JFGa3DH0yAqcJCNddLm']
   },
   // Premium
   prod_RND1xoBl19Y4PT: {
+    name: 'Premium',
     maxCalculations: 1
     // prices: ['price_1QUSazFGa3DH0yAqzUU4v4U9', 'price_1QUSazFGa3DH0yAqPZk0IBrb', 'price_1QUSazFGa3DH0yAq85zvOhaH']
   },
+  // Enterprise
   prod_RjffeKdrDoeGcS: {
-    maxCalculations: -1
+    name: 'Enterprise',
+    maxCalculations: 20
   }
 };
 
@@ -56,17 +61,21 @@ export const StripeContextProvider = ({ children }) => {
 
   const [activeSubscriptions, setActiveSubscriptions] = useState([]);
   const hasActiveSubscription = useMemo(() => activeSubscriptions?.length > 0, [activeSubscriptions]);
-  const maxCalculations = useMemo(() => {
+  const activeProductConfig = useMemo(() => {
     if (hasActiveSubscription) {
       const activeProduct = activeSubscriptions[0].productId;
-      return productConfig[activeProduct].maxCalculations;
-    } else {
-      return maxFreeCalculations;
+      return productConfig[activeProduct];
     }
+    return null;
   }, [activeSubscriptions, hasActiveSubscription]);
+  const maxCalculations = useMemo(() => {
+    return activeProductConfig?.maxCalculations ?? maxFreeCalculations;
+  }, [activeProductConfig]);
+  const activeSubscriptionName = useMemo(() => {
+    return activeProductConfig?.name ?? null;
+  }, [activeProductConfig]);
   const canCreateNewCalulation = useMemo(() => {
-    const isInfinite = maxCalculations === -1;
-    return isInfinite || maxCalculations > Object.keys(formsData).length;
+    return maxCalculations > Object.keys(formsData).length;
   }, [formsData, maxCalculations]);
 
   const updateSubscriptions = useCallback(async () => {
@@ -156,7 +165,8 @@ export const StripeContextProvider = ({ children }) => {
         loadingGetSubscriptionStatus,
         getPortalUrl,
         canCreateNewCalulation,
-        maxCalculations
+        maxCalculations,
+        activeSubscriptionName
       }}
     >
       {children}

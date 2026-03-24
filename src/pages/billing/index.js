@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <>
       <Typography variant="h2" sx={{ mb: { xs: 2, md: 3, lg: 5, xl: 8 } }}>
-        {hasActiveSubscription ? 'Sie verfügen über ein aktives Abonnement.' : 'Sie verfügen über kein aktives Abonnement'}
+        {hasActiveSubscription ? `Sie verfügen über ein aktives Abonnement` : 'Sie verfügen über kein aktives Abonnement'}
       </Typography>
       <PricesCards sx={{ px: { xl: 10 } }} />
     </>

@@ -10,6 +10,7 @@ const PriceCard = ({
   priceNotice,
   originalPrice,
   stripePriceId,
+  productId,
   bullets,
   feature,
   featured,
@@ -20,7 +21,7 @@ const PriceCard = ({
   const { user } = useContext(UserContext);
   const [stripeLink, setStripeLink] = useState();
   const [portalUrl, setPortalUrl] = useState();
-  const activeSubscription = activeSubscriptions?.find((sub) => sub.priceId === stripePriceId);
+  const activeSubscription = activeSubscriptions?.find((sub) => sub.productId === productId);
   const isActive = !!activeSubscription;
 
   useEffect(() => {
@@ -147,24 +148,39 @@ const PriceCard = ({
     >
       <Stack flexDirection="row" justifyContent="space-between" alignItems="center">
         <Typography variant="h2" sx={{ fontSize: { xs: 16, lg: 18 } }}>
-          {feature} {isActive ? ' (aktiv)' : ''}
+          {feature}
         </Typography>
-        {featured ? (
-          <Stack
-            sx={{
-              borderRadius: '1000px',
-              px: 2,
-              py: 0.25,
-              backgroundColor: isActive ? theme.palette.common.white : theme.palette.warning.main + '44',
-              color: theme.palette.warning.dark,
-              my: -2
-            }}
-          >
-            Bestseller
-          </Stack>
-        ) : (
-          ''
-        )}
+        <Stack flexDirection="row" gap={1} alignItems="center">
+          {isActive && (
+            <Stack
+              sx={{
+                borderRadius: '1000px',
+                px: 2,
+                py: 0.25,
+                backgroundColor: theme.palette.common.white,
+                color: theme.palette.success.dark,
+                fontWeight: 600,
+                my: -2
+              }}
+            >
+              Aktiv
+            </Stack>
+          )}
+          {featured && !isActive && (
+            <Stack
+              sx={{
+                borderRadius: '1000px',
+                px: 2,
+                py: 0.25,
+                backgroundColor: theme.palette.warning.main + '44',
+                color: theme.palette.warning.dark,
+                my: -2
+              }}
+            >
+              Bestseller
+            </Stack>
+          )}
+        </Stack>
       </Stack>
       <Typography>
         <Typography
@@ -253,6 +269,7 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
             originalPrice={null}
             priceNotice={priceConfig.priceNotice}
             stripePriceId={priceConfig.prices?.[viewState].stripePriceId}
+            productId={priceConfig.productId}
             bullets={priceConfig.bullets}
             featured={priceConfig.prices?.[viewState].featured}
             customLink={priceConfig.customLink}
@@ -267,6 +284,7 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
 const pricesConfigPreset = [
   {
     title: 'Reine Toolnutzung',
+    productId: 'prod_RFgQbyJhgjwWPa',
     prices: {
       monthly: {
         price: 29.95,
@@ -284,6 +302,7 @@ const pricesConfigPreset = [
   },
   {
     title: 'Tool + Beratung',
+    productId: 'prod_RND1xoBl19Y4PT',
     prices: {
       monthly: {
         price: 119.95,
@@ -301,6 +320,7 @@ const pricesConfigPreset = [
   },
   {
     title: 'Enterprise',
+    productId: 'prod_RjffeKdrDoeGcS',
     priceNotice: 'Preis auf Anfrage',
     customLink: '/enterprise',
     customLinkText: 'Jetzt anfragen',

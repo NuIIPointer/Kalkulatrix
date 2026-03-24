@@ -36,10 +36,7 @@ const SelectFormView = ({ formType, sections }) => {
   const { createForm, copyForm: copyFormContext, formsData = {}, deleteForm } = useContext(UserContext);
   const { hasActiveSubscription, canCreateNewCalulation, maxCalculations } = useContext(StripeContext);
   const [openSubBanner, setOpenSubBanner] = useState(false);
-  const showMoreFormsWarning = useMemo(
-    () => maxCalculations !== -1 && maxCalculations < Object.keys(formsData).length,
-    [formsData, maxCalculations]
-  );
+  const showMoreFormsWarning = useMemo(() => maxCalculations < Object.keys(formsData).length, [formsData, maxCalculations]);
   const [showDeleteFormDialog, setShowDeleteFormDialog] = useState(false);
 
   const removeForm = async (formId) => {
@@ -67,7 +64,7 @@ const SelectFormView = ({ formType, sections }) => {
       Object.keys(formsData)?.forEach((formKey, key) => {
         const currentForm = formsData[formKey];
         if (currentForm.type === formType) {
-          const shouldAddFormToView = maxCalculations === -1 || key < maxCalculations;
+          const shouldAddFormToView = key < maxCalculations;
 
           if (shouldAddFormToView) {
             formsToUse[formKey] = currentForm;
