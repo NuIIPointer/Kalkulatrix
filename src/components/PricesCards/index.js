@@ -3,26 +3,35 @@ import { useTheme } from '@mui/material/styles';
 import { StripeContext } from 'context/stripe/index';
 import { UserContext } from 'context/user/index';
 import { useContext, useEffect, useState, useMemo, useCallback } from 'react';
+import useStripeProductPrice from 'hooks/useStripeProductPrice';
 
 const PriceCard = ({
-  price,
   viewState,
-  priceNotice,
+  priceNotice: priceNoticeProp,
   originalPrice,
-  stripePriceId,
   productId,
   bullets,
   feature,
   featured,
-  customLink,
-  customLinkText
+  customLink: customLinkProp,
+  customLinkText: customLinkTextProp
 }) => {
   const { getPortalUrl, createSubscription, activeSubscriptions } = useContext(StripeContext);
   const { user } = useContext(UserContext);
+  // Betrag und Price-ID kommen aus Stripe (via Firestore), nicht für Karten mit Preishinweis
+  const { monthlyPrice: price, stripePriceId, loading: loadingPrice } = useStripeProductPrice(priceNoticeProp ? null : productId);
   const [stripeLink, setStripeLink] = useState();
   const [portalUrl, setPortalUrl] = useState();
   const activeSubscription = activeSubscriptions?.find((sub) => sub.productId === productId);
   const isActive = !!activeSubscription;
+
+  // Kein aktiver Stripe-Preis gefunden (oder Laden fehlgeschlagen): statt leerer Karte auf Kontakt verweisen
+  // (bestehende Abonnenten behalten den Link zur Abo-Verwaltung)
+  const priceUnavailable = !priceNoticeProp && !loadingPrice && price == null;
+  const contactFallback = priceUnavailable && !isActive;
+  const priceNotice = priceNoticeProp || (priceUnavailable ? 'Preis auf Anfrage' : undefined);
+  const customLink = customLinkProp || (contactFallback ? '/kontakt' : undefined);
+  const customLinkText = customLinkTextProp || (contactFallback ? 'Kontakt aufnehmen' : undefined);
 
   useEffect(() => {
     const calc = async () => {
@@ -96,7 +105,7 @@ const PriceCard = ({
   );
 
   const cardHref = useMemo(() => {
-    if (!user.uid) {
+    if (!user.uid && !contactFallback) {
       return '/login';
     } else if (customLink) {
       return customLink;
@@ -108,7 +117,7 @@ const PriceCard = ({
       // Platzhalter # falls stripeLink noch nicht geladen - onClick übernimmt
       return stripeLink || '#';
     }
-  }, [user.uid, customLink, isLoggedIn, isActive, portalUrl, stripeLink]);
+  }, [user.uid, contactFallback, customLink, isLoggedIn, isActive, portalUrl, stripeLink]);
 
   return (
     <Stack
@@ -123,9 +132,7 @@ const PriceCard = ({
         width: '100%',
         flexDirection: 'column',
         maxWidth: { xs: 500, md: 'none' },
-        ...(isActive
-          ? { backgroundColor: theme.palette.primary[500] }
-          : theme.glass({ intensity: 'medium' })),
+        ...(isActive ? { backgroundColor: theme.palette.primary[500] } : theme.glass({ intensity: 'medium' })),
         boxShadow: theme.customShadows.card,
         padding: theme.shape.paddingBoxMedium,
         borderRadius: theme.shape.borderRadiusBox,
@@ -190,7 +197,7 @@ const PriceCard = ({
           lineHeight="1.15em"
           display="inline-flex"
         >
-          {price ? `${price}€` : priceNotice}
+          {loadingPrice ? <CircularProgress color="inherit" size={32} /> : price != null ? `${price.toFixed(2)}€` : priceNotice}
         </Typography>
         {!priceNotice && (
           <Typography variant="span" sx={{ opacity: 0.7 }}>
@@ -242,7 +249,13 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
   const viewState = 'monthly';
 
   return (
-    <Grid container columnSpacing={{ xs: 2, sm: 3, md: 4 }} rowSpacing={{ xs: 2, sm: 3, md: 4 }} {...containerProps}>
+    <Grid
+      container
+      justifyContent="center"
+      columnSpacing={{ xs: 2, sm: 3, md: 4 }}
+      rowSpacing={{ xs: 2, sm: 3, md: 4 }}
+      {...containerProps}
+    >
       {/* <Grid item xs={12}>
         <Stack sx={{ display: 'flex', alignItems: { xs: 'start', sm: 'center' }, marginBottom: 2 }}>
           <Typography
@@ -262,16 +275,14 @@ const PricesCards = ({ pricesConfig = pricesConfigPreset, containerProps }) => {
       {pricesConfig.map((priceConfig) => (
         <Grid key={priceConfig.title} item xs={12} sm={6} lg={4}>
           <PriceCard
-            key={priceConfig.prices?.[viewState].stripePriceId || priceConfig.priceNotice}
+            key={priceConfig.productId}
             feature={priceConfig.title}
             viewState={viewState}
-            price={priceConfig.prices?.[viewState].price}
             originalPrice={null}
             priceNotice={priceConfig.priceNotice}
-            stripePriceId={priceConfig.prices?.[viewState].stripePriceId}
             productId={priceConfig.productId}
             bullets={priceConfig.bullets}
-            featured={priceConfig.prices?.[viewState].featured}
+            featured={priceConfig.featured}
             customLink={priceConfig.customLink}
             customLinkText={priceConfig.customLinkText}
           />
@@ -285,36 +296,12 @@ const pricesConfigPreset = [
   {
     title: 'Reine Toolnutzung',
     productId: 'prod_RFgQbyJhgjwWPa',
-    prices: {
-      monthly: {
-        price: 29.95,
-        stripePriceId: 'price_1Syh0wFGa3DH0yAqNDwevvob'
-      }
-    },
     bullets: [
       'Stundensatzkalkulation',
       'Mitarbeiterkostenplanung',
       'Produktmargenplanung',
       'Erfassung des Plangewinns',
       'Kundensupport',
-      '12 Monate Laufzeit'
-    ]
-  },
-  {
-    title: 'Tool + Beratung',
-    productId: 'prod_RND1xoBl19Y4PT',
-    prices: {
-      monthly: {
-        price: 119.95,
-        stripePriceId: 'price_1Syh27FGa3DH0yAqvNnHjeOc',
-        featured: true
-      }
-    },
-    bullets: [
-      'Monatliches Beratungsgespräch',
-      'Regelmäßige Schulungen und Webinare',
-      'Alle Funktionen des Toolnutzung-Plans',
-      'Priorisierter Kundensupport',
       '12 Monate Laufzeit'
     ]
   },
@@ -329,7 +316,7 @@ const pricesConfigPreset = [
       'Durchführung der Kalkulation in ihrem Betrieb',
       'Individuelle Handlungsempfehlungen',
       'Für Unternehmens- und Steuerberater',
-      'Alle Features des Tool + Beratung Plans',
+      'Alle Funktionen des Toolnutzung-Plans',
       'Persönlicher Accountmanager',
       '12 Monate Laufzeit'
     ]

@@ -115,12 +115,13 @@ Das Projekt nutzt die Firebase Stripe Extension für Subscription-Management.
 ### Subscription-Tiers
 
 - **Free**: 1 Kalkulation
-- **Pro** (prod_RFgQbyJhgjwWPa): 2 Kalkulationen
-- **Premium** (prod_RND1xoBl19Y4PT): 1 Kalkulation
+- **Pro / "Reine Toolnutzung"** (prod_RFgQbyJhgjwWPa): 2 Kalkulationen
+- **Premium / "Tool + Beratung"** (prod_RND1xoBl19Y4PT): 1 Kalkulation (nicht mehr buchbar, nur noch für Bestandskunden)
 - **Enterprise** (prod_RjffeKdrDoeGcS): Unbegrenzt (-1)
 
 ### Flows
 
+- Preise (Betrag + Price-ID) werden nicht im Code gepflegt: `hooks/useStripeProductPrice` liest den aktiven Preis aus `products/{productId}/prices` (von der Extension synchronisiert) und rechnet ihn auf den Monatsbetrag um. In `PricesCards` wird nur die `productId` konfiguriert.
 - Checkout Sessions werden in Firestore erstellt
 - onSnapshot wartet auf URL-Generierung durch Firebase Extension
 - Customer Portal für Subscription-Management
@@ -287,7 +288,7 @@ npm run lint    # ESLint mit Auto-Fix
 - Screenshot-Mockups der Anwendung
 - Timeline "Erst kalkulieren, dann implementieren"
 - Eingebettetes Calendly-Webinar-Formular (adel-consulting.com)
-- Preiskarten (Pro, Premium, Enterprise)
+- Preiskarten (Reine Toolnutzung, Enterprise)
 - Footer mit Links zu Kontakt, FAQ, Impressum, Datenschutz, AGB
 
 ### Login (`/login`)
@@ -366,9 +367,8 @@ npm run lint    # ESLint mit Auto-Fix
 ### Abonnement (`/office/billing`)
 
 - Anzeige des aktuellen Abo-Status
-- Preispläne-Auswahl (Monatlich, Halbjährlich, Jährlich)
-- **Pro** (69€/Monat): Stundensatzkalkulation, Mitarbeiterkostenplanung, Produktmargenplanung
-- **Premium** (299€/Monat): + Monatliches Beratungsgespräch, Schulungen, Priorisierter Support
+- Preispläne (monatlich)
+- **Reine Toolnutzung** (9,95€/Monat, 12 Monate Laufzeit): Stundensatzkalkulation, Mitarbeiterkostenplanung, Produktmargenplanung, Plangewinn, Kundensupport
 - **Enterprise** (auf Anfrage): Unbegrenzte Kalkulationen, Vor-Ort-Beratung, Persönlicher Accountmanager
 
 ### Beratungstermine (`/office/events`)
